@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>SalimTeaches — Unit 1 Listening</title>
+<style>
+:root{
+  --primary:#5865f2;
+  --primary-dark:#4652d9;
+  --bg:#f5f7fb;
+  --card:#fff;
+  --text:#172033;
+  --muted:#747d91;
+  --border:#e8ebf2;
+  --good:#149b66;
+  --goodbg:#e9f8f1;
+  --bad:#d84a4a;
+  --badbg:#fff0f0;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+}
+.app{max-width:760px;margin:auto;padding-bottom:110px}
+.header{padding:24px 18px 14px}
+.brand{font-size:12px;font-weight:800;letter-spacing:.8px;color:var(--primary)}
+h1{font-size:27px;margin:7px 0 5px}
+.subtitle{color:var(--muted);font-size:14px;line-height:1.45;margin:0}
+.progress-wrap{
+  position:sticky;top:0;z-index:10;background:rgba(245,247,251,.94);
+  backdrop-filter:blur(10px);padding:9px 18px 12px;border-bottom:1px solid var(--border)
+}
+.progress-row{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:7px}
+.progressbar{height:7px;background:#e4e7ef;border-radius:10px;overflow:hidden}
+.progressfill{height:100%;width:0;background:linear-gradient(90deg,var(--primary),#7c83f5);transition:.3s}
+
+.section{
+  margin:14px 14px 0;background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:18px;box-shadow:0 5px 20px rgba(20,30,60,.04)
+}
+.section-head{
+  background:linear-gradient(135deg,#5865f2,#747cf5);color:#fff;
+  border-radius:17px;padding:15px;margin-bottom:15px
+}
+.section-code{font-size:11px;font-weight:800;opacity:.85;letter-spacing:.5px}
+.section-title{font-size:19px;font-weight:800;margin-top:3px}
+.section-desc{font-size:13px;opacity:.92;margin-top:5px;line-height:1.45}
+
+.audio-card{
+  background:#f7f8ff;border:1px solid #e1e4ff;border-radius:16px;
+  padding:14px;margin-bottom:16px
+}
+.audio-title{font-weight:800;font-size:15px;margin-bottom:9px}
+.audio-note{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.4}
+audio{width:100%;height:42px}
+
+.question{
+  padding:15px 0;border-top:1px solid #edf0f5
+}
+.question:first-of-type{border-top:0}
+.qnum{
+  display:inline-flex;width:29px;height:29px;border-radius:9px;
+  background:#eef0ff;color:var(--primary);align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;margin-right:8px;vertical-align:middle
+}
+.qprompt{font-size:15px;line-height:1.5;font-weight:650;margin-bottom:11px}
+.choices{display:grid;gap:8px}
+.choice{
+  width:100%;border:1px solid #dfe3ec;background:#fbfcfe;color:var(--text);
+  border-radius:12px;padding:12px;font-size:14px;font-weight:650;text-align:left;
+  min-height:46px;cursor:pointer
+}
+.choice.selected{border-color:var(--primary);background:#eef0ff;color:var(--primary)}
+.choice.correct{border-color:#bfead6;background:var(--goodbg);color:var(--good)}
+.choice.wrong{border-color:#ffd0d0;background:var(--badbg);color:var(--bad)}
+
+.tf-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tf{
+  border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;
+  padding:11px;text-align:center;font-weight:750;cursor:pointer
+}
+.tf.selected{border-color:var(--primary);background:#eef0ff;color:var(--primary)}
+.tf.correct{border-color:#bfead6;background:var(--goodbg);color:var(--good)}
+.tf.wrong{border-color:#ffd0d0;background:var(--badbg);color:var(--bad)}
+
+input[type="text"]{
+  width:100%;border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;
+  padding:12px;font-size:15px;color:var(--text);outline:none
+}
+input[type="text"]:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(88,101,242,.1)}
+input.correct{border-color:#bfead6;background:var(--goodbg)}
+input.wrong{border-color:#ffd0d0;background:var(--badbg)}
+
+.feedback{
+  display:none;margin-top:9px;border-radius:10px;padding:9px 10px;
+  font-size:12px;line-height:1.45
+}
+.feedback.good{display:block;background:var(--goodbg);color:var(--good)}
+.feedback.bad{display:block;background:var(--badbg);color:var(--bad)}
+
+.actions{
+  position:fixed;left:0;right:0;bottom:0;z-index:20;
+  background:rgba(255,255,255,.96);border-top:1px solid var(--border);
+  padding:12px 14px;backdrop-filter:blur(12px)
+}
+.actions-inner{max-width:760px;margin:auto;display:flex;gap:9px}
+button.action{
+  border:0;border-radius:13px;padding:13px 16px;font-size:15px;font-weight:800;cursor:pointer
+}
+.check{flex:1;background:var(--primary);color:#fff}
+.retry{background:#eef0ff;color:var(--primary);display:none}
+
+.result{
+  display:none;margin:14px;padding:21px;border-radius:20px;
+  background:#fff;border:1px solid var(--border);text-align:center
+}
+.result.pass{border-color:#c9efdd;background:#f4fcf8}
+.result.fail{border-color:#ffd3d3;background:#fff8f8}
+.result-score{font-size:38px;font-weight:900;color:var(--primary)}
+.result.pass .result-score{color:var(--good)}
+.result-title{font-size:20px;font-weight:850;margin:5px 0}
+.result-text{color:var(--muted);font-size:14px;line-height:1.5}
+
+@media(max-width:480px){
+  .section{margin-left:10px;margin-right:10px;padding:15px}
+}
+</style>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+
+<body>
+<div class="app">
+
+<header class="header">
+  <div class="brand">SALIMTEACHES • BEGINNER</div>
+  <h1>🎧 Unit 1 — Listening</h1>
+  <p class="subtitle">Tinglang, savollarga javob bering va eshitib tushunish qobiliyatingizni mashq qiling.</p>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-row">
+    <span>Listening jarayoni</span>
+    <span id="progressText">0 / 14</span>
+  </div>
+  <div class="progressbar"><div class="progressfill" id="progressFill"></div></div>
+</div>
+
+<!-- PART 1 -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-code">1-QISM</div>
+    <div class="section-title">👋 Meeting Someone</div>
+    <div class="section-desc">Anna va Adamning birinchi uchrashuvini tinglang.</div>
+  </div>
+
+  <div class="audio-card">
+    <div class="audio-title">🎧 Audio 1</div>
+    <audio controls preload="none">
+      <source src="../audio/beginner-unit1-1.mp3" type="audio/mpeg">
+      Brauzeringiz audio faylni qo‘llab-quvvatlamaydi.
+    </audio>
+    <div class="audio-note">Audio faylni qayta tinglashingiz mumkin.</div>
+  </div>
+
+  <div class="question" data-id="1" data-answer="Adam">
+    <div class="qprompt"><span class="qnum">1</span>Yigitning ismi nima?</div>
+    <div class="choices">
+      <button class="choice" data-value="Anna">Anna</button>
+      <button class="choice" data-value="Adam">Adam</button>
+      <button class="choice" data-value="David">David</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="2" data-answer="Anna">
+    <div class="qprompt"><span class="qnum">2</span>Qizning ismi nima?</div>
+    <div class="choices">
+      <button class="choice" data-value="Emma">Emma</button>
+      <button class="choice" data-value="Anna">Anna</button>
+      <button class="choice" data-value="Claire">Claire</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="3" data-answer="What’s your name?">
+    <div class="qprompt"><span class="qnum">3</span>Anna Adamdan nima so‘raydi?</div>
+    <div class="choices">
+      <button class="choice" data-value="What’s your name?">What’s your name?</button>
+      <button class="choice" data-value="Where are you from?">Where are you from?</button>
+      <button class="choice" data-value="How are you?">How are you?</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="4" data-answer="Nice to meet you.">
+    <div class="qprompt"><span class="qnum">4</span>Adam Anna bilan tanishganda nima deydi?</div>
+    <div class="choices">
+      <button class="choice" data-value="Nice to meet you.">Nice to meet you.</button>
+      <button class="choice" data-value="I’m fine, thanks.">I’m fine, thanks.</button>
+      <button class="choice" data-value="I don’t have one.">I don’t have one.</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="5" data-answer="Nice to meet you, too.">
+    <div class="qprompt"><span class="qnum">5</span>Anna Adamga qanday javob beradi?</div>
+    <div class="choices">
+      <button class="choice" data-value="Nice to meet you, too.">Nice to meet you, too.</button>
+      <button class="choice" data-value="I’m from Russia.">I’m from Russia.</button>
+      <button class="choice" data-value="OK.">OK.</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+</section>
+
+<!-- PART 2 -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-code">2-QISM</div>
+    <div class="section-title">🌍 Where Are You From?</div>
+    <div class="section-desc">Audio tinglang va gaplarning to‘g‘ri yoki noto‘g‘ri ekanini aniqlang.</div>
+  </div>
+
+  <div class="audio-card">
+    <div class="audio-title">🎧 Audio 2</div>
+    <audio controls preload="none">
+      <source src="../audio/beginner-unit1-2.mp3" type="audio/mpeg">
+      Brauzeringiz audio faylni qo‘llab-quvvatlamaydi.
+    </audio>
+    <div class="audio-note">Kerak bo‘lsa, audioni bir necha marta tinglang.</div>
+  </div>
+
+  <div class="question" data-id="6" data-answer="true">
+    <div class="qprompt"><span class="qnum">6</span>Anna Rossiyadan.</div>
+    <div class="tf-grid"><button class="tf" data-value="true">✓ True</button><button class="tf" data-value="false">✗ False</button></div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="7" data-answer="false">
+    <div class="qprompt"><span class="qnum">7</span>Anna Sankt-Peterburgdan.</div>
+    <div class="tf-grid"><button class="tf" data-value="true">✓ True</button><button class="tf" data-value="false">✗ False</button></div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="8" data-answer="true">
+    <div class="qprompt"><span class="qnum">8</span>Adam AQShdan.</div>
+    <div class="tf-grid"><button class="tf" data-value="true">✓ True</button><button class="tf" data-value="false">✗ False</button></div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="9" data-answer="true">
+    <div class="qprompt"><span class="qnum">9</span>Adam Chikagodan.</div>
+    <div class="tf-grid"><button class="tf" data-value="true">✓ True</button><button class="tf" data-value="false">✗ False</button></div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="10" data-answer="false">
+    <div class="qprompt"><span class="qnum">10</span>Anna va Adam bir xil davlatdan.</div>
+    <div class="tf-grid"><button class="tf" data-value="true">✓ True</button><button class="tf" data-value="false">✗ False</button></div>
+    <div class="feedback"></div>
+  </div>
+</section>
+
+<!-- PART 3 -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-code">3-QISM</div>
+    <div class="section-title">📱 Phone Numbers</div>
+    <div class="section-desc">Audio tinglang va bo‘sh joylarni to‘ldiring.</div>
+  </div>
+
+  <div class="audio-card">
+    <div class="audio-title">🎧 Audio 3</div>
+    <audio controls preload="none">
+      <source src="../audio/beginner-unit1-3.mp3" type="audio/mpeg">
+      Brauzeringiz audio faylni qo‘llab-quvvatlamaydi.
+    </audio>
+    <div class="audio-note">Telefon raqamini eshitishda kerak bo‘lsa, audioni qayta tinglang.</div>
+  </div>
+
+  <div class="question" data-id="11" data-answer="998 90 746 32 18">
+    <div class="qprompt"><span class="qnum">11</span>Anna's mobile number is ______.</div>
+    <input type="text" inputmode="tel" autocomplete="off" placeholder="Javobingiz...">
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="12" data-answer="again">
+    <div class="qprompt"><span class="qnum">12</span>Adam Anna'dan raqamini yana aytishini so‘raydi. U “Can you say that ______?” deydi.</div>
+    <input type="text" autocomplete="off" placeholder="Javobingiz...">
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="13" data-answer="home">
+    <div class="qprompt"><span class="qnum">13</span>Adam Anna'dan qaysi raqamini ham so‘raydi?</div>
+    <input type="text" autocomplete="off" placeholder="Javobingiz...">
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="14" data-answer="one">
+    <div class="qprompt"><span class="qnum">14</span>Anna: “Sorry, I don’t have ______.”</div>
+    <input type="text" autocomplete="off" placeholder="Javobingiz...">
+    <div class="feedback"></div>
+  </div>
+</section>
+
+<div id="result" class="result">
+  <div class="result-score" id="score">0 / 14</div>
+  <div class="result-title" id="resultTitle"></div>
+  <div class="result-text" id="resultText"></div>
+</div>
+
+</div>
+
+<div class="actions">
+  <div class="actions-inner">
+    <button class="action retry" id="retry" onclick="location.reload()">🔄 Qayta ishlash</button>
+    <button class="action check" id="check" onclick="checkListening()">Javoblarni tekshirish</button>
+  </div>
+</div>
+
+<script>
+const questions=[...document.querySelectorAll('.question')];
+const answered=new Set();
+
+function norm(v){
+  return String(v??'')
+    .trim()
+    .toLowerCase()
+    .replace(/[’‘]/g,"'")
+    .replace(/\s+/g,' ');
+}
+
+function normPhone(v){
+  return String(v??'').replace(/\D/g,'');
+}
+
+function updateProgress(){
+  document.getElementById('progressText').textContent=answered.size+' / 14';
+  document.getElementById('progressFill').style.width=(answered.size/14*100)+'%';
+}
+
+function selectButton(btn){
+  const q=btn.closest('.question');
+  q.querySelectorAll('.choice,.tf').forEach(x=>x.classList.remove('selected'));
+  btn.classList.add('selected');
+  answered.add(Number(q.dataset.id));
+  updateProgress();
+}
+
+document.querySelectorAll('.choice,.tf').forEach(btn=>{
+  btn.addEventListener('click',()=>selectButton(btn));
+});
+
+document.querySelectorAll('input[type="text"]').forEach(input=>{
+  input.addEventListener('input',()=>{
+    const q=input.closest('.question');
+    const id=Number(q.dataset.id);
+    if(norm(input.value)) answered.add(id);
+    else answered.delete(id);
+    updateProgress();
+  });
+});
+
+function checkListening(){
+  let score=0;
+
+  questions.forEach(q=>{
+    const id=Number(q.dataset.id);
+    const answer=q.dataset.answer;
+    let value='';
+    let input=q.querySelector('input[type="text"]');
+    let selected=q.querySelector('.choice.selected,.tf.selected');
+
+    if(selected) value=selected.dataset.value;
+    else if(input) value=input.value;
+
+    let ok;
+    if(id===11){
+      ok=normPhone(value)===normPhone(answer);
+    }else{
+      ok=norm(value)===norm(answer);
+    }
+
+    if(ok) score++;
+
+    const feedback=q.querySelector('.feedback');
+    feedback.className='feedback '+(ok?'good':'bad');
+
+    if(ok){
+      feedback.textContent='✅ To‘g‘ri!';
+    }else{
+      let correctAnswer=answer;
+      if(id===6||id===7||id===8||id===9||id===10){
+        correctAnswer=answer==='true'?'True':'False';
+      }
+      feedback.innerHTML='❌ Noto‘g‘ri. <strong>To‘g‘ri javob:</strong> '+correctAnswer;
+    }
+
+    q.querySelectorAll('.choice,.tf').forEach(btn=>{
+      btn.classList.remove('correct','wrong');
+      if(btn.classList.contains('selected')){
+        btn.classList.add(ok?'correct':'wrong');
+      }
+    });
+
+    if(input){
+      input.classList.remove('correct','wrong');
+      input.classList.add(ok?'correct':'wrong');
+    }
+  });
+
+  const percent=Math.round(score/14*100);
+  const result=document.getElementById('result');
+  result.style.display='block';
+  result.className='result '+(percent>=70?'pass':'fail');
+
+  document.getElementById('score').textContent=score+' / 14 — '+percent+'%';
+  reportActivityProgress(percent>=70, percent);
+
+  if(percent>=70){
+    document.getElementById('resultTitle').textContent='🎉 Ajoyib!';
+    document.getElementById('resultText').textContent='Listening mashqini muvaffaqiyatli tugatdingiz. Keyingi mashqqa o‘tishingiz mumkin.';
+  }else{
+    document.getElementById('resultTitle').textContent='💪 Yana bir marta urinib ko‘ring';
+    document.getElementById('resultText').textContent='Kamida 70% olishga harakat qiling. Xatolarni ko‘rib chiqing va audioni yana tinglang.';
+  }
+
+  document.getElementById('check').style.display='none';
+  document.getElementById('retry').style.display='block';
+
+  result.scrollIntoView({behavior:'smooth',block:'center'});
+}
+</script>
+
+<script>
+async function reportActivityProgress(completed, score) {
+  const activityId =
+    new URLSearchParams(window.location.search).get("activity_id");
+
+  if (!activityId || !window.Telegram || !Telegram.WebApp || !Telegram.WebApp.initData) {
+    return null;
+  }
+
+  try {
+    const response = await fetch(
+      "https://salimteaches-beginner-auth.imshosalim.workers.dev/progress",
+      {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          initData: Telegram.WebApp.initData,
+          activity_id: Number(activityId),
+          completed: Boolean(completed),
+          score: score === null || score === undefined ? null : Number(score)
+        })
+      }
+    );
+
+    return await response.json();
+  } catch (error) {
+    console.error("Progress save failed:", error);
+    return null;
+  }
+}
+</script>
+
+</body>
+</html>
