@@ -126,48 +126,17 @@ button.action{
 @media(max-width:480px){
   .section{margin-left:10px;margin-right:10px;padding:15px}
 }
-
-.activity-top{
-  position:sticky;top:0;z-index:50;
-  display:flex;align-items:center;gap:10px;
-  padding:10px 0;
-  margin-bottom:8px;
-  background:rgba(245,247,251,.96);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--border);
-}
-.activity-back{
-  width:42px;height:42px;flex:0 0 42px;
-  border:1px solid var(--border);border-radius:13px;
-  background:#fff;color:var(--text);
-  font-size:22px;font-weight:800;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-}
-.activity-back:active{background:#eef0ff;color:var(--primary)}
-.activity-top-title{flex:1;min-width:0}
-.activity-top-title strong{display:block;font-size:13px}
-.activity-top-title span{display:block;color:var(--muted);font-size:11px;margin-top:2px}
-.activity-top-progress{font-size:12px;font-weight:800;color:var(--primary)}
-.activity-bottom{
-  margin:18px 0 95px;text-align:center;
-}
-.back-unit-button{
-  width:100%;border:1px solid var(--border);border-radius:13px;
-  padding:13px 15px;background:#fff;color:var(--primary);
-  font-size:14px;font-weight:800;cursor:pointer;
-}
 </style>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 
 <body>
-<div class="app">
-<div class="activity-top">
-  <button class="activity-back" type="button" onclick="goBackToUnit1()" aria-label="Orqaga">←</button>
-  <div class="activity-top-title"><strong>Unit 1</strong><span>Listening</span></div>
-  <div class="activity-top-progress" id="topProgress">0%</div>
+
+<div class="activity-nav">
+  <button class="activity-back" type="button" onclick="backToUnit1()">← Unit 1</button>
+  <div class="activity-label">SalimTeaches • Unit 1</div>
 </div>
+<div class="app">
 
 <header class="header">
   <div class="brand">SALIMTEACHES • BEGINNER</div>
@@ -346,7 +315,7 @@ button.action{
   <div class="result-title" id="resultTitle"></div>
   <div class="result-text" id="resultText"></div>
 </div>
-<div class="activity-bottom"><button class="back-unit-button" type="button" onclick="goBackToUnit1()">← Unit 1 ga qaytish</button></div>
+
 </div>
 
 <div class="actions">
@@ -354,17 +323,9 @@ button.action{
     <button class="action retry" id="retry" onclick="location.reload()">🔄 Qayta ishlash</button>
     <button class="action check" id="check" onclick="checkListening()">Javoblarni tekshirish</button>
   </div>
+<button type="button" class="action" style="width:100%;background:#eef0ff;color:#5865f2;margin-top:10px" onclick="backToUnit1()">← Unit 1 ga qaytish</button>
 </div>
 
-<script>
-function goBackToUnit1(){
-  window.location.href = "../index.html#unit1";
-}
-if (window.Telegram && Telegram.WebApp) {
-  Telegram.WebApp.ready();
-  Telegram.WebApp.expand();
-}
-</script>
 <script>
 const questions=[...document.querySelectorAll('.question')];
 const answered=new Set();
@@ -382,10 +343,8 @@ function normPhone(v){
 }
 
 function updateProgress(){
-  const pct=Math.round(answered.size/14*100);
   document.getElementById('progressText').textContent=answered.size+' / 14';
-  document.getElementById('progressFill').style.width=pct+'%';
-  document.getElementById('topProgress').textContent=pct+'%';
+  document.getElementById('progressFill').style.width=(answered.size/14*100)+'%';
 }
 
 function selectButton(btn){
@@ -466,12 +425,28 @@ async function checkListening(){
   document.getElementById('score').textContent=score+' / 14 — '+percent+'%';
   const saved = await reportActivityProgress(percent>=70, percent);
 
+  let saveStatus = document.getElementById('saveStatus');
+  if (!saveStatus) {
+    saveStatus = document.createElement('div');
+    saveStatus.id = 'saveStatus';
+    saveStatus.className = 'save-status';
+    result.appendChild(saveStatus);
+  }
+  if (saved && saved.success === true) {
+    saveStatus.className = 'save-status ok';
+    saveStatus.textContent = '✓ Natijangiz saqlandi';
+  } else {
+    saveStatus.className = 'save-status err';
+    saveStatus.textContent = '⚠ Natijangizni saqlashda muammo: ' +
+      ((saved && saved.error) || 'noma’lum xatolik');
+  }
+
   if(percent>=70){
     document.getElementById('resultTitle').textContent='🎉 Ajoyib!';
-    document.getElementById('resultText').textContent='Listening mashqini muvaffaqiyatli tugatdingiz. Keyingi mashqqa o‘tishingiz mumkin.' + (saved && saved.success ? ' Natijangiz saqlandi ✓' : ' ⚠️ Natijangizni saqlashda muammo yuz berdi.');
+    document.getElementById('resultText').textContent='Listening mashqini muvaffaqiyatli tugatdingiz. Keyingi mashqqa o‘tishingiz mumkin.';
   }else{
     document.getElementById('resultTitle').textContent='💪 Yana bir marta urinib ko‘ring';
-    document.getElementById('resultText').textContent='Kamida 70% olishga harakat qiling. Xatolarni ko‘rib chiqing va audioni yana tinglang.' + (saved && saved.success ? ' Natijangiz saqlandi ✓' : ' ⚠️ Natijangizni saqlashda muammo yuz berdi.');
+    document.getElementById('resultText').textContent='Kamida 70% olishga harakat qiling. Xatolarni ko‘rib chiqing va audioni yana tinglang.';
   }
 
   document.getElementById('check').style.display='none';
@@ -485,9 +460,10 @@ async function checkListening(){
 async function reportActivityProgress(completed, score) {
   const activityId =
     Number(new URLSearchParams(window.location.search).get("activity_id")) || 4;
+  const initData = getTelegramInitData();
 
-  if (!activityId || !window.Telegram || !Telegram.WebApp || !Telegram.WebApp.initData) {
-    return null;
+  if (!initData) {
+    return { success: false, error: "Telegram initData mavjud emas." };
   }
 
   try {
@@ -497,18 +473,25 @@ async function reportActivityProgress(completed, score) {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-          initData: Telegram.WebApp.initData,
-          activity_id: Number(activityId),
+          initData,
+          activity_id: activityId,
           completed: Boolean(completed),
-          score: score === null || score === undefined ? null : Number(score)
+          score: score == null ? null : Number(score)
         })
       }
     );
 
-    return await response.json();
+    const data = await response.json();
+    if (!response.ok || data.success !== true) {
+      return {
+        success: false,
+        error: data.error || data.reason || ("HTTP " + response.status)
+      };
+    }
+    return data;
   } catch (error) {
     console.error("Progress save failed:", error);
-    return null;
+    return { success: false, error: error.message || "Network error" };
   }
 }
 </script>

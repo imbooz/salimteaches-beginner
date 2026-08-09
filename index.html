@@ -1360,6 +1360,19 @@
     tg.ready();
     tg.expand();
 
+    // Keep Telegram initData available when an activity page opens.
+    // Activity pages are same-origin, so sessionStorage lets them
+    // authenticate with the same Cloudflare Worker without putting
+    // sensitive initData into the URL.
+    if (tg.initData) {
+      sessionStorage.setItem("salimteaches_initData", tg.initData);
+    }
+
+    sessionStorage.setItem(
+      "salimteaches_returnUrl",
+      window.location.href.split("#")[0]
+    );
+
 
     // ======================================================
     // GLOBAL DATA
@@ -1511,10 +1524,8 @@
 
       renderUnits();
 
-      // When an activity sends the student back with #unit1,
-      // open Unit 1 directly instead of leaving them on Home.
-      if (window.location.hash === "#unit1") {
-        history.replaceState(null, "", window.location.pathname + window.location.search);
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("unit") === "1" || window.location.hash === "#unit1") {
         openUnit(1);
       }
 
