@@ -128,7 +128,9 @@ button.action{
 }
 </style>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-</head>
+<style id="unit1-consistent-actions">
+.unit-back{width:100%;background:#eef0ff;color:#5865f2;border:0;border-radius:13px;padding:13px 16px;font-size:15px;font-weight:800;cursor:pointer}
+</style></head>
 
 <body>
 
@@ -320,10 +322,10 @@ button.action{
 
 <div class="actions">
   <div class="actions-inner">
-    <button class="action retry" id="retry" onclick="location.reload()">🔄 Qayta ishlash</button>
+    
     <button class="action check" id="check" onclick="checkListening()">Javoblarni tekshirish</button>
   </div>
-<button type="button" class="action" style="width:100%;background:#eef0ff;color:#5865f2;margin-top:10px" onclick="backToUnit1()">← Unit 1 ga qaytish</button>
+<button type="button" class="action unit-back" onclick="backToUnit1()">← Unit 1 ga qaytish</button>
 </div>
 
 <script>
@@ -450,41 +452,8 @@ async function checkListening(){
   }
 
   document.getElementById('check').style.display='none';
-  document.getElementById('retry').style.display='block';
 
   result.scrollIntoView({behavior:'smooth',block:'center'});
-}
-</script>
-
-
-<script>
-function getTelegramInitData() {
-  try {
-    const saved = sessionStorage.getItem("salimteaches_initData");
-    if (saved) return saved;
-  } catch (e) {
-    console.warn("sessionStorage unavailable:", e);
-  }
-
-  try {
-    if (window.Telegram && window.Telegram.WebApp) {
-      const tg = window.Telegram.WebApp;
-      if (tg.initData) {
-        try {
-          sessionStorage.setItem("salimteaches_initData", tg.initData);
-        } catch (e) {}
-        return tg.initData;
-      }
-    }
-  } catch (e) {
-    console.warn("Telegram initData unavailable:", e);
-  }
-
-  return "";
-}
-
-function backToUnit1() {
-  window.location.href = "../index.html?unit=1";
 }
 </script>
 
