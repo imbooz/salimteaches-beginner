@@ -140,6 +140,38 @@ input[type=text]{width:100%;padding:14px;border:1px solid #d8deea;border-radius:
   };
 })();
 </script>
+
+<script>
+function getTelegramInitData() {
+  try {
+    const saved = sessionStorage.getItem("salimteaches_initData");
+    if (saved) return saved;
+  } catch (e) {
+    console.warn("sessionStorage unavailable:", e);
+  }
+
+  try {
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+      if (tg.initData) {
+        try {
+          sessionStorage.setItem("salimteaches_initData", tg.initData);
+        } catch (e) {}
+        return tg.initData;
+      }
+    }
+  } catch (e) {
+    console.warn("Telegram initData unavailable:", e);
+  }
+
+  return "";
+}
+
+function backToUnit1() {
+  window.location.href = "../index.html?unit=1";
+}
+</script>
+
 <script>
 async function reportActivityProgress(completed, score) {
   const activityId =
