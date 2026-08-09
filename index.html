@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
+
 <head>
+
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
@@ -12,14 +15,30 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
   <style>
+
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
 
+    :root {
+      --primary: #5865f2;
+      --primary-dark: #4652d9;
+      --background: #f5f7fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #747d91;
+      --border: #e9ecf3;
+      --success: #16a36a;
+      --success-bg: #eaf9f2;
+      --locked: #aab0bd;
+    }
+
     body {
       margin: 0;
-      padding: 0;
+      background: var(--background);
+      color: var(--text);
+
       font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -28,406 +47,1797 @@
         Arial,
         sans-serif;
 
-      background: #f5f7fb;
-      color: #172033;
+      min-height: 100vh;
     }
+
+
+    /* ==========================================
+       APP
+    ========================================== */
 
     .app {
       max-width: 700px;
-      margin: auto;
-      padding: 24px 18px 40px;
+      margin: 0 auto;
+
+      min-height: 100vh;
+
+      padding-bottom: 90px;
     }
 
-    .header {
-      padding: 20px 4px 25px;
-    }
 
-    .logo {
-      font-size: 14px;
-      font-weight: 700;
-      color: #5b63f1;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      margin: 8px 0 5px;
-      font-size: 30px;
-      line-height: 1.15;
-    }
-
-    .subtitle {
-      margin: 0;
-      color: #697386;
-      font-size: 16px;
-    }
-
-    .status {
-      display: none;
-      background: white;
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 5px 25px rgba(20, 30, 60, 0.07);
-      margin-bottom: 18px;
-    }
+    /* ==========================================
+       LOADING
+    ========================================== */
 
     .loading {
-      text-align: center;
-      padding: 50px 20px;
-      color: #697386;
+      min-height: 100vh;
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      color: var(--muted);
     }
 
     .spinner {
-      width: 35px;
-      height: 35px;
-      border: 4px solid #e4e7f5;
-      border-top-color: #5b63f1;
+      width: 38px;
+      height: 38px;
+
+      border: 4px solid #e3e6f2;
+      border-top-color: var(--primary);
+
       border-radius: 50%;
+
       animation: spin 0.8s linear infinite;
-      margin: 0 auto 15px;
+
+      margin-bottom: 16px;
     }
 
     @keyframes spin {
+
       to {
         transform: rotate(360deg);
       }
+
     }
 
-    .error {
+
+    /* ==========================================
+       ERROR
+    ========================================== */
+
+    .error-screen {
+
       display: none;
-      background: #fff0f0;
-      color: #b42318;
-      border-radius: 18px;
-      padding: 22px;
+
+      min-height: 100vh;
+
+      padding: 30px 20px;
+
+      align-items: center;
+      justify-content: center;
+
       text-align: center;
     }
 
-    .success {
-      background: #ecfdf3;
-      color: #027a48;
-      border-radius: 14px;
-      padding: 14px;
-      font-weight: 600;
-    }
+    .error-card {
 
-    .section-title {
-      font-size: 20px;
-      font-weight: 750;
-      margin: 25px 0 12px;
-    }
-
-    .unit {
       background: white;
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 13px;
-      box-shadow: 0 5px 25px rgba(20, 30, 60, 0.06);
+
+      border-radius: 22px;
+
+      padding: 30px 24px;
+
+      box-shadow:
+        0 8px 30px rgba(20, 30, 60, 0.07);
     }
 
-    .unit-number {
-      font-size: 13px;
-      color: #5b63f1;
-      font-weight: 750;
-      text-transform: uppercase;
+    .error-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
     }
 
-    .unit h2 {
-      margin: 5px 0 7px;
-      font-size: 20px;
+    .error-card h2 {
+      margin: 0 0 10px;
     }
 
-    .unit p {
-      margin: 0 0 16px;
-      color: #697386;
+    .error-card p {
+      color: var(--muted);
       line-height: 1.5;
     }
 
-    button {
-      width: 100%;
-      border: none;
-      border-radius: 13px;
-      padding: 14px 18px;
-      background: #5b63f1;
-      color: white;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
+
+    /* ==========================================
+       MAIN CONTENT
+    ========================================== */
+
+    #main {
+      display: none;
     }
 
-    button:active {
-      transform: scale(0.98);
+
+    /* ==========================================
+       HEADER
+    ========================================== */
+
+    .header {
+
+      padding:
+        26px
+        20px
+        18px;
+
     }
 
-    .locked {
-      opacity: 0.65;
-    }
+    .brand {
 
-    .locked button {
-      background: #d9dce7;
-      color: #697386;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 35px;
-      color: #9aa2b1;
       font-size: 13px;
+
+      font-weight: 800;
+
+      color: var(--primary);
+
+      letter-spacing: 0.6px;
+
+      text-transform: uppercase;
+
     }
+
+    .header h1 {
+
+      margin:
+        7px
+        0
+        5px;
+
+      font-size: 29px;
+
+      line-height: 1.15;
+
+    }
+
+    .header p {
+
+      margin: 0;
+
+      color: var(--muted);
+
+      font-size: 15px;
+
+    }
+
+
+    /* ==========================================
+       WELCOME CARD
+    ========================================== */
+
+    .welcome {
+
+      margin:
+        0
+        20px
+        22px;
+
+      padding: 20px;
+
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #5865f2,
+          #707af5
+        );
+
+      color: white;
+
+      box-shadow:
+        0 10px 30px
+        rgba(88, 101, 242, 0.22);
+
+    }
+
+    .welcome-small {
+
+      font-size: 14px;
+
+      opacity: 0.85;
+
+      margin-bottom: 5px;
+
+    }
+
+    .welcome-name {
+
+      font-size: 23px;
+
+      font-weight: 750;
+
+    }
+
+    .welcome-text {
+
+      margin-top: 8px;
+
+      font-size: 14px;
+
+      opacity: 0.9;
+
+    }
+
+
+    /* ==========================================
+       SECTION
+    ========================================== */
+
+    .section {
+
+      padding:
+        0
+        20px;
+
+    }
+
+    .section-title {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin:
+        0
+        0
+        13px;
+
+    }
+
+    .section-title h2 {
+
+      margin: 0;
+
+      font-size: 20px;
+
+    }
+
+    .section-title span {
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+    }
+
+
+    /* ==========================================
+       UNIT CARD
+    ========================================== */
+
+    .unit-card {
+
+      background:
+        var(--card);
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 20px;
+
+      padding: 19px;
+
+      margin-bottom: 13px;
+
+      box-shadow:
+        0 5px 22px
+        rgba(20, 30, 60, 0.045);
+
+      transition:
+        transform 0.15s ease;
+
+    }
+
+    .unit-card:not(.locked):active {
+
+      transform:
+        scale(0.985);
+
+    }
+
+
+    .unit-top {
+
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 13px;
+
+    }
+
+    .unit-icon {
+
+      width: 45px;
+      height: 45px;
+
+      flex-shrink: 0;
+
+      border-radius: 13px;
+
+      background:
+        #eef0ff;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 21px;
+
+    }
+
+    .unit-card.locked
+    .unit-icon {
+
+      background:
+        #f0f1f4;
+
+    }
+
+    .unit-info {
+
+      flex: 1;
+
+      min-width: 0;
+
+    }
+
+    .unit-number {
+
+      font-size: 12px;
+
+      color: var(--primary);
+
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+      margin-bottom: 3px;
+
+    }
+
+    .unit-card.locked
+    .unit-number {
+
+      color: var(--locked);
+
+    }
+
+    .unit-title {
+
+      margin: 0;
+
+      font-size: 18px;
+
+      line-height: 1.25;
+
+    }
+
+    .unit-description {
+
+      margin:
+        6px
+        0
+        0;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.45;
+
+    }
+
+
+    /* ==========================================
+       PROGRESS
+    ========================================== */
+
+    .progress-area {
+
+      margin-top: 17px;
+
+    }
+
+    .progress-row {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 7px;
+
+      font-size: 12px;
+
+    }
+
+    .progress-label {
+
+      color: var(--muted);
+
+    }
+
+    .progress-percent {
+
+      font-weight: 750;
+
+      color: var(--primary);
+
+    }
+
+    .progress-bar {
+
+      width: 100%;
+
+      height: 7px;
+
+      border-radius: 20px;
+
+      background: #eceef4;
+
+      overflow: hidden;
+
+    }
+
+    .progress-fill {
+
+      height: 100%;
+
+      border-radius: inherit;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--primary),
+          #7b83f6
+        );
+
+      transition:
+        width 0.4s ease;
+
+    }
+
+
+    /* ==========================================
+       UNIT BUTTON
+    ========================================== */
+
+    .unit-button {
+
+      width: 100%;
+
+      margin-top: 15px;
+
+      border: none;
+
+      border-radius: 13px;
+
+      padding: 13px 15px;
+
+      background:
+        var(--primary);
+
+      color: white;
+
+      font-size: 15px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+    }
+
+    .unit-button:active {
+
+      background:
+        var(--primary-dark);
+
+    }
+
+    .unit-card.locked {
+
+      opacity: 0.7;
+
+    }
+
+    .unit-card.locked
+    .unit-button {
+
+      background:
+        #e3e5eb;
+
+      color:
+        #7c8391;
+
+      cursor: default;
+
+    }
+
+
+    /* ==========================================
+       COMPLETED
+    ========================================== */
+
+    .completed-badge {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 5px;
+
+      margin-top: 12px;
+
+      padding:
+        6px
+        10px;
+
+      border-radius: 20px;
+
+      background:
+        var(--success-bg);
+
+      color:
+        var(--success);
+
+      font-size: 12px;
+
+      font-weight: 750;
+
+    }
+
+
+    /* ==========================================
+       BOTTOM NAVIGATION
+    ========================================== */
+
+    .bottom-nav {
+
+      position: fixed;
+
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      z-index: 100;
+
+      height: 72px;
+
+      background:
+        rgba(255, 255, 255, 0.96);
+
+      border-top:
+        1px solid var(--border);
+
+      backdrop-filter:
+        blur(14px);
+
+      -webkit-backdrop-filter:
+        blur(14px);
+
+      display: flex;
+
+      justify-content: center;
+
+    }
+
+    .nav-inner {
+
+      width: 100%;
+
+      max-width: 700px;
+
+      display: flex;
+
+      justify-content: space-around;
+
+    }
+
+    .nav-button {
+
+      flex: 1;
+
+      max-width: 160px;
+
+      border: none;
+
+      background: transparent;
+
+      color: #9299a8;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 3px;
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+      cursor: pointer;
+
+    }
+
+    .nav-icon {
+
+      font-size: 22px;
+
+      line-height: 1;
+
+    }
+
+    .nav-button.active {
+
+      color:
+        var(--primary);
+
+    }
+
+
+    /* ==========================================
+       OTHER PAGES
+    ========================================== */
+
+    .page {
+
+      display: none;
+
+      padding:
+        25px
+        20px;
+
+    }
+
+    .page.active {
+
+      display: block;
+
+    }
+
+    .page h2 {
+
+      margin:
+        0
+        0
+        8px;
+
+      font-size: 25px;
+
+    }
+
+    .page-subtitle {
+
+      color: var(--muted);
+
+      margin:
+        0
+        0
+        25px;
+
+      line-height: 1.5;
+
+    }
+
+
+    /* ==========================================
+       PROFILE
+    ========================================== */
+
+    .profile-card {
+
+      background: white;
+
+      border-radius: 20px;
+
+      padding: 22px;
+
+      border:
+        1px solid var(--border);
+
+    }
+
+    .profile-avatar {
+
+      width: 65px;
+      height: 65px;
+
+      border-radius: 50%;
+
+      background:
+        #eef0ff;
+
+      color:
+        var(--primary);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 25px;
+
+      font-weight: 800;
+
+      margin-bottom: 15px;
+
+    }
+
+    .profile-name {
+
+      font-size: 20px;
+
+      font-weight: 750;
+
+    }
+
+    .profile-username {
+
+      margin-top: 4px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+    }
+
+
+    /* ==========================================
+       EMPTY / FUTURE
+    ========================================== */
+
+    .empty-card {
+
+      background: white;
+
+      border-radius: 20px;
+
+      padding: 30px 22px;
+
+      text-align: center;
+
+      color: var(--muted);
+
+    }
+
+    .empty-icon {
+
+      font-size: 42px;
+
+      margin-bottom: 10px;
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <div class="app">
 
-    <div class="header">
-      <div class="logo">SalimTeaches</div>
+  <!-- ==========================================
+       LOADING
+  =========================================== -->
 
-      <h1>Beginner English 🇬🇧</h1>
+  <div id="loading" class="loading">
 
-      <p class="subtitle">
-        Ingliz tilini bosqichma-bosqich o‘rganing.
-      </p>
+    <div class="spinner"></div>
+
+    <div>
+      Kirish tekshirilmoqda...
     </div>
 
-    <div id="loading" class="loading">
-      <div class="spinner"></div>
-      <div>Access tekshirilmoqda...</div>
-    </div>
+  </div>
 
-    <div id="error" class="error">
-      <h2>🔒 Kirish mumkin emas</h2>
 
-      <p>
+  <!-- ==========================================
+       ERROR
+  =========================================== -->
+
+  <div id="errorScreen" class="error-screen">
+
+    <div class="error-card">
+
+      <div class="error-icon">
+        🔒
+      </div>
+
+      <h2>
+        Kirish mumkin emas
+      </h2>
+
+      <p id="errorMessage">
         Ushbu materiallar faqat Premium guruh a'zolari uchun.
       </p>
-
-      <p>
-        Agar siz kursga to‘lov qilgan bo‘lsangiz,
-        Premium guruhga qo‘shilganingizni tekshiring.
-      </p>
-    </div>
-
-    <div id="content" style="display:none;">
-
-      <div id="welcome" class="status"></div>
-
-      <div class="section-title">
-        📚 Kurs
-      </div>
-
-      <!-- UNIT 1 -->
-
-      <div class="unit">
-        <div class="unit-number">Unit 1</div>
-
-        <h2>Greetings & Introductions</h2>
-
-        <p>
-          Greetings, names, countries, numbers,
-          phone numbers and to be.
-        </p>
-
-        <button onclick="openUnit(1)">
-          Unit 1 ni ochish →
-        </button>
-      </div>
-
-
-      <!-- UNIT 2 -->
-
-      <div class="unit locked">
-
-        <div class="unit-number">
-          Unit 2 🔒
-        </div>
-
-        <h2>Hotels & Everyday English</h2>
-
-        <p>
-          Bu unit tez orada ochiladi.
-        </p>
-
-        <button disabled>
-          Tez orada
-        </button>
-
-      </div>
-
-
-      <!-- UNIT 3 -->
-
-      <div class="unit locked">
-
-        <div class="unit-number">
-          Unit 3 🔒
-        </div>
-
-        <h2>Jobs, Nationalities & To Be</h2>
-
-        <p>
-          Bu unit tez orada ochiladi.
-        </p>
-
-        <button disabled>
-          Tez orada
-        </button>
-
-      </div>
-
-
-      <div class="footer">
-        SalimTeaches © 2026
-      </div>
 
     </div>
 
   </div>
 
 
-<script>
+  <!-- ==========================================
+       APP
+  =========================================== -->
 
-  const tg = window.Telegram.WebApp;
-
-  tg.ready();
-  tg.expand();
-
-
-  async function authenticate() {
-
-    const initData = tg.initData;
-
-    if (!initData) {
-
-      showError(
-        "Mini App Telegram ichidan ochilmagan."
-      );
-
-      return;
-    }
+  <div id="main" class="app">
 
 
-    try {
+    <!-- ========================================
+         HOME PAGE
+    ========================================= -->
 
-      const response = await fetch(
-        "https://salimteaches-beginner-auth.imshosalim.workers.dev/auth",
-        {
-          method: "POST",
+    <div
+      id="homePage"
+      class="page active"
+    >
 
-          headers: {
-            "Content-Type": "application/json"
-          },
+      <header class="header">
 
-          body: JSON.stringify({
-            initData: initData
-          })
-        }
-      );
+        <div class="brand">
+          SALIMTEACHES
+        </div>
 
+        <h1>
+          Beginner English 🇬🇧
+        </h1>
 
-      const data = await response.json();
+        <p>
+          Ingliz tilini bosqichma-bosqich o‘rganing.
+        </p>
 
-
-      if (data.authorized) {
-
-        document.getElementById(
-          "loading"
-        ).style.display = "none";
+      </header>
 
 
-        document.getElementById(
-          "content"
-        ).style.display = "block";
+      <div class="welcome">
+
+        <div class="welcome-small">
+          Xush kelibsiz! 👋
+        </div>
+
+        <div
+          id="welcomeName"
+          class="welcome-name"
+        >
+          Student
+        </div>
+
+        <div class="welcome-text">
+          Kursni davom ettirishga tayyormisiz?
+        </div>
+
+      </div>
 
 
-        const welcome =
-          document.getElementById("welcome");
+      <section class="section">
+
+        <div class="section-title">
+
+          <h2>
+            📚 Kurs
+          </h2>
+
+          <span id="unitCount">
+            0 ta Unit
+          </span>
+
+        </div>
+
+        <div id="unitsContainer"></div>
+
+      </section>
+
+    </div>
 
 
-        const firstName =
-          data.user?.first_name || "Student";
+    <!-- ========================================
+         COURSE PAGE
+    ========================================= -->
+
+    <div
+      id="coursePage"
+      class="page"
+    >
+
+      <h2>
+        📚 Kursim
+      </h2>
+
+      <p class="page-subtitle">
+        Barcha Unitlarni shu yerdan kuzatishingiz mumkin.
+      </p>
+
+      <div id="courseUnitsContainer"></div>
+
+    </div>
 
 
-        welcome.innerHTML =
-          `👋 Salom, ${escapeHtml(firstName)}!<br><br>
-           <div class="success">
-             ✅ Premium access tasdiqlandi
-           </div>`;
+    <!-- ========================================
+         PROFILE PAGE
+    ========================================= -->
+
+    <div
+      id="profilePage"
+      class="page"
+    >
+
+      <h2>
+        👤 Profil
+      </h2>
+
+      <p class="page-subtitle">
+        Sizning kursdagi ma'lumotlaringiz.
+      </p>
 
 
-        welcome.style.display = "block";
+      <div class="profile-card">
 
-      } else {
+        <div
+          id="profileAvatar"
+          class="profile-avatar"
+        >
+          S
+        </div>
+
+        <div
+          id="profileName"
+          class="profile-name"
+        >
+          Student
+        </div>
+
+        <div
+          id="profileUsername"
+          class="profile-username"
+        >
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- ==========================================
+       BOTTOM NAVIGATION
+  =========================================== -->
+
+  <nav
+    id="bottomNav"
+    class="bottom-nav"
+    style="display:none;"
+  >
+
+    <div class="nav-inner">
+
+      <button
+        class="nav-button active"
+        onclick="showPage('home')"
+      >
+
+        <div class="nav-icon">
+          🏠
+        </div>
+
+        <div>
+          Bosh sahifa
+        </div>
+
+      </button>
+
+
+      <button
+        class="nav-button"
+        onclick="showPage('course')"
+      >
+
+        <div class="nav-icon">
+          📚
+        </div>
+
+        <div>
+          Kursim
+        </div>
+
+      </button>
+
+
+      <button
+        class="nav-button"
+        onclick="showPage('profile')"
+      >
+
+        <div class="nav-icon">
+          👤
+        </div>
+
+        <div>
+          Profil
+        </div>
+
+      </button>
+
+    </div>
+
+  </nav>
+
+
+  <script>
+
+
+    // ======================================================
+    // TELEGRAM
+    // ======================================================
+
+    const tg =
+      window.Telegram.WebApp;
+
+    tg.ready();
+    tg.expand();
+
+
+    // ======================================================
+    // GLOBAL DATA
+    // ======================================================
+
+    let courseData = null;
+    let currentUser = null;
+
+
+    // ======================================================
+    // AUTHENTICATION
+    // ======================================================
+
+    async function authenticate() {
+
+      const initData =
+        tg.initData;
+
+
+      if (!initData) {
 
         showError(
-          data.reason === "not_member"
-            ? "Siz Premium guruh a'zosi emassiz."
-            : "Telegram orqali autentifikatsiya amalga oshmadi."
+          "Mini App Telegram ichidan ochilmagan."
+        );
+
+        return;
+
+      }
+
+
+      try {
+
+        const response =
+          await fetch(
+            "https://salimteaches-beginner-auth.imshosalim.workers.dev/auth",
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body: JSON.stringify({
+                initData
+              })
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (
+          data.authorized
+        ) {
+
+          currentUser =
+            data.user;
+
+          courseData =
+            data.course;
+
+
+          showApplication();
+
+        } else {
+
+          showError(
+            getErrorMessage(data)
+          );
+
+        }
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showError(
+          "Server bilan bog‘lanishda xatolik yuz berdi."
         );
 
       }
 
-    } catch (error) {
+    }
 
-      console.error(error);
 
-      showError(
-        "Server bilan bog‘lanishda xatolik yuz berdi."
+    // ======================================================
+    // ERROR MESSAGE
+    // ======================================================
+
+    function getErrorMessage(data) {
+
+      if (
+        data.reason ===
+        "not_member"
+      ) {
+
+        return (
+          "Siz Premium guruh a'zosi emassiz."
+        );
+
+      }
+
+
+      if (
+        data.reason ===
+        "telegram_auth_failed"
+      ) {
+
+        return (
+          "Telegram orqali autentifikatsiya amalga oshmadi."
+        );
+
+      }
+
+
+      return (
+        "Kirishni tasdiqlashda xatolik yuz berdi."
       );
 
     }
 
-  }
+
+    // ======================================================
+    // SHOW APPLICATION
+    // ======================================================
+
+    function showApplication() {
+
+      document
+        .getElementById("loading")
+        .style.display = "none";
 
 
-  function showError(message) {
-
-    document.getElementById(
-      "loading"
-    ).style.display = "none";
+      document
+        .getElementById("main")
+        .style.display = "block";
 
 
-    const error =
-      document.getElementById("error");
+      document
+        .getElementById("bottomNav")
+        .style.display = "flex";
 
 
-    error.style.display = "block";
+      renderUser();
+
+      renderUnits();
+
+    }
 
 
-    error.querySelector("p").textContent =
-      message;
+    // ======================================================
+    // USER
+    // ======================================================
 
-  }
+    function renderUser() {
+
+      const name =
+        currentUser?.first_name ||
+        "Student";
 
 
-  function openUnit(unit) {
+      document
+        .getElementById("welcomeName")
+        .textContent =
+          name;
 
-    if (unit === 1) {
 
-      alert(
-        "Unit 1 hozircha tayyorlanmoqda 🚧"
+      document
+        .getElementById("profileName")
+        .textContent =
+          name;
+
+
+      const username =
+        currentUser?.username;
+
+
+      document
+        .getElementById("profileUsername")
+        .textContent =
+          username
+            ? "@" + username
+            : "Telegram foydalanuvchisi";
+
+
+      const firstLetter =
+        name
+          .charAt(0)
+          .toUpperCase();
+
+
+      document
+        .getElementById("profileAvatar")
+        .textContent =
+          firstLetter;
+
+    }
+
+
+    // ======================================================
+    // RENDER UNITS
+    // ======================================================
+
+    function renderUnits() {
+
+      const units =
+        courseData?.units ||
+        [];
+
+
+      document
+        .getElementById("unitCount")
+        .textContent =
+          `${units.length} ta Unit`;
+
+
+      const homeContainer =
+        document
+          .getElementById(
+            "unitsContainer"
+          );
+
+
+      const courseContainer =
+        document
+          .getElementById(
+            "courseUnitsContainer"
+          );
+
+
+      homeContainer.innerHTML = "";
+
+      courseContainer.innerHTML = "";
+
+
+      units.forEach(
+        unit => {
+
+          const homeCard =
+            createUnitCard(unit);
+
+
+          const courseCard =
+            createUnitCard(unit);
+
+
+          homeContainer
+            .appendChild(
+              homeCard
+            );
+
+
+          courseContainer
+            .appendChild(
+              courseCard
+            );
+
+        }
       );
 
     }
 
-  }
+
+    // ======================================================
+    // UNIT STATUS
+    // ======================================================
+
+    function getUnitStatus(unit) {
+
+      const progress =
+        courseData?.unitProgress?.[
+          unit.unit_id
+        ];
 
 
-  function escapeHtml(text) {
-
-    const div =
-      document.createElement("div");
-
-    div.textContent = text;
-
-    return div.innerHTML;
-
-  }
+      const completed =
+        progress &&
+        progress.completed === 1;
 
 
-  authenticate();
+      // Unit 1 starts unlocked.
+      if (
+        unit.unit_id === 1
+      ) {
 
-</script>
+        return {
+          unlocked:
+            unit.is_available === 1,
+
+          completed,
+
+          progress
+
+        };
+
+      }
+
+
+      // Find previous unit.
+      const previousUnit =
+        courseData.units.find(
+          u =>
+            u.sort_order ===
+            unit.sort_order - 1
+        );
+
+
+      const previousProgress =
+        previousUnit
+          ? courseData
+              ?.unitProgress?.[
+                previousUnit.unit_id
+              ]
+          : null;
+
+
+      const unlocked =
+        unit.is_available === 1 &&
+        previousProgress &&
+        previousProgress.completed === 1;
+
+
+      return {
+        unlocked: Boolean(unlocked),
+        completed,
+        progress
+      };
+
+    }
+
+
+    // ======================================================
+    // CALCULATE UNIT PROGRESS
+    // ======================================================
+
+    function calculateProgress(unit) {
+
+      const activities =
+        courseData?.activities
+          ?.filter(
+            activity =>
+              activity.unit_id ===
+              unit.unit_id &&
+              activity.is_required === 1
+          ) || [];
+
+
+      if (
+        activities.length === 0
+      ) {
+
+        return 0;
+
+      }
+
+
+      let completed = 0;
+
+
+      activities.forEach(
+        activity => {
+
+          const progress =
+            courseData
+              ?.activityProgress?.[
+                activity.activity_id
+              ];
+
+
+          if (
+            progress &&
+            progress.completed === 1
+          ) {
+
+            completed++;
+
+          }
+
+        }
+      );
+
+
+      return Math.round(
+        (
+          completed /
+          activities.length
+        ) * 100
+      );
+
+    }
+
+
+    // ======================================================
+    // UNIT CARD
+    // ======================================================
+
+    function createUnitCard(unit) {
+
+      const status =
+        getUnitStatus(unit);
+
+
+      const progress =
+        calculateProgress(unit);
+
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+
+      card.className =
+        "unit-card" +
+        (
+          status.unlocked
+            ? ""
+            : " locked"
+        );
+
+
+      const icon =
+        status.completed
+          ? "🏆"
+          : status.unlocked
+            ? "📖"
+            : "🔒";
+
+
+      let buttonText;
+
+
+      if (
+        status.completed
+      ) {
+
+        buttonText =
+          "Qayta ko‘rish →";
+
+      } else if (
+        status.unlocked
+      ) {
+
+        buttonText =
+          "Davom etish →";
+
+      } else {
+
+        buttonText =
+          getLockedMessage(unit);
+
+      }
+
+
+      card.innerHTML = `
+
+        <div class="unit-top">
+
+          <div class="unit-icon">
+            ${icon}
+          </div>
+
+          <div class="unit-info">
+
+            <div class="unit-number">
+              Unit ${unit.unit_id}
+            </div>
+
+            <h3 class="unit-title">
+              ${escapeHtml(
+                unit.title
+              )}
+            </h3>
+
+            <p class="unit-description">
+              ${escapeHtml(
+                unit.description ||
+                ""
+              )}
+            </p>
+
+          </div>
+
+        </div>
+
+
+        ${
+          status.unlocked
+            ? `
+
+              <div class="progress-area">
+
+                <div class="progress-row">
+
+                  <span class="progress-label">
+                    Jarayon
+                  </span>
+
+                  <span class="progress-percent">
+                    ${progress}%
+                  </span>
+
+                </div>
+
+                <div class="progress-bar">
+
+                  <div
+                    class="progress-fill"
+                    style="
+                      width:${progress}%;
+                    "
+                  ></div>
+
+                </div>
+
+              </div>
+
+            `
+            : ""
+        }
+
+
+        ${
+          status.completed
+            ? `
+
+              <div class="completed-badge">
+                ✓ Tugallangan
+              </div>
+
+            `
+            : ""
+        }
+
+
+        <button
+          class="unit-button"
+          ${
+            status.unlocked
+              ? `onclick="openUnit(${unit.unit_id})"`
+              : "disabled"
+          }
+        >
+          ${buttonText}
+        </button>
+
+      `;
+
+
+      return card;
+
+    }
+
+
+    // ======================================================
+    // LOCK MESSAGE
+    // ======================================================
+
+    function getLockedMessage(unit) {
+
+      if (
+        unit.is_available !== 1
+      ) {
+
+        return "Tez orada";
+
+      }
+
+
+      return (
+        "Avval oldingi Unitni tugating"
+      );
+
+    }
+
+
+    // ======================================================
+    // OPEN UNIT
+    // ======================================================
+
+    function openUnit(unitId) {
+
+      if (
+        unitId === 1
+      ) {
+
+        // Temporary message.
+        // We'll replace this with the actual
+        // Unit 1 page next.
+
+        tg.showAlert(
+          "Unit 1 hozir tayyorlanmoqda 🚧"
+        );
+
+        return;
+
+      }
+
+
+      tg.showAlert(
+        "Bu Unit hali tayyorlanmoqda."
+      );
+
+    }
+
+
+    // ======================================================
+    // NAVIGATION
+    // ======================================================
+
+    function showPage(page) {
+
+      const pages = {
+
+        home:
+          document.getElementById(
+            "homePage"
+          ),
+
+        course:
+          document.getElementById(
+            "coursePage"
+          ),
+
+        profile:
+          document.getElementById(
+            "profilePage"
+          )
+
+      };
+
+
+      Object.values(pages)
+        .forEach(
+          element =>
+            element.classList.remove(
+              "active"
+            )
+        );
+
+
+      pages[page]
+        .classList.add(
+          "active"
+        );
+
+
+      const buttons =
+        document.querySelectorAll(
+          ".nav-button"
+        );
+
+
+      buttons.forEach(
+        button =>
+          button.classList.remove(
+            "active"
+          )
+      );
+
+
+      const index = {
+
+        home: 0,
+        course: 1,
+        profile: 2
+
+      }[page];
+
+
+      buttons[index]
+        .classList.add(
+          "active"
+        );
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    // ======================================================
+    // ESCAPE HTML
+    // ======================================================
+
+    function escapeHtml(text) {
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+      div.textContent =
+        text;
+
+      return div.innerHTML;
+
+    }
+
+
+    // ======================================================
+    // SHOW ERROR
+    // ======================================================
+
+    function showError(message) {
+
+      document
+        .getElementById("loading")
+        .style.display =
+          "none";
+
+
+      document
+        .getElementById("errorScreen")
+        .style.display =
+          "flex";
+
+
+      document
+        .getElementById("errorMessage")
+        .textContent =
+          message;
+
+    }
+
+
+    // ======================================================
+    // START
+    // ======================================================
+
+    authenticate();
+
+  </script>
 
 </body>
+
 </html>
