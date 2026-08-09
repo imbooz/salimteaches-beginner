@@ -158,25 +158,40 @@ button.action{
 </style>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-<style id="unit1-consistent-actions">
-/* Consistent Unit 1 activity navigation */
-.activity-nav .activity-back {
-  display: none !important;
+<style id="listening-actions-style-only">
+.actions{
+  position:sticky;
+  bottom:10px;
+  z-index:1000;
+  width:100%;
+  box-sizing:border-box;
+  display:flex !important;
+  gap:10px !important;
+  padding:10px 0 !important;
+  margin:0 !important;
+  background:rgba(245,247,251,.96);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
 }
-.unit1-bottom-back {
-  width: 100%;
-  margin-top: 12px;
-  border: 0;
-  border-radius: 13px;
-  padding: 13px 16px;
-  background: #eef0ff;
-  color: #5865f2;
-  font-size: 15px;
-  font-weight: 800;
-  cursor: pointer;
+.actions .actions-inner{
+  display:flex !important;
+  flex:1 1 0 !important;
+  min-width:0 !important;
+  gap:10px !important;
+  margin:0 !important;
 }
-#reset, #retry {
-  display: none !important;
+.actions .action{
+  flex:1 1 0 !important;
+  min-width:0 !important;
+  width:auto !important;
+  margin:0 !important;
+}
+.actions > .unit1-bottom-back,
+.actions > button[onclick="backToUnit1()"]{
+  flex:1 1 0 !important;
+  min-width:0 !important;
+  width:auto !important;
+  margin:0 !important;
 }
 </style>
 
@@ -377,7 +392,6 @@ button.action{
   </div>
 <button type="button" class="action" style="width:100%;background:#eef0ff;color:#5865f2;margin-top:10px" onclick="backToUnit1()">← Unit 1 ga qaytish</button>
 </div>
-<button type="button" class="unit1-bottom-back" onclick="backToUnit1()">← Unit 1 ga qaytish</button>
 
 <script>
 const questions=[...document.querySelectorAll('.question')];
