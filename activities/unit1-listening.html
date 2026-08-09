@@ -126,11 +126,61 @@ button.action{
 @media(max-width:480px){
   .section{margin-left:10px;margin-right:10px;padding:15px}
 }
+
+.activity-nav{
+  position:sticky;
+  top:0;
+  z-index:30;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+}
+.activity-back{
+  border:0;
+  border-radius:13px;
+  padding:12px 15px;
+  background:#eef0ff;
+  color:var(--primary);
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+}
+.activity-label{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
+}
+
 </style>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
 <style id="unit1-consistent-actions">
-.unit-back{width:100%;background:#eef0ff;color:#5865f2;border:0;border-radius:13px;padding:13px 16px;font-size:15px;font-weight:800;cursor:pointer}
-</style></head>
+/* Consistent Unit 1 activity navigation */
+.activity-nav .activity-back {
+  display: none !important;
+}
+.unit1-bottom-back {
+  width: 100%;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 13px;
+  padding: 13px 16px;
+  background: #eef0ff;
+  color: #5865f2;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+}
+#reset, #retry {
+  display: none !important;
+}
+</style>
+
+</head>
 
 <body>
 
@@ -322,22 +372,23 @@ button.action{
 
 <div class="actions">
   <div class="actions-inner">
-    
+    <button class="action retry" id="retry" onclick="location.reload()">🔄 Qayta ishlash</button>
     <button class="action check" id="check" onclick="checkListening()">Javoblarni tekshirish</button>
   </div>
-<button type="button" class="action unit-back" onclick="backToUnit1()">← Unit 1 ga qaytish</button>
+<button type="button" class="action" style="width:100%;background:#eef0ff;color:#5865f2;margin-top:10px" onclick="backToUnit1()">← Unit 1 ga qaytish</button>
 </div>
+<button type="button" class="unit1-bottom-back" onclick="backToUnit1()">← Unit 1 ga qaytish</button>
 
 <script>
 const questions=[...document.querySelectorAll('.question')];
 const answered=new Set();
 
 function norm(v){
-  return String(v??'')
+  return String(v ?? '')
     .trim()
     .toLowerCase()
-    .replace(/[’‘]/g,"'")
-    .replace(/\s+/g,' ');
+    .replace(/[’‘]/g, "'")
+    .replace(/\s+/g, ' ');
 }
 
 function normPhone(v){
@@ -452,8 +503,41 @@ async function checkListening(){
   }
 
   document.getElementById('check').style.display='none';
+  document.getElementById('retry').style.display='block';
 
   result.scrollIntoView({behavior:'smooth',block:'center'});
+}
+</script>
+
+
+<script>
+function getTelegramInitData() {
+  try {
+    const saved = sessionStorage.getItem("salimteaches_initData");
+    if (saved) return saved;
+  } catch (e) {
+    console.warn("sessionStorage unavailable:", e);
+  }
+
+  try {
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+      if (tg.initData) {
+        try {
+          sessionStorage.setItem("salimteaches_initData", tg.initData);
+        } catch (e) {}
+        return tg.initData;
+      }
+    }
+  } catch (e) {
+    console.warn("Telegram initData unavailable:", e);
+  }
+
+  return "";
+}
+
+function backToUnit1() {
+  window.location.href = "../index.html?unit=1";
 }
 </script>
 
