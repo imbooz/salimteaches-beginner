@@ -1511,6 +1511,13 @@
 
       renderUnits();
 
+      // When an activity sends the student back with #unit1,
+      // open Unit 1 directly instead of leaving them on Home.
+      if (window.location.hash === "#unit1") {
+        history.replaceState(null, "", window.location.pathname + window.location.search);
+        openUnit(1);
+      }
+
     }
 
 

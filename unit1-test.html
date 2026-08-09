@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="uz"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>SalimTeaches — Unit 1 Test</title>
+<style>
+:root{--primary:#5865f2;--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#747d91;--border:#e8ebf2;--good:#149b66;--goodbg:#e9f8f1;--bad:#d84a4a;--badbg:#fff0f0}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+.app{max-width:760px;margin:auto;padding-bottom:110px}.header{padding:24px 18px 14px}.brand{font-size:12px;font-weight:800;letter-spacing:.8px;color:var(--primary)}h1{font-size:27px;margin:7px 0 5px}.subtitle{color:var(--muted);font-size:14px;line-height:1.45;margin:0}
+.progress-wrap{position:sticky;top:0;z-index:10;background:rgba(245,247,251,.94);backdrop-filter:blur(10px);padding:9px 18px 12px;border-bottom:1px solid var(--border)}.progress-row{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:7px}.progressbar{height:7px;background:#e4e7ef;border-radius:10px;overflow:hidden}.progressfill{height:100%;width:0;background:linear-gradient(90deg,var(--primary),#7c83f5);transition:.3s}
+.section{margin:14px 14px 0}.section-head{background:linear-gradient(135deg,#5865f2,#747cf5);color:#fff;border-radius:18px;padding:16px 16px 14px;margin-bottom:10px}.section-code{font-size:11px;font-weight:800;opacity:.85;letter-spacing:.5px}.section-title{font-size:18px;font-weight:800;margin-top:3px}.section-desc{font-size:12px;opacity:.92;margin-top:5px;line-height:1.45}
+.question{display:flex;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 12px;margin:9px 0;box-shadow:0 4px 16px rgba(20,30,60,.035)}.qnum{width:30px;height:30px;flex:0 0 30px;border-radius:10px;background:#eef0ff;color:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px}.qbody{min-width:0;flex:1}.qprompt{font-size:15px;line-height:1.5;margin-bottom:10px}.choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}.choice,.word-choice,.phrase-card{border:1px solid #dfe3ec;background:#fbfcfe;color:var(--text);border-radius:11px;padding:11px 10px;font-size:14px;font-weight:650;min-height:44px}.choice.selected,.word-choice.selected,.phrase-card.selected{border-color:var(--primary);background:#eef0ff;color:var(--primary)}.choice.correct,.word-choice.correct{border-color:#bfead6;background:var(--goodbg);color:var(--good)}.choice.wrong,.word-choice.wrong{border-color:#ffd0d0;background:var(--badbg);color:var(--bad)}
+input{width:100%;border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;padding:11px 12px;font-size:15px;color:var(--text);outline:none}input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(88,101,242,.1)}
+.feedback{display:none;margin-top:9px;border-radius:10px;padding:9px 10px;font-size:12px;line-height:1.45}.feedback.good{display:block;background:var(--goodbg);color:var(--good)}.feedback.bad{display:block;background:var(--badbg);color:var(--bad)}
+.order-list{display:flex;flex-direction:column;gap:9px}.drag-item{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:13px 12px;font-size:14px;line-height:1.4;touch-action:none;user-select:none;cursor:grab;box-shadow:0 4px 14px rgba(20,30,60,.035)}.drag-item.dragging{opacity:.55;box-shadow:0 12px 30px rgba(20,30,60,.16)}.drag-handle{color:var(--primary);font-size:20px;line-height:1}.small-tip{color:var(--muted);font-size:11px;line-height:1.4;margin:8px 2px}.section-feedback{display:none;margin:9px 0;padding:11px 12px;border-radius:12px;font-size:13px}.section-feedback.good{display:block;background:var(--goodbg);color:var(--good)}.section-feedback.bad{display:block;background:var(--badbg);color:var(--bad)}
+.phrase-bank{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.phrase-card{touch-action:none;cursor:grab;background:#fff}.phrase-card.placed{opacity:.45}.dialogue{display:flex;flex-direction:column;gap:8px}.dialogue-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap;background:#fff;border:1px solid var(--border);border-radius:13px;padding:10px 12px}.line{font-size:14px;line-height:1.45}.speaker{font-weight:800;color:var(--primary);min-width:20px}.drop-slot{min-height:44px;min-width:190px;border:2px dashed #cfd4e1;border-radius:11px;display:flex;align-items:center;justify-content:center;text-align:center;padding:7px;color:#9aa1af;font-size:11px;background:#fafbfe}.drop-slot.inline-slot{min-width:190px;flex:0 1 220px}.drop-slot.filled{border-style:solid;border-color:var(--primary);background:#eef0ff;color:var(--primary);font-weight:700}.drop-slot.correct{border-color:#bfead6;background:var(--goodbg);color:var(--good)}.drop-slot.wrong{border-color:#ffd0d0;background:var(--badbg);color:var(--bad)}
+.word-row{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.word-choice{padding:12px 6px}.text-answer.correct{border-color:#bfead6;background:var(--goodbg)}.text-answer.wrong{border-color:#ffd0d0;background:var(--badbg)}
+.actions{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(255,255,255,.96);border-top:1px solid var(--border);padding:12px 14px;backdrop-filter:blur(12px)}.actions-inner{max-width:760px;margin:auto;display:flex;gap:9px}.actions button{border:0;border-radius:13px;padding:13px 16px;font-size:15px;font-weight:800;cursor:pointer}.check{flex:1;background:var(--primary);color:#fff}.retry{background:#eef0ff;color:var(--primary);display:none}.result{display:none;margin:14px;padding:20px;border-radius:20px;background:#fff;border:1px solid var(--border);text-align:center}.result-score{font-size:38px;font-weight:900;color:var(--primary)}.result-title{font-size:20px;font-weight:850;margin:5px 0}.result-text{color:var(--muted);font-size:14px;line-height:1.5}.result.pass{border-color:#c9efdd;background:#f4fcf8}.result.pass .result-score{color:var(--good)}.result.fail{border-color:#ffd3d3;background:#fff8f8}
+@media(max-width:480px){.choices{grid-template-columns:1fr 1fr}.dialogue-row{gap:8px}.drop-slot{min-height:44px;flex:1}.phrase-bank{grid-template-columns:1fr}.word-row{gap:5px}.word-choice{font-size:13px}}
+
+.activity-top{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;gap:10px;
+  padding:10px 0;
+  margin-bottom:8px;
+  background:rgba(245,247,251,.96);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.activity-back{
+  width:42px;height:42px;flex:0 0 42px;
+  border:1px solid var(--border);border-radius:13px;
+  background:#fff;color:var(--text);
+  font-size:22px;font-weight:800;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.activity-back:active{background:#eef0ff;color:var(--primary)}
+.activity-top-title{flex:1;min-width:0}
+.activity-top-title strong{display:block;font-size:13px}
+.activity-top-title span{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+.activity-top-progress{font-size:12px;font-weight:800;color:var(--primary)}
+.activity-bottom{
+  margin:18px 0 95px;text-align:center;
+}
+.back-unit-button{
+  width:100%;border:1px solid var(--border);border-radius:13px;
+  padding:13px 15px;background:#fff;color:var(--primary);
+  font-size:14px;font-weight:800;cursor:pointer;
+}
+</style><script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+<div class="app">
+<div class="activity-top">
+  <button class="activity-back" type="button" onclick="goBackToUnit1()" aria-label="Orqaga">←</button>
+  <div class="activity-top-title"><strong>Unit 1</strong><span>Unit Test</span></div>
+  <div class="activity-top-progress" id="topProgress">0%</div>
+</div>
+<header class="header"><div class="brand">SALIMTEACHES • BEGINNER</div><h1>📝 Unit 1 Test</h1>
+<p class="subtitle">Greetings, introductions, countries, numbers va <b>to be</b>.</p></header>
+<div class="progress-wrap"><div class="progress-row"><span>Test jarayoni</span><span id="answered">0 / 50</span></div><div class="progressbar"><div class="progressfill" id="progressFill"></div></div></div>
+<div id="test">
+<section class="section">
+ <div class="section-head"><div class="section-code">A</div><div class="section-title">Functional language</div>
+ <div class="section-desc">Gaplarni bosib ushlab, to‘g‘ri tartibga joylashtiring.</div></div>
+ <div class="order-list" id="orderA"><div class="drag-item" data-value="1" tabindex="0"><span class="drag-handle">☷</span><span>Nice to meet you, Claire.</span></div>
+<div class="drag-item" data-value="4" tabindex="0"><span class="drag-handle">☷</span><span>Nice to meet you, too.</span></div>
+<div class="drag-item" data-value="2" tabindex="0"><span class="drag-handle">☷</span><span>I’m fine thanks, Jessica. How are you?</span></div>
+<div class="drag-item" data-value="5" tabindex="0"><span class="drag-handle">☷</span><span>I’m fine. Mike, this is Claire.</span></div>
+<div class="drag-item" data-value="3" tabindex="0"><span class="drag-handle">☷</span><span>Hello, Mike. How are you?</span></div></div>
+ <div class="small-tip">📱 Telefonda: gapni bosib ushlab, kerakli joyga olib boring.</div>
+ <div class="section-feedback" id="sec-A"></div>
+</section>
+
+<section class="section"><div class="section-head"><div class="section-code">B</div><div class="section-title">Functional language</div>
+<div class="section-desc">Mos javobni tanlang.</div></div>
+<div class="question" data-id="6" data-answer="my" data-expl="“my name” — mening ismim.">
+ <div class="qnum">6</div><div class="qbody"><div class="qprompt">Hi, ______ name’s Gemma.</div><div class="choices"><button class="choice" data-value="my">my</button><button class="choice" data-value="your">your</button><button class="choice" data-value="I’m">I’m</button><button class="choice" data-value="you">you</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="7" data-answer="your" data-expl="“your name” — sizning/sening isming.">
+ <div class="qnum">7</div><div class="qbody"><div class="qprompt">What’s ______ name?</div><div class="choices"><button class="choice" data-value="your">your</button><button class="choice" data-value="my">my</button><button class="choice" data-value="I’m">I’m</button><button class="choice" data-value="you">you</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="8" data-answer="you" data-expl="“Where are you from?” — Siz qayerdansiz?">
+ <div class="qnum">8</div><div class="qbody"><div class="qprompt">Where are ______ from?</div><div class="choices"><button class="choice" data-value="your">your</button><button class="choice" data-value="my">my</button><button class="choice" data-value="I’m">I’m</button><button class="choice" data-value="you">you</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="9" data-answer="I’m" data-expl="“I’m” = “I am”.">
+ <div class="qnum">9</div><div class="qbody"><div class="qprompt">______ from Switzerland.</div><div class="choices"><button class="choice" data-value="your">your</button><button class="choice" data-value="my">my</button><button class="choice" data-value="I’m">I’m</button><button class="choice" data-value="you">you</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="10" data-answer="I’m" data-expl="“I’m fine” — Men yaxshiman.">
+ <div class="qnum">10</div><div class="qbody"><div class="qprompt">______ fine, thanks.</div><div class="choices"><button class="choice" data-value="your">your</button><button class="choice" data-value="my">my</button><button class="choice" data-value="I’m">I’m</button><button class="choice" data-value="you">you</button></div><div class="feedback"></div></div>
+</div></section>
+
+<section class="section">
+ <div class="section-head">
+   <div class="section-code">C</div>
+   <div class="section-title">Functional language</div>
+   <div class="section-desc">Berilgan iboralarni suhbatdagi bo‘sh joylarga sudrab olib boring.</div>
+ </div>
+
+ <div class="phrase-bank" id="phraseBank">
+   <button class="phrase-card" draggable="true" data-phrase="p11" data-text="My name’s Henry">My name’s Henry</button>
+   <button class="phrase-card" draggable="true" data-phrase="p12" data-text="What’s your work number?">What’s your work number?</button>
+   <button class="phrase-card" draggable="true" data-phrase="p13" data-text="OK">OK</button>
+   <button class="phrase-card" draggable="true" data-phrase="p14" data-text="I don’t have one">I don’t have one</button>
+   <button class="phrase-card" draggable="true" data-phrase="p15" data-text="My number is 9845">My number is 9845</button>
+ </div>
+
+ <div class="dialogue">
+
+   <div class="dialogue-row">
+     <span class="speaker">A:</span>
+     <span class="line">What’s your name?</span>
+   </div>
+
+   <div class="dialogue-row">
+     <span class="speaker">B:</span>
+     <div class="drop-slot" data-answer="p11" data-question="11">Javobni shu yerga joylashtiring</div>
+   </div>
+
+   <div class="dialogue-row">
+     <span class="speaker">A:</span>
+     <div class="drop-slot" data-answer="p12" data-question="12">Javobni shu yerga joylashtiring</div>
+   </div>
+
+   <div class="dialogue-row">
+     <span class="speaker">B:</span>
+     <span class="line">It’s 877 6778.</span>
+   </div>
+
+   <div class="dialogue-row">
+     <span class="speaker">A:</span>
+     <div class="drop-slot" data-answer="p13" data-question="13">Javobni shu yerga joylashtiring</div>
+     <span class="line">What’s your mobile number?</span>
+   </div>
+
+   <div class="dialogue-row">
+     <span class="speaker">B:</span>
+     <span class="line">Sorry,</span>
+     <div class="drop-slot inline-slot" data-answer="p14" data-question="14">Javobni shu yerga joylashtiring</div>
+     <span class="line">What’s your home number?</span>
+   </div>
+
+   <div class="dialogue-row">
+     <span class="speaker">A:</span>
+     <div class="drop-slot" data-answer="p15" data-question="15">Javobni shu yerga joylashtiring</div>
+   </div>
+
+ </div>
+
+ <div class="small-tip">📱 Telefonda: iborani bosib ushlab, mos bo‘sh joyga olib boring. Yoki iborani bosing, keyin bo‘sh joyni bosing.</div>
+ <div class="section-feedback" id="sec-C"></div>
+</section>
+
+<section class="section"><div class="section-head"><div class="section-code">D</div><div class="section-title">Vocabulary</div>
+<div class="section-desc">Har bir qatorda 4 ta so‘z bor. Ortiqcha so‘zni bosing.</div></div>
+<div class="question" data-id="16" data-answer="Berlin" data-expl="Berlin — shahar; qolganlari odam ismlari.">
+ <div class="qnum">16</div><div class="qbody"><div class="qprompt">Ortiqcha so‘zni tanlang:</div><div class="word-row"><button class="word-choice" data-value="Emily">Emily</button><button class="word-choice" data-value="Berlin">Berlin</button><button class="word-choice" data-value="Jessica">Jessica</button><button class="word-choice" data-value="Ben">Ben</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="17" data-answer="name" data-expl="“name” — ism; qolganlari sonlar.">
+ <div class="qnum">17</div><div class="qbody"><div class="qprompt">Ortiqcha so‘zni tanlang:</div><div class="word-row"><button class="word-choice" data-value="five">five</button><button class="word-choice" data-value="eight">eight</button><button class="word-choice" data-value="name">name</button><button class="word-choice" data-value="seven">seven</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="18" data-answer="Russia" data-expl="Russia — davlat; qolganlari shaharlar.">
+ <div class="qnum">18</div><div class="qbody"><div class="qprompt">Ortiqcha so‘zni tanlang:</div><div class="word-row"><button class="word-choice" data-value="Russia">Russia</button><button class="word-choice" data-value="Paris">Paris</button><button class="word-choice" data-value="Rome">Rome</button><button class="word-choice" data-value="Washington">Washington</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="19" data-answer="two" data-expl="“two” — son; qolganlari salomlashish/xayrlashish so‘zlari.">
+ <div class="qnum">19</div><div class="qbody"><div class="qprompt">Ortiqcha so‘zni tanlang:</div><div class="word-row"><button class="word-choice" data-value="hello">hello</button><button class="word-choice" data-value="two">two</button><button class="word-choice" data-value="bye">bye</button><button class="word-choice" data-value="hi">hi</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="20" data-answer="three" data-expl="“three” — son; qolganlari subject pronouns.">
+ <div class="qnum">20</div><div class="qbody"><div class="qprompt">Ortiqcha so‘zni tanlang:</div><div class="word-row"><button class="word-choice" data-value="she">she</button><button class="word-choice" data-value="three">three</button><button class="word-choice" data-value="they">they</button><button class="word-choice" data-value="he">he</button></div><div class="feedback"></div></div>
+</div></section>
+
+<section class="section"><div class="section-head"><div class="section-code">E</div><div class="section-title">Vocabulary</div>
+<div class="section-desc">Harflarni to‘g‘ri tartibga keltirib, davlat nomini yozing.</div></div>
+<div class="question" data-id="21" data-answer="GERMANY">
+ <div class="qnum">21</div><div class="qbody"><div class="qprompt">Harflarni tartibga keltiring: <b>RYMGENA</b></div>
+ <input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Davlat nomi">
+ <div class="feedback"></div></div>
+</div>
+<div class="question" data-id="22" data-answer="BRAZIL">
+ <div class="qnum">22</div><div class="qbody"><div class="qprompt">Harflarni tartibga keltiring: <b>ILRZAB</b></div>
+ <input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Davlat nomi">
+ <div class="feedback"></div></div>
+</div>
+<div class="question" data-id="23" data-answer="FRANCE">
+ <div class="qnum">23</div><div class="qbody"><div class="qprompt">Harflarni tartibga keltiring: <b>REFACN</b></div>
+ <input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Davlat nomi">
+ <div class="feedback"></div></div>
+</div>
+<div class="question" data-id="24" data-answer="ENGLAND">
+ <div class="qnum">24</div><div class="qbody"><div class="qprompt">Harflarni tartibga keltiring: <b>GLNDNEA</b></div>
+ <input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Davlat nomi">
+ <div class="feedback"></div></div>
+</div>
+<div class="question" data-id="25" data-answer="RUSSIA">
+ <div class="qnum">25</div><div class="qbody"><div class="qprompt">Harflarni tartibga keltiring: <b>SRIASU</b></div>
+ <input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Davlat nomi">
+ <div class="feedback"></div></div>
+</div></section>
+
+<section class="section"><div class="section-head"><div class="section-code">F</div><div class="section-title">Grammar</div>
+<div class="section-desc">Mos javobni tanlang: <b>is / am / are</b>.</div></div>
+<div class="question" data-id="26" data-answer="is" data-expl="“His name” birlik, shuning uchun “is”.">
+ <div class="qnum">26</div><div class="qbody"><div class="qprompt">His name ______ Ben.</div><div class="choices"><button class="choice" data-value="am">am</button><button class="choice" data-value="is">is</button><button class="choice" data-value="are">are</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="27" data-answer="are" data-expl="Ikki kishi — ko‘plik, shuning uchun “are”.">
+ <div class="qnum">27</div><div class="qbody"><div class="qprompt">Mario and Paulo ______ from Italy</div><div class="choices"><button class="choice" data-value="am">am</button><button class="choice" data-value="is">is</button><button class="choice" data-value="are">are</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="28" data-answer="are" data-expl="“We” bilan “are” ishlatiladi.">
+ <div class="qnum">28</div><div class="qbody"><div class="qprompt">We ______ from Germany.</div><div class="choices"><button class="choice" data-value="am">am</button><button class="choice" data-value="is">is</button><button class="choice" data-value="are">are</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="29" data-answer="am" data-expl="“I” bilan “am” ishlatiladi.">
+ <div class="qnum">29</div><div class="qbody"><div class="qprompt">I ______ from London.</div><div class="choices"><button class="choice" data-value="am">am</button><button class="choice" data-value="is">is</button><button class="choice" data-value="are">are</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="30" data-answer="is" data-expl="“her name” birlik, shuning uchun “is”.">
+ <div class="qnum">30</div><div class="qbody"><div class="qprompt">What ______ her name?</div><div class="choices"><button class="choice" data-value="am">am</button><button class="choice" data-value="is">is</button><button class="choice" data-value="are">are</button></div><div class="feedback"></div></div>
+</div></section>
+
+<section class="section"><div class="section-head"><div class="section-code">G</div><div class="section-title">Grammar</div>
+<div class="section-desc"><b>Gaplarni qisqartma bilan yozing.</b><br>Masalan: <i>I am from Uzbekistan.</i> → <b>I’m from Uzbekistan.</b></div></div>
+<div class="question" data-id="31" data-answer="My name&#x27;s Michael.">
+ <div class="qnum">31</div><div class="qbody"><div class="qprompt">My name is Michael.</div>
+ <input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Qisqartma shaklini yozing">
+ <div class="feedback"></div></div>
+</div>
+<div class="question" data-id="32" data-answer="I&#x27;m from Ireland.">
+ <div class="qnum">32</div><div class="qbody"><div class="qprompt">I am from Ireland.</div>
+ <input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Qisqartma shaklini yozing">
+ <div class="feedback"></div></div>
+</div>
+<div class="question" data-id="33" data-answer="She&#x27;s from Rome.">
+ <div class="qnum">33</div><div class="qbody"><div class="qprompt">She is from Rome.</div>
+ <input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Qisqartma shaklini yozing">
+ <div class="feedback"></div></div>
+</div>
+<div class="question" data-id="34" data-answer="What&#x27;s your number?">
+ <div class="qnum">34</div><div class="qbody"><div class="qprompt">What is your number?</div>
+ <input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Qisqartma shaklini yozing">
+ <div class="feedback"></div></div>
+</div>
+<div class="question" data-id="35" data-answer="It&#x27;s 4749.">
+ <div class="qnum">35</div><div class="qbody"><div class="qprompt">It is 4749.</div>
+ <input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Qisqartma shaklini yozing">
+ <div class="feedback"></div></div>
+</div></section>
+
+<section class="section"><div class="section-head"><div class="section-code">H</div><div class="section-title">Grammar</div>
+<div class="section-desc">Qalin yozilgan so‘z o‘rniga <b>he / she / it / they</b> dan mosini tanlang.</div></div>
+<div class="question" data-id="36" data-answer="they" data-expl="Carlo va Jorge — ikki kishi, shuning uchun “they”.">
+ <div class="qnum">36</div><div class="qbody"><div class="qprompt"><b>Carlo and Jorge</b> are from Brazil.</div><div class="choices"><button class="choice" data-value="he">he</button><button class="choice" data-value="she">she</button><button class="choice" data-value="it">it</button><button class="choice" data-value="they">they</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="37" data-answer="she" data-expl="Diana uchun “she” ishlatiladi.">
+ <div class="qnum">37</div><div class="qbody"><div class="qprompt">Where is <b>Diana</b> from?</div><div class="choices"><button class="choice" data-value="he">he</button><button class="choice" data-value="she">she</button><button class="choice" data-value="it">it</button><button class="choice" data-value="they">they</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="38" data-answer="it" data-expl="“number” — narsa, shuning uchun “it”.">
+ <div class="qnum">38</div><div class="qbody"><div class="qprompt">What’s <b>his number</b>? His number is 344 689.</div><div class="choices"><button class="choice" data-value="he">he</button><button class="choice" data-value="she">she</button><button class="choice" data-value="it">it</button><button class="choice" data-value="they">they</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="39" data-answer="he" data-expl="David — erkak, shuning uchun “he”.">
+ <div class="qnum">39</div><div class="qbody"><div class="qprompt"><b>David</b> is from Scotland.</div><div class="choices"><button class="choice" data-value="he">he</button><button class="choice" data-value="she">she</button><button class="choice" data-value="it">it</button><button class="choice" data-value="they">they</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="40" data-answer="she" data-expl="Eva — ayol/qiz, shuning uchun “she”.">
+ <div class="qnum">40</div><div class="qbody"><div class="qprompt"><b>Eva</b> is Polish.</div><div class="choices"><button class="choice" data-value="he">he</button><button class="choice" data-value="she">she</button><button class="choice" data-value="it">it</button><button class="choice" data-value="they">they</button></div><div class="feedback"></div></div>
+</div></section>
+
+<section class="section"><div class="section-head"><div class="section-code">I</div><div class="section-title">Grammar</div>
+<div class="section-desc">Xatoni toping va gapni to‘g‘ri yozing.</div></div>
+<div class="question" data-id="41" data-answer="Her name is Chloe.">
+ <div class="qnum">41</div><div class="qbody"><div class="qprompt">She name is Chloe.</div>
+ <input class="text-answer" autocomplete="off" spellcheck="false" placeholder="To‘g‘ri gapni yozing">
+ <div class="feedback"></div></div>
+</div>
+<div class="question" data-id="42" data-answer="He is from France.">
+ <div class="qnum">42</div><div class="qbody"><div class="qprompt">His is from France.</div>
+ <input class="text-answer" autocomplete="off" spellcheck="false" placeholder="To‘g‘ri gapni yozing">
+ <div class="feedback"></div></div>
+</div>
+<div class="question" data-id="43" data-answer="I am Will.">
+ <div class="qnum">43</div><div class="qbody"><div class="qprompt">I are Will.</div>
+ <input class="text-answer" autocomplete="off" spellcheck="false" placeholder="To‘g‘ri gapni yozing">
+ <div class="feedback"></div></div>
+</div>
+<div class="question" data-id="44" data-answer="They are from Spain.">
+ <div class="qnum">44</div><div class="qbody"><div class="qprompt">They is from Spain.</div>
+ <input class="text-answer" autocomplete="off" spellcheck="false" placeholder="To‘g‘ri gapni yozing">
+ <div class="feedback"></div></div>
+</div>
+<div class="question" data-id="45" data-answer="She is in London.">
+ <div class="qnum">45</div><div class="qbody"><div class="qprompt">Her is in London.</div>
+ <input class="text-answer" autocomplete="off" spellcheck="false" placeholder="To‘g‘ri gapni yozing">
+ <div class="feedback"></div></div>
+</div></section>
+
+<section class="section"><div class="section-head"><div class="section-code">J</div><div class="section-title">Grammar</div>
+<div class="section-desc">Ikki variantdan to‘g‘ri gapni tanlang.</div></div>
+<div class="question" data-id="46" data-answer="a" data-expl="“They” bilan “are” to‘g‘ri.">
+ <div class="qnum">46</div><div class="qbody"><div class="qprompt">To‘g‘ri gapni tanlang:</div><div class="choices"><button class="choice j-choice" data-value="a">a) They are from Russia.</button><button class="choice j-choice" data-value="b">b) They am from Russia.</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="47" data-answer="a" data-expl="“She” subject pronoun, “is” to be.">
+ <div class="qnum">47</div><div class="qbody"><div class="qprompt">To‘g‘ri gapni tanlang:</div><div class="choices"><button class="choice j-choice" data-value="a">a) She is Emily.</button><button class="choice j-choice" data-value="b">b) Her is Emily.</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="48" data-answer="b" data-expl="“I” bilan “am” ishlatiladi.">
+ <div class="qnum">48</div><div class="qbody"><div class="qprompt">To‘g‘ri gapni tanlang:</div><div class="choices"><button class="choice j-choice" data-value="a">a) I is from Italy.</button><button class="choice j-choice" data-value="b">b) I am from Italy.</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="49" data-answer="a" data-expl="“We” bilan “are” ishlatiladi.">
+ <div class="qnum">49</div><div class="qbody"><div class="qprompt">To‘g‘ri gapni tanlang:</div><div class="choices"><button class="choice j-choice" data-value="a">a) We are in New York.</button><button class="choice j-choice" data-value="b">b) We is in New York.</button></div><div class="feedback"></div></div>
+</div>
+<div class="question" data-id="50" data-answer="b" data-expl="“It” bilan “is” ishlatiladi.">
+ <div class="qnum">50</div><div class="qbody"><div class="qprompt">To‘g‘ri gapni tanlang:</div><div class="choices"><button class="choice j-choice" data-value="a">a) It am from Japan.</button><button class="choice j-choice" data-value="b">b) It is from Japan.</button></div><div class="feedback"></div></div>
+</div></section>
+</div>
+<div id="result" class="result"><div class="result-score" id="score"></div><div class="result-title" id="resultTitle"></div><div class="result-text" id="resultText"></div></div>
+</div>
+<div class="actions"><div class="actions-inner"><button class="retry" id="retry" onclick="retryTest()">🔄 Qayta ishlash</button><button class="check" id="check" onclick="checkTest()">Javoblarni tekshirish</button></div></div><div class="activity-bottom"><button class="back-unit-button" type="button" onclick="goBackToUnit1()">← Unit 1 ga qaytish</button></div>
+<script>
+function goBackToUnit1(){
+  window.location.href = "../index.html#unit1";
+}
+if (window.Telegram && Telegram.WebApp) {
+  Telegram.WebApp.ready();
+  Telegram.WebApp.expand();
+}
+</script>
+<script>
+const TOTAL=50;
+let answeredSet=new Set();
+let selectedPhrase=null;
+
+function norm(v){return String(v??'').trim().toLowerCase().replace(/[’‘]/g,"'").replace(/[.,!?“”\"']/g,'').replace(/\s+/g,' ')}
+function updateProgress(){
+  const n=answeredSet.size;
+  const pct=Math.round(n/TOTAL*100);
+  document.getElementById('answered').textContent=n+' / '+TOTAL;
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('topProgress').textContent=pct+'%';
+}
+function markAnswer(q, ok, explanation){
+  const fb=q.querySelector('.feedback');
+  fb.className='feedback '+(ok?'good':'bad');
+  fb.textContent=ok?'✅ To‘g‘ri!':'❌ Noto‘g‘ri. '+(explanation||'');
+}
+function attachChoiceHandlers(){
+ document.querySelectorAll('.choices .choice').forEach(btn=>{
+   btn.addEventListener('click',()=>{
+     const q=btn.closest('.question');
+     q.querySelectorAll('.choice').forEach(x=>x.classList.remove('selected'));
+     btn.classList.add('selected');
+     answeredSet.add(Number(q.dataset.id)); updateProgress();
+   });
+ });
+ document.querySelectorAll('.word-choice').forEach(btn=>{
+   btn.addEventListener('click',()=>{
+     const q=btn.closest('.question');
+     q.querySelectorAll('.word-choice').forEach(x=>x.classList.remove('selected'));
+     btn.classList.add('selected');
+     answeredSet.add(Number(q.dataset.id)); updateProgress();
+   });
+ });
+}
+attachChoiceHandlers();
+
+function setupText(){
+ document.querySelectorAll('.text-answer').forEach(input=>{
+   input.addEventListener('input',()=>{
+     const q=input.closest('.question');
+     if(norm(input.value)) answeredSet.add(Number(q.dataset.id)); else answeredSet.delete(Number(q.dataset.id));
+     updateProgress();
+   });
+ });
+}
+setupText();
+
+// Section A touch-friendly reorder
+const list=document.getElementById('orderA');
+let dragEl=null, startY=0;
+list.querySelectorAll('.drag-item').forEach(item=>{
+ item.addEventListener('pointerdown',e=>{
+   dragEl=item; startY=e.clientY; item.classList.add('dragging'); item.setPointerCapture(e.pointerId);
+ });
+ item.addEventListener('pointermove',e=>{
+   if(!dragEl) return;
+   const others=[...list.querySelectorAll('.drag-item:not(.dragging)')];
+   let before=null;
+   for(const o of others){
+     const r=o.getBoundingClientRect();
+     if(e.clientY < r.top+r.height/2){before=o;break;}
+   }
+   if(before) list.insertBefore(dragEl,before); else list.appendChild(dragEl);
+ });
+ item.addEventListener('pointerup',()=>{
+   if(!dragEl) return;
+   dragEl.classList.remove('dragging'); dragEl=null;
+   answeredSet.add(0); updateProgress();
+ });
+ item.addEventListener('keydown',e=>{
+   if(e.key==='ArrowUp'){e.preventDefault();const prev=item.previousElementSibling;if(prev)list.insertBefore(item,prev);answeredSet.add(0);updateProgress();}
+   if(e.key==='ArrowDown'){e.preventDefault();const next=item.nextElementSibling;if(next)list.insertBefore(next,item);answeredSet.add(0);updateProgress();}
+ });
+});
+
+// Section C: drag + tap fallback
+document.querySelectorAll('.phrase-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    if(card.classList.contains('placed')) return;
+    document.querySelectorAll('.phrase-card').forEach(x=>x.classList.remove('selected'));
+    card.classList.add('selected');
+    selectedPhrase=card;
+  });
+
+  card.addEventListener('dragstart',e=>{
+    e.dataTransfer.setData('text/plain',card.dataset.phrase);
+  });
+});
+
+document.querySelectorAll('.drop-slot').forEach(slot=>{
+  const place=(card)=>{
+    if(!card) return;
+
+    const oldId=slot.dataset.phrase;
+    if(oldId){
+      const oldCard=document.querySelector(`.phrase-card[data-phrase="${oldId}"]`);
+      if(oldCard) oldCard.classList.remove('placed');
+    }
+
+    // If this phrase is already in another slot, clear that slot.
+    document.querySelectorAll('.drop-slot').forEach(other=>{
+      if(other !== slot && other.dataset.phrase === card.dataset.phrase){
+        other.dataset.phrase='';
+        other.textContent='Javobni shu yerga joylashtiring';
+        other.classList.remove('filled','correct','wrong');
+      }
+    });
+
+    slot.dataset.phrase=card.dataset.phrase;
+    slot.textContent=card.dataset.text;
+    slot.classList.add('filled');
+    card.classList.add('placed');
+    card.classList.remove('selected');
+    selectedPhrase=null;
+  };
+
+  slot.addEventListener('dragover',e=>e.preventDefault());
+
+  slot.addEventListener('drop',e=>{
+    e.preventDefault();
+    const id=e.dataTransfer.getData('text/plain');
+    place(document.querySelector(`.phrase-card[data-phrase="${id}"]`));
+  });
+
+  slot.addEventListener('click',()=>{
+    if(selectedPhrase) place(selectedPhrase);
+  });
+});
+
+// Check all
+async function checkTest(){
+ let correct=0;
+ // A
+ const order=[...list.children].map(x=>x.dataset.value).join(',');
+ const aok=order==='3,2,5,1,4';
+ if(aok) correct+=5;
+ const secA=document.getElementById('sec-A');
+ secA.className='section-feedback '+(aok?'good':'bad');
+ secA.textContent=aok?'✅ Ajoyib! Suhbat to‘g‘ri tartiblangan.':'❌ Tartib to‘g‘ri emas. Suhbat salomlashishdan boshlanadi va “Nice to meet you, too.” bilan yakunlanadi.';
+
+ // C
+ document.querySelectorAll('.drop-slot').forEach(slot=>{
+   const expected = slot.dataset.answer;
+   const ok = slot.dataset.phrase === expected;
+   slot.classList.remove('correct','wrong');
+   slot.classList.add(ok ? 'correct' : 'wrong');
+   if(ok) correct++;
+ });
+
+ const secC = document.getElementById('sec-C');
+ const cSlots = [...document.querySelectorAll('.drop-slot')];
+ const cCorrect = cSlots.filter(s => s.dataset.phrase === s.dataset.answer).length;
+ secC.className = 'section-feedback ' + (cCorrect === 5 ? 'good' : 'bad');
+ secC.textContent = cCorrect === 5
+   ? '✅ Ajoyib! Suhbat to‘g‘ri to‘ldirildi.'
+   : `❌ ${cCorrect}/5 ta javob to‘g‘ri. Suhbatdagi javoblarni yana bir bor ko‘rib chiqing.`;
+ // B,D,F,H,J
+ document.querySelectorAll('.question').forEach(q=>{
+   const id=Number(q.dataset.id);
+   let ok=false, ans=q.dataset.answer;
+   const choice=q.querySelector('.choice.selected');
+   const word=q.querySelector('.word-choice.selected');
+   const input=q.querySelector('input');
+   if(choice) ok=norm(choice.dataset.value)===norm(ans);
+   else if(word) ok=norm(word.dataset.value)===norm(ans);
+   else if(input) ok=norm(input.value)===norm(ans);
+   if(ok) correct++;
+   markAnswer(q,ok,q.dataset.expl);
+   if(q.dataset.id>=6){} // no-op
+ });
+ // G/I text exact handled above; B/F/H/J choices; D words; E/G/I inputs.
+ const percent=Math.round(correct/TOTAL*100);
+ const result=document.getElementById('result');
+ result.style.display='block'; result.className='result '+(percent>=70?'pass':'fail');
+ document.getElementById('score').textContent=correct+' / '+TOTAL+' — '+percent+'%';
+ const saved = await reportActivityProgress(percent>=70, percent);
+ document.getElementById('resultTitle').textContent=percent>=70?'🎉 Tabriklaymiz!':'💪 Yana bir marta urinib ko‘ring';
+ document.getElementById('resultText').textContent=(percent>=70?'Siz Unit 1 testidan kamida 70% oldingiz. Unitni tugatish uchun talab bajarildi.':'Unit 1 ni tugatish uchun kamida 70% kerak. Xatolarni ko‘rib chiqing va testni qayta ishlang.') + (saved && saved.success ? '  Natijangiz saqlandi ✓' : '  ⚠️ Natijangizni saqlashda muammo yuz berdi.');
+ document.getElementById('check').style.display='none'; document.getElementById('retry').style.display='block';
+ result.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function retryTest(){
+ location.reload();
+}
+</script>
+
+<script>
+async function reportActivityProgress(completed, score) {
+  const activityId =
+    Number(new URLSearchParams(window.location.search).get("activity_id")) || 6;
+
+  if (!activityId || !window.Telegram || !Telegram.WebApp || !Telegram.WebApp.initData) {
+    return null;
+  }
+
+  try {
+    const response = await fetch(
+      "https://salimteaches-beginner-auth.imshosalim.workers.dev/progress",
+      {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          initData: Telegram.WebApp.initData,
+          activity_id: Number(activityId),
+          completed: Boolean(completed),
+          score: score === null || score === undefined ? null : Number(score)
+        })
+      }
+    );
+
+    return await response.json();
+  } catch (error) {
+    console.error("Progress save failed:", error);
+    return null;
+  }
+}
+</script>
+
+</body></html>
