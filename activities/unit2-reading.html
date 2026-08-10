@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>SalimTeaches — Unit 2 Reading</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#f5f7fb;--card:#fff;--ink:#182033;--muted:#6f7890;
+  --blue:#5865f2;--blue-soft:#eef0ff;--border:#e2e5ee;
+  --green:#16a36a;--green-soft:#eaf9f2;--red:#d84c5b;--red-soft:#fff0f2;
+}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+.container{max-width:760px;margin:auto;padding-bottom:110px}
+.top-nav{
+  position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:10px;
+  padding:10px 14px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px)
+}
+.back{
+  border:0;border-radius:13px;padding:12px 15px;background:var(--blue-soft);
+  color:var(--blue);font-size:14px;font-weight:800;cursor:pointer
+}
+.nav-label{color:var(--muted);font-size:12px;font-weight:700}
+.header{padding:24px 18px 14px}
+.brand{font-size:12px;font-weight:900;letter-spacing:.8px;color:var(--blue)}
+h1{font-size:27px;margin:7px 0 5px}
+.subtitle{color:var(--muted);font-size:14px;line-height:1.45;margin:0 0 18px}
+.progress-wrap{position:sticky;top:53px;z-index:20;background:rgba(245,247,251,.94);backdrop-filter:blur(10px);padding:9px 18px 12px;border-bottom:1px solid var(--border)}
+.progress-row{display:flex;justify-content:space-between;font-size:12px;font-weight:800;margin-bottom:7px}
+.progress-track{height:7px;background:#e4e7ef;border-radius:10px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--blue),#7c83f5);transition:.3s}
+.reading-card{background:var(--card);border:1px solid var(--border);border-radius:18px;margin:16px 18px;padding:18px}
+.section-kicker{font-size:12px;font-weight:900;letter-spacing:.08em;color:var(--blue);margin-bottom:7px}
+.reading-card h2{font-size:21px;margin:0 0 10px}
+.text{
+  background:#f8f9fc;border:1px solid #e7e9f0;border-radius:14px;
+  padding:16px;line-height:1.65;font-size:15px
+}
+.text p{margin:0 0 10px}.text p:last-child{margin-bottom:0}
+.question{padding:14px 0;border-top:1px solid var(--border)}
+.question:first-child{border-top:0}
+.qtitle{font-weight:750;line-height:1.45;margin-bottom:10px}
+.num{color:var(--blue);font-weight:900;margin-right:4px}
+.option{display:block;background:#fafbfe;border:1px solid #e1e4ed;border-radius:12px;padding:11px 12px;margin:8px 0;cursor:pointer;line-height:1.4}
+.option:hover{border-color:#bfc5f8}
+input[type=radio]{margin-right:8px;accent-color:var(--blue)}
+.answer-input{
+  width:100%;border:1px solid #dfe2eb;border-radius:11px;padding:12px;
+  font-size:15px;outline:none;background:#fff
+}
+.answer-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(88,101,242,.1)}
+.feedback{display:none;margin-top:9px;padding:10px 12px;border-radius:10px;font-size:13px;line-height:1.45}
+.feedback.correct{display:block;background:var(--green-soft);color:#11764d}
+.feedback.wrong{display:block;background:var(--red-soft);color:#a52e3d}
+.actions{display:flex;gap:10px;margin:18px}
+.btn{flex:1;border:0;border-radius:13px;padding:13px 15px;font-size:15px;font-weight:800;cursor:pointer}
+.check{background:var(--blue);color:#fff}.reset{background:#e9ebf4;color:#252b40}
+.result{display:none;margin:16px 18px;background:#fff;border:1px solid var(--border);border-radius:18px;padding:20px;text-align:center}
+.result h2{margin:0 0 7px}.result p{color:var(--muted);line-height:1.5}
+.success{color:var(--green);font-weight:900}.fail{color:var(--red);font-weight:900}
+@media(max-width:520px){.header h1{font-size:25px}.reading-card{margin-left:11px;margin-right:11px}.actions,.result{margin-left:11px;margin-right:11px}}
+</style>
+</head>
+<body>
+<div class="top-nav">
+  <button class="back" type="button" onclick="backToUnit2()">← Unit 2</button>
+  <div class="nav-label">SalimTeaches • Unit 2</div>
+</div>
+
+<div class="container">
+<header class="header">
+  <div class="brand">SALIMTEACHES • BEGINNER</div>
+  <h1>📖 Unit 2 — Reading</h1>
+  <p class="subtitle">3 ta qisqa matnni o‘qing va turli xil topshiriqlarni bajaring.</p>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-row">
+    <span>Reading jarayoni</span>
+    <span id="answered">0 / 15</span>
+  </div>
+  <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
+</div>
+
+<form id="quiz">
+
+<section class="reading-card">
+  <div class="section-kicker">TEXT 1</div>
+  <h2>At the Hotel</h2>
+  <div class="text">
+    <p>Anna is at a hotel. She has a reservation. She says, “Excuse me, I have a reservation.”</p>
+    <p>The receptionist asks, “What’s your name, please?” Anna says, “My name is Anna Brown.” The receptionist asks, “How do you spell your last name?” Anna says, “B-R-O-W-N.”</p>
+    <p>The receptionist says, “Thank you, Ms Brown. You are in room 14.” Anna takes her key and goes to her room. There is a bed, a desk, a lamp, a chair, a television and a phone in the room.</p>
+  </div>
+
+  <div class="question">
+    <div class="qtitle"><span class="num">1.</span> What is Anna’s last name?</div>
+    <input class="answer-input" type="text" name="q0" autocomplete="off" placeholder="Javobingizni yozing">
+    <div id="f0" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">2.</span> What does Anna have?</div>
+    <input class="answer-input" type="text" name="q1" autocomplete="off" placeholder="Javobingizni yozing">
+    <div id="f1" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">3.</span> What is Anna’s room number?</div>
+    <input class="answer-input" type="text" name="q2" autocomplete="off" placeholder="Javobingizni yozing">
+    <div id="f2" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">4.</span> Write one object that is in Anna’s room.</div>
+    <input class="answer-input" type="text" name="q3" autocomplete="off" placeholder="Masalan: bed">
+    <div id="f3" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">5.</span> What does Anna take?</div>
+    <input class="answer-input" type="text" name="q4" autocomplete="off" placeholder="Javobingizni yozing">
+    <div id="f4" class="feedback"></div>
+  </div>
+</section>
+
+<section class="reading-card">
+  <div class="section-kicker">TEXT 2</div>
+  <h2>At the Café</h2>
+  <div class="text">
+    <p>Tom is in a café. He says, “I’d like a coffee, please.”</p>
+    <p>The waiter asks, “Would you like black or white?” Tom says, “Black, please.”</p>
+    <p>Tom also wants a croissant and orange juice. His friend Sara wants an omelet and still mineral water. The waiter brings their food and drinks and says, “Here you are.”</p>
+  </div>
+
+  <div class="question">
+    <div class="qtitle"><span class="num">6.</span> What does Tom order first?</div>
+    <label class="option"><input type="radio" name="q5" value="coffee"> Coffee</label>
+    <label class="option"><input type="radio" name="q5" value="tea"> Tea</label>
+    <label class="option"><input type="radio" name="q5" value="juice"> Juice</label>
+    <div id="f5" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">7.</span> How does Tom want his coffee?</div>
+    <label class="option"><input type="radio" name="q6" value="black"> Black</label>
+    <label class="option"><input type="radio" name="q6" value="white"> White</label>
+    <label class="option"><input type="radio" name="q6" value="cold"> Cold</label>
+    <div id="f6" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">8.</span> What does Tom want with his coffee?</div>
+    <label class="option"><input type="radio" name="q7" value="croissant"> A croissant</label>
+    <label class="option"><input type="radio" name="q7" value="omelet"> An omelet</label>
+    <label class="option"><input type="radio" name="q7" value="ham sandwich"> A ham sandwich</label>
+    <div id="f7" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">9.</span> What does Sara want to drink?</div>
+    <label class="option"><input type="radio" name="q8" value="still mineral water"> Still mineral water</label>
+    <label class="option"><input type="radio" name="q8" value="sparkling mineral water"> Sparkling mineral water</label>
+    <label class="option"><input type="radio" name="q8" value="orange juice"> Orange juice</label>
+    <div id="f8" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">10.</span> What does the waiter say when he brings the order?</div>
+    <label class="option"><input type="radio" name="q9" value="Here you are."> Here you are.</label>
+    <label class="option"><input type="radio" name="q9" value="What’s this?"> What’s this?</label>
+    <label class="option"><input type="radio" name="q9" value="See you."> See you.</label>
+    <div id="f9" class="feedback"></div>
+  </div>
+</section>
+
+<section class="reading-card">
+  <div class="section-kicker">TEXT 3</div>
+  <h2>In the Room</h2>
+  <div class="text">
+    <p>Ben is in his hotel room. He looks at the desk and says, “This is a desk.” He points to a lamp near the desk and says, “That is a lamp.”</p>
+    <p>There are two chairs near the television. Ben says, “These are chairs.” Then he points to the keys on the desk. “Those are my keys.”</p>
+    <p>Ben puts his phone on the desk. The phone is here, but the television is there. He sits on a chair and opens his notebook.</p>
+  </div>
+
+  <div class="question">
+    <div class="qtitle"><span class="num">11.</span> Ben says “This is a desk” because the desk is near him.</div>
+    <label class="option"><input type="radio" name="q10" value="true"> True</label>
+    <label class="option"><input type="radio" name="q10" value="false"> False</label>
+    <div id="f10" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">12.</span> Ben says “Those are my keys” because there is more than one key.</div>
+    <label class="option"><input type="radio" name="q11" value="true"> True</label>
+    <label class="option"><input type="radio" name="q11" value="false"> False</label>
+    <div id="f11" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">13.</span> There is one chair near the television.</div>
+    <label class="option"><input type="radio" name="q12" value="true"> True</label>
+    <label class="option"><input type="radio" name="q12" value="false"> False</label>
+    <div id="f12" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">14.</span> Ben says the phone is here.</div>
+    <label class="option"><input type="radio" name="q13" value="true"> True</label>
+    <label class="option"><input type="radio" name="q13" value="false"> False</label>
+    <div id="f13" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">15.</span> Ben opens a notebook.</div>
+    <label class="option"><input type="radio" name="q14" value="true"> True</label>
+    <label class="option"><input type="radio" name="q14" value="false"> False</label>
+    <div id="f14" class="feedback"></div>
+  </div>
+</section>
+
+</form>
+
+<div class="actions">
+  <button class="btn check" id="check" type="button">Tekshirish</button>
+  <button class="btn reset" id="reset" type="button">Qayta boshlash</button>
+</div>
+
+<div class="result" id="result">
+  <h2 id="resultTitle"></h2>
+  <p id="resultText"></p>
+</div>
+</div>
+
+<script>
+const answers = [
+  ["brown"],["a reservation"],["14"],["bed","desk","lamp","chair","television","phone"],["key"],
+  ["coffee"],["black"],["croissant"],["still mineral water"],["Here you are."],
+  ["true"],["true"],["false"],["true"],["true"]
+];
+
+const explanations = [
+  "Anna’s last name is Brown.",
+  "Anna has a reservation.",
+  "Anna is in room 14.",
+  "The text mentions a bed, desk, lamp, chair, television and phone.",
+  "Anna takes her key.",
+  "Tom first orders a coffee.",
+  "Tom chooses black coffee.",
+  "Tom wants a croissant.",
+  "Sara wants still mineral water.",
+  "The waiter says “Here you are.” when he brings the order.",
+  "The desk is near Ben, so he says “This”.",
+  "“Those” is plural and is used for the keys in the text.",
+  "There are two chairs, not one.",
+  "Ben says the phone is here.",
+  "Ben opens his notebook."
+];
+
+const total = answers.length;
+const answered = Array(total).fill(false);
+
+function normalize(s){
+  return String(s || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[.!?]+$/,"")
+    .replace(/\s+/g," ");
+}
+
+function answersMatch(userAnswer, correctAnswers){
+  const user = normalize(userAnswer);
+  if(!user) return false;
+
+  return correctAnswers.some(answer => {
+    const correct = normalize(answer);
+
+    // Exact match first.
+    if(user === correct) return true;
+
+    // For short-answer questions, allow a/an/the to be omitted.
+    const stripArticles = s => s.replace(/\b(a|an|the)\s+/g,"").trim();
+
+    return stripArticles(user) === stripArticles(correct);
+  });
+}
+function isAnswered(i){
+  const input = document.querySelector('[name="q'+i+'"]');
+  if(!input) return false;
+  if(input.type === "radio") return !!document.querySelector('[name="q'+i+'"]:checked');
+  return input.value.trim() !== "";
+}
+function updateProgress(){
+  let count=0;
+  for(let i=0;i<total;i++) if(isAnswered(i)) count++;
+  document.getElementById("answered").textContent = count+" / "+total;
+  document.getElementById("progressFill").style.width = (count/total*100)+"%";
+}
+function setFeedback(i, ok){
+  const f=document.getElementById("f"+i);
+  f.className="feedback "+(ok?"correct":"wrong");
+  f.innerHTML=ok ? "✓ To‘g‘ri!" : "✗ Noto‘g‘ri. <b>To‘g‘ri javob:</b> "+answers[i].join(" / ")+"<br>"+explanations[i];
+}
+function checkAnswers(){
+  let score=0;
+  for(let i=0;i<total;i++){
+    const input=document.querySelector('[name="q'+i+'"]');
+    let value="";
+    if(input && input.type==="radio"){
+      const checked=document.querySelector('[name="q'+i+'"]:checked');
+      value=checked ? checked.value : "";
+    }else{
+      value=input ? input.value : "";
+    }
+    const ok=answersMatch(value, answers[i]);
+    if(ok) score++;
+    if(value) setFeedback(i,ok);
+    answered[i]=!!value;
+  }
+  const pct=Math.round(score/total*100);
+  const result=document.getElementById("result");
+  result.style.display="block";
+  document.getElementById("resultTitle").textContent = pct>=70 ? "🎉 Reading tugallandi!" : "Yana bir marta urinib ko‘ring";
+  document.getElementById("resultTitle").className = pct>=70 ? "success" : "fail";
+  document.getElementById("resultText").textContent =
+    "Natijangiz: "+score+" / "+total+" ("+pct+"%). "+
+    (pct>=70 ? "Siz Unit 2 Reading talabini bajardingiz." : "Kamida 70% natija kerak.");
+  updateProgress();
+  reportActivityProgress(pct>=70,pct);
+  window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
+}
+function resetQuiz(){
+  document.querySelectorAll('input[type="radio"]').forEach(x=>x.checked=false);
+  document.querySelectorAll('input[type="text"]').forEach(x=>x.value="");
+  document.querySelectorAll(".feedback").forEach(x=>{x.className="feedback";x.innerHTML=""});
+  document.getElementById("result").style.display="none";
+  updateProgress();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function getTelegramInitData(){
+  try{
+    const saved=sessionStorage.getItem("salimteaches_initData");
+    if(saved)return saved;
+  }catch(e){}
+  try{
+    if(window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData){
+      const d=window.Telegram.WebApp.initData;
+      try{sessionStorage.setItem("salimteaches_initData",d)}catch(e){}
+      return d;
+    }
+  }catch(e){}
+  return "";
+}
+async function reportActivityProgress(completed,score){
+  const params=new URLSearchParams(window.location.search);
+  const activityId=Number(params.get("activity_id"))||0;
+  const initData=getTelegramInitData();
+  if(!activityId || !initData)return;
+  try{
+    await fetch("https://salimteaches-beginner-auth.imshosalim.workers.dev/progress",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        initData,
+        activity_id:activityId,
+        completed:Boolean(completed),
+        score:Number(score)
+      })
+    });
+  }catch(e){console.error("Progress save failed:",e)}
+}
+function backToUnit2(){
+  window.location.assign("https://imbooz.github.io/salimteaches-beginner/index.html?unit=2");
+}
+document.querySelectorAll("input").forEach(x=>x.addEventListener("input",updateProgress));
+document.querySelectorAll('input[type="radio"]').forEach(x=>x.addEventListener("change",updateProgress));
+document.getElementById("check").addEventListener("click",checkAnswers);
+document.getElementById("reset").addEventListener("click",resetQuiz);
+updateProgress();
+</script>
+</body>
+</html>
