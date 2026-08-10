@@ -29,7 +29,7 @@ body{
 h1{font-size:27px;margin:7px 0 5px}
 .subtitle{color:var(--muted);font-size:14px;line-height:1.45;margin:0}
 .progress-wrap{
-  position:sticky;top:0;z-index:10;background:rgba(245,247,251,.94);
+  position:sticky;top:53px;z-index:10;background:rgba(245,247,251,.94);
   backdrop-filter:blur(10px);padding:9px 18px 12px;border-bottom:1px solid var(--border)
 }
 .progress-row{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:7px}
@@ -157,44 +157,6 @@ button.action{
 
 </style>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-<style id="listening-actions-style-only">
-.actions{
-  position:sticky;
-  bottom:10px;
-  z-index:1000;
-  width:100%;
-  box-sizing:border-box;
-  display:flex !important;
-  gap:10px !important;
-  padding:10px 0 !important;
-  margin:0 !important;
-  background:rgba(245,247,251,.96);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-}
-.actions .actions-inner{
-  display:flex !important;
-  flex:1 1 0 !important;
-  min-width:0 !important;
-  gap:10px !important;
-  margin:0 !important;
-}
-.actions .action{
-  flex:1 1 0 !important;
-  min-width:0 !important;
-  width:auto !important;
-  margin:0 !important;
-}
-.actions > .unit1-bottom-back,
-.actions > button[onclick="backToUnit1()"]{
-  flex:1 1 0 !important;
-  min-width:0 !important;
-  width:auto !important;
-  margin:0 !important;
-}
-</style>
-
 </head>
 
 <body>
