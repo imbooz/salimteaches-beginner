@@ -255,27 +255,56 @@ body{
     return String(x || '').toLowerCase().replace(/[.,!?“”"’‘'\-]/g,'').replace(/\s+/g,' ').trim();
   }
 
+  // Live progress is deliberately kept separate from the
+  // `answered[]` array used by the final answer checker.
+  // `answered[]` becomes true only after Check is pressed, so using it for the
+  // live bar was the reason the bar jumped to 100%.
+  var liveAnswered = new Set();
+
   function updateProgress(){
-    var n=0, j;
-    for(j=0;j<total;j++){
-      if(answered[j]) n++;
-    
-    var n2=0;
-    for(var j2=0;j2<total;j2++){ if(answered[j2]) n2++; }
-    var topCount=document.getElementById('answered');
-    var topFill=document.getElementById('topProgressFill');
-    if(topCount) topCount.textContent=n2+' / '+total;
-    if(topFill) topFill.style.width=((n2/total)*100)+'%';
-  }
-    var pct=(n/total)*100;
-    document.getElementById('bar').style.width=pct+'%';
-    var answeredEl=document.getElementById('answered');
-    var topBar=document.getElementById('topProgressBar');
-    if(answeredEl) answeredEl.textContent=n+' / '+total;
-    if(topBar) topBar.style.width=pct+'%';
+    var n = liveAnswered.size;
+    var pct = total ? (n / total) * 100 : 0;
+
+    var countEl = document.getElementById('answered');
+    var fillEl = document.getElementById('topProgressFill');
+
+    if(countEl){
+      countEl.textContent = n + ' / ' + total;
+    }
+
+    if(fillEl){
+      fillEl.style.width = pct + '%';
+    }
   }
 
-  async function checkAnswers(){
+  function markLiveAnsweredFromRadio(radio){
+    var block = radio.closest('.card');
+    if(!block) return;
+
+    var id = Number(block.id.replace('q',''));
+    if(!Number.isNaN(id)){
+      liveAnswered.add(id);
+      updateProgress();
+    }
+  }
+
+  function markLiveAnsweredFromText(input){
+    var block = input.closest('.card');
+    if(!block) return;
+
+    var id = Number(block.id.replace('q',''));
+    if(Number.isNaN(id)) return;
+
+    if(input.value.trim() !== ''){
+      liveAnswered.add(id);
+    }else{
+      liveAnswered.delete(id);
+    }
+
+    updateProgress();
+  }
+
+    async function checkAnswers(){
     var score=0, j, block, selected, correct, fb;
     for(j=0;j<total;j++){
       block=document.getElementById('q'+j);
@@ -328,6 +357,7 @@ body{
   }
 
   function resetQuiz(){
+    liveAnswered.clear();
     var els=document.getElementsByTagName('input'), j;
     for(j=0;j<els.length;j++){
       if(els[j].type==='radio') els[j].checked=false;
@@ -343,16 +373,34 @@ body{
     window.scrollTo(0,0);
   }
 
-  window.onload=function(){
-    document.getElementById('check').onclick=function(e){ if(e)e.preventDefault(); checkAnswers(); return false; };
-    document.getElementById('reset').onclick=function(e){ if(e)e.preventDefault(); resetQuiz(); return false; };
-    var inputs=document.getElementsByTagName('input'), j;
-    for(j=0;j<inputs.length;j++){
-      inputs[j].onchange=updateProgress;
-      inputs[j].oninput=updateProgress;
-    }
-    updateProgress();
+  // Bind directly after the form exists. This avoids relying on the
+  // preview environment's window.onload handling.
+  document.getElementById('check').onclick=function(e){
+    if(e)e.preventDefault();
+    checkAnswers();
+    return false;
   };
+
+  document.getElementById('reset').onclick=function(e){
+    if(e)e.preventDefault();
+    resetQuiz();
+    return false;
+  };
+
+  document.querySelectorAll('#quiz .option').forEach(function(option){
+    option.addEventListener('click', function(){
+      var radio = option.querySelector('input[type="radio"]');
+      if(radio) markLiveAnsweredFromRadio(radio);
+    });
+  });
+
+  document.querySelectorAll('#quiz input[type="text"]').forEach(function(input){
+    input.addEventListener('input', function(){
+      markLiveAnsweredFromText(input);
+    });
+  });
+
+  updateProgress();
 })();
 </script>
 
