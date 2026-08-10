@@ -47,29 +47,47 @@ input{width:100%;border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;
 }
 
 </style><script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-<style id="unit1-consistent-actions">
-/* Consistent Unit 1 activity navigation */
-.activity-nav .activity-back {
-  display: none !important;
+<style id="test-actions-style-only">
+.actions{
+  position:sticky;
+  bottom:10px;
+  z-index:1000;
+  width:100%;
+  box-sizing:border-box;
+  display:flex !important;
+  gap:10px !important;
+  padding:10px 0 !important;
+  margin:0 !important;
+  background:rgba(245,247,251,.96);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
 }
-.unit1-bottom-back {
-  width: 100%;
-  margin-top: 12px;
-  border: 0;
-  border-radius: 13px;
-  padding: 13px 16px;
-  background: #eef0ff;
-  color: #5865f2;
-  font-size: 15px;
-  font-weight: 800;
-  cursor: pointer;
+.actions .actions-inner{
+  display:flex !important;
+  flex:1 1 0 !important;
+  min-width:0 !important;
+  gap:10px !important;
+  margin:0 !important;
 }
-#reset, #retry {
-  display: none !important;
+.actions .action,
+.actions .check,
+.actions .retry,
+.actions > button[onclick="backToUnit1()"]{
+  flex:1 1 0 !important;
+  min-width:0 !important;
+  width:auto !important;
+  margin:0 !important;
+}
+.actions > button[onclick="backToUnit1()"]{
+  background:#eef0ff !important;
+  color:#5865f2 !important;
+  border:0 !important;
+  border-radius:13px !important;
+  padding:13px 16px !important;
+  font-size:15px !important;
+  font-weight:800 !important;
 }
 </style>
-
 </head>
 <body>
 
@@ -332,7 +350,6 @@ input{width:100%;border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;
 <div id="result" class="result"><div class="result-score" id="score"></div><div class="result-title" id="resultTitle"></div><div class="result-text" id="resultText"></div></div>
 </div>
 <div class="actions"><div class="actions-inner"><button class="retry" id="retry" onclick="retryTest()">🔄 Qayta ishlash</button><button class="check" id="check" onclick="checkTest()">Javoblarni tekshirish</button></div><button type="button" class="action" style="width:100%;background:#eef0ff;color:#5865f2;margin-top:10px" onclick="backToUnit1()">← Unit 1 ga qaytish</button></div>
-<button type="button" class="unit1-bottom-back" onclick="backToUnit1()">← Unit 1 ga qaytish</button>
 <script>
 const TOTAL=50;
 let answeredSet=new Set();
