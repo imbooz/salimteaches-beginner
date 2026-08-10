@@ -1266,6 +1266,8 @@
         🎉 Unit 1 tugallandi! Keyingi Unit ochildi.
       </div>
 
+    </div>
+
     <div id="unit2Page" class="page unit-page">
 
       <div class="unit-page-header">
@@ -1291,8 +1293,6 @@
       <div id="unit2CompleteCard" class="unit-complete-card">
         🎉 Unit 2 tugallandi! Keyingi Unit ochildi.
       </div>
-
-    </div>
 
     </div>
 
@@ -2301,17 +2301,6 @@
       });
 
       items.push({
-        icon: "🎬",
-        title: "Workbook tahlili",
-        subtitle: "Javoblarni men bilan birga tekshiring va xatolaringizni tahlil qiling.",
-        status: "Ixtiyoriy",
-        done: false,
-        optional: true,
-        locked: false,
-        action: () => openVideo("JSmGBHUKyrs")
-      });
-
-      items.push({
         icon: "🧩",
         title: "Amaliy mashqlar",
         subtitle: "Unit 1 bo‘yicha interaktiv mashqlar.",
@@ -2380,7 +2369,7 @@
           (item.optional ? " optional" : "");
 
         button.innerHTML = `
-          <div class="activity-icon">${item.done ? "✓" : item.icon}</div>
+          <div class="activity-icon">${item.icon}</div>
           <div class="activity-main">
             <div class="activity-title">${escapeHtml(item.title)}</div>
             <div class="activity-subtitle">${escapeHtml(item.subtitle)}</div>
@@ -2598,7 +2587,7 @@
           (item.locked ? " locked" : "");
 
         button.innerHTML = `
-          <div class="activity-icon">${item.done ? "✓" : item.icon}</div>
+          <div class="activity-icon">${item.icon}</div>
           <div class="activity-main">
             <div class="activity-title">${escapeHtml(item.title)}</div>
             <div class="activity-subtitle">${escapeHtml(item.subtitle)}</div>
