@@ -390,18 +390,18 @@ async function checkTest(){
  document.getElementById('saveStatus').style.color=saved&&saved.success===true?'var(--good)':'var(--bad)';
  result.scrollIntoView({behavior:'smooth',block:'center'});
 }
-function retryTest(){location.reload()}
+function retryTest(){ location.reload(); }
 function getTelegramInitData(){try{const s=sessionStorage.getItem('salimteaches_initData');if(s)return s}catch(e){}try{if(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.initData)return Telegram.WebApp.initData}catch(e){}return ''}
 function backToUnit2(){window.location.assign('https://imbooz.github.io/salimteaches-beginner/index.html?unit=2')}
 async function reportActivityProgress(completed,score){
- const activityId=Number(new URLSearchParams(window.location.search).get('activity_id'))||0;
+ const activityId=Number(new URLSearchParams(window.location.search).get('activity_id'))||11;
  const initData=getTelegramInitData();if(!activityId||!initData)return {success:false,error:'Telegram initData mavjud emas.'};
  try{const r=await fetch('https://salimteaches-beginner-auth.imshosalim.workers.dev/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({initData,activity_id:activityId,completed:Boolean(completed),score:Number(score)})});const d=await r.json();if(!r.ok||d.success!==true)return {success:false,error:d.error||d.reason||('HTTP '+r.status)};return d}catch(e){return {success:false,error:e.message||'Network error'}}
 }
 setupChoiceHandlers();setupCategory();setupPhraseDrag();setupOrder('orderE');
 document.getElementById('check').addEventListener('click',checkTest);
 document.getElementById('retry').addEventListener('click',retryTest);
-document.getElementById('backTest').addEventListener('click',()=>window.location.assign('https://imbooz.github.io/salimteaches-beginner/index.html?unit=1'));
+document.getElementById('backTest').addEventListener('click',()=>window.location.assign('https://imbooz.github.io/salimteaches-beginner/index.html?unit=2'));
 updateProgress();
 </script>
 </body></html>
