@@ -1,39 +1,34 @@
-<!doctype html>
-<html lang="uz">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<title>SalimTeaches — Unit 2 Interactive Practice</title>
-<style>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><title>SalimTeaches — Unit 1 Interactive Practice</title><style>
 :root{--bg:#f5f7fb;--card:#fff;--ink:#182033;--muted:#647089;--blue:#5b5ce2;--green:#168a55;--red:#c83b4b;--border:#e3e7ef}
-*{box-sizing:border-box}
-body{margin:0;background:linear-gradient(135deg,#eef0ff,#f8fbff);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--ink);padding:18px}
-.container{max-width:760px;margin:0 auto;padding-bottom:110px}
-.practice-test-nav{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
-.practice-test-back{border:0;border-radius:13px;padding:12px 15px;background:#eef0ff;color:var(--blue);font-size:14px;font-weight:800;cursor:pointer}
-.practice-test-label{color:var(--muted);font-size:12px;font-weight:700}
-.practice-test-header{padding:24px 18px 14px}
-.practice-test-brand{font-size:12px;font-weight:800;letter-spacing:.8px;color:var(--blue)}
-.practice-test-header h1{font-size:27px;margin:7px 0 5px;color:var(--ink)}
-.practice-test-subtitle{color:var(--muted);font-size:14px;line-height:1.45;margin:0}
-.practice-test-progress{position:sticky;top:53px;z-index:10;background:rgba(245,247,251,.94);backdrop-filter:blur(10px);padding:9px 18px 12px;border-bottom:1px solid var(--border)}
-.practice-test-progress-row{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:7px}
-.practice-test-progressbar{height:7px;background:#e4e7ef;border-radius:10px;overflow:hidden}
-.practice-test-progressfill{height:100%;width:0;background:linear-gradient(90deg,var(--blue),#7c83f5);transition:.3s}
-.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 5px 18px rgba(28,35,65,.06)}
-.qtitle{font-weight:700;line-height:1.45;margin-bottom:13px}.num{color:#5b5ce2}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#eef0ff,#f8fbff);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--ink);padding:18px}
+.container{max-width:760px;margin:0 auto}.hero{background:#20224d;color:white;border-radius:22px;padding:26px 22px;margin-bottom:16px}.hero h1{margin:0 0 8px;font-size:27px}.hero p{margin:0;color:#dfe1ff;line-height:1.5}
+.progress{height:9px;background:#e6e9f3;border-radius:20px;overflow:hidden;margin:12px 0 20px}.bar{height:100%;background:linear-gradient(90deg,#5b5ce2,#8d72ff);width:0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 5px 18px rgba(28,35,65,.06)}.qtitle{font-weight:700;line-height:1.45;margin-bottom:13px}.num{color:#5b5ce2}
 .option{display:block;padding:13px 14px;border:1px solid #e1e5ee;border-radius:12px;margin:8px 0;cursor:pointer;background:#fff}.option input{margin-right:9px}.option:active{background:#f0f1ff}
-input[type=text]{width:100%;padding:14px;border:1px solid #d8deea;border-radius:12px;font-size:16px;outline:none}
-.feedback{display:none;margin-top:12px;padding:12px;border-radius:12px;line-height:1.45}.correct{display:block;background:#eaf8f0;color:#176a43}.wrong{display:block;background:#fff0f1;color:#9d2736}
-.actions{position:sticky;bottom:10px;z-index:1000;background:rgba(245,247,251,.96);backdrop-filter:blur(10px);padding:10px 0;display:flex;gap:10px}
-.btn{border:0;border-radius:13px;padding:15px 18px;font-size:16px;font-weight:700;cursor:pointer;touch-action:manipulation}.primary{background:#5b5ce2;color:white;flex:1}.secondary{background:#e9ebf4;color:#252b40}
-.result{display:none;text-align:center;background:#20224d;color:white;border-radius:18px;padding:22px;margin:18px 0}.result strong{font-size:28px}.save-status{margin-top:10px;font-size:13px;font-weight:700}.save-status.ok{color:#8df0bf}.save-status.err{color:#ffb0b8}
-.tip{color:var(--muted);font-size:14px;line-height:1.5}
-@media(max-width:520px){body{padding:11px}.practice-test-header{padding:22px 14px 12px}.practice-test-header h1{font-size:24px}.card{padding:17px}.btn{font-size:15px}}
-</style>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<style id="unit2-navigation-consistency">
+input[type=text]{width:100%;padding:14px;border:1px solid #d8deea;border-radius:12px;font-size:16px;outline:none}.feedback{display:none;margin-top:12px;padding:12px;border-radius:12px;line-height:1.45}.correct{display:block;background:#eaf8f0;color:#176a43}.wrong{display:block;background:#fff0f1;color:#9d2736}
+.actions{position:sticky;bottom:10px;background:rgba(245,247,251,.94);backdrop-filter:blur(8px);padding:10px 0;display:flex;gap:10px}.btn{border:0;border-radius:13px;padding:15px 18px;font-size:16px;font-weight:700;cursor:pointer;touch-action:manipulation}.primary{background:#5b5ce2;color:white;flex:1}.secondary{background:#e9ebf4;color:#252b40}.result{display:none;text-align:center;background:#20224d;color:white;border-radius:18px;padding:22px;margin:18px 0}.result strong{font-size:28px}.tip{color:var(--muted);font-size:14px;line-height:1.5}
+@media(max-width:520px){body{padding:11px}.hero{padding:22px 18px}.card{padding:17px}.hero h1{font-size:24px}.btn{font-size:15px}}
+
+.activity-nav{
+  position:sticky;top:0;z-index:1000;
+  display:flex;align-items:center;gap:10px;
+  padding:10px 0 12px;
+  background:rgba(245,247,251,.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #e5e8f0;
+  margin-bottom:10px;
+}
+.activity-back{
+  border:0;background:#fff;color:#3f46c8;
+  border:1px solid #dfe3ef;border-radius:12px;
+  padding:9px 12px;font-size:14px;font-weight:800;
+  cursor:pointer;box-shadow:0 3px 10px rgba(20,30,60,.05);
+}
+.activity-label{font-size:13px;font-weight:800;color:#626b7e}
+.save-status{margin-top:10px;font-size:13px;font-weight:700}
+.save-status.ok{color:#149b66}.save-status.err{color:#d84a4a}
+</style><script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style id="practice-navigation-fix">
 .actions{
   position:sticky;
   bottom:10px;
@@ -48,21 +43,185 @@ input[type=text]{width:100%;padding:14px;border:1px solid #d8deea;border-radius:
 .actions .btn{flex:1;min-width:0}
 .actions .unit-back-button{background:#e9ebf4;color:#252b40}
 .actions .reset-hidden{display:none !important}
+</style><style id="practice-top-consistency">
+.practice-top{
+  margin: -18px -18px 18px;
+  background:#fff;
+  border-bottom:1px solid #e2e5ee;
+}
+.practice-top-nav{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  min-height:52px;
+  border-bottom:1px solid #e7e9f0;
+}
+.practice-top-back{
+  border:0;
+  border-radius:13px;
+  padding:10px 15px;
+  background:#eef0ff;
+  color:#5865f2;
+  font-size:15px;
+  font-weight:800;
+  cursor:pointer;
+}
+.practice-top-title{
+  font-size:13px;
+  font-weight:800;
+  color:#5e6679;
+}
+.practice-top-info{
+  padding:16px 16px 14px;
+}
+.practice-kicker{
+  color:#5865f2;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.08em;
+  margin-bottom:8px;
+}
+.practice-heading h1{
+  margin:0 0 5px;
+  font-size:25px;
+  line-height:1.2;
+  color:#182033;
+}
+.practice-heading p{
+  margin:0 0 18px;
+  color:#647089;
+  font-size:13px;
+  line-height:1.45;
+}
+.practice-progress-label{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:12px;
+  font-weight:800;
+  color:#273047;
+  margin-bottom:8px;
+}
+.practice-progress-track{
+  height:8px;
+  background:#e6e9f3;
+  border-radius:999px;
+  overflow:hidden;
+}
+.practice-progress-bar{
+  height:100%;
+  width:0%;
+  background:#5b5ce2;
+  border-radius:999px;
+  transition:width .2s ease;
+}
+@media(max-width:520px){
+  .practice-top{margin:-11px -11px 18px}
+  .practice-heading h1{font-size:24px}
+}
 </style>
-</head>
-<body>
+
+<style id="practice-test-header-match">
+body{
+  margin:0 !important;
+  padding:0 !important;
+  background:var(--bg) !important;
+}
+.container{
+  max-width:760px;
+  margin:auto;
+  padding-bottom:110px;
+}
+.practice-test-nav{
+  position:sticky;
+  top:0;
+  z-index:30;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+}
+.practice-test-back{
+  border:0;
+  border-radius:13px;
+  padding:12px 15px;
+  background:#eef0ff;
+  color:var(--blue);
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+}
+.practice-test-label{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
+}
+.practice-test-header{
+  padding:24px 18px 14px;
+}
+.practice-test-brand{
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.8px;
+  color:var(--blue);
+}
+.practice-test-header h1{
+  font-size:27px;
+  margin:7px 0 5px;
+  color:var(--ink);
+}
+.practice-test-subtitle{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.45;
+  margin:0;
+}
+.practice-test-progress{
+  position:sticky;
+  top:53px;
+  z-index:10;
+  background:rgba(245,247,251,.94);
+  backdrop-filter:blur(10px);
+  padding:9px 18px 12px;
+  border-bottom:1px solid var(--border);
+}
+.practice-test-progress-row{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:7px;
+}
+.practice-test-progressbar{
+  height:7px;
+  background:#e4e7ef;
+  border-radius:10px;
+  overflow:hidden;
+}
+.practice-test-progressfill{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--blue),#7c83f5);
+  transition:.3s;
+}
+</style>
+
+</head><body>
+
 <div class="practice-test-nav">
-  <button class="practice-test-back" type="button" id="backBtn">← Unit 2</button>
+  <button class="practice-test-back" type="button" onclick="backToUnit2()">← Unit 2</button>
   <div class="practice-test-label">SalimTeaches • Unit 2</div>
 </div>
-
 <div class="container">
 <header class="practice-test-header">
   <div class="practice-test-brand">SALIMTEACHES • BEGINNER</div>
   <h1>📝 2-unit — Interaktiv mashqlar</h1>
-  <p class="practice-test-subtitle">Alphabet • Spelling • Hotels • Numbers 11–20 • Hotel room vocabulary • this/that/these/those • Cafés • Plurals • a/an</p>
+  <p class="practice-test-subtitle">Alphabet, spelling, hotels, numbers, hotel room vocabulary, this/that/these/those, cafés, plurals va a/an.</p>
 </header>
-
 <div class="practice-test-progress">
   <div class="practice-test-progress-row">
     <span>Mashq jarayoni</span>
@@ -73,79 +232,83 @@ input[type=text]{width:100%;padding:14px;border:1px solid #d8deea;border-radius:
   </div>
 </div>
 
+
+
+
+
 <form id="quiz">
 
-<div class="card" id="q0" data-type="mc" data-answer="[ey]">
+<div class="card" id="q0" data-type="mc" data-answer="[ey]" data-explanation="A harfi [ey] deb talaffuz qilinadi.">
 <div class="qtitle"><span class="num">1.</span> Ingliz alifbosidagi <b>A</b> harfi qanday talaffuz qilinadi?</div>
 
 <label class="option"><input type="radio" name="q0" value="[ey]"> [ey]</label>
 <label class="option"><input type="radio" name="q0" value="[ay]"> [ay]</label>
 <label class="option"><input type="radio" name="q0" value="[iy]"> [iy]</label><div id="f0" class="feedback"></div></div>
 
-<div class="card" id="q1" data-type="mc" data-answer="[biy]">
+<div class="card" id="q1" data-type="mc" data-answer="[biy]" data-explanation="B harfi [biy] deb talaffuz qilinadi.">
 <div class="qtitle"><span class="num">2.</span> <b>B</b> harfining o‘zbekcha talaffuzini tanlang.</div>
 
 <label class="option"><input type="radio" name="q1" value="[bay]"> [bay]</label>
 <label class="option"><input type="radio" name="q1" value="[biy]"> [biy]</label>
 <label class="option"><input type="radio" name="q1" value="[bi]"> [bi]</label><div id="f1" class="feedback"></div></div>
 
-<div class="card" id="q2" data-type="mc" data-answer="[siy]">
+<div class="card" id="q2" data-type="mc" data-answer="[siy]" data-explanation="C harfi [siy] deb talaffuz qilinadi.">
 <div class="qtitle"><span class="num">3.</span> <b>C</b> harfi qanday talaffuz qilinadi?</div>
 
 <label class="option"><input type="radio" name="q2" value="[key]"> [key]</label>
 <label class="option"><input type="radio" name="q2" value="[sey]"> [sey]</label>
 <label class="option"><input type="radio" name="q2" value="[siy]"> [siy]</label><div id="f2" class="feedback"></div></div>
 
-<div class="card" id="q3" data-type="mc" data-answer="[diy]">
+<div class="card" id="q3" data-type="mc" data-answer="[diy]" data-explanation="D harfi [diy] deb talaffuz qilinadi.">
 <div class="qtitle"><span class="num">4.</span> <b>D</b> harfining talaffuzini tanlang.</div>
 
 <label class="option"><input type="radio" name="q3" value="[dey]"> [dey]</label>
 <label class="option"><input type="radio" name="q3" value="[di]"> [di]</label>
 <label class="option"><input type="radio" name="q3" value="[diy]"> [diy]</label><div id="f3" class="feedback"></div></div>
 
-<div class="card" id="q4" data-type="mc" data-answer="[ay]">
+<div class="card" id="q4" data-type="mc" data-answer="[ay]" data-explanation="I harfi [ay] deb talaffuz qilinadi.">
 <div class="qtitle"><span class="num">5.</span> 9-raqamli harf — <b>I</b>. Uning talaffuzi qaysi?</div>
 
 <label class="option"><input type="radio" name="q4" value="[ay]"> [ay]</label>
 <label class="option"><input type="radio" name="q4" value="[ey]"> [ey]</label>
 <label class="option"><input type="radio" name="q4" value="[iy]"> [iy]</label><div id="f4" class="feedback"></div></div>
 
-<div class="card" id="q5" data-type="mc" data-answer="[kyu]">
+<div class="card" id="q5" data-type="mc" data-answer="[kyu]" data-explanation="Q harfi [kyu] deb talaffuz qilinadi.">
 <div class="qtitle"><span class="num">6.</span> <b>Q</b> harfi qanday talaffuz qilinadi?</div>
 
 <label class="option"><input type="radio" name="q5" value="[ku]"> [ku]</label>
 <label class="option"><input type="radio" name="q5" value="[kyou]"> [kyou]</label>
 <label class="option"><input type="radio" name="q5" value="[kyu]"> [kyu]</label><div id="f5" class="feedback"></div></div>
 
-<div class="card" id="q6" data-type="mc" data-answer="[ey] - [el] - [ay]">
+<div class="card" id="q6" data-type="mc" data-answer="[ey] - [el] - [ay]" data-explanation="Ali: A — [ey], L — [el], I — [ay].">
 <div class="qtitle"><span class="num">7.</span> Ism <b>Ali</b> ni harflab berishning to‘g‘ri variantini tanlang.</div>
 
 <label class="option"><input type="radio" name="q6" value="[ey] - [el] - [ay]"> [ey] - [el] - [ay]</label>
 <label class="option"><input type="radio" name="q6" value="[ay] - [el] - [ay]"> [ay] - [el] - [ay]</label>
 <label class="option"><input type="radio" name="q6" value="[ey] - [i] - [ay]"> [ey] - [i] - [ay]</label><div id="f6" class="feedback"></div></div>
 
-<div class="card" id="q7" data-type="mc" data-answer="[es] - [ey] - [em]">
+<div class="card" id="q7" data-type="mc" data-answer="[es] - [ey] - [em]" data-explanation="Sam: S — [es], A — [ey], M — [em].">
 <div class="qtitle"><span class="num">8.</span> <b>Sam</b> ismining to‘g‘ri spellingini tanlang.</div>
 
 <label class="option"><input type="radio" name="q7" value="[es] - [ay] - [em]"> [es] - [ay] - [em]</label>
 <label class="option"><input type="radio" name="q7" value="[es] - [ey] - [em]"> [es] - [ey] - [em]</label>
 <label class="option"><input type="radio" name="q7" value="[siy] - [ey] - [em]"> [siy] - [ey] - [em]</label><div id="f7" class="feedback"></div></div>
 
-<div class="card" id="q8" data-type="mc" data-answer="[jey] - [ou] - [en] - [iy] - [es]">
+<div class="card" id="q8" data-type="mc" data-answer="[jey] - [ou] - [en] - [iy] - [es]" data-explanation="Jones: J — [jey], O — [ou], N — [en], E — [iy], S — [es].">
 <div class="qtitle"><span class="num">9.</span> Familiya <b>Jones</b> qanday harflanadi?</div>
 
 <label class="option"><input type="radio" name="q8" value="[jey] - [ou] - [en] - [iy] - [es]"> [jey] - [ou] - [en] - [iy] - [es]</label>
 <label class="option"><input type="radio" name="q8" value="[ji] - [ou] - [en] - [iy] - [es]"> [ji] - [ou] - [en] - [iy] - [es]</label>
 <label class="option"><input type="radio" name="q8" value="[jey] - [ay] - [en] - [iy] - [es]"> [jey] - [ay] - [en] - [iy] - [es]</label><div id="f8" class="feedback"></div></div>
 
-<div class="card" id="q9" data-type="mc" data-answer="[biy] - [ar] - [ou] - [dablyu] - [en]">
+<div class="card" id="q9" data-type="mc" data-answer="[biy] - [ar] - [ou] - [dablyu] - [en]" data-explanation="Brown: B — [biy], R — [ar], O — [ou], W — [dablyu], N — [en].">
 <div class="qtitle"><span class="num">10.</span> <b>Brown</b> familiyasining to‘g‘ri spellingini tanlang.</div>
 
 <label class="option"><input type="radio" name="q9" value="[biy] - [ar] - [ou] - [dablyu] - [en]"> [biy] - [ar] - [ou] - [dablyu] - [en]</label>
 <label class="option"><input type="radio" name="q9" value="[biy] - [ar] - [ou] - [yu] - [en]"> [biy] - [ar] - [ou] - [yu] - [en]</label>
 <label class="option"><input type="radio" name="q9" value="[bay] - [ar] - [ou] - [dablyu] - [en]"> [bay] - [ar] - [ou] - [dablyu] - [en]</label><div id="f9" class="feedback"></div></div>
 
-<div class="card" id="q10" data-type="mc" data-answer="Excuse me, I have a reservation.">
+<div class="card" id="q10" data-type="mc" data-answer="Excuse me, I have a reservation." data-explanation="Mehmonxonada broningiz borligini aytganda “I have a reservation” ishlatiladi.">
 <div class="qtitle"><span class="num">11.</span> Mehmonxonaga kirib, broningiz borligini aytmoqchisiz. Qaysi gap mos?</div>
 
 <label class="option"><input type="radio" name="q10" value="Excuse me, I am a reservation."> Excuse me, I am a reservation.</label>
@@ -159,14 +322,14 @@ input[type=text]{width:100%;padding:14px;border:1px solid #d8deea;border-radius:
 <label class="option"><input type="radio" name="q11" value="How room, please?"> How room, please?</label>
 <label class="option"><input type="radio" name="q11" value="What’s your name, please?"> What’s your name, please?</label><div id="f11" class="feedback"></div></div>
 
-<div class="card" id="q12" data-type="mc" data-answer="How do you spell your last name, please?">
+<div class="card" id="q12" data-type="mc" data-answer="How do you spell your last name, please?" data-explanation="“How do you spell your last name, please?” — familiyangizni qanday harflab aytishni so‘rash uchun ishlatiladi.">
 <div class="qtitle"><span class="num">13.</span> Familiya so‘rash uchun qaysi savol to‘g‘ri?</div>
 
 <label class="option"><input type="radio" name="q12" value="How do you spell your last name, please?"> How do you spell your last name, please?</label>
 <label class="option"><input type="radio" name="q12" value="How are you spell your last name, please?"> How are you spell your last name, please?</label>
 <label class="option"><input type="radio" name="q12" value="What do you spell your last name, please?"> What do you spell your last name, please?</label><div id="f12" class="feedback"></div></div>
 
-<div class="card" id="q13" data-type="mc" data-answer="Thirteen">
+<div class="card" id="q13" data-type="mc" data-answer="Thirteen" data-explanation="13 — thirteen. 30 esa thirty.">
 <div class="qtitle"><span class="num">14.</span> “You are in room 13.” gapidagi <b>13</b> qaysi so‘z?</div>
 
 <label class="option"><input type="radio" name="q13" value="Thirty"> Thirty</label>
@@ -215,21 +378,21 @@ input[type=text]{width:100%;padding:14px;border:1px solid #d8deea;border-radius:
 <label class="option"><input type="radio" name="q19" value="desk"> desk</label>
 <label class="option"><input type="radio" name="q19" value="phone"> phone</label><div id="f19" class="feedback"></div></div>
 
-<div class="card" id="q20" data-type="mc" data-answer="This">
+<div class="card" id="q20" data-type="mc" data-answer="This" data-explanation="This/that — birlik; these/those — ko‘plik.">
 <div class="qtitle"><span class="num">21.</span> Qo‘lingizdagi bitta kalitni ko‘rsatib: “_____ is my key.”</div>
 
 <label class="option"><input type="radio" name="q20" value="This"> This</label>
 <label class="option"><input type="radio" name="q20" value="Those"> Those</label>
 <label class="option"><input type="radio" name="q20" value="These"> These</label><div id="f20" class="feedback"></div></div>
 
-<div class="card" id="q21" data-type="mc" data-answer="Those">
+<div class="card" id="q21" data-type="mc" data-answer="Those" data-explanation="This/that — birlik; these/those — ko‘plik.">
 <div class="qtitle"><span class="num">22.</span> Uzoqda turgan bir nechta stullarni ko‘rsatib: “_____ are chairs.”</div>
 
 <label class="option"><input type="radio" name="q21" value="That"> That</label>
 <label class="option"><input type="radio" name="q21" value="Those"> Those</label>
 <label class="option"><input type="radio" name="q21" value="This"> This</label><div id="f21" class="feedback"></div></div>
 
-<div class="card" id="q22" data-type="mc" data-answer="here">
+<div class="card" id="q22" data-type="mc" data-answer="here" data-explanation="here — bu yerda/yonimda; there — u yerda.">
 <div class="qtitle"><span class="num">23.</span> Biror narsa yoningizda ekanini ko‘rsatish uchun qaysi so‘z mos: “The keys are _____.”</div>
 
 <label class="option"><input type="radio" name="q22" value="there"> there</label>
@@ -264,21 +427,21 @@ input[type=text]{width:100%;padding:14px;border:1px solid #d8deea;border-radius:
 <label class="option"><input type="radio" name="q26" value="Are you a hotel?"> Are you a hotel?</label>
 <label class="option"><input type="radio" name="q26" value="What’s your room?"> What’s your room?</label><div id="f26" class="feedback"></div></div>
 
-<div class="card" id="q27" data-type="mc" data-answer="an apple">
+<div class="card" id="q27" data-type="mc" data-answer="an apple" data-explanation="Bu mashqda a/an ni talaffuzga qarab tanlaymiz: apple unli tovush bilan boshlanadi, shuning uchun “an apple”.">
 <div class="qtitle"><span class="num">28.</span> Qaysi variant to‘g‘ri? Bu mashqda a/an ni <b>talaffuzga qarab</b> tanlang: <b>___ apple</b>.</div>
 
 <label class="option"><input type="radio" name="q27" value="a apple"> a apple</label>
 <label class="option"><input type="radio" name="q27" value="an apple"> an apple</label>
 <label class="option"><input type="radio" name="q27" value="an apples"> an apples</label><div id="f27" class="feedback">Eslatma: bu mashqda tovushga qaraymiz. <b>apple</b> unli tovush bilan boshlanadi.</div></div>
 
-<div class="card" id="q28" data-type="mc" data-answer="Here are your keys.">
+<div class="card" id="q28" data-type="mc" data-answer="Here are your keys." data-explanation="keys ko‘plik, shuning uchun “Here are your keys.”">
 <div class="qtitle"><span class="num">29.</span> Aynan qaysi gap ko‘plikdagi <b>keys</b> uchun to‘g‘ri?</div>
 
 <label class="option"><input type="radio" name="q28" value="Here are your keys."> Here are your keys.</label>
 <label class="option"><input type="radio" name="q28" value="Here is your keys."> Here is your keys.</label>
 <label class="option"><input type="radio" name="q28" value="Here you are your keys."> Here you are your keys.</label><div id="f28" class="feedback"></div></div>
 
-<div class="card" id="q29" data-type="mc" data-answer="Here you are.">
+<div class="card" id="q29" data-type="mc" data-answer="Here you are." data-explanation="“Here you are” biror narsani odamga uzatganda ishlatiladi. “Here is your coffee” esa narsaning o‘zini ko‘rsatish/taqdim etish uchun ishlatiladi.">
 <div class="qtitle"><span class="num">30.</span> Waiter sizga qahvani uzatyapti. Qaysi gap “Mana, oling” ma’nosida ishlatiladi? <br><span class="tip">Farqni eslang: <b>Here is your coffee</b> — “Mana qahvangiz”; <b>Here you are</b> — biror narsani odamga berayotganda aytiladi.</span></div>
 
 <label class="option"><input type="radio" name="q29" value="Here are your coffee."> Here are your coffee.</label>
@@ -286,131 +449,169 @@ input[type=text]{width:100%;padding:14px;border:1px solid #d8deea;border-radius:
 <label class="option"><input type="radio" name="q29" value="Here you is."> Here you is.</label><div id="f29" class="feedback"></div></div>
 
 </form>
-
-<div id="result" class="result">
-  Natijangiz<br>
-  <strong id="score">0 / 30</strong>
-  <p id="resultMessage">Izohlarni o‘qing va xohlasangiz qayta ishlang.</p>
-</div>
-
+<div id="result" class="result">Natijangiz<br><strong id="score">0 / 30</strong><p>Izohlarni o‘qing va xohlasangiz qayta ishlang.</p></div>
 <div class="actions">
   <button id="check" type="button" class="btn primary">✓ Javoblarimni tekshirish</button>
-  <button type="button" class="btn secondary unit-back-button" id="unitBack">← Unit 2 ga qaytish</button>
+  <button type="button" class="btn secondary unit-back-button" onclick="backToUnit2()">← Unit 2 ga qaytish</button>
   <button id="reset" type="button" class="btn secondary reset-hidden">↻ Qayta ishlash</button>
 </div>
-
-<script>
+</div><script>
 (function(){
-  const total = 30;
-  const answered = new Array(total).fill(false);
-  const liveAnswered = new Set();
+  var answers = [];
+  var answered = [];
+  var total = 30;
+  var i;
+  for(i=0;i<total;i++){ answers[i]=null; answered[i]=false; }
 
   function normalize(x){
-    return String(x || "")
-      .toLowerCase()
-      .replace(/[.,!?“”"’‘'\-]/g,"")
-      .replace(/\s+/g," ")
-      .trim();
+    return String(x || '').toLowerCase().replace(/[.,!?“”"’‘'\-]/g,'').replace(/\s+/g,' ').trim();
   }
+
+  // Live progress is deliberately kept separate from the
+  // `answered[]` array used by the final answer checker.
+  // `answered[]` becomes true only after Check is pressed, so using it for the
+  // live bar was the reason the bar jumped to 100%.
+  var liveAnswered = new Set();
 
   function updateProgress(){
-    const blocks = document.querySelectorAll("#quiz .card");
-    let n = 0;
-    blocks.forEach(block => {
-      const radio = block.querySelector('input[type="radio"]:checked');
-      if (radio) n++;
-    });
-    const pct = (n / total) * 100;
-    document.getElementById("answered").textContent = n + " / " + total;
-    document.getElementById("topProgressFill").style.width = pct + "%";
+    var n = liveAnswered.size;
+    var pct = total ? (n / total) * 100 : 0;
+
+    var countEl = document.getElementById('answered');
+    var fillEl = document.getElementById('topProgressFill');
+
+    if(countEl){
+      countEl.textContent = n + ' / ' + total;
+    }
+
+    if(fillEl){
+      fillEl.style.width = pct + '%';
+    }
   }
 
-  async function checkAnswers(){
-    let score = 0;
+  function markLiveAnsweredFromRadio(radio){
+    var block = radio.closest('.card');
+    if(!block) return;
 
-    for(let j=0;j<total;j++){
-      const block = document.getElementById("q"+j);
-      const fb = document.getElementById("f"+j);
-      const selected = block.querySelector('input[type="radio"]:checked');
-      const correct = block.getAttribute("data-answer");
-      const value = selected ? selected.value : "";
-      answered[j] = true;
+    var id = Number(block.id.replace('q',''));
+    if(!Number.isNaN(id)){
+      liveAnswered.add(id);
+      updateProgress();
+    }
+  }
 
-      if(normalize(value) === normalize(correct)){
-        score++;
-        fb.className = "feedback correct";
-        fb.innerHTML = "✓ <b>To‘g‘ri!</b>";
+  function markLiveAnsweredFromText(input){
+    var block = input.closest('.card');
+    if(!block) return;
+
+    var id = Number(block.id.replace('q',''));
+    if(Number.isNaN(id)) return;
+
+    if(input.value.trim() !== ''){
+      liveAnswered.add(id);
+    }else{
+      liveAnswered.delete(id);
+    }
+
+    updateProgress();
+  }
+
+    async function checkAnswers(){
+    var score=0, j, block, selected, correct, fb;
+    for(j=0;j<total;j++){
+      block=document.getElementById('q'+j);
+      fb=document.getElementById('f'+j);
+      selected=null;
+      if(block.getAttribute('data-type')==='mc'){
+        var radios=block.getElementsByTagName('input');
+        var k;
+        for(k=0;k<radios.length;k++){
+          if(radios[k].checked){selected=radios[k].value;break;}
+        }
       }else{
-        fb.className = "feedback wrong";
-        let explanation = "";
-
-        if(j === 0) explanation = "<br><b>Izoh:</b> A harfi [ey] deb talaffuz qilinadi.";
-        if(j === 1) explanation = "<br><b>Izoh:</b> B harfi [biy] deb talaffuz qilinadi.";
-        if(j === 2) explanation = "<br><b>Izoh:</b> C harfi [siy] deb talaffuz qilinadi.";
-        if(j === 3) explanation = "<br><b>Izoh:</b> D harfi [diy] deb talaffuz qilinadi.";
-        if(j === 4) explanation = "<br><b>Izoh:</b> I harfi [ay] deb talaffuz qilinadi.";
-        if(j === 5) explanation = "<br><b>Izoh:</b> Q harfi [kyu] deb talaffuz qilinadi.";
-        if(j === 6) explanation = "<br><b>Izoh:</b> Ali: A — [ey], L — [el], I — [ay].";
-        if(j === 7) explanation = "<br><b>Izoh:</b> Sam: S — [es], A — [ey], M — [em].";
-        if(j === 8) explanation = "<br><b>Izoh:</b> Jones: J — [jey], O — [ou], N — [en], E — [iy], S — [es].";
-        if(j === 9) explanation = "<br><b>Izoh:</b> Brown: B — [biy], R — [ar], O — [ou], W — [dablyu], N — [en].";
-        if(j === 10) explanation = "<br><b>Izoh:</b> Mehmonxonada broningiz borligini aytganda “I have a reservation” ishlatiladi.";
-        if(j === 12) explanation = "<br><b>Izoh:</b> “How do you spell your last name, please?” — familiyangizni qanday harflab aytishni so‘rash uchun ishlatiladi."; 
-        if(j === 13) explanation = "<br><b>Izoh:</b> 13 — thirteen. 30 esa thirty.";
-        if(j === 20 || j === 21) explanation = "<br><b>Izoh:</b> This/that — birlik; these/those — ko‘plik.";
-        if(j === 22) explanation = "<br><b>Izoh:</b> here — bu yerda/yonimda; there — u yerda.";
-        if(j === 27) explanation = "<br><b>Izoh:</b> Bu mashqda a/an ni talaffuzga qarab tanlaymiz: apple unli tovush bilan boshlanadi, shuning uchun “an apple”.";
-        if(j === 28) explanation = "<br><b>Izoh:</b> keys ko‘plik, shuning uchun “Here are your keys.”";
-        if(j === 29) explanation = "<br><b>Izoh:</b> “Here you are” biror narsani odamga uzatganda ishlatiladi. “Here is your coffee” esa narsaning o‘zini ko‘rsatish/taqdim etish uchun ishlatiladi.";
-
-        fb.innerHTML = "✗ <b>Xato.</b><br><b>To‘g‘ri javob:</b> " + correct + explanation;
+        selected=block.getElementsByTagName('input')[0].value;
+      }
+      correct=block.getAttribute('data-answer');
+      answered[j]=true;
+      if(normalize(selected)===normalize(correct)){
+        score++;
+        fb.className='feedback correct';
+        fb.innerHTML='✓ <b>To‘g‘ri!</b>';
+      }else{
+        fb.className='feedback wrong';
+        var explanation = block.getAttribute('data-explanation') || '';
+        fb.innerHTML='✗ <b>Xato.</b><br><b>To‘g‘ri javob:</b> '+correct+
+          (explanation ? '<br><b>Izoh:</b> '+explanation : '');
       }
     }
+    document.getElementById('score').innerHTML=score+' / '+total;
+    const saved = await reportActivityProgress(
+      (score/total*100)>=70,
+      Math.round(score/total*100)
+    );
 
-    const percent = Math.round((score / total) * 100);
-    document.getElementById("score").textContent = score + " / " + total;
-    const saved = await reportActivityProgress(percent >= 70, percent);
-
-    const result = document.getElementById("result");
-    result.style.display = "block";
-
-    const message = document.getElementById("resultMessage");
-    if(percent >= 70){
-      message.textContent = saved && saved.success
-        ? "🎉 Tabriklaymiz! Unit 2 amaliy mashqlaridan talab qilingan natijani oldingiz. Natijangiz saqlandi."
-        : "🎉 Tabriklaymiz! Talab qilingan natijani oldingiz. Natijani saqlashda muammo yuz berdi.";
-    }else{
-      message.textContent = saved && saved.success
-        ? "💪 Xatolarni ko‘rib chiqing va yana bir marta urinib ko‘ring. Natijangiz saqlandi."
-        : "💪 Xatolarni ko‘rib chiqing va yana bir marta urinib ko‘ring.";
+    document.getElementById('result').style.display='block';
+    let saveStatus = document.getElementById('saveStatus');
+    if (!saveStatus) {
+      saveStatus = document.createElement('div');
+      saveStatus.id = 'saveStatus';
+      saveStatus.className = 'save-status';
+      document.getElementById('result').appendChild(saveStatus);
     }
-
-    document.getElementById('unitBack').addEventListener('click',()=>window.location.assign('https://imbooz.github.io/salimteaches-beginner/index.html?unit=2'));
-updateProgress();
-    window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
+    if (saved && saved.success === true) {
+      saveStatus.className = 'save-status ok';
+      saveStatus.textContent = '✓ Natijangiz saqlandi';
+    } else {
+      saveStatus.className = 'save-status err';
+      saveStatus.textContent = '⚠ Natijangizni saqlashda muammo: ' +
+        ((saved && saved.error) || 'noma’lum xatolik');
+    }
+    updateProgress();
+    window.scrollTo(0,document.body.scrollHeight);
   }
 
   function resetQuiz(){
-    document.querySelectorAll('#quiz input[type="radio"]').forEach(r => r.checked = false);
-    for(let j=0;j<total;j++){
-      answered[j] = false;
-      const fb = document.getElementById("f"+j);
-      fb.className = "feedback";
-      fb.innerHTML = "";
+    liveAnswered.clear();
+    var els=document.getElementsByTagName('input'), j;
+    for(j=0;j<els.length;j++){
+      if(els[j].type==='radio') els[j].checked=false;
+      if(els[j].type==='text') els[j].value='';
     }
-    document.getElementById("result").style.display = "none";
+    for(j=0;j<total;j++){
+      answered[j]=false;
+      document.getElementById('f'+j).className='feedback';
+      document.getElementById('f'+j).innerHTML='';
+    }
+    document.getElementById('result').style.display='none';
     updateProgress();
-    window.scrollTo({top:0,behavior:"smooth"});
+    window.scrollTo(0,0);
   }
 
-  document.getElementById("check").addEventListener("click", checkAnswers);
-  document.getElementById("reset").addEventListener("click", resetQuiz);
-  document.querySelectorAll('#quiz input[type="radio"]').forEach(r => {
-    r.addEventListener("change", updateProgress);
+  // Bind directly after the form exists. This avoids relying on the
+  // preview environment's window.onload handling.
+  document.getElementById('check').onclick=function(e){
+    if(e)e.preventDefault();
+    checkAnswers();
+    return false;
+  };
+
+  document.getElementById('reset').onclick=function(e){
+    if(e)e.preventDefault();
+    resetQuiz();
+    return false;
+  };
+
+  document.querySelectorAll('#quiz .option').forEach(function(option){
+    option.addEventListener('click', function(){
+      var radio = option.querySelector('input[type="radio"]');
+      if(radio) markLiveAnsweredFromRadio(radio);
+    });
   });
 
-  document.getElementById("backBtn").addEventListener("click", function(){
-    window.location.assign("https://imbooz.github.io/salimteaches-beginner/index.html?unit=2");
+  document.querySelectorAll('#quiz input[type="text"]').forEach(function(input){
+    input.addEventListener('input', function(){
+      markLiveAnsweredFromText(input);
+    });
   });
 
   updateProgress();
@@ -418,65 +619,77 @@ updateProgress();
 </script>
 
 <script>
-function getTelegramInitData(){
-  try{
+function getTelegramInitData() {
+  try {
     const saved = sessionStorage.getItem("salimteaches_initData");
-    if(saved) return saved;
-  }catch(e){}
+    if (saved) return saved;
+  } catch (e) {
+    console.warn("sessionStorage unavailable:", e);
+  }
 
-  try{
-    if(window.Telegram && window.Telegram.WebApp){
+  try {
+    if (window.Telegram && window.Telegram.WebApp) {
       const tg = window.Telegram.WebApp;
-      if(tg.initData){
-        try{ sessionStorage.setItem("salimteaches_initData", tg.initData); }catch(e){}
+      if (tg.initData) {
+        try {
+          sessionStorage.setItem("salimteaches_initData", tg.initData);
+        } catch (e) {}
         return tg.initData;
       }
     }
-  }catch(e){}
+  } catch (e) {
+    console.warn("Telegram initData unavailable:", e);
+  }
 
   return "";
 }
 
-async function reportActivityProgress(completed, score){
+function backToUnit2() {
+  window.location.assign(
+    "https://imbooz.github.io/salimteaches-beginner/index.html?unit=2"
+  );
+}
+</script>
+
+<script>
+async function reportActivityProgress(completed, score) {
   const activityId =
     Number(new URLSearchParams(window.location.search).get("activity_id")) || 0;
   const initData = getTelegramInitData();
 
-  if(!activityId){
-    return {success:false,error:"Unit 2 practice activity_id mavjud emas."};
-  }
-  if(!initData){
-    return {success:false,error:"Telegram initData mavjud emas."};
+  if (!initData) {
+    return { success: false, error: "Telegram initData mavjud emas." };
   }
 
-  try{
+  try {
     const response = await fetch(
       "https://salimteaches-beginner-auth.imshosalim.workers.dev/progress",
       {
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
           initData,
-          activity_id:activityId,
-          completed:Boolean(completed),
-          score:score == null ? null : Number(score)
+          activity_id: activityId,
+          completed: Boolean(completed),
+          score: score == null ? null : Number(score)
         })
       }
     );
 
     const data = await response.json();
-    if(!response.ok || data.success !== true){
+    if (!response.ok || data.success !== true) {
       return {
-        success:false,
-        error:data.error || data.reason || ("HTTP " + response.status)
+        success: false,
+        error: data.error || data.reason || ("HTTP " + response.status)
       };
     }
     return data;
-  }catch(error){
-    console.error("Progress save failed:",error);
-    return {success:false,error:error.message || "Network error"};
+  } catch (error) {
+    console.error("Progress save failed:", error);
+    return { success: false, error: error.message || "Network error" };
   }
 }
 </script>
-</body>
-</html>
+
+</div>
+</body></html>
