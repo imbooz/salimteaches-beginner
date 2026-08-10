@@ -8,7 +8,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
   --bg:#f5f7fb;--card:#fff;--ink:#182033;--muted:#6f7890;
-  --blue:#5865f2;--blue-soft:#eef0ff;--border:#e2e5ee;
+  --blue:##5b5ce2;--blue-soft:#eef0ff;--border:#e2e5ee;
   --green:#16a36a;--green-soft:#eaf9f2;--red:#d84c5b;--red-soft:#fff0f2;
 }
 body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
@@ -61,6 +61,22 @@ input[type=radio]{margin-right:8px;accent-color:var(--blue)}
 .result h2{margin:0 0 7px}.result p{color:var(--muted);line-height:1.5}
 .success{color:var(--green);font-weight:900}.fail{color:var(--red);font-weight:900}
 @media(max-width:520px){.header h1{font-size:25px}.reading-card{margin-left:11px;margin-right:11px}.actions,.result{margin-left:11px;margin-right:11px}}
+</style>
+<style id="unit2-navigation-consistency">
+.actions{
+  position:sticky;
+  bottom:10px;
+  z-index:1000;
+  background:rgba(245,247,251,.96);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  padding:10px 0;
+  display:flex;
+  gap:10px;
+}
+.actions .btn{flex:1;min-width:0}
+.actions .unit-back-button{background:#e9ebf4;color:#252b40}
+.actions .reset-hidden{display:none !important}
 </style>
 </head>
 <body>
@@ -212,14 +228,9 @@ input[type=radio]{margin-right:8px;accent-color:var(--blue)}
 </form>
 
 <div class="actions">
-  <button class="btn check" id="check" type="button">Tekshirish</button>
-  <button class="btn reset" id="reset" type="button">Qayta boshlash</button>
-</div>
-
-<div class="result" id="result">
-  <h2 id="resultTitle"></h2>
-  <p id="resultText"></p>
-</div>
+  <button id="check" type="button" class="btn primary">✓ Javoblarimni tekshirish</button>
+  <button type="button" class="btn secondary unit-back-button" id="unitBack">← Unit 2 ga qaytish</button>
+  <button id="reset" type="button" class="btn secondary reset-hidden">↻ Qayta ishlash</button>
 </div>
 
 <script>
@@ -315,7 +326,8 @@ function checkAnswers(){
   document.getElementById("resultText").textContent =
     "Natijangiz: "+score+" / "+total+" ("+pct+"%). "+
     (pct>=70 ? "Siz Unit 2 Reading talabini bajardingiz." : "Kamida 70% natija kerak.");
-  updateProgress();
+  document.getElementById('unitBack').addEventListener('click',()=>window.location.assign('https://imbooz.github.io/salimteaches-beginner/index.html?unit=2'));
+updateProgress();
   reportActivityProgress(pct>=70,pct);
   window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
 }
