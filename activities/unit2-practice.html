@@ -33,6 +33,22 @@ input[type=text]{width:100%;padding:14px;border:1px solid #d8deea;border-radius:
 @media(max-width:520px){body{padding:11px}.practice-test-header{padding:22px 14px 12px}.practice-test-header h1{font-size:24px}.card{padding:17px}.btn{font-size:15px}}
 </style>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style id="unit2-navigation-consistency">
+.actions{
+  position:sticky;
+  bottom:10px;
+  z-index:1000;
+  background:rgba(245,247,251,.96);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  padding:10px 0;
+  display:flex;
+  gap:10px;
+}
+.actions .btn{flex:1;min-width:0}
+.actions .unit-back-button{background:#e9ebf4;color:#252b40}
+.actions .reset-hidden{display:none !important}
+</style>
 </head>
 <body>
 <div class="practice-test-nav">
@@ -279,8 +295,8 @@ input[type=text]{width:100%;padding:14px;border:1px solid #d8deea;border-radius:
 
 <div class="actions">
   <button id="check" type="button" class="btn primary">✓ Javoblarimni tekshirish</button>
-  <button id="reset" type="button" class="btn secondary">↻ Qayta ishlash</button>
-</div>
+  <button type="button" class="btn secondary unit-back-button" id="unitBack">← Unit 2 ga qaytish</button>
+  <button id="reset" type="button" class="btn secondary reset-hidden">↻ Qayta ishlash</button>
 </div>
 
 <script>
@@ -369,7 +385,8 @@ input[type=text]{width:100%;padding:14px;border:1px solid #d8deea;border-radius:
         : "💪 Xatolarni ko‘rib chiqing va yana bir marta urinib ko‘ring.";
     }
 
-    updateProgress();
+    document.getElementById('unitBack').addEventListener('click',()=>window.location.assign('https://imbooz.github.io/salimteaches-beginner/index.html?unit=2'));
+updateProgress();
     window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
   }
 
