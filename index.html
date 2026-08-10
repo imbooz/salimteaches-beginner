@@ -2284,6 +2284,17 @@
       });
 
       items.push({
+        icon: "🎬",
+        title: "Workbook tahlili",
+        subtitle: "Javoblarni men bilan birga tekshiring va xatolaringizni tahlil qiling.",
+        status: "Ixtiyoriy",
+        done: false,
+        optional: true,
+        locked: false,
+        action: () => openVideo("JSmGBHUKyrs")
+      });
+
+      items.push({
         icon: "🧩",
         title: "Amaliy mashqlar",
         subtitle: "Unit 1 bo‘yicha interaktiv mashqlar.",
@@ -2469,21 +2480,21 @@
         subtitle: "Unit 2 darsini ko‘ring.",
         status: lesson
           ? (lessonDone ? "✓ Tugallangan" : "Boshlash →")
-          : "Tez orada",
+          : "Boshlash →",
         done: lessonDone,
         locked: false,
         action: () => {
-          if (!lesson) {
-            tg.showAlert("Unit 2 darsi hali qo‘shilmagan.");
-            return;
+          if (lesson) {
+            reportProgressFromApp(
+              lesson.activity_id,
+              true,
+              null
+            );
           }
-          reportProgressFromApp(
-            lesson.activity_id,
-            true,
-            null
+          window.open(
+            "https://youtu.be/WPGTM1Mb0JY?si=sdT7HTujwOu0LlAW",
+            "_blank"
           );
-          // YouTube link will be added when the Unit 2 lesson is ready.
-          tg.showAlert("Unit 2 darsi tez orada qo‘shiladi.");
         }
       });
 
