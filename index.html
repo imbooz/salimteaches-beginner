@@ -1762,13 +1762,24 @@
           : null;
 
 
-      const unlocked =
-        (
-          unit.is_available === undefined ||
-          unit.is_available === 1
-        ) &&
+      // Unit 2 is released by completing Unit 1.
+      // We intentionally do not depend on the backend's is_available
+      // flag for Unit 2, because the student-facing progression is
+      // controlled by the previous Unit's completion.
+      const releasedByProgress =
         previousProgress &&
         previousProgress.completed === 1;
+
+      const unlocked =
+        Number(unit.unit_id) === 2
+          ? Boolean(releasedByProgress)
+          : (
+              (
+                unit.is_available === undefined ||
+                unit.is_available === 1
+              ) &&
+              Boolean(releasedByProgress)
+            );
 
 
       return {
@@ -2009,18 +2020,24 @@
 
     function getLockedMessage(unit) {
 
+      const previousUnit =
+        courseData?.units?.find(
+          u => Number(u.sort_order) === Number(unit.sort_order) - 1
+        );
+
+      const previousProgress =
+        previousUnit
+          ? courseData?.unitProgress?.[previousUnit.unit_id]
+          : null;
+
       if (
-        unit.is_available !== 1
+        previousProgress &&
+        previousProgress.completed !== 1
       ) {
-
-        return "Tez orada";
-
+        return "Avval oldingi Unitni tugating";
       }
 
-
-      return (
-        "Avval oldingi Unitni tugating"
-      );
+      return "Tez orada";
 
     }
 
