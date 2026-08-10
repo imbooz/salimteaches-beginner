@@ -7,7 +7,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
 .app{max-width:760px;margin:auto;padding-bottom:110px}.header{padding:24px 18px 14px}.brand{font-size:12px;font-weight:800;letter-spacing:.8px;color:var(--primary)}h1{font-size:27px;margin:7px 0 5px}.subtitle{color:var(--muted);font-size:14px;line-height:1.45;margin:0}
-.progress-wrap{position:sticky;top:0;z-index:10;background:rgba(245,247,251,.94);backdrop-filter:blur(10px);padding:9px 18px 12px;border-bottom:1px solid var(--border)}.progress-row{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:7px}.progressbar{height:7px;background:#e4e7ef;border-radius:10px;overflow:hidden}.progressfill{height:100%;width:0;background:linear-gradient(90deg,var(--primary),#7c83f5);transition:.3s}
+.progress-wrap{position:sticky;top:53px;z-index:10;background:rgba(245,247,251,.94);backdrop-filter:blur(10px);padding:9px 18px 12px;border-bottom:1px solid var(--border)}.progress-row{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:7px}.progressbar{height:7px;background:#e4e7ef;border-radius:10px;overflow:hidden}.progressfill{height:100%;width:0;background:linear-gradient(90deg,var(--primary),#7c83f5);transition:.3s}
 .section{margin:14px 14px 0}.section-head{background:linear-gradient(135deg,#5865f2,#747cf5);color:#fff;border-radius:18px;padding:16px 16px 14px;margin-bottom:10px}.section-code{font-size:11px;font-weight:800;opacity:.85;letter-spacing:.5px}.section-title{font-size:18px;font-weight:800;margin-top:3px}.section-desc{font-size:12px;opacity:.92;margin-top:5px;line-height:1.45}
 .question{display:flex;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 12px;margin:9px 0;box-shadow:0 4px 16px rgba(20,30,60,.035)}.qnum{width:30px;height:30px;flex:0 0 30px;border-radius:10px;background:#eef0ff;color:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px}.qbody{min-width:0;flex:1}.qprompt{font-size:15px;line-height:1.5;margin-bottom:10px}.choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}.choice,.word-choice,.phrase-card{border:1px solid #dfe3ec;background:#fbfcfe;color:var(--text);border-radius:11px;padding:11px 10px;font-size:14px;font-weight:650;min-height:44px}.choice.selected,.word-choice.selected,.phrase-card.selected{border-color:var(--primary);background:#eef0ff;color:var(--primary)}.choice.correct,.word-choice.correct{border-color:#bfead6;background:var(--goodbg);color:var(--good)}.choice.wrong,.word-choice.wrong{border-color:#ffd0d0;background:var(--badbg);color:var(--bad)}
 input{width:100%;border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;padding:11px 12px;font-size:15px;color:var(--text);outline:none}input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(88,101,242,.1)}
@@ -47,47 +47,6 @@ input{width:100%;border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;
 }
 
 </style><script src="https://telegram.org/js/telegram-web-app.js"></script>
-<style id="test-actions-style-only">
-.actions{
-  position:sticky;
-  bottom:10px;
-  z-index:1000;
-  width:100%;
-  box-sizing:border-box;
-  display:flex !important;
-  gap:10px !important;
-  padding:10px 0 !important;
-  margin:0 !important;
-  background:rgba(245,247,251,.96);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-}
-.actions .actions-inner{
-  display:flex !important;
-  flex:1 1 0 !important;
-  min-width:0 !important;
-  gap:10px !important;
-  margin:0 !important;
-}
-.actions .action,
-.actions .check,
-.actions .retry,
-.actions > button[onclick="backToUnit1()"]{
-  flex:1 1 0 !important;
-  min-width:0 !important;
-  width:auto !important;
-  margin:0 !important;
-}
-.actions > button[onclick="backToUnit1()"]{
-  background:#eef0ff !important;
-  color:#5865f2 !important;
-  border:0 !important;
-  border-radius:13px !important;
-  padding:13px 16px !important;
-  font-size:15px !important;
-  font-weight:800 !important;
-}
-</style>
 </head>
 <body>
 
@@ -138,11 +97,11 @@ input{width:100%;border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;
  </div>
 
  <div class="phrase-bank" id="phraseBank">
-   <button class="phrase-card" draggable="true" data-phrase="p13" data-text="OK">OK</button>
-   <button class="phrase-card" draggable="true" data-phrase="p15" data-text="My number is 9845">My number is 9845</button>
    <button class="phrase-card" draggable="true" data-phrase="p11" data-text="My name’s Henry">My name’s Henry</button>
-   <button class="phrase-card" draggable="true" data-phrase="p14" data-text="I don’t have one">I don’t have one</button>
    <button class="phrase-card" draggable="true" data-phrase="p12" data-text="What’s your work number?">What’s your work number?</button>
+   <button class="phrase-card" draggable="true" data-phrase="p13" data-text="OK">OK</button>
+   <button class="phrase-card" draggable="true" data-phrase="p14" data-text="I don’t have one">I don’t have one</button>
+   <button class="phrase-card" draggable="true" data-phrase="p15" data-text="My number is 9845">My number is 9845</button>
  </div>
 
  <div class="dialogue">
@@ -360,7 +319,6 @@ function norm(v){
     .trim()
     .toLowerCase()
     .replace(/[’‘]/g, "'")
-    .replace(/[.,!?;:"“”'\-]/g, '')
     .replace(/\s+/g, ' ');
 }
 function updateProgress(){
