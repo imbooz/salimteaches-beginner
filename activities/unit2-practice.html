@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>SalimTeaches — Unit 2 Interactive Practice</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#182033;--muted:#647089;--blue:#5b5ce2;--green:#168a55;--red:#c83b4b;--border:#e3e7ef}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(135deg,#eef0ff,#f8fbff);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--ink);padding:18px}
+.container{max-width:760px;margin:0 auto;padding-bottom:110px}
+.practice-test-nav{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
+.practice-test-back{border:0;border-radius:13px;padding:12px 15px;background:#eef0ff;color:var(--blue);font-size:14px;font-weight:800;cursor:pointer}
+.practice-test-label{color:var(--muted);font-size:12px;font-weight:700}
+.practice-test-header{padding:24px 18px 14px}
+.practice-test-brand{font-size:12px;font-weight:800;letter-spacing:.8px;color:var(--blue)}
+.practice-test-header h1{font-size:27px;margin:7px 0 5px;color:var(--ink)}
+.practice-test-subtitle{color:var(--muted);font-size:14px;line-height:1.45;margin:0}
+.practice-test-progress{position:sticky;top:53px;z-index:10;background:rgba(245,247,251,.94);backdrop-filter:blur(10px);padding:9px 18px 12px;border-bottom:1px solid var(--border)}
+.practice-test-progress-row{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:7px}
+.practice-test-progressbar{height:7px;background:#e4e7ef;border-radius:10px;overflow:hidden}
+.practice-test-progressfill{height:100%;width:0;background:linear-gradient(90deg,var(--blue),#7c83f5);transition:.3s}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 5px 18px rgba(28,35,65,.06)}
+.qtitle{font-weight:700;line-height:1.45;margin-bottom:13px}.num{color:#5b5ce2}
+.option{display:block;padding:13px 14px;border:1px solid #e1e5ee;border-radius:12px;margin:8px 0;cursor:pointer;background:#fff}.option input{margin-right:9px}.option:active{background:#f0f1ff}
+input[type=text]{width:100%;padding:14px;border:1px solid #d8deea;border-radius:12px;font-size:16px;outline:none}
+.feedback{display:none;margin-top:12px;padding:12px;border-radius:12px;line-height:1.45}.correct{display:block;background:#eaf8f0;color:#176a43}.wrong{display:block;background:#fff0f1;color:#9d2736}
+.actions{position:sticky;bottom:10px;z-index:1000;background:rgba(245,247,251,.96);backdrop-filter:blur(10px);padding:10px 0;display:flex;gap:10px}
+.btn{border:0;border-radius:13px;padding:15px 18px;font-size:16px;font-weight:700;cursor:pointer;touch-action:manipulation}.primary{background:#5b5ce2;color:white;flex:1}.secondary{background:#e9ebf4;color:#252b40}
+.result{display:none;text-align:center;background:#20224d;color:white;border-radius:18px;padding:22px;margin:18px 0}.result strong{font-size:28px}.save-status{margin-top:10px;font-size:13px;font-weight:700}.save-status.ok{color:#8df0bf}.save-status.err{color:#ffb0b8}
+.tip{color:var(--muted);font-size:14px;line-height:1.5}
+@media(max-width:520px){body{padding:11px}.practice-test-header{padding:22px 14px 12px}.practice-test-header h1{font-size:24px}.card{padding:17px}.btn{font-size:15px}}
+</style>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+<div class="practice-test-nav">
+  <button class="practice-test-back" type="button" id="backBtn">← Unit 2</button>
+  <div class="practice-test-label">SalimTeaches • Unit 2</div>
+</div>
+
+<div class="container">
+<header class="practice-test-header">
+  <div class="practice-test-brand">SALIMTEACHES • BEGINNER</div>
+  <h1>📝 2-unit — Interaktiv mashqlar</h1>
+  <p class="practice-test-subtitle">Alphabet • Spelling • Hotels • Numbers 11–20 • Hotel room vocabulary • this/that/these/those • Cafés • Plurals • a/an</p>
+</header>
+
+<div class="practice-test-progress">
+  <div class="practice-test-progress-row">
+    <span>Mashq jarayoni</span>
+    <span id="answered">0 / 30</span>
+  </div>
+  <div class="practice-test-progressbar">
+    <div class="practice-test-progressfill" id="topProgressFill"></div>
+  </div>
+</div>
+
+<form id="quiz">
+
+<div class="card" id="q0" data-type="mc" data-answer="[ey]">
+<div class="qtitle"><span class="num">1.</span> Ingliz alifbosidagi <b>A</b> harfi qanday talaffuz qilinadi?</div>
+
+<label class="option"><input type="radio" name="q0" value="[ey]"> [ey]</label>
+<label class="option"><input type="radio" name="q0" value="[ay]"> [ay]</label>
+<label class="option"><input type="radio" name="q0" value="[iy]"> [iy]</label><div id="f0" class="feedback"></div></div>
+
+<div class="card" id="q1" data-type="mc" data-answer="[biy]">
+<div class="qtitle"><span class="num">2.</span> <b>B</b> harfining o‘zbekcha talaffuzini tanlang.</div>
+
+<label class="option"><input type="radio" name="q1" value="[bay]"> [bay]</label>
+<label class="option"><input type="radio" name="q1" value="[biy]"> [biy]</label>
+<label class="option"><input type="radio" name="q1" value="[bi]"> [bi]</label><div id="f1" class="feedback"></div></div>
+
+<div class="card" id="q2" data-type="mc" data-answer="[siy]">
+<div class="qtitle"><span class="num">3.</span> <b>C</b> harfi qanday talaffuz qilinadi?</div>
+
+<label class="option"><input type="radio" name="q2" value="[key]"> [key]</label>
+<label class="option"><input type="radio" name="q2" value="[sey]"> [sey]</label>
+<label class="option"><input type="radio" name="q2" value="[siy]"> [siy]</label><div id="f2" class="feedback"></div></div>
+
+<div class="card" id="q3" data-type="mc" data-answer="[diy]">
+<div class="qtitle"><span class="num">4.</span> <b>D</b> harfining talaffuzini tanlang.</div>
+
+<label class="option"><input type="radio" name="q3" value="[dey]"> [dey]</label>
+<label class="option"><input type="radio" name="q3" value="[di]"> [di]</label>
+<label class="option"><input type="radio" name="q3" value="[diy]"> [diy]</label><div id="f3" class="feedback"></div></div>
+
+<div class="card" id="q4" data-type="mc" data-answer="[ay]">
+<div class="qtitle"><span class="num">5.</span> 9-raqamli harf — <b>I</b>. Uning talaffuzi qaysi?</div>
+
+<label class="option"><input type="radio" name="q4" value="[ay]"> [ay]</label>
+<label class="option"><input type="radio" name="q4" value="[ey]"> [ey]</label>
+<label class="option"><input type="radio" name="q4" value="[iy]"> [iy]</label><div id="f4" class="feedback"></div></div>
+
+<div class="card" id="q5" data-type="mc" data-answer="[kyu]">
+<div class="qtitle"><span class="num">6.</span> <b>Q</b> harfi qanday talaffuz qilinadi?</div>
+
+<label class="option"><input type="radio" name="q5" value="[ku]"> [ku]</label>
+<label class="option"><input type="radio" name="q5" value="[kyou]"> [kyou]</label>
+<label class="option"><input type="radio" name="q5" value="[kyu]"> [kyu]</label><div id="f5" class="feedback"></div></div>
+
+<div class="card" id="q6" data-type="mc" data-answer="[ey] - [el] - [ay]">
+<div class="qtitle"><span class="num">7.</span> Ism <b>Ali</b> ni harflab berishning to‘g‘ri variantini tanlang.</div>
+
+<label class="option"><input type="radio" name="q6" value="[ey] - [el] - [ay]"> [ey] - [el] - [ay]</label>
+<label class="option"><input type="radio" name="q6" value="[ay] - [el] - [ay]"> [ay] - [el] - [ay]</label>
+<label class="option"><input type="radio" name="q6" value="[ey] - [i] - [ay]"> [ey] - [i] - [ay]</label><div id="f6" class="feedback"></div></div>
+
+<div class="card" id="q7" data-type="mc" data-answer="[es] - [ey] - [em]">
+<div class="qtitle"><span class="num">8.</span> <b>Sam</b> ismining to‘g‘ri spellingini tanlang.</div>
+
+<label class="option"><input type="radio" name="q7" value="[es] - [ay] - [em]"> [es] - [ay] - [em]</label>
+<label class="option"><input type="radio" name="q7" value="[es] - [ey] - [em]"> [es] - [ey] - [em]</label>
+<label class="option"><input type="radio" name="q7" value="[siy] - [ey] - [em]"> [siy] - [ey] - [em]</label><div id="f7" class="feedback"></div></div>
+
+<div class="card" id="q8" data-type="mc" data-answer="[jey] - [ou] - [en] - [iy] - [es]">
+<div class="qtitle"><span class="num">9.</span> Familiya <b>Jones</b> qanday harflanadi?</div>
+
+<label class="option"><input type="radio" name="q8" value="[jey] - [ou] - [en] - [iy] - [es]"> [jey] - [ou] - [en] - [iy] - [es]</label>
+<label class="option"><input type="radio" name="q8" value="[ji] - [ou] - [en] - [iy] - [es]"> [ji] - [ou] - [en] - [iy] - [es]</label>
+<label class="option"><input type="radio" name="q8" value="[jey] - [ay] - [en] - [iy] - [es]"> [jey] - [ay] - [en] - [iy] - [es]</label><div id="f8" class="feedback"></div></div>
+
+<div class="card" id="q9" data-type="mc" data-answer="[biy] - [ar] - [ou] - [dablyu] - [en]">
+<div class="qtitle"><span class="num">10.</span> <b>Brown</b> familiyasining to‘g‘ri spellingini tanlang.</div>
+
+<label class="option"><input type="radio" name="q9" value="[biy] - [ar] - [ou] - [dablyu] - [en]"> [biy] - [ar] - [ou] - [dablyu] - [en]</label>
+<label class="option"><input type="radio" name="q9" value="[biy] - [ar] - [ou] - [yu] - [en]"> [biy] - [ar] - [ou] - [yu] - [en]</label>
+<label class="option"><input type="radio" name="q9" value="[bay] - [ar] - [ou] - [dablyu] - [en]"> [bay] - [ar] - [ou] - [dablyu] - [en]</label><div id="f9" class="feedback"></div></div>
+
+<div class="card" id="q10" data-type="mc" data-answer="Excuse me, I have a reservation.">
+<div class="qtitle"><span class="num">11.</span> Mehmonxonaga kirib, broningiz borligini aytmoqchisiz. Qaysi gap mos?</div>
+
+<label class="option"><input type="radio" name="q10" value="Excuse me, I am a reservation."> Excuse me, I am a reservation.</label>
+<label class="option"><input type="radio" name="q10" value="I have hotel."> I have hotel.</label>
+<label class="option"><input type="radio" name="q10" value="Excuse me, I have a reservation."> Excuse me, I have a reservation.</label><div id="f10" class="feedback"></div></div>
+
+<div class="card" id="q11" data-type="mc" data-answer="What’s your name, please?">
+<div class="qtitle"><span class="num">12.</span> Receptionist: “Yes, ______?”</div>
+
+<label class="option"><input type="radio" name="q11" value="What’s room, please?"> What’s room, please?</label>
+<label class="option"><input type="radio" name="q11" value="How room, please?"> How room, please?</label>
+<label class="option"><input type="radio" name="q11" value="What’s your name, please?"> What’s your name, please?</label><div id="f11" class="feedback"></div></div>
+
+<div class="card" id="q12" data-type="mc" data-answer="How do you spell your last name, please?">
+<div class="qtitle"><span class="num">13.</span> Familiya so‘rash uchun qaysi savol to‘g‘ri?</div>
+
+<label class="option"><input type="radio" name="q12" value="How do you spell your last name, please?"> How do you spell your last name, please?</label>
+<label class="option"><input type="radio" name="q12" value="How are you spell your last name, please?"> How are you spell your last name, please?</label>
+<label class="option"><input type="radio" name="q12" value="What do you spell your last name, please?"> What do you spell your last name, please?</label><div id="f12" class="feedback"></div></div>
+
+<div class="card" id="q13" data-type="mc" data-answer="Thirteen">
+<div class="qtitle"><span class="num">14.</span> “You are in room 13.” gapidagi <b>13</b> qaysi so‘z?</div>
+
+<label class="option"><input type="radio" name="q13" value="Thirty"> Thirty</label>
+<label class="option"><input type="radio" name="q13" value="Three"> Three</label>
+<label class="option"><input type="radio" name="q13" value="Thirteen"> Thirteen</label><div id="f13" class="feedback"></div></div>
+
+<div class="card" id="q14" data-type="mc" data-answer="Eighteen">
+<div class="qtitle"><span class="num">15.</span> Mehmonxonadagi xona raqami <b>18</b>. Uni qanday aytasiz?</div>
+
+<label class="option"><input type="radio" name="q14" value="Eight"> Eight</label>
+<label class="option"><input type="radio" name="q14" value="Eighteen"> Eighteen</label>
+<label class="option"><input type="radio" name="q14" value="Eighty"> Eighty</label><div id="f14" class="feedback"></div></div>
+
+<div class="card" id="q15" data-type="mc" data-answer="lamp">
+<div class="qtitle"><span class="num">16.</span> Xonadagi chiroq inglizcha nima?</div>
+
+<label class="option"><input type="radio" name="q15" value="lamp"> lamp</label>
+<label class="option"><input type="radio" name="q15" value="desk"> desk</label>
+<label class="option"><input type="radio" name="q15" value="key"> key</label><div id="f15" class="feedback"></div></div>
+
+<div class="card" id="q16" data-type="mc" data-answer="bed">
+<div class="qtitle"><span class="num">17.</span> Mehmonxona xonasidagi uxlash uchun ishlatiladigan narsa?</div>
+
+<label class="option"><input type="radio" name="q16" value="chair"> chair</label>
+<label class="option"><input type="radio" name="q16" value="bed"> bed</label>
+<label class="option"><input type="radio" name="q16" value="desk"> desk</label><div id="f16" class="feedback"></div></div>
+
+<div class="card" id="q17" data-type="mc" data-answer="key">
+<div class="qtitle"><span class="num">18.</span> Eshikni ochish uchun ishlatiladigan narsa?</div>
+
+<label class="option"><input type="radio" name="q17" value="pen"> pen</label>
+<label class="option"><input type="radio" name="q17" value="radio"> radio</label>
+<label class="option"><input type="radio" name="q17" value="key"> key</label><div id="f17" class="feedback"></div></div>
+
+<div class="card" id="q18" data-type="mc" data-answer="notebook">
+<div class="qtitle"><span class="num">19.</span> Yozuvlar qilish uchun ishlatiladigan daftar?</div>
+
+<label class="option"><input type="radio" name="q18" value="phone"> phone</label>
+<label class="option"><input type="radio" name="q18" value="television"> television</label>
+<label class="option"><input type="radio" name="q18" value="notebook"> notebook</label><div id="f18" class="feedback"></div></div>
+
+<div class="card" id="q19" data-type="mc" data-answer="phone">
+<div class="qtitle"><span class="num">20.</span> Mehmonxona xonasidagi aloqa vositasi?</div>
+
+<label class="option"><input type="radio" name="q19" value="chair"> chair</label>
+<label class="option"><input type="radio" name="q19" value="desk"> desk</label>
+<label class="option"><input type="radio" name="q19" value="phone"> phone</label><div id="f19" class="feedback"></div></div>
+
+<div class="card" id="q20" data-type="mc" data-answer="This">
+<div class="qtitle"><span class="num">21.</span> Qo‘lingizdagi bitta kalitni ko‘rsatib: “_____ is my key.”</div>
+
+<label class="option"><input type="radio" name="q20" value="This"> This</label>
+<label class="option"><input type="radio" name="q20" value="Those"> Those</label>
+<label class="option"><input type="radio" name="q20" value="These"> These</label><div id="f20" class="feedback"></div></div>
+
+<div class="card" id="q21" data-type="mc" data-answer="Those">
+<div class="qtitle"><span class="num">22.</span> Uzoqda turgan bir nechta stullarni ko‘rsatib: “_____ are chairs.”</div>
+
+<label class="option"><input type="radio" name="q21" value="That"> That</label>
+<label class="option"><input type="radio" name="q21" value="Those"> Those</label>
+<label class="option"><input type="radio" name="q21" value="This"> This</label><div id="f21" class="feedback"></div></div>
+
+<div class="card" id="q22" data-type="mc" data-answer="here">
+<div class="qtitle"><span class="num">23.</span> Biror narsa yoningizda ekanini ko‘rsatish uchun qaysi so‘z mos: “The keys are _____.”</div>
+
+<label class="option"><input type="radio" name="q22" value="there"> there</label>
+<label class="option"><input type="radio" name="q22" value="here"> here</label>
+<label class="option"><input type="radio" name="q22" value="those"> those</label><div id="f22" class="feedback"></div></div>
+
+<div class="card" id="q23" data-type="mc" data-answer="coffee">
+<div class="qtitle"><span class="num">24.</span> Kafeda ichimliklardan biri: <b>coffee</b>. Bu nima?</div>
+
+<label class="option"><input type="radio" name="q23" value="tea"> choy</label>
+<label class="option"><input type="radio" name="q23" value="coffee"> qahva</label>
+<label class="option"><input type="radio" name="q23" value="juice"> sharbat</label><div id="f23" class="feedback"></div></div>
+
+<div class="card" id="q24" data-type="mc" data-answer="sparkling mineral water">
+<div class="qtitle"><span class="num">25.</span> Gazli mineral suvning inglizcha varianti qaysi?</div>
+
+<label class="option"><input type="radio" name="q24" value="still mineral water"> still mineral water</label>
+<label class="option"><input type="radio" name="q24" value="orange juice"> orange juice</label>
+<label class="option"><input type="radio" name="q24" value="sparkling mineral water"> sparkling mineral water</label><div id="f24" class="feedback"></div></div>
+
+<div class="card" id="q25" data-type="mc" data-answer="I’d like a coffee, please.">
+<div class="qtitle"><span class="num">26.</span> Kafeda qahva buyurtma qilmoqchisiz. Eng mos gap?</div>
+
+<label class="option"><input type="radio" name="q25" value="I like coffee you."> I like coffee you.</label>
+<label class="option"><input type="radio" name="q25" value="I’d like a coffee, please."> I’d like a coffee, please.</label>
+<label class="option"><input type="radio" name="q25" value="Give coffee me."> Give coffee me.</label><div id="f25" class="feedback"></div></div>
+
+<div class="card" id="q26" data-type="mc" data-answer="Would you like black or white?">
+<div class="qtitle"><span class="num">27.</span> Waiter: “I’d like a coffee.” Sizga qaysi savol berilishi mumkin?</div>
+
+<label class="option"><input type="radio" name="q26" value="Would you like black or white?"> Would you like black or white?</label>
+<label class="option"><input type="radio" name="q26" value="Are you a hotel?"> Are you a hotel?</label>
+<label class="option"><input type="radio" name="q26" value="What’s your room?"> What’s your room?</label><div id="f26" class="feedback"></div></div>
+
+<div class="card" id="q27" data-type="mc" data-answer="an apple">
+<div class="qtitle"><span class="num">28.</span> Qaysi variant to‘g‘ri? Bu mashqda a/an ni <b>talaffuzga qarab</b> tanlang: <b>___ apple</b>.</div>
+
+<label class="option"><input type="radio" name="q27" value="a apple"> a apple</label>
+<label class="option"><input type="radio" name="q27" value="an apple"> an apple</label>
+<label class="option"><input type="radio" name="q27" value="an apples"> an apples</label><div id="f27" class="feedback">Eslatma: bu mashqda tovushga qaraymiz. <b>apple</b> unli tovush bilan boshlanadi.</div></div>
+
+<div class="card" id="q28" data-type="mc" data-answer="Here are your keys.">
+<div class="qtitle"><span class="num">29.</span> Aynan qaysi gap ko‘plikdagi <b>keys</b> uchun to‘g‘ri?</div>
+
+<label class="option"><input type="radio" name="q28" value="Here are your keys."> Here are your keys.</label>
+<label class="option"><input type="radio" name="q28" value="Here is your keys."> Here is your keys.</label>
+<label class="option"><input type="radio" name="q28" value="Here you are your keys."> Here you are your keys.</label><div id="f28" class="feedback"></div></div>
+
+<div class="card" id="q29" data-type="mc" data-answer="Here you are.">
+<div class="qtitle"><span class="num">30.</span> Waiter sizga qahvani uzatyapti. Qaysi gap “Mana, oling” ma’nosida ishlatiladi? <br><span class="tip">Farqni eslang: <b>Here is your coffee</b> — “Mana qahvangiz”; <b>Here you are</b> — biror narsani odamga berayotganda aytiladi.</span></div>
+
+<label class="option"><input type="radio" name="q29" value="Here are your coffee."> Here are your coffee.</label>
+<label class="option"><input type="radio" name="q29" value="Here you are."> Here you are.</label>
+<label class="option"><input type="radio" name="q29" value="Here you is."> Here you is.</label><div id="f29" class="feedback"></div></div>
+
+</form>
+
+<div id="result" class="result">
+  Natijangiz<br>
+  <strong id="score">0 / 30</strong>
+  <p id="resultMessage">Izohlarni o‘qing va xohlasangiz qayta ishlang.</p>
+</div>
+
+<div class="actions">
+  <button id="check" type="button" class="btn primary">✓ Javoblarimni tekshirish</button>
+  <button id="reset" type="button" class="btn secondary">↻ Qayta ishlash</button>
+</div>
+</div>
+
+<script>
+(function(){
+  const total = 30;
+  const answered = new Array(total).fill(false);
+  const liveAnswered = new Set();
+
+  function normalize(x){
+    return String(x || "")
+      .toLowerCase()
+      .replace(/[.,!?“”"’‘'\-]/g,"")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+
+  function updateProgress(){
+    const blocks = document.querySelectorAll("#quiz .card");
+    let n = 0;
+    blocks.forEach(block => {
+      const radio = block.querySelector('input[type="radio"]:checked');
+      if (radio) n++;
+    });
+    const pct = (n / total) * 100;
+    document.getElementById("answered").textContent = n + " / " + total;
+    document.getElementById("topProgressFill").style.width = pct + "%";
+  }
+
+  async function checkAnswers(){
+    let score = 0;
+
+    for(let j=0;j<total;j++){
+      const block = document.getElementById("q"+j);
+      const fb = document.getElementById("f"+j);
+      const selected = block.querySelector('input[type="radio"]:checked');
+      const correct = block.getAttribute("data-answer");
+      const value = selected ? selected.value : "";
+      answered[j] = true;
+
+      if(normalize(value) === normalize(correct)){
+        score++;
+        fb.className = "feedback correct";
+        fb.innerHTML = "✓ <b>To‘g‘ri!</b>";
+      }else{
+        fb.className = "feedback wrong";
+        let explanation = "";
+
+        if(j === 0) explanation = "<br><b>Izoh:</b> A harfi [ey] deb talaffuz qilinadi.";
+        if(j === 1) explanation = "<br><b>Izoh:</b> B harfi [biy] deb talaffuz qilinadi.";
+        if(j === 2) explanation = "<br><b>Izoh:</b> C harfi [siy] deb talaffuz qilinadi.";
+        if(j === 3) explanation = "<br><b>Izoh:</b> D harfi [diy] deb talaffuz qilinadi.";
+        if(j === 4) explanation = "<br><b>Izoh:</b> I harfi [ay] deb talaffuz qilinadi.";
+        if(j === 5) explanation = "<br><b>Izoh:</b> Q harfi [kyu] deb talaffuz qilinadi.";
+        if(j === 6) explanation = "<br><b>Izoh:</b> Ali: A — [ey], L — [el], I — [ay].";
+        if(j === 7) explanation = "<br><b>Izoh:</b> Sam: S — [es], A — [ey], M — [em].";
+        if(j === 8) explanation = "<br><b>Izoh:</b> Jones: J — [jey], O — [ou], N — [en], E — [iy], S — [es].";
+        if(j === 9) explanation = "<br><b>Izoh:</b> Brown: B — [biy], R — [ar], O — [ou], W — [dablyu], N — [en].";
+        if(j === 10) explanation = "<br><b>Izoh:</b> Mehmonxonada broningiz borligini aytganda “I have a reservation” ishlatiladi.";
+        if(j === 12) explanation = "<br><b>Izoh:</b> “How do you spell your last name, please?” — familiyangizni qanday harflab aytishni so‘rash uchun ishlatiladi."; 
+        if(j === 13) explanation = "<br><b>Izoh:</b> 13 — thirteen. 30 esa thirty.";
+        if(j === 20 || j === 21) explanation = "<br><b>Izoh:</b> This/that — birlik; these/those — ko‘plik.";
+        if(j === 22) explanation = "<br><b>Izoh:</b> here — bu yerda/yonimda; there — u yerda.";
+        if(j === 27) explanation = "<br><b>Izoh:</b> Bu mashqda a/an ni talaffuzga qarab tanlaymiz: apple unli tovush bilan boshlanadi, shuning uchun “an apple”.";
+        if(j === 28) explanation = "<br><b>Izoh:</b> keys ko‘plik, shuning uchun “Here are your keys.”";
+        if(j === 29) explanation = "<br><b>Izoh:</b> “Here you are” biror narsani odamga uzatganda ishlatiladi. “Here is your coffee” esa narsaning o‘zini ko‘rsatish/taqdim etish uchun ishlatiladi.";
+
+        fb.innerHTML = "✗ <b>Xato.</b><br><b>To‘g‘ri javob:</b> " + correct + explanation;
+      }
+    }
+
+    const percent = Math.round((score / total) * 100);
+    document.getElementById("score").textContent = score + " / " + total;
+    const saved = await reportActivityProgress(percent >= 70, percent);
+
+    const result = document.getElementById("result");
+    result.style.display = "block";
+
+    const message = document.getElementById("resultMessage");
+    if(percent >= 70){
+      message.textContent = saved && saved.success
+        ? "🎉 Tabriklaymiz! Unit 2 amaliy mashqlaridan talab qilingan natijani oldingiz. Natijangiz saqlandi."
+        : "🎉 Tabriklaymiz! Talab qilingan natijani oldingiz. Natijani saqlashda muammo yuz berdi.";
+    }else{
+      message.textContent = saved && saved.success
+        ? "💪 Xatolarni ko‘rib chiqing va yana bir marta urinib ko‘ring. Natijangiz saqlandi."
+        : "💪 Xatolarni ko‘rib chiqing va yana bir marta urinib ko‘ring.";
+    }
+
+    updateProgress();
+    window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
+  }
+
+  function resetQuiz(){
+    document.querySelectorAll('#quiz input[type="radio"]').forEach(r => r.checked = false);
+    for(let j=0;j<total;j++){
+      answered[j] = false;
+      const fb = document.getElementById("f"+j);
+      fb.className = "feedback";
+      fb.innerHTML = "";
+    }
+    document.getElementById("result").style.display = "none";
+    updateProgress();
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  document.getElementById("check").addEventListener("click", checkAnswers);
+  document.getElementById("reset").addEventListener("click", resetQuiz);
+  document.querySelectorAll('#quiz input[type="radio"]').forEach(r => {
+    r.addEventListener("change", updateProgress);
+  });
+
+  document.getElementById("backBtn").addEventListener("click", function(){
+    window.location.assign("https://imbooz.github.io/salimteaches-beginner/index.html?unit=2");
+  });
+
+  updateProgress();
+})();
+</script>
+
+<script>
+function getTelegramInitData(){
+  try{
+    const saved = sessionStorage.getItem("salimteaches_initData");
+    if(saved) return saved;
+  }catch(e){}
+
+  try{
+    if(window.Telegram && window.Telegram.WebApp){
+      const tg = window.Telegram.WebApp;
+      if(tg.initData){
+        try{ sessionStorage.setItem("salimteaches_initData", tg.initData); }catch(e){}
+        return tg.initData;
+      }
+    }
+  }catch(e){}
+
+  return "";
+}
+
+async function reportActivityProgress(completed, score){
+  const activityId =
+    Number(new URLSearchParams(window.location.search).get("activity_id")) || 0;
+  const initData = getTelegramInitData();
+
+  if(!activityId){
+    return {success:false,error:"Unit 2 practice activity_id mavjud emas."};
+  }
+  if(!initData){
+    return {success:false,error:"Telegram initData mavjud emas."};
+  }
+
+  try{
+    const response = await fetch(
+      "https://salimteaches-beginner-auth.imshosalim.workers.dev/progress",
+      {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          initData,
+          activity_id:activityId,
+          completed:Boolean(completed),
+          score:score == null ? null : Number(score)
+        })
+      }
+    );
+
+    const data = await response.json();
+    if(!response.ok || data.success !== true){
+      return {
+        success:false,
+        error:data.error || data.reason || ("HTTP " + response.status)
+      };
+    }
+    return data;
+  }catch(error){
+    console.error("Progress save failed:",error);
+    return {success:false,error:error.message || "Network error"};
+  }
+}
+</script>
+</body>
+</html>
