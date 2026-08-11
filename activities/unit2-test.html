@@ -254,7 +254,6 @@ input{width:100%;border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;
 </div>
 <div class="actions"><div class="actions-inner">
 <button id="check" type="button" class="btn primary">✓ Javoblarimni tekshirish</button>
-<button type="button" class="btn secondary unit-back-button" id="backTest">← Unit 2 ga qaytish</button>
 <button id="retry" type="button" class="btn secondary reset-hidden">↻ Qayta ishlash</button>
 </div></div>
 
@@ -401,7 +400,6 @@ async function reportActivityProgress(completed,score){
 setupChoiceHandlers();setupCategory();setupPhraseDrag();setupOrder('orderE');
 document.getElementById('check').addEventListener('click',checkTest);
 document.getElementById('retry').addEventListener('click',retryTest);
-document.getElementById('backTest').addEventListener('click',()=>window.location.assign('https://imbooz.github.io/salimteaches-beginner/index.html?unit=2'));
 updateProgress();
 </script>
 </body></html>

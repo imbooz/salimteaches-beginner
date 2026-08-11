@@ -962,7 +962,7 @@
     }
 
     .activity-card.optional .activity-status {
-      color: #9b7a18;
+      color: var(--primary);
     }
 
     .activity-card.locked .activity-status {

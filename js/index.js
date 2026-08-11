@@ -894,7 +894,7 @@
 
       items.push({
         icon: "🎥",
-        title: "1-dars",
+        title: "1-Dars",
         subtitle: "Greetings & Introductions darsini ko‘ring.",
         status: lessonDone ? "✓ Tugallangan" : "Boshlash →",
         done: lessonDone,
@@ -907,10 +907,7 @@
               null
             );
           }
-          window.open(
-            "https://www.youtube.com/watch?v=Kd7X6tKh6YA",
-            "_blank"
-          );
+          openVideo("Kd7X6tKh6YA");
         }
       });
 
@@ -1108,7 +1105,7 @@
 
       items.push({
         icon: "🎥",
-        title: "1-dars",
+        title: "2-Dars",
         subtitle: "Unit 2 darsini ko‘ring.",
         status: lesson
           ? (lessonDone ? "✓ Tugallangan" : "Boshlash →")
@@ -1123,10 +1120,7 @@
               null
             );
           }
-          window.open(
-            "https://youtu.be/WPGTM1Mb0JY?si=sdT7HTujwOu0LlAW",
-            "_blank"
-          );
+          openVideo("WPGTM1Mb0JY");
         }
       });
 
