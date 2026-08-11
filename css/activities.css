@@ -1,0 +1,43 @@
+/*
+ * SalimTeaches Beginner — shared activity components
+ * Unit 3+ only.
+ */
+
+/* Shared answer/check area */
+.activity-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.activity-result {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-weight: 750;
+}
+
+.activity-result.correct {
+  background: #eaf8f1;
+  color: #1f9d67;
+}
+
+.activity-result.incorrect {
+  background: #fff0ef;
+  color: #d9534f;
+}
+
+/* Generic reorder/drop target */
+.st-drop-target {
+  min-height: 48px;
+  border: 2px dashed #d8dbe5;
+  border-radius: 12px;
+  padding: 10px;
+  touch-action: manipulation;
+}
+
+.st-drop-target.is-active {
+  border-color: var(--primary);
+  background: #f5f3ff;
+}
