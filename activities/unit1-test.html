@@ -46,6 +46,35 @@ input{width:100%;border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;
   font-weight:700;
 }
 
+
+/* Shared bottom action bar — standard for Unit 3+ */
+.actions {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  background: #fff;
+  border-top: 1px solid var(--border, #e2e5ee);
+  padding: 12px 14px 16px;
+}
+
+.actions-inner {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 4px;
+}
+
+.actions button,
+.actions .check,
+.actions #check {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+body { padding-bottom: 110px; }
 </style><script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>

@@ -27,7 +27,35 @@ input[type=text]{width:100%;padding:14px;border:1px solid #d8deea;border-radius:
 .activity-label{font-size:13px;font-weight:800;color:#626b7e}
 .save-status{margin-top:10px;font-size:13px;font-weight:700}
 .save-status.ok{color:#149b66}.save-status.err{color:#d84a4a}
-.actions #check{flex:1;width:100%;}
+
+/* Shared bottom action bar — standard for Unit 3+ */
+.actions {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  background: #fff;
+  border-top: 1px solid var(--border, #e2e5ee);
+  padding: 12px 14px 16px;
+}
+
+.actions-inner {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 4px;
+}
+
+.actions button,
+.actions .check,
+.actions #check {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+body { padding-bottom: 110px; }
 </style><script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style id="practice-navigation-fix">
 .actions{
