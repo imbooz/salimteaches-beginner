@@ -102,7 +102,103 @@ input{width:100%;border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;
   box-sizing: border-box;
 }
 
-body { padding-bottom: 110px; }
+
+/* APPROVED STANDARD BOTTOM ACTION BAR — final override */
+body {
+  padding-bottom: 110px !important;
+}
+
+.actions {
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 1000 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  background: #fff !important;
+  border-top: 1px solid var(--border, #e2e5ee) !important;
+  padding: 12px 14px 16px !important;
+  margin: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.actions-inner {
+  width: 100% !important;
+  max-width: 760px !important;
+  margin: 0 auto !important;
+  padding: 0 4px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  gap: 9px !important;
+}
+
+.actions > button {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.actions button {
+  box-sizing: border-box !important;
+}
+
+.actions-inner .check,
+.actions-inner #check,
+.actions > #check {
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+
+
+
+/* APPROVED BOTTOM ACTION BAR — based on Unit 2 Test reference */
+.actions{
+  position:sticky;
+  bottom:10px;
+  z-index:1000;
+  background:rgba(245,247,251,.96);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  padding:10px 0;
+  display:flex;
+  gap:10px;
+}
+.actions-inner{
+  max-width:760px;
+  width:100%;
+  margin:auto;
+  display:flex;
+  gap:10px;
+}
+.actions .btn,
+.actions .action,
+.actions .check{
+  flex:1;
+  min-width:0;
+  box-sizing:border-box;
+  border:0;
+  border-radius:13px;
+  padding:15px 18px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+.actions .primary,
+.actions .check{
+  background:#5b5ce2;
+  color:#fff;
+}
+.actions .secondary{
+  background:#e9ebf4;
+  color:#252b40;
+}
+.actions .reset-hidden,
+
+
 </style></head><body>
 <div class="activity-nav"><button class="activity-back" type="button" onclick="backToUnit2()">← Unit 2</button><div class="activity-label">SalimTeaches • Unit 2</div></div>
 <div class="app">
@@ -283,7 +379,6 @@ body { padding-bottom: 110px; }
 </div>
 <div class="actions"><div class="actions-inner">
 <button id="check" type="button" class="btn primary">✓ Javoblarimni tekshirish</button>
-<button id="retry" type="button" class="btn secondary reset-hidden">↻ Qayta ishlash</button>
 </div></div>
 
 <script>
@@ -412,13 +507,11 @@ async function checkTest(){
  const result=document.getElementById('result');result.style.display='block';result.className='result '+(percent>=70?'pass':'fail');
  document.getElementById('resultTitle').textContent=percent>=70?'🎉 Tabriklaymiz!':'💪 Yana bir marta urinib ko‘ring';
  document.getElementById('resultText').textContent=percent>=70?'Siz Unit 2 testidan kamida 70% oldingiz. Unitni tugatish uchun talab bajarildi.':'Unit 2 ni tugatish uchun kamida 70% kerak. Xatolarni ko‘rib chiqing va testni qayta ishlang.';
- document.getElementById('check').style.display='none';document.getElementById('retry').style.display='block';
  const saved=await reportActivityProgress(percent>=70,percent);
  document.getElementById('saveStatus').textContent=saved&&saved.success===true?'✓ Natijangiz saqlandi':'⚠ Natijani saqlashda muammo: '+((saved&&saved.error)||'noma’lum xatolik');
  document.getElementById('saveStatus').style.color=saved&&saved.success===true?'var(--good)':'var(--bad)';
  result.scrollIntoView({behavior:'smooth',block:'center'});
 }
-function retryTest(){ location.reload(); }
 function getTelegramInitData(){try{const s=sessionStorage.getItem('salimteaches_initData');if(s)return s}catch(e){}try{if(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.initData)return Telegram.WebApp.initData}catch(e){}return ''}
 function backToUnit2(){window.location.assign('https://imbooz.github.io/salimteaches-beginner/index.html?unit=2')}
 async function reportActivityProgress(completed,score){
@@ -427,8 +520,6 @@ async function reportActivityProgress(completed,score){
  try{const r=await fetch('https://salimteaches-beginner-auth.imshosalim.workers.dev/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({initData,activity_id:activityId,completed:Boolean(completed),score:Number(score)})});const d=await r.json();if(!r.ok||d.success!==true)return {success:false,error:d.error||d.reason||('HTTP '+r.status)};return d}catch(e){return {success:false,error:e.message||'Network error'}}
 }
 setupChoiceHandlers();setupCategory();setupPhraseDrag();setupOrder('orderE');
-document.getElementById('check').addEventListener('click',checkTest);
-document.getElementById('retry').addEventListener('click',retryTest);
-updateProgress();
+document.getElementById('check').addEventListener('click',checkTest);updateProgress();
 </script>
 </body></html>

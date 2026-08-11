@@ -76,28 +76,37 @@
   touch-action: manipulation;
 }
 
-
-/* Standard bottom action bar for Unit 3+ */
+/* Standard bottom action bar for Unit 3+ — approved Unit 2 Test reference */
 .st-action-bar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 20;
-  background: #fff;
-  border-top: 1px solid var(--border);
-  padding: 12px 14px 16px;
+  position: sticky;
+  bottom: 10px;
+  z-index: 1000;
+  background: rgba(245,247,251,.96);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 10px 0;
+  display: flex;
+  gap: 10px;
 }
-
 .st-action-bar__inner {
-  width: 100%;
   max-width: 760px;
-  margin: 0 auto;
-  padding: 0 4px;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  gap: 10px;
+}
+.st-action-bar .st-btn {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 13px;
+  padding: 15px 18px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  background: #5b5ce2;
+  color: #fff;
 }
 
-.st-action-bar .st-btn {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-}

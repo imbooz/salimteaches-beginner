@@ -110,8 +110,52 @@ button.action{
   border:0;border-radius:13px;padding:13px 16px;font-size:15px;font-weight:800;cursor:pointer
 }
 .check{flex:1;background:var(--primary);color:#fff}
-.retry{background:#eef0ff;color:var(--primary);display:none}
 
+
+.actions{
+  position:sticky;
+  bottom:10px;
+  z-index:1000;
+  background:rgba(245,247,251,.96);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  padding:10px 0;
+  display:flex;
+  gap:10px;
+}
+.actions-inner{
+  max-width:760px;
+  width:100%;
+  margin:auto;
+  display:flex;
+  gap:10px;
+}
+.actions .btn{
+  flex:1;
+  min-width:0;
+  border:0;
+  border-radius:13px;
+  padding:15px 18px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+.actions .primary{
+  background:#5b5ce2;
+  color:#fff;
+}
+.actions .secondary{
+  background:#e9ebf4;
+  color:#252b40;
+}
+.actions .unit-back-button{
+  background:#e9ebf4;
+  color:#252b40;
+}
+.actions .reset-hidden{
+  display:none !important;
+}
 .result{
   display:none;margin:14px;padding:21px;border-radius:20px;
   background:#fff;border:1px solid var(--border);text-align:center
@@ -173,40 +217,108 @@ button.action{
 .reading-card .feedback.bad{display:block;background:var(--badbg);color:var(--bad)}
 .actions-inner{flex-wrap:wrap}
 .back-action{background:#eef0ff;color:var(--primary)}
-.retry{display:none}
+
 .result .save-status{margin-top:12px;font-size:12px;font-weight:800}
 .result .save-status.ok{color:var(--good)}
 .result .save-status.err{color:var(--bad)}
 @media(max-width:480px){.actions-inner{gap:8px}.actions .action{font-size:13px;padding:12px 10px}}
 
-/* Shared bottom action bar — standard for Unit 3+ */
+/* APPROVED STANDARD BOTTOM ACTION BAR — final override */
+body {
+  padding-bottom: 110px !important;
+}
+
 .actions {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 20;
-  background: #fff;
-  border-top: 1px solid var(--border, #e2e5ee);
-  padding: 12px 14px 16px;
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 1000 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  background: #fff !important;
+  border-top: 1px solid var(--border, #e2e5ee) !important;
+  padding: 12px 14px 16px !important;
+  margin: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 .actions-inner {
-  width: 100%;
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 0 4px;
+  width: 100% !important;
+  max-width: 760px !important;
+  margin: 0 auto !important;
+  padding: 0 4px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  gap: 9px !important;
 }
 
-.actions button,
-.actions .check,
-.actions #check {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
+.actions > button {
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
 
-body { padding-bottom: 110px; }
+.actions button {
+  box-sizing: border-box !important;
+}
+
+.actions-inner .check,
+.actions-inner #check,
+.actions > #check {
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+
+
+
+/* APPROVED BOTTOM ACTION BAR — based on Unit 2 Test reference */
+.actions{
+  position:sticky;
+  bottom:10px;
+  z-index:1000;
+  background:rgba(245,247,251,.96);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  padding:10px 0;
+  display:flex;
+  gap:10px;
+}
+.actions-inner{
+  max-width:760px;
+  width:100%;
+  margin:auto;
+  display:flex;
+  gap:10px;
+}
+.actions .btn,
+.actions .action,
+.actions .check{
+  flex:1;
+  min-width:0;
+  box-sizing:border-box;
+  border:0;
+  border-radius:13px;
+  padding:15px 18px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+.actions .primary,
+.actions .check{
+  background:#5b5ce2;
+  color:#fff;
+}
+.actions .secondary{
+  background:#e9ebf4;
+  color:#252b40;
+}
+.actions .reset-hidden,
+
+
 </style>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
@@ -352,7 +464,6 @@ body { padding-bottom: 110px; }
 <div class="actions">
   <div class="actions-inner">
     <button id="check" type="button" class="action check">✓ Javoblarimni tekshirish</button>
-    <button id="retry" type="button" class="action retry">↻ Qayta ishlash</button>
   </div>
 </div>
 </div>
@@ -451,9 +562,6 @@ async function checkReading(){
     saveStatus.className="save-status err";
     saveStatus.textContent="⚠ Natijangizni saqlashda muammo: "+((saved&&saved.error)||"noma’lum xatolik");
   }
-
-  document.getElementById("check").style.display="none";
-  document.getElementById("retry").style.display="block";
   updateProgress();
   result.scrollIntoView({behavior:"smooth",block:"center"});
 }
@@ -464,7 +572,6 @@ function resetReading(){
   document.querySelectorAll(".feedback").forEach(x=>{x.className="feedback";x.innerHTML=""});
   document.getElementById("result").style.display="none";
   document.getElementById("check").style.display="block";
-  document.getElementById("retry").style.display="none";
   updateProgress();
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -510,9 +617,7 @@ document.querySelectorAll("input").forEach(x=>{
   x.addEventListener("input",updateProgress);
   x.addEventListener("change",updateProgress);
 });
-document.getElementById("check").addEventListener("click",checkReading);
-document.getElementById("retry").addEventListener("click",resetReading);
-updateProgress();
+document.getElementById("check").addEventListener("click",checkReading);updateProgress();
 </script>
 </body>
 </html>
