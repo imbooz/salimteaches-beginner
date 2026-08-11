@@ -199,7 +199,14 @@ body {
 .actions .reset-hidden,
 
 
-</style></head><body>
+</style>
+<style>
+.dialogue-text .number-slot + .number-slot {
+  margin-top: 8px;
+}
+</style>
+
+</head><body>
 <div class="activity-nav"><button class="activity-back" type="button" onclick="backToUnit2()">← Unit 2</button><div class="activity-label">SalimTeaches • Unit 2</div></div>
 <div class="app">
 <header class="header"><div class="brand">SALIMTEACHES • BEGINNER</div><h1>📝 Unit 2 Test</h1><p class="subtitle">Alphabet, hotel, café, numbers, plurals va <b>this / these</b>.</p></header>
@@ -278,9 +285,8 @@ body {
 <div class="dialogue-line"><div class="speaker">Man:</div><div class="dialogue-text">Felipe Perez</div></div>
 <div class="dialogue-line"><div class="speaker">Receptionist:</div><div class="dialogue-text"><div class="number-slot" data-answer="28">Phrase</div></div></div>
 <div class="dialogue-line"><div class="speaker">Man:</div><div class="dialogue-text">P-E-R-E-Z</div></div>
-<div class="dialogue-line"><div class="speaker">Receptionist:</div><div class="dialogue-text">Thank you. <div class="number-slot" data-answer="29">Phrase</div></div></div>
-<div class="dialogue-line"><div class="speaker">Man:</div><div class="dialogue-text"><div class="number-slot" data-answer="30">Phrase</div></div></div>
-<div class="dialogue-line"><div class="speaker">Receptionist:</div><div class="dialogue-text">Keys.</div></div>
+<div class="dialogue-line"><div class="speaker">Receptionist:</div><div class="dialogue-text"><div class="number-slot" data-answer="29">Phrase</div><div class="number-slot" data-answer="30">Phrase</div></div></div>
+<div class="dialogue-line"><div class="speaker">Man:</div><div class="dialogue-text">Thank you.</div></div>
 
 <div class="section-feedback" id="sec-D"></div></section>
 
