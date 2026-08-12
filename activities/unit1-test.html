@@ -460,6 +460,7 @@ function norm(v){
     .trim()
     .toLowerCase()
     .replace(/[’‘]/g, "'")
+    .replace(/[.,!?;:]/g, '')
     .replace(/\s+/g, ' ');
 }
 function updateProgress(){
