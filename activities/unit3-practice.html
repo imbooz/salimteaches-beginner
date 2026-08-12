@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>SalimTeaches — Unit 3 Practice</title>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <!-- Unit 3+ shared architecture -->
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/activities.css">
+
+  <script src="../js/common.js"></script>
+  <script src="../js/progress.js"></script>
+  <script src="../js/interactions.js"></script>
+</head>
+
+<body>
+  <main class="app st-activity-page">
+
+    <div class="unit-page-header">
+      <button class="back-button" type="button" onclick="goBack()" aria-label="Orqaga">←</button>
+      <div>
+        <div class="unit-page-kicker">Unit 3 • Practice</div>
+        <h2>Jobs, Nationality &amp; To Be</h2>
+      </div>
+    </div>
+
+    <div class="unit-progress-card">
+      <div class="progress-row">
+        <span class="progress-label">Mashq jarayoni</span>
+        <span class="progress-percent" id="progressText">0 / 30</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="activity-list" id="quiz">
+
+      <section class="activity-card" data-answer="teacher" data-type="mc">
+        <div class="activity-icon">💼</div>
+        <div class="activity-main">
+          <div class="activity-title">1. “O‘qituvchi” qaysi so‘z?</div>
+          <div class="activity-subtitle">Kasb nomini tanlang.</div>
+          <fieldset>
+            <label><input type="radio" name="q1" value="teacher"> teacher</label><br>
+            <label><input type="radio" name="q1" value="doctor"> doctor</label><br>
+            <label><input type="radio" name="q1" value="driver"> driver</label>
+          </fieldset>
+          <div class="activity-result" id="f1" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="doctor" data-type="mc">
+        <div class="activity-icon">💼</div>
+        <div class="activity-main">
+          <div class="activity-title">2. “Shifokor” qaysi so‘z?</div>
+          <fieldset>
+            <label><input type="radio" name="q2" value="student"> student</label><br>
+            <label><input type="radio" name="q2" value="doctor"> doctor</label><br>
+            <label><input type="radio" name="q2" value="engineer"> engineer</label>
+          </fieldset>
+          <div class="activity-result" id="f2" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="engineer" data-type="mc">
+        <div class="activity-icon">💼</div>
+        <div class="activity-main">
+          <div class="activity-title">3. “Muhandis” qaysi so‘z?</div>
+          <fieldset>
+            <label><input type="radio" name="q3" value="engineer"> engineer</label><br>
+            <label><input type="radio" name="q3" value="waiter"> waiter</label><br>
+            <label><input type="radio" name="q3" value="teacher"> teacher</label>
+          </fieldset>
+          <div class="activity-result" id="f3" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="student" data-type="mc">
+        <div class="activity-icon">💼</div>
+        <div class="activity-main">
+          <div class="activity-title">4. “Talaba / o‘quvchi” qaysi so‘z?</div>
+          <fieldset>
+            <label><input type="radio" name="q4" value="student"> student</label><br>
+            <label><input type="radio" name="q4" value="nurse"> nurse</label><br>
+            <label><input type="radio" name="q4" value="driver"> driver</label>
+          </fieldset>
+          <div class="activity-result" id="f4" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="driver" data-type="mc">
+        <div class="activity-icon">💼</div>
+        <div class="activity-main">
+          <div class="activity-title">5. “Haydovchi” qaysi so‘z?</div>
+          <fieldset>
+            <label><input type="radio" name="q5" value="driver"> driver</label><br>
+            <label><input type="radio" name="q5" value="doctor"> doctor</label><br>
+            <label><input type="radio" name="q5" value="chef"> chef</label>
+          </fieldset>
+          <div class="activity-result" id="f5" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="red" data-type="mc">
+        <div class="activity-icon">🎨</div>
+        <div class="activity-main">
+          <div class="activity-title">6. “Qizil” qaysi rang?</div>
+          <fieldset>
+            <label><input type="radio" name="q6" value="red"> red</label><br>
+            <label><input type="radio" name="q6" value="green"> green</label><br>
+            <label><input type="radio" name="q6" value="blue"> blue</label>
+          </fieldset>
+          <div class="activity-result" id="f6" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="blue" data-type="mc">
+        <div class="activity-icon">🎨</div>
+        <div class="activity-main">
+          <div class="activity-title">7. “Ko‘k” qaysi rang?</div>
+          <fieldset>
+            <label><input type="radio" name="q7" value="black"> black</label><br>
+            <label><input type="radio" name="q7" value="blue"> blue</label><br>
+            <label><input type="radio" name="q7" value="yellow"> yellow</label>
+          </fieldset>
+          <div class="activity-result" id="f7" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="green" data-type="mc">
+        <div class="activity-icon">🎨</div>
+        <div class="activity-main">
+          <div class="activity-title">8. “Yashil” qaysi rang?</div>
+          <fieldset>
+            <label><input type="radio" name="q8" value="white"> white</label><br>
+            <label><input type="radio" name="q8" value="green"> green</label><br>
+            <label><input type="radio" name="q8" value="red"> red</label>
+          </fieldset>
+          <div class="activity-result" id="f8" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="yellow" data-type="mc">
+        <div class="activity-icon">🎨</div>
+        <div class="activity-main">
+          <div class="activity-title">9. “Sariq” qaysi rang?</div>
+          <fieldset>
+            <label><input type="radio" name="q9" value="yellow"> yellow</label><br>
+            <label><input type="radio" name="q9" value="brown"> brown</label><br>
+            <label><input type="radio" name="q9" value="blue"> blue</label>
+          </fieldset>
+          <div class="activity-result" id="f9" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="black" data-type="mc">
+        <div class="activity-icon">🎨</div>
+        <div class="activity-main">
+          <div class="activity-title">10. “Qora” qaysi rang?</div>
+          <fieldset>
+            <label><input type="radio" name="q10" value="black"> black</label><br>
+            <label><input type="radio" name="q10" value="white"> white</label><br>
+            <label><input type="radio" name="q10" value="green"> green</label>
+          </fieldset>
+          <div class="activity-result" id="f10" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="Uzbek" data-type="mc">
+        <div class="activity-icon">🌍</div>
+        <div class="activity-main">
+          <div class="activity-title">11. O‘zbekistonlik odamning nationalitysi qanday?</div>
+          <fieldset>
+            <label><input type="radio" name="q11" value="Uzbek"> Uzbek</label><br>
+            <label><input type="radio" name="q11" value="English"> English</label><br>
+            <label><input type="radio" name="q11" value="Turkish"> Turkish</label>
+          </fieldset>
+          <div class="activity-result" id="f11" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="British" data-type="mc">
+        <div class="activity-icon">🌍</div>
+        <div class="activity-main">
+          <div class="activity-title">12. Buyuk Britaniyadan bo‘lgan odamning nationalitysi?</div>
+          <fieldset>
+            <label><input type="radio" name="q12" value="British"> British</label><br>
+            <label><input type="radio" name="q12" value="Spanish"> Spanish</label><br>
+            <label><input type="radio" name="q12" value="Italian"> Italian</label>
+          </fieldset>
+          <div class="activity-result" id="f12" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="Turkish" data-type="mc">
+        <div class="activity-icon">🌍</div>
+        <div class="activity-main">
+          <div class="activity-title">13. Turkiyadan bo‘lgan odamning nationalitysi?</div>
+          <fieldset>
+            <label><input type="radio" name="q13" value="French"> French</label><br>
+            <label><input type="radio" name="q13" value="Turkish"> Turkish</label><br>
+            <label><input type="radio" name="q13" value="Uzbek"> Uzbek</label>
+          </fieldset>
+          <div class="activity-result" id="f13" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="What do you do?" data-type="mc">
+        <div class="activity-icon">🗣️</div>
+        <div class="activity-main">
+          <div class="activity-title">14. Odamning kasbini so‘rash uchun qaysi savol to‘g‘ri?</div>
+          <fieldset>
+            <label><input type="radio" name="q14" value="What do you do?"> What do you do?</label><br>
+            <label><input type="radio" name="q14" value="Where do you do?"> Where do you do?</label><br>
+            <label><input type="radio" name="q14" value="Who do you?"> Who do you?</label>
+          </fieldset>
+          <div class="activity-result" id="f14" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="I'm a teacher." data-type="mc">
+        <div class="activity-icon">🗣️</div>
+        <div class="activity-main">
+          <div class="activity-title">15. “What do you do?” savoliga mos javobni tanlang.</div>
+          <fieldset>
+            <label><input type="radio" name="q15" value="I'm a teacher."> I'm a teacher.</label><br>
+            <label><input type="radio" name="q15" value="I'm Uzbekistan."> I'm Uzbekistan.</label><br>
+            <label><input type="radio" name="q15" value="I teacher."> I teacher.</label>
+          </fieldset>
+          <div class="activity-result" id="f15" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="Where are you from?" data-type="mc">
+        <div class="activity-icon">🗣️</div>
+        <div class="activity-main">
+          <div class="activity-title">16. Odamning qayerdan ekanini so‘rash uchun qaysi savol?</div>
+          <fieldset>
+            <label><input type="radio" name="q16" value="What are you?"> What are you?</label><br>
+            <label><input type="radio" name="q16" value="Where are you from?"> Where are you from?</label><br>
+            <label><input type="radio" name="q16" value="How are you from?"> How are you from?</label>
+          </fieldset>
+          <div class="activity-result" id="f16" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="I'm Uzbek." data-type="mc">
+        <div class="activity-icon">🗣️</div>
+        <div class="activity-main">
+          <div class="activity-title">17. “Where are you from?” savoliga mos javobni tanlang.</div>
+          <fieldset>
+            <label><input type="radio" name="q17" value="I'm Uzbek."> I'm Uzbek.</label><br>
+            <label><input type="radio" name="q17" value="I'm a Uzbek."> I'm a Uzbek.</label><br>
+            <label><input type="radio" name="q17" value="I Uzbek."> I Uzbek.</label>
+          </fieldset>
+          <div class="activity-result" id="f17" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="See you!" data-type="mc">
+        <div class="activity-icon">👋</div>
+        <div class="activity-main">
+          <div class="activity-title">18. “Ko‘rishguncha!” uchun tabiiy iborani tanlang.</div>
+          <fieldset>
+            <label><input type="radio" name="q18" value="See you!"> See you!</label><br>
+            <label><input type="radio" name="q18" value="Thank you!"> Thank you!</label><br>
+            <label><input type="radio" name="q18" value="Excuse me!"> Excuse me!</label>
+          </fieldset>
+          <div class="activity-result" id="f18" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="Please repeat." data-type="mc">
+        <div class="activity-icon">🏫</div>
+        <div class="activity-main">
+          <div class="activity-title">19. O‘qituvchidan gapni takrorlashni so‘rash uchun qaysi ibora?</div>
+          <fieldset>
+            <label><input type="radio" name="q19" value="Please repeat."> Please repeat.</label><br>
+            <label><input type="radio" name="q19" value="Please sit."> Please sit.</label><br>
+            <label><input type="radio" name="q19" value="Please open."> Please open.</label>
+          </fieldset>
+          <div class="activity-result" id="f19" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="I don't understand." data-type="mc">
+        <div class="activity-icon">🏫</div>
+        <div class="activity-main">
+          <div class="activity-title">20. “Men tushunmayapman”ning to‘g‘ri varianti?</div>
+          <fieldset>
+            <label><input type="radio" name="q20" value="I don't understand."> I don't understand.</label><br>
+            <label><input type="radio" name="q20" value="I don't repeat."> I don't repeat.</label><br>
+            <label><input type="radio" name="q20" value="I am not understand."> I am not understand.</label>
+          </fieldset>
+          <div class="activity-result" id="f20" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="am" data-type="mc">
+        <div class="activity-icon">🔤</div>
+        <div class="activity-main">
+          <div class="activity-title">21. I ___ a student.</div>
+          <fieldset>
+            <label><input type="radio" name="q21" value="am"> am</label><br>
+            <label><input type="radio" name="q21" value="is"> is</label><br>
+            <label><input type="radio" name="q21" value="are"> are</label>
+          </fieldset>
+          <div class="activity-result" id="f21" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="is" data-type="mc">
+        <div class="activity-icon">🔤</div>
+        <div class="activity-main">
+          <div class="activity-title">22. She ___ a doctor.</div>
+          <fieldset>
+            <label><input type="radio" name="q22" value="am"> am</label><br>
+            <label><input type="radio" name="q22" value="is"> is</label><br>
+            <label><input type="radio" name="q22" value="are"> are</label>
+          </fieldset>
+          <div class="activity-result" id="f22" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="are" data-type="mc">
+        <div class="activity-icon">🔤</div>
+        <div class="activity-main">
+          <div class="activity-title">23. They ___ students.</div>
+          <fieldset>
+            <label><input type="radio" name="q23" value="am"> am</label><br>
+            <label><input type="radio" name="q23" value="is"> is</label><br>
+            <label><input type="radio" name="q23" value="are"> are</label>
+          </fieldset>
+          <div class="activity-result" id="f23" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="We are Uzbek." data-type="mc">
+        <div class="activity-icon">🔤</div>
+        <div class="activity-main">
+          <div class="activity-title">24. Qaysi gap grammatik jihatdan to‘g‘ri?</div>
+          <fieldset>
+            <label><input type="radio" name="q24" value="We are Uzbek."> We are Uzbek.</label><br>
+            <label><input type="radio" name="q24" value="We is Uzbek."> We is Uzbek.</label><br>
+            <label><input type="radio" name="q24" value="We am Uzbek."> We am Uzbek.</label>
+          </fieldset>
+          <div class="activity-result" id="f24" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="He isn't a teacher." data-type="mc">
+        <div class="activity-icon">🚫</div>
+        <div class="activity-main">
+          <div class="activity-title">25. “U o‘qituvchi emas”ni to‘g‘ri tuzing.</div>
+          <fieldset>
+            <label><input type="radio" name="q25" value="He isn't a teacher."> He isn't a teacher.</label><br>
+            <label><input type="radio" name="q25" value="He not is a teacher."> He not is a teacher.</label><br>
+            <label><input type="radio" name="q25" value="He aren't a teacher."> He aren't a teacher.</label>
+          </fieldset>
+          <div class="activity-result" id="f25" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="They aren't doctors." data-type="mc">
+        <div class="activity-icon">🚫</div>
+        <div class="activity-main">
+          <div class="activity-title">26. “Ular shifokorlar emas”ni to‘g‘ri tuzing.</div>
+          <fieldset>
+            <label><input type="radio" name="q26" value="They isn't doctors."> They isn't doctors.</label><br>
+            <label><input type="radio" name="q26" value="They aren't doctors."> They aren't doctors.</label><br>
+            <label><input type="radio" name="q26" value="They not are doctors."> They not are doctors.</label>
+          </fieldset>
+          <div class="activity-result" id="f26" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="Are you a student?" data-type="mc">
+        <div class="activity-icon">❓</div>
+        <div class="activity-main">
+          <div class="activity-title">27. “Siz talabamisiz?” savolini tanlang.</div>
+          <fieldset>
+            <label><input type="radio" name="q27" value="You are a student?"> You are a student?</label><br>
+            <label><input type="radio" name="q27" value="Are you a student?"> Are you a student?</label><br>
+            <label><input type="radio" name="q27" value="Is you a student?"> Is you a student?</label>
+          </fieldset>
+          <div class="activity-result" id="f27" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="Is he a doctor?" data-type="mc">
+        <div class="activity-icon">❓</div>
+        <div class="activity-main">
+          <div class="activity-title">28. “U shifokormi?” savolini tanlang.</div>
+          <fieldset>
+            <label><input type="radio" name="q28" value="Is he a doctor?"> Is he a doctor?</label><br>
+            <label><input type="radio" name="q28" value="He is a doctor?"> He is a doctor?</label><br>
+            <label><input type="radio" name="q28" value="Are he a doctor?"> Are he a doctor?</label>
+          </fieldset>
+          <div class="activity-result" id="f28" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="Are they British?" data-type="mc">
+        <div class="activity-icon">❓</div>
+        <div class="activity-main">
+          <div class="activity-title">29. “Ular britaniyalikmi?” savolini tanlang.</div>
+          <fieldset>
+            <label><input type="radio" name="q29" value="Is they British?"> Is they British?</label><br>
+            <label><input type="radio" name="q29" value="Are they British?"> Are they British?</label><br>
+            <label><input type="radio" name="q29" value="They are British?"> They are British?</label>
+          </fieldset>
+          <div class="activity-result" id="f29" hidden></div>
+        </div>
+      </section>
+
+      <section class="activity-card" data-answer="Are you a teacher?" data-type="mc">
+        <div class="activity-icon">🎯</div>
+        <div class="activity-main">
+          <div class="activity-title">30. Qaysi gap “Siz o‘qituvchimisiz?” degan ma’noni beradi?</div>
+          <fieldset>
+            <label><input type="radio" name="q30" value="You are a teacher."> You are a teacher.</label><br>
+            <label><input type="radio" name="q30" value="Are you a teacher?"> Are you a teacher?</label><br>
+            <label><input type="radio" name="q30" value="You aren't a teacher."> You aren't a teacher.</label>
+          </fieldset>
+          <div class="activity-result" id="f30" hidden></div>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="activity-result" id="finalResult" hidden></div>
+
+    <div class="activity-actions">
+      <button id="checkButton" type="button" class="st-btn st-btn-primary">
+        ✓ Javoblarimni tekshirish
+      </button>
+      <button id="resetButton" type="button" class="st-btn st-btn-secondary">
+        Qayta ishlash
+      </button>
+    </div>
+
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const TOTAL = 30;
+      const PASS_PERCENT = 70;
+
+      const params = new URLSearchParams(window.location.search);
+      const activityId = Number(params.get("activity_id")) || 0;
+
+      const quiz = document.getElementById("quiz");
+      const progressText = document.getElementById("progressText");
+      const progressFill = document.getElementById("progressFill");
+      const finalResult = document.getElementById("finalResult");
+      const checkButton = document.getElementById("checkButton");
+      const resetButton = document.getElementById("resetButton");
+
+      function normalize(value) {
+        return window.SalimTeaches.normalizeAnswer(value)
+          .replace(/[.,!?“”"’‘']/g, "");
+      }
+
+      function getCards() {
+        return Array.from(quiz.querySelectorAll(".activity-card"));
+      }
+
+      function updateProgress() {
+        const answered = getCards().filter(card => {
+          const checked = card.querySelector("input[type='radio']:checked");
+          return Boolean(checked);
+        }).length;
+
+        progressText.textContent = answered + " / " + TOTAL;
+        progressFill.style.width = ((answered / TOTAL) * 100) + "%";
+      }
+
+      function showQuestionFeedback(card, correct, answer) {
+        const feedback = card.querySelector(".activity-result");
+        if (!feedback) return;
+
+        feedback.hidden = false;
+
+        if (correct) {
+          feedback.className = "activity-result correct";
+          feedback.innerHTML = "✓ <b>To‘g‘ri!</b>";
+        } else {
+          feedback.className = "activity-result incorrect";
+          feedback.innerHTML =
+            "✗ <b>Xato.</b><br>" +
+            "<b>To‘g‘ri javob:</b> " +
+            answer;
+        }
+      }
+
+      async function checkAnswers() {
+        let score = 0;
+
+        getCards().forEach(card => {
+          const selected = card.querySelector("input[type='radio']:checked");
+          const answer = card.dataset.answer;
+          const value = selected ? selected.value : "";
+
+          const correct = normalize(value) === normalize(answer);
+
+          if (correct) score++;
+
+          showQuestionFeedback(card, correct, answer);
+        });
+
+        const percent = Math.round((score / TOTAL) * 100);
+        const passed = percent >= PASS_PERCENT;
+
+        finalResult.hidden = false;
+        finalResult.className =
+          "activity-result " + (passed ? "correct" : "incorrect");
+
+        finalResult.innerHTML =
+          "<b>Natijangiz: " + score + " / " + TOTAL + " (" + percent + "%)</b><br>" +
+          (passed
+            ? "🎉 Practice muvaffaqiyatli yakunlandi."
+            : "Avval xatolarni ko‘rib chiqing va qayta ishlab ko‘ring.") +
+          "<div id='saveStatus'></div>";
+
+        const saveStatus = document.getElementById("saveStatus");
+
+        if (!activityId) {
+          saveStatus.className = "st-feedback incorrect";
+          saveStatus.textContent =
+            "⚠ Activity ID topilmadi. Bu sahifa activity_id parametri bilan ochilishi kerak.";
+        } else {
+          try {
+            const saved = await window.SalimTeaches.reportActivityProgress(
+              activityId,
+              passed,
+              percent
+            );
+
+            if (saved && saved.success === true) {
+              saveStatus.className = "st-feedback correct";
+              saveStatus.textContent = "✓ Natijangiz saqlandi";
+            } else {
+              saveStatus.className = "st-feedback incorrect";
+              saveStatus.textContent =
+                "⚠ Natijani saqlashda muammo: " +
+                ((saved && (saved.error || saved.reason)) || "noma’lum xatolik");
+            }
+          } catch (error) {
+            console.error(error);
+            saveStatus.className = "st-feedback incorrect";
+            saveStatus.textContent =
+              "⚠ Natijani saqlashda muammo: " + error.message;
+          }
+        }
+
+        finalResult.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+
+      function resetQuiz() {
+        quiz.querySelectorAll("input[type='radio']").forEach(input => {
+          input.checked = false;
+        });
+
+        quiz.querySelectorAll(".activity-result").forEach(feedback => {
+          feedback.hidden = true;
+          feedback.className = "activity-result";
+          feedback.textContent = "";
+        });
+
+        finalResult.hidden = true;
+        finalResult.className = "activity-result";
+        finalResult.textContent = "";
+
+        updateProgress();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function goBack() {
+        if (window.history.length > 1) {
+          window.history.back();
+          return;
+        }
+
+        window.location.href = "../index.html?unit=3";
+      }
+
+      window.goBack = goBack;
+
+      quiz.addEventListener("change", updateProgress);
+      checkButton.addEventListener("click", checkAnswers);
+      resetButton.addEventListener("click", resetQuiz);
+
+      updateProgress();
+    })();
+  </script>
+</body>
+</html>
