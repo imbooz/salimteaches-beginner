@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SalimTeaches — Unit 4 Interactive Practice</title>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/activities.css">
+
+  <style>
+    /* Small Unit 1/2/3 consistency overrides — no change to shared CSS. */
+    .st-activity-nav__back {
+      background:#eef0ff;
+      color:#5865f2;
+      border-radius:13px;
+      padding:10px 15px;
+      font-size:15px;
+    }
+
+    .st-activity-header {
+      padding:24px 18px 14px;
+    }
+
+    .st-activity-header h1 {
+      font-size:27px;
+      line-height:1.2;
+      margin:7px 0 5px;
+    }
+
+    .st-activity-subtitle {
+      color:#647089;
+      font-size:14px;
+      line-height:1.45;
+      margin:0;
+    }
+
+    .st-choice-grid {
+      grid-template-columns:1fr;
+    }
+
+    .st-quiz-actions__inner {
+      justify-content:flex-end;
+    }
+
+    .st-quiz-actions__inner .st-btn-primary {
+      flex:1;
+    }
+
+    .st-quiz-actions__inner .st-btn-secondary {
+      display:none;
+    }
+
+    @media (max-width:560px) {
+      .st-choice-grid {
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<div class="st-quiz-page">
+
+  <nav class="st-activity-nav">
+    <button class="st-activity-nav__back" type="button" onclick="backToUnit4()">← Unit 4</button>
+    <div class="st-activity-nav__label">SalimTeaches • Unit 4</div>
+  </nav>
+
+  <header class="st-activity-header">
+    <div class="st-activity-brand">SALIMTEACHES • BEGINNER</div>
+    <h1>📝 4-unit — Interaktiv mashqlar</h1>
+    <p class="st-activity-subtitle">
+      Sonlar (21–100+), yosh so‘rash va aytish, oila a’zolari, egalik ’s, olmoshlar,
+      shaxsiy buyumlar va joy predloglari.
+    </p>
+  </header>
+
+  <div class="st-quiz-progress">
+    <div class="st-quiz-progress__row">
+      <span>Mashq jarayoni</span>
+      <span id="answered">0 / 30</span>
+    </div>
+    <div class="st-quiz-progress__bar">
+      <div class="st-quiz-progress__fill" id="topProgressFill"></div>
+    </div>
+  </div>
+
+  <div class="st-answer-note">
+    Javoblar tekshirilganda har bir savol bo‘yicha to‘g‘ri javob va qisqa izoh ko‘rsatiladi.
+  </div>
+
+  <form id="quiz">
+    <section class="st-question" id="q0">
+      <div class="st-question__top">
+        <div class="st-question__number">1</div>
+        <div class="st-question__body">
+          <div class="st-question__title">’75’ sonini ingliz tilida tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q0" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">seventy-five</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q0" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">fifty-seven</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q0" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">seventeen-five</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f0"></div>
+    </section>
+<section class="st-question" id="q1">
+      <div class="st-question__top">
+        <div class="st-question__number">2</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Write in words: 92</div>
+        </div>
+      </div>
+      <input class="st-text-input" type="text" name="q1" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing">
+      <div class="st-question-feedback" id="f1"></div>
+    </section>
+<section class="st-question" id="q2">
+      <div class="st-question__top">
+        <div class="st-question__number">3</div>
+        <div class="st-question__body">
+          <div class="st-question__title">’56’ sonini ingliz tilida tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q2" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">sixty-five</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q2" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">fifty-six</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q2" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">five-six</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f2"></div>
+    </section>
+<section class="st-question" id="q3">
+      <div class="st-question__top">
+        <div class="st-question__number">4</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Write in words: 110</div>
+        </div>
+      </div>
+      <input class="st-text-input" type="text" name="q3" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing">
+      <div class="st-question-feedback" id="f3"></div>
+    </section>
+<section class="st-question" id="q4">
+      <div class="st-question__top">
+        <div class="st-question__number">5</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Juda katta sonlarni yozganda ‘and’ so‘zi qayerda ishlatiladi? Masalan: 101</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q4" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">one and hundred one</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q4" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">hundred and one one</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q4" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">one hundred and one</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f4"></div>
+    </section>
+<section class="st-question" id="q5">
+      <div class="st-question__top">
+        <div class="st-question__number">6</div>
+        <div class="st-question__body">
+          <div class="st-question__title">‘How old are you?’ savoliga to‘g‘ri javobni tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q5" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">I’m twenty.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q5" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">I twenty.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q5" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">I’m twenty year.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f5"></div>
+    </section>
+<section class="st-question" id="q6">
+      <div class="st-question__top">
+        <div class="st-question__number">7</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Uch oylik chaqaloq haqida qanday aytamiz?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q6" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">He’s three month.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q6" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">He’s three months old.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q6" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">He’s three months.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f6"></div>
+    </section>
+<section class="st-question" id="q7">
+      <div class="st-question__top">
+        <div class="st-question__number">8</div>
+        <div class="st-question__body">
+          <div class="st-question__title">So‘zlarni to‘g‘ri tartibda joylashtiring: old / She’s / years / thirty</div>
+        </div>
+      </div>
+      <input class="st-text-input" type="text" name="q7" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing">
+      <div class="st-question-feedback" id="f7"></div>
+    </section>
+<section class="st-question" id="q8">
+      <div class="st-question__top">
+        <div class="st-question__number">9</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Bir haftalik kuchukcha haqida to‘g‘ri gapni tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q8" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">The puppy is one weeks old.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q8" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">The puppy is one-week old years.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q8" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">The puppy is one week old.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f8"></div>
+    </section>
+<section class="st-question" id="q9">
+      <div class="st-question__top">
+        <div class="st-question__number">10</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Onaning otasi kim?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q9" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Grandfather</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q9" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Father</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q9" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Uncle</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f9"></div>
+    </section>
+<section class="st-question" id="q10">
+      <div class="st-question__top">
+        <div class="st-question__number">11</div>
+        <div class="st-question__body">
+          <div class="st-question__title">‘Parents’ so‘zi kimlarni anglatadi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q10" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Brother and sister</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q10" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Mother and father</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q10" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Grandmother and grandfather</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f10"></div>
+    </section>
+<section class="st-question" id="q11">
+      <div class="st-question__top">
+        <div class="st-question__number">12</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Erkak farzand ingliz tilida qanday ataladi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q11" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Daughter</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q11" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Child</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q11" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Son</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f11"></div>
+    </section>
+<section class="st-question" id="q12">
+      <div class="st-question__top">
+        <div class="st-question__number">13</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Ayolning turmush o‘rtog‘i (eri) ingliz tilida qanday ataladi?</div>
+        </div>
+      </div>
+      <input class="st-text-input" type="text" name="q12" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing">
+      <div class="st-question-feedback" id="f12"></div>
+    </section>
+<section class="st-question" id="q13">
+      <div class="st-question__top">
+        <div class="st-question__number">14</div>
+        <div class="st-question__body">
+          <div class="st-question__title">‘Children’ so‘zining birlik shakli qaysi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q13" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Child</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q13" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Childs</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q13" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Childes</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f13"></div>
+    </section>
+<section class="st-question" id="q14">
+      <div class="st-question__top">
+        <div class="st-question__number">15</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Otaning onasi kim?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q14" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Mother</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q14" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Grandmother</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q14" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Sister</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f14"></div>
+    </section>
+<section class="st-question" id="q15">
+      <div class="st-question__top">
+        <div class="st-question__number">16</div>
+        <div class="st-question__body">
+          <div class="st-question__title">To‘g‘ri gapni tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q15" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Jacks umbrella is red.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q15" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Jack umbrella’s is red.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q15" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Jack’s umbrella is red.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f15"></div>
+    </section>
+<section class="st-question" id="q16">
+      <div class="st-question__top">
+        <div class="st-question__number">17</div>
+        <div class="st-question__body">
+          <div class="st-question__title">To‘g‘ri gapni tanlang (bolalar — ko‘plik).</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q16" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">The children’s bags are here.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q16" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">The childrens’ bags are here.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q16" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">The childs’ bags are here.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f16"></div>
+    </section>
+<section class="st-question" id="q17">
+      <div class="st-question__top">
+        <div class="st-question__number">18</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Correct the sentence: This is my father umbrella.</div>
+        </div>
+      </div>
+      <input class="st-text-input" type="text" name="q17" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing">
+      <div class="st-question-feedback" id="f17"></div>
+    </section>
+<section class="st-question" id="q18">
+      <div class="st-question__top">
+        <div class="st-question__number">19</div>
+        <div class="st-question__body">
+          <div class="st-question__title">To‘g‘ri gapni tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q18" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">This is Marias’ bag.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q18" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">This is Maria’s bag.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q18" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">This is Maria bag’s.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f18"></div>
+    </section>
+<section class="st-question" id="q19">
+      <div class="st-question__top">
+        <div class="st-question__number">20</div>
+        <div class="st-question__body">
+          <div class="st-question__title">‘My brother’ o‘rniga qaysi olmosh keladi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q19" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">She</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q19" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">It</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q19" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">He</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f19"></div>
+    </section>
+<section class="st-question" id="q20">
+      <div class="st-question__top">
+        <div class="st-question__number">21</div>
+        <div class="st-question__body">
+          <div class="st-question__title">‘My sisters’ (ko‘plik) o‘rniga qaysi olmosh keladi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q20" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">They</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q20" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">We</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q20" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">You</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f20"></div>
+    </section>
+<section class="st-question" id="q21">
+      <div class="st-question__top">
+        <div class="st-question__number">22</div>
+        <div class="st-question__body">
+          <div class="st-question__title">‘You and I’ o‘rniga qaysi olmosh keladi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q21" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">They</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q21" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">We</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q21" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">He</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f21"></div>
+    </section>
+<section class="st-question" id="q22">
+      <div class="st-question__top">
+        <div class="st-question__number">23</div>
+        <div class="st-question__body">
+          <div class="st-question__title">‘The book is on the table. ___ is new.’ Bo‘sh joyni to‘ldiring.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q22" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">He</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q22" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">She</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q22" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">It</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f22"></div>
+    </section>
+<section class="st-question" id="q23">
+      <div class="st-question__top">
+        <div class="st-question__number">24</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Ko‘zoynak (quyosh nuridan himoya qiluvchi) ingliz tilida:</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q23" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Sunglasses</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q23" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Glasses</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q23" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Umbrella</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f23"></div>
+    </section>
+<section class="st-question" id="q24">
+      <div class="st-question__top">
+        <div class="st-question__number">25</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Pulni saqlash uchun ishlatiladigan kichik sumkacha:</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q24" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Bag</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q24" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Wallet</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q24" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">ID card</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f24"></div>
+    </section>
+<section class="st-question" id="q25">
+      <div class="st-question__top">
+        <div class="st-question__number">26</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Write the word: shaxsiy guvohnoma (kartochka)</div>
+        </div>
+      </div>
+      <input class="st-text-input" type="text" name="q25" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing">
+      <div class="st-question-feedback" id="f25"></div>
+    </section>
+<section class="st-question" id="q26">
+      <div class="st-question__top">
+        <div class="st-question__number">27</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Yomg‘irdan himoya qiluvchi narsa:</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q26" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Jacket</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q26" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Bag</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q26" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Umbrella</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f26"></div>
+    </section>
+<section class="st-question" id="q27">
+      <div class="st-question__top">
+        <div class="st-question__number">28</div>
+        <div class="st-question__body">
+          <div class="st-question__title">‘The bag is ___ the table.’ (stol ustida)</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q27" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">on</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q27" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">in</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q27" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">under</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f27"></div>
+    </section>
+<section class="st-question" id="q28">
+      <div class="st-question__top">
+        <div class="st-question__number">29</div>
+        <div class="st-question__body">
+          <div class="st-question__title">‘The cat is ___ the box.’ (quti ichida)</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q28" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">on</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q28" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">in</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q28" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">behind</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f28"></div>
+    </section>
+<section class="st-question" id="q29">
+      <div class="st-question__top">
+        <div class="st-question__number">30</div>
+        <div class="st-question__body">
+          <div class="st-question__title">So‘zlarni to‘g‘ri tartibda joylashtiring: bag / next to / The / chair / the / is</div>
+        </div>
+      </div>
+      <input class="st-text-input" type="text" name="q29" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing">
+      <div class="st-question-feedback" id="f29"></div>
+    </section>
+  </form>
+
+  <div id="result" class="st-quiz-result">
+    <div class="st-quiz-result__score"><span id="score">0</span> / 30</div>
+    <div class="st-quiz-result__title" id="resultTitle"></div>
+    <div class="st-quiz-result__text" id="resultText"></div>
+    <div id="saveStatus" class="st-save-status"></div>
+  </div>
+
+  <div class="st-quiz-actions">
+    <div class="st-quiz-actions__inner">
+      <button class="st-btn st-btn-primary" id="checkBtn" type="button" onclick="checkAnswers()">✓ Javoblarni tekshirish</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/common.js"></script>
+<script src="../js/progress.js"></script>
+
+<script>
+"use strict";
+
+const questions = [{"type": "mc", "q": "’75’ sonini ingliz tilida tanlang.", "a": ["seventy-five", "fifty-seven", "seventeen-five"], "c": 0, "e": "70 = seventy, 5 = five → seventy-five."}, {"type": "text", "q": "Write in words: 92", "answer": "ninety-two", "e": "90 = ninety, 2 = two → ninety-two."}, {"type": "mc", "q": "’56’ sonini ingliz tilida tanlang.", "a": ["sixty-five", "fifty-six", "five-six"], "c": 1, "e": "50 = fifty, 6 = six → fifty-six."}, {"type": "text", "q": "Write in words: 110", "answer": "one hundred and ten", "e": "100 dan katta sonlarda ‘and’ ishlatiladi: one hundred and ten."}, {"type": "mc", "q": "Juda katta sonlarni yozganda ‘and’ so‘zi qayerda ishlatiladi? Masalan: 101", "a": ["one and hundred one", "hundred and one one", "one hundred and one"], "c": 2, "e": "101 = one hundred and one."}, {"type": "mc", "q": "‘How old are you?’ savoliga to‘g‘ri javobni tanlang.", "a": ["I’m twenty.", "I twenty.", "I’m twenty year."], "c": 0, "e": "Yoshni aytishda ‘I’m + son’ ishlatiladi."}, {"type": "mc", "q": "Uch oylik chaqaloq haqida qanday aytamiz?", "a": ["He’s three month.", "He’s three months old.", "He’s three months."], "c": 1, "e": "Yosh/vaqt birligidan keyin ‘old’ keladi: three months old."}, {"type": "text", "q": "So‘zlarni to‘g‘ri tartibda joylashtiring: old / She’s / years / thirty", "answer": "She's thirty years old.", "e": "She’s thirty years old."}, {"type": "mc", "q": "Bir haftalik kuchukcha haqida to‘g‘ri gapni tanlang.", "a": ["The puppy is one weeks old.", "The puppy is one-week old years.", "The puppy is one week old."], "c": 2, "e": "Birlikda ‘one week old’, ko‘plikda ‘two weeks old’ bo‘ladi."}, {"type": "mc", "q": "Onaning otasi kim?", "a": ["Grandfather", "Father", "Uncle"], "c": 0, "e": "Onaning otasi — grandfather (bobo)."}, {"type": "mc", "q": "‘Parents’ so‘zi kimlarni anglatadi?", "a": ["Brother and sister", "Mother and father", "Grandmother and grandfather"], "c": 1, "e": "Parents = ota-ona."}, {"type": "mc", "q": "Erkak farzand ingliz tilida qanday ataladi?", "a": ["Daughter", "Child", "Son"], "c": 2, "e": "Son = o‘g‘il."}, {"type": "text", "q": "Ayolning turmush o‘rtog‘i (eri) ingliz tilida qanday ataladi?", "answer": "husband", "e": "Husband = er."}, {"type": "mc", "q": "‘Children’ so‘zining birlik shakli qaysi?", "a": ["Child", "Childs", "Childes"], "c": 0, "e": "Child (birlik) → children (ko‘plik)."}, {"type": "mc", "q": "Otaning onasi kim?", "a": ["Mother", "Grandmother", "Sister"], "c": 1, "e": "Otaning onasi — grandmother (buvi)."}, {"type": "mc", "q": "To‘g‘ri gapni tanlang.", "a": ["Jacks umbrella is red.", "Jack umbrella’s is red.", "Jack’s umbrella is red."], "c": 2, "e": "Egalikni ko‘rsatish uchun ism + ’s: Jack’s umbrella."}, {"type": "mc", "q": "To‘g‘ri gapni tanlang (bolalar — ko‘plik).", "a": ["The children’s bags are here.", "The childrens’ bags are here.", "The childs’ bags are here."], "c": 0, "e": "Children allaqachon ko‘plik, shuning uchun children’s (’s qo‘shiladi, childrens’ emas)."}, {"type": "text", "q": "Correct the sentence: This is my father umbrella.", "answer": "This is my father's umbrella.", "e": "Egalik uchun father’s umbrella bo‘lishi kerak."}, {"type": "mc", "q": "To‘g‘ri gapni tanlang.", "a": ["This is Marias’ bag.", "This is Maria’s bag.", "This is Maria bag’s."], "c": 1, "e": "Ism oxiri ‘s’ bilan tugamasa ham ’s qo‘shiladi: Maria’s bag."}, {"type": "mc", "q": "‘My brother’ o‘rniga qaysi olmosh keladi?", "a": ["She", "It", "He"], "c": 2, "e": "Brother — erkak, shuning uchun He."}, {"type": "mc", "q": "‘My sisters’ (ko‘plik) o‘rniga qaysi olmosh keladi?", "a": ["They", "We", "You"], "c": 0, "e": "Ko‘plik uchinchi shaxs — They."}, {"type": "mc", "q": "‘You and I’ o‘rniga qaysi olmosh keladi?", "a": ["They", "We", "He"], "c": 1, "e": "Men va sen/siz birga — We."}, {"type": "mc", "q": "‘The book is on the table. ___ is new.’ Bo‘sh joyni to‘ldiring.", "a": ["He", "She", "It"], "c": 2, "e": "Jonsiz narsa (book) uchun It ishlatiladi."}, {"type": "mc", "q": "Ko‘zoynak (quyosh nuridan himoya qiluvchi) ingliz tilida:", "a": ["Sunglasses", "Glasses", "Umbrella"], "c": 0, "e": "Sunglasses — quyosh ko‘zoynagi."}, {"type": "mc", "q": "Pulni saqlash uchun ishlatiladigan kichik sumkacha:", "a": ["Bag", "Wallet", "ID card"], "c": 1, "e": "Wallet — hamyon."}, {"type": "text", "q": "Write the word: shaxsiy guvohnoma (kartochka)", "answer": "ID card", "e": "ID card — shaxsni tasdiqlovchi karta."}, {"type": "mc", "q": "Yomg‘irdan himoya qiluvchi narsa:", "a": ["Jacket", "Bag", "Umbrella"], "c": 2, "e": "Umbrella — soyabon."}, {"type": "mc", "q": "‘The bag is ___ the table.’ (stol ustida)", "a": ["on", "in", "under"], "c": 0, "e": "Yuzada joylashgan narsa uchun ‘on’ ishlatiladi."}, {"type": "mc", "q": "‘The cat is ___ the box.’ (quti ichida)", "a": ["on", "in", "behind"], "c": 1, "e": "Ichida joylashgan narsa uchun ‘in’ ishlatiladi."}, {"type": "text", "q": "So‘zlarni to‘g‘ri tartibda joylashtiring: bag / next to / The / chair / the / is", "answer": "The bag is next to the chair.", "e": "The bag is next to the chair."}];
+
+const quiz = document.getElementById("quiz");
+const answeredEl = document.getElementById("answered");
+const progressFill = document.getElementById("topProgressFill");
+
+function normalizeAnswer(v) {
+  return String(v ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]/gu, "")
+    .replace(/\s+/g, " ");
+}
+
+function updateProgress() {
+  let answered = 0;
+  questions.forEach((item, i) => {
+    if (item.type === "text") {
+      const input = document.querySelector(`#q${i} .st-text-input`);
+      if (input && input.value.trim()) answered++;
+    } else {
+      if (document.querySelector(`input[name="q${i}"]:checked`)) answered++;
+    }
+  });
+  answeredEl.textContent = `${answered} / ${questions.length}`;
+  progressFill.style.width = `${answered / questions.length * 100}%`;
+}
+
+async function checkAnswers() {
+  let score = 0;
+
+  questions.forEach((item, i) => {
+    const card = document.getElementById(`q${i}`);
+    const feedback = document.getElementById(`f${i}`);
+    let ok = false;
+    let correctText = "";
+
+    if (item.type === "text") {
+      const input = card.querySelector(".st-text-input");
+      ok = normalizeAnswer(input.value) === normalizeAnswer(item.answer);
+      input.classList.remove("is-correct", "is-wrong");
+      input.classList.add(ok ? "is-correct" : "is-wrong");
+      correctText = item.answer;
+    } else {
+      const selected = document.querySelector(`input[name="q${i}"]:checked`);
+      card.querySelectorAll(".st-choice").forEach((label, j) => {
+        label.classList.remove("is-correct", "is-wrong");
+        if (j === item.c) label.classList.add("is-correct");
+      });
+      if (selected && Number(selected.value) === item.c) {
+        ok = true;
+      } else if (selected) {
+        card.querySelector(`.st-choice:nth-child(${Number(selected.value) + 1})`)
+          ?.classList.add("is-wrong");
+      }
+      correctText = item.a[item.c];
+    }
+
+    if (ok) score++;
+
+    feedback.className = "st-question-feedback " + (ok ? "correct" : "incorrect") + " is-visible";
+    if (ok) {
+      feedback.innerHTML = item.e ? `✓ <b>To‘g‘ri!</b><br>${item.e}` : `✓ <b>To‘g‘ri!</b>`;
+    } else {
+      feedback.innerHTML = item.e
+        ? `✗ <b>Noto‘g‘ri.</b><br><b>To‘g‘ri javob:</b> ${correctText}<br>${item.e}`
+        : `✗ <b>Noto‘g‘ri.</b><br><b>To‘g‘ri javob:</b> ${correctText}`;
+    }
+  });
+
+  const percent = Math.round(score / questions.length * 100);
+  document.getElementById("score").textContent = score;
+
+  const result = document.getElementById("result");
+  const title = document.getElementById("resultTitle");
+  const text = document.getElementById("resultText");
+  const saveStatus = document.getElementById("saveStatus");
+
+  if (percent >= 70) {
+    result.className = "st-quiz-result pass is-visible";
+    title.textContent = "Ajoyib! Mashq muvaffaqiyatli tugallandi.";
+    text.textContent = `Siz ${percent}% natija oldingiz.`;
+  } else {
+    result.className = "st-quiz-result fail is-visible";
+    title.textContent = "Yana bir marta urinib ko‘ring.";
+    text.textContent = `Siz ${percent}% natija oldingiz. Tugallangan deb hisoblanishi uchun kamida 70% kerak.`;
+  }
+
+  saveStatus.textContent = "Progress saqlanmoqda...";
+  saveStatus.className = "st-save-status";
+
+  try {
+    const activityId =
+      Number(new URLSearchParams(window.location.search).get("activity_id")) || 0;
+
+    if (!activityId) throw new Error("activity_id topilmadi.");
+
+    const data = await window.SalimTeaches.reportActivityProgress(
+      activityId,
+      percent >= 70,
+      percent
+    );
+
+    if (data && data.course) {
+      saveStatus.textContent = "✓ Progress saqlandi.";
+      saveStatus.className = "st-save-status correct";
+    } else {
+      saveStatus.textContent = "✓ Javoblar tekshirildi.";
+      saveStatus.className = "st-save-status correct";
+    }
+  } catch (error) {
+    console.error(error);
+    saveStatus.textContent = "Progressni saqlashda xatolik yuz berdi.";
+    saveStatus.className = "st-save-status incorrect";
+  }
+
+  SalimTeaches.showPostCheckActions("checkBtn", 4);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function backToUnit4() {
+  const returnUrl =
+    sessionStorage.getItem("salimteaches_returnUrl") ||
+    "../index.html";
+
+  const clean = returnUrl.split("#")[0].split("?")[0];
+  window.location.href = `${clean}?unit=4`;
+}
+
+quiz.addEventListener("change", updateProgress);
+updateProgress();
+</script>
+</body>
+</html>

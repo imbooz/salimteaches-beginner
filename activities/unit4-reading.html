@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>SalimTeaches — Unit 4 Reading</title>
+<style>
+:root{
+  --primary:#5865f2;
+  --bg:#f5f7fb;
+  --card:#fff;
+  --text:#172033;
+  --muted:#747d91;
+  --border:#e8ebf2;
+  --good:#149b66;
+  --goodbg:#e9f8f1;
+  --bad:#d84a4a;
+  --badbg:#fff0f0;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+.app{max-width:760px;margin:auto;padding-bottom:110px}
+.header{padding:24px 18px 14px}
+.brand{font-size:12px;font-weight:800;letter-spacing:.8px;color:var(--primary)}
+h1{font-size:27px;margin:7px 0 5px}
+.subtitle{color:var(--muted);font-size:14px;line-height:1.45;margin:0}
+.progress-wrap{position:sticky;top:53px;z-index:10;background:rgba(245,247,251,.94);backdrop-filter:blur(10px);padding:9px 18px 12px;border-bottom:1px solid var(--border)}
+.progress-row{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:7px}
+.progressbar{height:7px;background:#e4e7ef;border-radius:10px;overflow:hidden}
+.progressfill{height:100%;width:0;background:linear-gradient(90deg,var(--primary),#7c83f5);transition:.3s}
+
+.reading-card{margin:14px 14px 0;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:18px;box-shadow:0 5px 20px rgba(20,30,60,.04)}
+.reading-card .section-kicker{font-size:11px;font-weight:800;letter-spacing:.7px;color:var(--primary);margin-bottom:4px}
+.reading-card h2{font-size:20px;margin:0 0 12px}
+.reading-card .text{font-size:14px;line-height:1.6;color:var(--text)}
+.reading-card .text p{margin:0 0 10px}
+.reading-card .question{padding:15px 0;border-top:1px solid #edf0f5}
+.reading-card .qtitle{font-size:15px;line-height:1.5;font-weight:650;margin-bottom:11px}
+.reading-card .num{display:inline-flex;width:29px;height:29px;border-radius:9px;background:#eef0ff;color:var(--primary);align-items:center;justify-content:center;font-size:12px;font-weight:800;margin-right:8px;vertical-align:middle}
+.reading-card .option{display:block;border:1px solid #dfe3ec;background:#fbfcfe;color:var(--text);border-radius:12px;padding:12px;font-size:14px;font-weight:650;min-height:46px;margin:8px 0;cursor:pointer}
+.reading-card .option:has(input:checked){border-color:var(--primary);background:#eef0ff;color:var(--primary)}
+.reading-card .answer-input{width:100%;border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;padding:12px;font-size:15px;color:var(--text);outline:none}
+.reading-card .answer-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(88,101,242,.1)}
+.reading-card .feedback{display:none;margin-top:9px;border-radius:10px;padding:9px 10px;font-size:12px;line-height:1.45}
+.reading-card .feedback.good{display:block;background:var(--goodbg);color:var(--good)}
+.reading-card .feedback.bad{display:block;background:var(--badbg);color:var(--bad)}
+
+.result{display:none;margin:14px;padding:21px;border-radius:20px;background:#fff;border:1px solid var(--border);text-align:center}
+.result.pass{border-color:#c9efdd;background:#f4fcf8}
+.result.fail{border-color:#ffd3d3;background:#fff8f8}
+.result-score{font-size:38px;font-weight:900;color:var(--primary)}
+.result.pass .result-score{color:var(--good)}
+.result-title{font-size:20px;font-weight:850;margin:5px 0}
+.result-text{color:var(--muted);font-size:14px;line-height:1.5}
+.result .save-status{margin-top:12px;font-size:12px;font-weight:800}
+.result .save-status.ok{color:var(--good)}
+.result .save-status.err{color:var(--bad)}
+
+.actions{position:sticky;bottom:10px;z-index:1000;background:rgba(245,247,251,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:10px 0;display:flex;gap:10px}
+.actions-inner{max-width:760px;width:100%;margin:auto;display:flex;gap:10px}
+.actions .check{flex:1;min-width:0;border:0;border-radius:13px;padding:15px 18px;font-size:16px;font-weight:700;cursor:pointer;touch-action:manipulation;background:#5b5ce2;color:#fff}
+
+.activity-nav{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
+.activity-back{border:0;border-radius:13px;padding:12px 15px;background:#eef0ff;color:var(--primary);font-size:14px;font-weight:800;cursor:pointer}
+.activity-label{color:var(--muted);font-size:12px;font-weight:700}
+
+@media(max-width:480px){.reading-card{margin-left:10px;margin-right:10px;padding:15px}}
+</style>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+
+<body>
+<div class="activity-nav">
+  <button class="activity-back" type="button" onclick="backToUnit4()">← Unit 4</button>
+  <div class="activity-label">SalimTeaches • Unit 4</div>
+</div>
+<div class="app">
+
+<header class="header">
+  <div class="brand">SALIMTEACHES • BEGINNER</div>
+  <h1>📖 Unit 4 — Reading</h1>
+  <p class="subtitle">3 ta qisqa matnni o‘qing va turli xil topshiriqlarni bajaring.</p>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-row"><span>Reading jarayoni</span><span id="progressText">0 / 15</span></div>
+  <div class="progressbar"><div class="progressfill" id="progressFill"></div></div>
+</div>
+
+<section class="reading-card">
+  <div class="section-kicker">TEXT 1</div>
+  <h2>My Family</h2>
+  <div class="text">
+    <p>Hi! My name's Sara. I'm twenty-five years old. This is a photo of my family.</p>
+    <p>This is my mother, Anna. She's fifty-two years old. This is my father, Peter. He's fifty-four years old.</p>
+    <p>I have one brother, Tom. He's twenty-eight. Tom's wife is Julia, and their daughter is only two months old! Her name is Emma.</p>
+    <p>My grandmother's name is Rose. She's eighty years old. She lives with my parents.</p>
+  </div>
+
+  <div class="question">
+    <div class="qtitle"><span class="num">1.</span> Sara is ____________________ years old.</div>
+    <input class="answer-input" type="text" name="q0" autocomplete="off" placeholder="Javobingizni yozing">
+    <div id="f0" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">2.</span> Sara-ning ukasi (birodari) kim?</div>
+    <label class="option"><input type="radio" name="q1" value="Tom"> Tom</label>
+    <label class="option"><input type="radio" name="q1" value="Peter"> Peter</label>
+    <label class="option"><input type="radio" name="q1" value="Emma"> Emma</label>
+    <div id="f1" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">3.</span> Emma is Tom's daughter.</div>
+    <label class="option"><input type="radio" name="q2" value="true"> To‘g‘ri</label>
+    <label class="option"><input type="radio" name="q2" value="false"> Noto‘g‘ri</label>
+    <div id="f2" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">4.</span> Sara-ning buvisi ____________________ yoshda.</div>
+    <input class="answer-input" type="text" name="q3" autocomplete="off" placeholder="Javobingizni yozing">
+    <div id="f3" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">5.</span> How old is Emma?</div>
+    <label class="option"><input type="radio" name="q4" value="Two years old"> Two years old</label>
+    <label class="option"><input type="radio" name="q4" value="Two months old"> Two months old</label>
+    <label class="option"><input type="radio" name="q4" value="Two weeks old"> Two weeks old</label>
+    <div id="f4" class="feedback"></div>
+  </div>
+</section>
+
+<section class="reading-card">
+  <div class="section-kicker">TEXT 2</div>
+  <h2>Lucy's Bag</h2>
+  <div class="text">
+    <p>Lucy is a student. She has a big blue bag. In her bag, there is a wallet, a mobile phone, and an ID card.</p>
+    <p>Her wallet is in the small pocket of the bag. Her mobile phone is on top of her books. Her sunglasses are next to her wallet.</p>
+    <p>Lucy's umbrella is not in the bag today. It's behind the door at home! Her ID card is under her wallet.</p>
+    <p>Lucy needs her umbrella because it's raining outside.</p>
+  </div>
+
+  <div class="question">
+    <div class="qtitle"><span class="num">6.</span> Where is Lucy's mobile phone?</div>
+    <label class="option"><input type="radio" name="q5" value="In the small pocket"> In the small pocket</label>
+    <label class="option"><input type="radio" name="q5" value="Behind the door"> Behind the door</label>
+    <label class="option"><input type="radio" name="q5" value="On top of her books"> On top of her books</label>
+    <div id="f5" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">7.</span> Lucy's sunglasses are next to her ____________________.</div>
+    <input class="answer-input" type="text" name="q6" autocomplete="off" placeholder="Javobingizni yozing">
+    <div id="f6" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">8.</span> Lucy's umbrella is in her bag today.</div>
+    <label class="option"><input type="radio" name="q7" value="true"> To‘g‘ri</label>
+    <label class="option"><input type="radio" name="q7" value="false"> Noto‘g‘ri</label>
+    <div id="f7" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">9.</span> Where is Lucy's ID card?</div>
+    <label class="option"><input type="radio" name="q8" value="Under her wallet"> Under her wallet</label>
+    <label class="option"><input type="radio" name="q8" value="On her books"> On her books</label>
+    <label class="option"><input type="radio" name="q8" value="Next to her umbrella"> Next to her umbrella</label>
+    <div id="f8" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">10.</span> It is raining outside.</div>
+    <label class="option"><input type="radio" name="q9" value="true"> To‘g‘ri</label>
+    <label class="option"><input type="radio" name="q9" value="false"> Noto‘g‘ri</label>
+    <div id="f9" class="feedback"></div>
+  </div>
+</section>
+
+<section class="reading-card">
+  <div class="section-kicker">TEXT 3</div>
+  <h2>Jack's Grandparents</h2>
+  <div class="text">
+    <p>This is Jack. He's thirty-one years old. Jack's grandparents live in a small house next to a park.</p>
+    <p>His grandfather's name is Robert. He's seventy-nine years old. His grandmother's name is Helen. She's seventy-six.</p>
+    <p>Robert and Helen have three children: Jack's mother, his uncle, and his aunt. They also have five grandchildren.</p>
+    <p>Every Sunday, Jack visits his grandparents' house. He sits in front of the house with his grandfather, and they talk about football.</p>
+  </div>
+
+  <div class="question">
+    <div class="qtitle"><span class="num">11.</span> Jack's grandfather is ____________________ years old.</div>
+    <input class="answer-input" type="text" name="q10" autocomplete="off" placeholder="Javobingizni yozing">
+    <div id="f10" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">12.</span> How many children do Robert and Helen have?</div>
+    <label class="option"><input type="radio" name="q11" value="Two"> Two</label>
+    <label class="option"><input type="radio" name="q11" value="Three"> Three</label>
+    <label class="option"><input type="radio" name="q11" value="Five"> Five</label>
+    <div id="f11" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">13.</span> Jack's grandparents live next to a park.</div>
+    <label class="option"><input type="radio" name="q12" value="true"> To‘g‘ri</label>
+    <label class="option"><input type="radio" name="q12" value="false"> Noto‘g‘ri</label>
+    <div id="f12" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">14.</span> When does Jack visit his grandparents?</div>
+    <label class="option"><input type="radio" name="q13" value="Every Saturday"> Every Saturday</label>
+    <label class="option"><input type="radio" name="q13" value="Every day"> Every day</label>
+    <label class="option"><input type="radio" name="q13" value="Every Sunday"> Every Sunday</label>
+    <div id="f13" class="feedback"></div>
+  </div>
+  <div class="question">
+    <div class="qtitle"><span class="num">15.</span> Jack sits ____________________ the house with his grandfather. (in front of)</div>
+    <input class="answer-input" type="text" name="q14" autocomplete="off" placeholder="Javobingizni yozing">
+    <div id="f14" class="feedback"></div>
+  </div>
+</section>
+
+<div id="result" class="result">
+  <div class="result-score" id="score">0 / 15 — 0%</div>
+  <div class="result-title" id="resultTitle">Natija</div>
+  <div class="result-text" id="resultText"></div>
+</div>
+</div>
+
+<div class="actions">
+  <div class="actions-inner">
+    <button id="check" type="button" class="check">✓ Javoblarimni tekshirish</button>
+  </div>
+</div>
+
+<script src="../js/common.js"></script>
+<script>
+const total = 15;
+
+function normalize(value){
+  return String(value || "").toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]/gu,"")
+    .replace(/\s+/g," ").trim();
+}
+
+function getAcceptedAnswers(id){
+  const accepted={
+    0:["twenty-five","25"],
+    1:["Tom"],
+    2:["true"],
+    3:["eighty","80"],
+    4:["Two months old"],
+    5:["On top of her books"],
+    6:["wallet"],
+    7:["false"],
+    8:["Under her wallet"],
+    9:["true"],
+    10:["seventy-nine","79"],
+    11:["Three"],
+    12:["true"],
+    13:["Every Sunday"],
+    14:["in front of"]
+  };
+  return accepted[id] || [];
+}
+
+function isCorrect(id,value){
+  const v=normalize(value);
+  return getAcceptedAnswers(id).some(a=>normalize(a)===v);
+}
+
+function updateProgress(){
+  let answered=0;
+  for(let i=0;i<total;i++){
+    const radio=document.querySelector('[name="q'+i+'"]:checked');
+    const input=document.querySelector('[name="q'+i+'"]');
+    if(radio || (input && input.type==="text" && input.value.trim())) answered++;
+  }
+  document.getElementById("progressText").textContent=answered+" / "+total;
+  document.getElementById("progressFill").style.width=(answered/total*100)+"%";
+}
+
+function setFeedback(id,ok,correctText){
+  const fb=document.getElementById("f"+id);
+  if(!fb)return;
+  fb.className="feedback "+(ok?"good":"bad");
+  fb.innerHTML=ok?"✅ To‘g‘ri!":"❌ Noto‘g‘ri. <strong>To‘g‘ri javob:</strong> "+correctText;
+}
+
+async function checkReading(){
+  let score=0;
+  for(let i=0;i<total;i++){
+    let value="";
+    const radio=document.querySelector('[name="q'+i+'"]:checked');
+    const input=document.querySelector('[name="q'+i+'"]');
+    if(radio)value=radio.value;
+    else if(input && input.type==="text")value=input.value;
+    const ok=isCorrect(i,value);
+    if(ok)score++;
+    if(String(value).trim())setFeedback(i,ok,getAcceptedAnswers(i)[0]);
+  }
+
+  const percent=Math.round(score/total*100);
+  const result=document.getElementById("result");
+  result.style.display="block";
+  result.className="result "+(percent>=70?"pass":"fail");
+  document.getElementById("score").textContent=score+" / "+total+" — "+percent+"%";
+
+  if(percent>=70){
+    document.getElementById("resultTitle").textContent="🎉 Ajoyib!";
+    document.getElementById("resultText").textContent="Reading mashqini muvaffaqiyatli tugatdingiz. Keyingi mashqqa o‘tishingiz mumkin.";
+  }else{
+    document.getElementById("resultTitle").textContent="💪 Yana bir marta urinib ko‘ring";
+    document.getElementById("resultText").textContent="Kamida 70% olishga harakat qiling. Xatolarni ko‘rib chiqing va qayta urinib ko‘ring.";
+  }
+
+  const saved=await reportActivityProgress(percent>=70,percent);
+  let saveStatus=document.getElementById("saveStatus");
+  if(!saveStatus){
+    saveStatus=document.createElement("div");
+    saveStatus.id="saveStatus";
+    saveStatus.className="save-status";
+    result.appendChild(saveStatus);
+  }
+  if(saved && saved.success===true){
+    saveStatus.className="save-status ok";
+    saveStatus.textContent="✓ Natijangiz saqlandi";
+  }else{
+    saveStatus.className="save-status err";
+    saveStatus.textContent="⚠ Natijangizni saqlashda muammo: "+((saved&&saved.error)||"noma’lum xatolik");
+  }
+  updateProgress();
+  SalimTeaches.showPostCheckActions("check", 4);
+  result.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function getTelegramInitData(){
+  try{
+    const saved=sessionStorage.getItem("salimteaches_initData");
+    if(saved)return saved;
+  }catch(e){}
+  try{
+    if(window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.initData){
+      const d=window.Telegram.WebApp.initData;
+      try{sessionStorage.setItem("salimteaches_initData",d)}catch(e){}
+      return d;
+    }
+  }catch(e){}
+  return "";
+}
+
+async function reportActivityProgress(completed,score){
+  const activityId=Number(new URLSearchParams(window.location.search).get("activity_id"))||0;
+  const initData=getTelegramInitData();
+  if(!activityId)return{success:false,error:"activity_id mavjud emas."};
+  if(!initData)return{success:false,error:"Telegram initData mavjud emas."};
+  try{
+    const response=await fetch("https://salimteaches-beginner-auth.imshosalim.workers.dev/progress",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({initData,activity_id:activityId,completed:Boolean(completed),score:Number(score)})
+    });
+    const data=await response.json();
+    if(!response.ok||data.success!==true)return{success:false,error:data.error||data.reason||("HTTP "+response.status)};
+    return data;
+  }catch(error){
+    console.error("Progress save failed:",error);
+    return{success:false,error:error.message||"Network error"};
+  }
+}
+
+function backToUnit4(){window.location.href="../index.html?unit=4";}
+
+document.querySelectorAll("input").forEach(x=>{
+  x.addEventListener("input",updateProgress);
+  x.addEventListener("change",updateProgress);
+});
+document.getElementById("check").addEventListener("click",checkReading);updateProgress();
+</script>
+</body>
+</html>

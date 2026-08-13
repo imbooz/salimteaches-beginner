@@ -189,9 +189,53 @@ const UNIT_CONFIGS = [
         file: "progress-test-1.html"
       }
     ]
+  },
+
+  {
+    id: 4,
+    sortOrder: 5,
+    title: "Numbers, Age & Family",
+    description: "Sonlar, yosh so‘rash va aytish, oila a’zolari, egalik ’s, olmoshlar, shaxsiy buyumlar va joy predloglari.",
+    activities: [
+      {
+        type: "lesson",
+        icon: "🎥",
+        title: "4-Dars",
+        subtitle: "Numbers, age, family va personal possessions darsini ko‘ring.",
+        videoId: "BpvIu0x-kjI"
+      },
+      {
+        type: "workbook",
+        icon: "🎬",
+        title: "Workbook tahlili",
+        subtitle: "Video tez orada qo‘shiladi."
+      },
+      {
+        type: "practice",
+        icon: "🧩",
+        title: "Amaliy mashqlar",
+        subtitle: "Unit 4 bo‘yicha 30 ta interaktiv savol.",
+        file: "unit4-practice.html"
+      },
+      {
+        type: "reading",
+        icon: "📖",
+        title: "Reading",
+        subtitle: "3 ta matn va turli xil mashqlar.",
+        file: "unit4-reading.html"
+      },
+      {
+        type: "test",
+        icon: "📝",
+        title: "Unit 4 Test",
+        subtitle: "Unitni tugatish uchun kamida 70% kerak.",
+        file: "unit4-test.html",
+        requires: ["practice", "reading"]
+      }
+    ]
   }
 
-  // Unit 4 goes here — copy the Unit 3 block above, fill in the content,
-  // and give it sortOrder: 5 (the progress test above already took 4).
+  // Unit 5 goes here — copy the Unit 4 block above, fill in the content,
+  // and give it sortOrder: 6.
 
 ];
