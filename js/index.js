@@ -104,6 +104,7 @@ function showApplication() {
   renderUser();
   renderUnits();       // unit-engine.js
   openUnitFromLocation(); // unit-engine.js
+  initLeaderboardAndProfile(); // leaderboard.js
 }
 
 

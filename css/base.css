@@ -1034,3 +1034,253 @@
       height: 100%;
       border: 0;
     }
+
+    /* ==========================================
+       LEADERBOARD
+    ========================================== */
+
+    .leaderboard-card {
+      margin: 0 20px 22px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 19px;
+      box-shadow: 0 5px 22px rgba(20, 30, 60, 0.045);
+    }
+
+    .leaderboard-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 13px;
+      gap: 10px;
+    }
+
+    .leaderboard-head h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .leaderboard-you-pill {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--primary);
+      background: #eef0ff;
+      padding: 5px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .leaderboard-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .leaderboard-row {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 10px 12px;
+      border-radius: 13px;
+      background: #f8f9fd;
+    }
+
+    .leaderboard-row.is-you {
+      background: #eef0ff;
+      border: 1px solid #d7dbff;
+    }
+
+    .leaderboard-rank {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      border-radius: 9px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--muted);
+    }
+
+    .leaderboard-rank.top1 { background: #fff4d6; color: #a5760a; }
+    .leaderboard-rank.top2 { background: #eef1f6; color: #5b6270; }
+    .leaderboard-rank.top3 { background: #fbe6d8; color: #a15423; }
+
+    .leaderboard-name {
+      flex: 1;
+      min-width: 0;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .leaderboard-points {
+      flex-shrink: 0;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .leaderboard-empty {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+
+    /* ==========================================
+       NAME MODAL (first-run "what should we call
+       you on the leaderboard" prompt — skippable)
+    ========================================== */
+
+    .name-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 400;
+      display: none;
+      background: rgba(9, 12, 25, .82);
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .name-modal.open {
+      display: flex;
+    }
+
+    .name-modal-card {
+      width: min(400px, 100%);
+      background: white;
+      border-radius: 22px;
+      padding: 26px 22px;
+      text-align: center;
+      box-shadow: 0 20px 70px rgba(0,0,0,.3);
+    }
+
+    .name-modal-icon {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    .name-modal-card h3 {
+      margin: 0 0 6px;
+      font-size: 19px;
+    }
+
+    .name-modal-card p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .name-input {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: #fbfcfe;
+      border-radius: 12px;
+      padding: 13px 14px;
+      font-size: 15px;
+      text-align: center;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .name-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(88,101,242,.12);
+    }
+
+    .name-error {
+      min-height: 18px;
+      color: #d84a4a;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .name-save-btn {
+      width: 100%;
+      margin-top: 12px;
+      border: none;
+      border-radius: 13px;
+      padding: 13px 15px;
+      background: var(--primary);
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .name-skip-btn {
+      width: 100%;
+      margin-top: 8px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 8px;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+
+    /* ==========================================
+       PROFILE — EDITABLE DISPLAY NAME FIELD
+    ========================================== */
+
+    .profile-name-field {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .profile-name-label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .profile-name-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .profile-name-input {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid var(--border);
+      background: #fbfcfe;
+      border-radius: 12px;
+      padding: 11px 13px;
+      font-size: 14px;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .profile-name-save {
+      flex-shrink: 0;
+      border: none;
+      border-radius: 12px;
+      padding: 11px 16px;
+      background: var(--primary);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .profile-name-status {
+      min-height: 16px;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .profile-name-status.ok { color: var(--success); }
+    .profile-name-status.err { color: #d84a4a; }

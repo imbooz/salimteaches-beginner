@@ -116,6 +116,30 @@
       </div>
 
 
+      <section
+        id="leaderboardCard"
+        class="leaderboard-card"
+        style="display:none;"
+      >
+
+        <div class="leaderboard-head">
+
+          <h2>
+            🏆 Top talabalar
+          </h2>
+
+          <div
+            id="leaderboardYouPill"
+            class="leaderboard-you-pill"
+          ></div>
+
+        </div>
+
+        <div id="leaderboardList" class="leaderboard-list"></div>
+
+      </section>
+
+
       <section class="section">
 
         <div class="section-title">
@@ -199,6 +223,38 @@
         >
         </div>
 
+
+        <div class="profile-name-field">
+
+          <div class="profile-name-label">
+            Reytingdagi ismingiz
+          </div>
+
+          <div class="profile-name-row">
+
+            <input
+              id="profileNameInput"
+              class="profile-name-input"
+              type="text"
+              maxlength="40"
+              placeholder="Ismingizni kiriting"
+              autocomplete="off"
+            >
+
+            <button
+              class="profile-name-save"
+              type="button"
+              onclick="submitDisplayName('profile')"
+            >
+              Saqlash
+            </button>
+
+          </div>
+
+          <div id="profileNameStatus" class="profile-name-status"></div>
+
+        </div>
+
       </div>
 
     </div>
@@ -221,6 +277,54 @@
       <div class="video-frame-wrap">
         <iframe id="videoFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       NAME PROMPT (first run, skippable) —
+       what the leaderboard should call this student
+  =========================================== -->
+
+  <div id="nameModal" class="name-modal">
+    <div class="name-modal-card">
+
+      <div class="name-modal-icon">✍️</div>
+
+      <h3>Ismingizni kiriting</h3>
+
+      <p>
+        Reyting va boshqa talabalar sizni shu ism bilan ko‘rishadi.
+      </p>
+
+      <input
+        id="nameInput"
+        class="name-input"
+        type="text"
+        maxlength="40"
+        placeholder="Ismingiz"
+        autocomplete="off"
+      >
+
+      <div id="nameError" class="name-error"></div>
+
+      <button
+        id="nameSaveBtn"
+        class="name-save-btn"
+        type="button"
+        onclick="submitDisplayName()"
+      >
+        Saqlash
+      </button>
+
+      <button
+        class="name-skip-btn"
+        type="button"
+        onclick="skipDisplayName()"
+      >
+        Hozircha o‘tkazib yuborish
+      </button>
+
     </div>
   </div>
 
@@ -291,6 +395,7 @@
 
   <script src="js/units-config.js"></script>
   <script src="js/unit-engine.js"></script>
+  <script src="js/leaderboard.js"></script>
   <script src="js/index.js"></script>
 
 </body>

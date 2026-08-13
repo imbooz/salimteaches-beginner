@@ -22,8 +22,14 @@ gated content hub — lessons, practice exercises, listening/reading, and tests 
 - **Live URL:** https://imbooz.github.io/salimteaches-beginner/
 - **Backend:** Cloudflare Worker at `salimteaches-beginner-auth.imshosalim.workers.dev`,
   backed by a Cloudflare D1 database (tables: `students`, `units`, `activities`,
-  `unit_progress`, `activity_progress`). **Nobody working from chat has DB access** —
-  every DB change must be handed to the teacher as exact SQL to run in the D1 console.
+  `unit_progress`, `activity_progress`). **Nobody working from chat has DB or
+  Cloudflare access** — every DB change must be handed to the teacher as exact SQL
+  to run in the D1 console, and every Worker code change must be handed over as the
+  full file for the teacher to paste into the Cloudflare dashboard's Worker "Edit
+  code" / "Quick Edit" view and deploy. A copy of the Worker's source is tracked in
+  this repo at `worker/worker.js` purely for reference/version history — **editing
+  that file does not deploy it**; it still has to be pasted into Cloudflare manually.
+  Keep it in sync whenever you hand over a new Worker version.
 - **Auth:** Telegram WebApp `initData`, HMAC-verified server-side, checked against
   Telegram Premium group membership via `getChatMember`.
 - **Owner:** a non-technical English teacher (10 years teaching experience, based in
@@ -65,7 +71,15 @@ gated content hub — lessons, practice exercises, listening/reading, and tests 
   hardcode a unit number in this file.** Also handles the `milestone: true` /
   `kicker` / per-unit `icon` config fields — see §5.
 - **`js/index.js`** — shared app shell only (Telegram auth, nav, video modal,
-  progress reporting).
+  progress reporting). Calls `initLeaderboardAndProfile()` (from `js/leaderboard.js`)
+  once inside `showApplication()` — that's the only line it knows about the
+  leaderboard feature; keep it that thin.
+- **`js/leaderboard.js`** — the first-run "what should we call you on the
+  leaderboard" name prompt (skippable, re-editable later from the Profile page),
+  and fetching/rendering the top-5 leaderboard card on the home page. Talks to the
+  Worker's `/profile` and `/leaderboard` endpoints — see §5.
+- **`worker/worker.js`** — a tracked copy of the Cloudflare Worker's source (see §1
+  — this is reference only, deploying it is a manual step).
 - **`js/common.js`** — shared utilities, including
   `SalimTeaches.showPostCheckActions(checkButtonId, backUnitId)`. Every exercise
   page must call this after checking answers — it swaps the check button for
@@ -178,6 +192,35 @@ all through the existing generic unlock chain, no special-casing needed beyond t
 Progress-test pages you build for these should use `SalimTeaches.showPostCheckActions("check", null)`
 (no unit to go back to) — see §3's note on `common.js`.
 
+### Leaderboard (new — added after Unit 4)
+
+Home page shows a top-5 leaderboard card right after the welcome section, plus the
+current student's own rank if they're not in the top 5. Two new Worker endpoints
+(both POST, both authenticated via `initData` exactly like `/progress`):
+
+- **`/profile`** — `{ initData, display_name }` → saves a student-chosen display
+  name (max 40 chars, trimmed). Telegram `first_name`/`username` are NOT used for
+  the leaderboard — they're unreliable (many students don't set their real name on
+  Telegram) — so there's a separate `students.display_name TEXT` column, populated
+  by a first-run modal (skippable) and editable any time from the Profile page.
+  Falls back to Telegram `first_name`, then `"Talaba"`, if never set.
+- **`/leaderboard`** — `{ initData }` → `{ success, leaderboard: [top5], you: {...} }`.
+  Ranks **every** student (including zero-activity ones, via `LEFT JOIN`) by a
+  points formula — see the comment above `getLeaderboard()` in `worker/worker.js`
+  for the exact numbers (currently: 10 pts per completed practice/listening/reading,
+  15 + `round(score/5)` pts per passed test). Ties broken by earliest `joined_at`.
+  **Adjust the points numbers directly in that SQL CASE expression** if the teacher
+  wants different weighting — it's the only place the formula lives.
+
+`/auth`'s response now also includes `user.display_name` — the front end
+(`js/leaderboard.js`) shows the first-run modal when that's empty/null.
+
+Migration this needed (already run once, but note it for any fresh DB):
+
+```sql
+ALTER TABLE students ADD COLUMN display_name TEXT;
+```
+
 ---
 
 ## 6. Known pitfalls — read before repeating them
@@ -198,6 +241,13 @@ Progress-test pages you build for these should use `SalimTeaches.showPostCheckAc
   most recent sibling page instead (see §3).
 - **Unit 3's regression** (documented, don't reintroduce): unlock logic must never
   depend on `is_available` except for the very first unit in the whole sequence.
+- **`tg.initData` (Telegram WebApp SDK) is a getter-only property** — you cannot
+  mock it with a plain `tg.initData = "..."` assignment when testing index.html
+  outside real Telegram (the assignment silently no-ops). It'll just stay `""`. If
+  you need to test code gated on `tg.initData` being truthy, either restructure the
+  test to bypass that specific guard, or accept you can only verify the guard
+  correctly blocks the call (which is itself useful — it proves the code won't
+  hit the real backend with empty auth data outside Telegram).
 
 ---
 
@@ -222,15 +272,27 @@ Progress-test pages you build for these should use `SalimTeaches.showPostCheckAc
   needed, its row already exists.
 - ⏳ **Unit 4's workbook video** — same as above, add `videoId` to Unit 4's
   `workbook` block when recorded. No DB change needed.
+- 🔶 **Leaderboard** — front-end (`js/leaderboard.js`, home page card, name-prompt
+  modal, Profile page name field) is built and unit-tested (SQL logic verified
+  against a real SQLite engine; front-end flow verified in a mocked browser
+  session — see the conversation this was built in for details). **Not yet live**:
+  needs the teacher to (1) run the `ALTER TABLE` migration above, and (2) paste
+  `worker/worker.js`'s current content into the Cloudflare dashboard and deploy it.
+  The front-end code was intentionally NOT pushed to GitHub Pages until both of
+  those are confirmed done, to avoid every student seeing a name-prompt modal that
+  can't actually save (old Worker has no `/profile` route yet). **If you're
+  picking this up fresh: ask the teacher whether both steps are done before
+  pushing anything home-page-related, or check the deployed Worker's `/` response
+  isn't from a build that predates this feature.**
 
 ## 8. Status — what's next
 
-**Unit 5**, using the standing workflow in §9. Unit 5 is odd → it needs a
-**Listening** section (not Reading), with a drafted dialogue script + questions
-handed to the teacher before the audio exists (see §9). It needs `sortOrder: 6` in
-`units-config.js` (Unit 4 has 5; no milestone sits between Unit 4 and Unit 5, so no
-gap to leave this time — the next milestone comes after Unit 6, between Unit 6 and
-Unit 7).
+Once the leaderboard is confirmed live (§7), **Unit 5**, using the standing
+workflow in §9. Unit 5 is odd → it needs a **Listening** section (not Reading),
+with a drafted dialogue script + questions handed to the teacher before the audio
+exists (see §9). It needs `sortOrder: 6` in `units-config.js` (Unit 4 has 5; no
+milestone sits between Unit 4 and Unit 5, so no gap to leave this time — the next
+milestone comes after Unit 6, between Unit 6 and Unit 7).
 
 ---
 
