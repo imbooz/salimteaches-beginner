@@ -617,10 +617,12 @@ async function checkListening(){
     document.getElementById('resultText').textContent='Kamida 70% olishga harakat qiling. Xatolarni ko‘rib chiqing va audioni yana tinglang.';
   }
 
+  SalimTeaches.showPostCheckActions("check", 1);
   result.scrollIntoView({behavior:'smooth',block:'center'});
 }
 </script>
 
+<script src="../js/common.js"></script>
 
 <script>
 function getTelegramInitData() {

@@ -826,7 +826,6 @@
 
   <div class="st-quiz-actions">
     <div class="st-quiz-actions__inner">
-      <button class="st-btn st-btn-secondary" type="button" onclick="backToUnit3()">← Unit 3</button>
       <button class="st-btn st-btn-primary" id="checkBtn" type="button" onclick="checkAnswers()">✓ Javoblarni tekshirish</button>
     </div>
   </div>
@@ -927,6 +926,7 @@ async function checkAnswers() {
     saveStatus.className = "st-save-status incorrect";
   }
 
+  SalimTeaches.showPostCheckActions("checkBtn", 3);
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 

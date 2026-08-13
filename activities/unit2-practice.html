@@ -595,7 +595,9 @@ body {
 <div class="actions">
   <button id="check" type="button" class="btn primary">✓ Javoblarimni tekshirish</button>
 </div>
-</div><script>
+</div>
+<script src="../js/common.js"></script>
+<script>
 (function(){
   var answers = [];
   var answered = [];
@@ -707,6 +709,7 @@ body {
         ((saved && saved.error) || 'noma’lum xatolik');
     }
     updateProgress();
+    SalimTeaches.showPostCheckActions("check", 2);
     window.scrollTo(0,document.body.scrollHeight);
   }
 

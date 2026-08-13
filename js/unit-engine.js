@@ -192,15 +192,15 @@ function createUnitCard(unit) {
   card.dataset.unitId = unit.unit_id;
 
   const icon =
-    status.completed ? "🏆" : status.unlocked ? "📖" : "🔒";
+    !status.unlocked ? "🔒" : status.completed ? "🏆" : "📖";
 
   let buttonText;
-  if (status.completed) {
-    buttonText = "Qayta ko‘rish →";
-  } else if (status.unlocked) {
-    buttonText = "Davom etish →";
-  } else {
+  if (!status.unlocked) {
     buttonText = getLockedMessage(unit);
+  } else if (status.completed) {
+    buttonText = "Qayta ko‘rish →";
+  } else {
+    buttonText = "Davom etish →";
   }
 
   card.innerHTML = `
@@ -225,7 +225,7 @@ function createUnitCard(unit) {
       </div>
     ` : ""}
 
-    ${status.completed ? `
+    ${status.completed && status.unlocked ? `
       <div class="completed-badge">✓ Tugallangan</div>
     ` : ""}
 

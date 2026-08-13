@@ -387,6 +387,7 @@ body {
 <button id="check" type="button" class="btn primary">✓ Javoblarimni tekshirish</button>
 </div></div>
 
+<script src="../js/common.js"></script>
 <script>
 const TOTAL=50;
 const answeredSet=new Set();
@@ -516,6 +517,7 @@ async function checkTest(){
  const saved=await reportActivityProgress(percent>=70,percent);
  document.getElementById('saveStatus').textContent=saved&&saved.success===true?'✓ Natijangiz saqlandi':'⚠ Natijani saqlashda muammo: '+((saved&&saved.error)||'noma’lum xatolik');
  document.getElementById('saveStatus').style.color=saved&&saved.success===true?'var(--good)':'var(--bad)';
+ SalimTeaches.showPostCheckActions("check", 2);
  result.scrollIntoView({behavior:'smooth',block:'center'});
 }
 function getTelegramInitData(){try{const s=sessionStorage.getItem('salimteaches_initData');if(s)return s}catch(e){}try{if(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.initData)return Telegram.WebApp.initData}catch(e){}return ''}

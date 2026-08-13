@@ -653,10 +653,12 @@ async function checkTest(){
 
  document.getElementById('resultTitle').textContent=percent>=70?'🎉 Tabriklaymiz!':'💪 Yana bir marta urinib ko‘ring';
  document.getElementById('resultText').textContent=percent>=70?'Siz Unit 1 testidan kamida 70% oldingiz. Unitni tugatish uchun talab bajarildi.':'Unit 1 ni tugatish uchun kamida 70% kerak. Xatolarni ko‘rib chiqing va testni qayta ishlang.';
+ SalimTeaches.showPostCheckActions("check", 1);
  result.scrollIntoView({behavior:'smooth',block:'center'});
 }
 </script>
 
+<script src="../js/common.js"></script>
 
 <script>
 function getTelegramInitData() {

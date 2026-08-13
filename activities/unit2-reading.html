@@ -467,6 +467,7 @@ body {
   </div>
 </div>
 </div>
+<script src="../js/common.js"></script>
 <script>
 const total = 15;
 
@@ -563,6 +564,7 @@ async function checkReading(){
     saveStatus.textContent="⚠ Natijangizni saqlashda muammo: "+((saved&&saved.error)||"noma’lum xatolik");
   }
   updateProgress();
+  SalimTeaches.showPostCheckActions("check", 2);
   result.scrollIntoView({behavior:"smooth",block:"center"});
 }
 
