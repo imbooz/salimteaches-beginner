@@ -90,6 +90,7 @@
 
     document.getElementById("unit3ProgressPercent").textContent =
       progress + "%";
+
     document.getElementById("unit3ProgressFill").style.width =
       progress + "%";
 
@@ -402,6 +403,7 @@
     });
 
     const count = document.getElementById("unitCount");
+
     if (count) {
       const cards =
         document.querySelectorAll("#unitsContainer .unit-card").length;
@@ -419,9 +421,20 @@
     }
 
     const unit = getUnit3();
-    const status = getUnitStatus(unit);
 
-    if (!status.unlocked) {
+    // Unit 3 is unlocked by Unit 2 completion. Do not use the generic
+    // getUnitStatus() here because its previous-unit lookup depends on the
+    // backend unit metadata and can disagree with the menu card.
+    const unit2Progress =
+      courseData?.unitProgress?.[2];
+
+    const unit3Unlocked =
+      Boolean(
+        unit2Progress &&
+        Number(unit2Progress.completed) === 1
+      );
+
+    if (!unit3Unlocked) {
       tg.showAlert("Avval Unit 2 ni tugating.");
       return;
     }
