@@ -136,12 +136,19 @@ const UNIT_CONFIGS = [
         file: "unit3-practice.html"
       },
       {
+        type: "listening",
+        icon: "🎧",
+        title: "Listening",
+        subtitle: "3 ta dialog va 15 ta savol.",
+        file: "unit3-listening.html"
+      },
+      {
         type: "test",
         icon: "📝",
         title: "Unit 3 Test",
         subtitle: "Unitni tugatish uchun kamida 70% kerak.",
         file: "unit3-test.html",
-        requires: ["practice"]
+        requires: ["practice", "listening"]
       }
     ]
   }
