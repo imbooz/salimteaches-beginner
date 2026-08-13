@@ -473,7 +473,7 @@ const total = 15;
 
 function normalize(value){
   return String(value || "").toLowerCase()
-    .replace(/[“”‘’]/g,"'").replace(/[.,!?]/g,"")
+    .replace(/[^\p{L}\p{N}\s]/gu,"")
     .replace(/\s+/g," ").trim();
 }
 

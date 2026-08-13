@@ -502,7 +502,7 @@ function norm(v){
   return String(v ?? '')
     .trim()
     .toLowerCase()
-    .replace(/[’‘]/g, "'")
+    .replace(/[^\p{L}\p{N}\s]/gu, '')
     .replace(/\s+/g, ' ');
 }
 

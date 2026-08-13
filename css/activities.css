@@ -344,6 +344,26 @@
 /* Unit 3 practice-specific rules, extracted from the HTML. */
 .st-question__title b { color: #5865f2; }
 
+.st-text-input {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: #fbfcfe;
+  border-radius: 11px;
+  padding: 12px;
+  font-size: 15px;
+  color: var(--text);
+  outline: none;
+  font-family: inherit;
+}
+
+.st-text-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(88,101,242,.1);
+}
+
+.st-text-input.is-correct { border-color: #bfead6; background: #f4fcf8; }
+.st-text-input.is-wrong { border-color: #ffd0d0; background: #fff8f8; }
+
 .st-answer-note {
   margin: 10px 14px 0;
   color: #747b8c;

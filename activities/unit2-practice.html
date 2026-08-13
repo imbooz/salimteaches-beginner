@@ -1,815 +1,999 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><title>SalimTeaches — Unit 1 Interactive Practice</title><style>
-:root{--bg:#f5f7fb;--card:#fff;--ink:#182033;--muted:#647089;--blue:#5b5ce2;--green:#168a55;--red:#c83b4b;--border:#e3e7ef}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#eef0ff,#f8fbff);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--ink);padding:18px}
-.container{max-width:760px;margin:0 auto}.hero{background:#20224d;color:white;border-radius:22px;padding:26px 22px;margin-bottom:16px}.hero h1{margin:0 0 8px;font-size:27px}.hero p{margin:0;color:#dfe1ff;line-height:1.5}
-.progress{height:9px;background:#e6e9f3;border-radius:20px;overflow:hidden;margin:12px 0 20px}.bar{height:100%;background:linear-gradient(90deg,#5b5ce2,#8d72ff);width:0}
-.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 5px 18px rgba(28,35,65,.06)}.qtitle{font-weight:700;line-height:1.45;margin-bottom:13px}.num{color:#5b5ce2}
-.option{display:block;padding:13px 14px;border:1px solid #e1e5ee;border-radius:12px;margin:8px 0;cursor:pointer;background:#fff}.option input{margin-right:9px}.option:active{background:#f0f1ff}
-input[type=text]{width:100%;padding:14px;border:1px solid #d8deea;border-radius:12px;font-size:16px;outline:none}.feedback{display:none;margin-top:12px;padding:12px;border-radius:12px;line-height:1.45}.correct{display:block;background:#eaf8f0;color:#176a43}.wrong{display:block;background:#fff0f1;color:#9d2736}
-.actions{position:sticky;bottom:10px;background:rgba(245,247,251,.94);backdrop-filter:blur(8px);padding:10px 0;display:flex;gap:10px}.btn{border:0;border-radius:13px;padding:15px 18px;font-size:16px;font-weight:700;cursor:pointer;touch-action:manipulation}.primary{background:#5b5ce2;color:white;flex:1}.secondary{background:#e9ebf4;color:#252b40}.actions{
-  position:sticky;
-  bottom:10px;
-  z-index:1000;
-  background:rgba(245,247,251,.96);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  padding:10px 0;
-  display:flex;
-  gap:10px;
-}
-.actions-inner{
-  max-width:760px;
-  width:100%;
-  margin:auto;
-  display:flex;
-  gap:10px;
-}
-.actions .btn{
-  flex:1;
-  min-width:0;
-  border:0;
-  border-radius:13px;
-  padding:15px 18px;
-  font-size:16px;
-  font-weight:700;
-  cursor:pointer;
-  touch-action:manipulation;
-}
-.actions .primary{
-  background:#5b5ce2;
-  color:#fff;
-}
-.actions .secondary{
-  background:#e9ebf4;
-  color:#252b40;
-}
-.actions .unit-back-button{
-  background:#e9ebf4;
-  color:#252b40;
-}
-.actions .reset-hidden{
-  display:none !important;
-}
-.result{display:none;text-align:center;background:#20224d;color:white;border-radius:18px;padding:22px;margin:18px 0}.result strong{font-size:28px}.tip{color:var(--muted);font-size:14px;line-height:1.5}
-@media(max-width:520px){body{padding:11px}.hero{padding:22px 18px}.card{padding:17px}.hero h1{font-size:24px}.btn{font-size:15px}}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SalimTeaches — Unit 2 Interactive Practice</title>
 
-.activity-nav{
-  position:sticky;top:0;z-index:1000;
-  display:flex;align-items:center;gap:10px;
-  padding:10px 0 12px;
-  background:rgba(245,247,251,.96);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid #e5e8f0;
-  margin-bottom:10px;
-}
-.activity-back{
-  border:0;background:#fff;color:#3f46c8;
-  border:1px solid #dfe3ef;border-radius:12px;
-  padding:9px 12px;font-size:14px;font-weight:800;
-  cursor:pointer;box-shadow:0 3px 10px rgba(20,30,60,.05);
-}
-.activity-label{font-size:13px;font-weight:800;color:#626b7e}
-.save-status{margin-top:10px;font-size:13px;font-weight:700}
-.save-status.ok{color:#149b66}.save-status.err{color:#d84a4a}
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/activities.css">
 
+  <style>
+    /* Small Unit 1/2 consistency overrides — no change to shared CSS. */
+    .st-activity-nav__back {
+      background:#eef0ff;
+      color:#5865f2;
+      border-radius:13px;
+      padding:10px 15px;
+      font-size:15px;
+    }
 
-/* APPROVED BOTTOM ACTION BAR — based on Unit 2 Test reference */
-.actions{
-  position:sticky;
-  bottom:10px;
-  z-index:1000;
-  background:rgba(245,247,251,.96);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  padding:10px 0;
-  display:flex;
-  gap:10px;
-}
-.actions-inner{
-  max-width:760px;
-  width:100%;
-  margin:auto;
-  display:flex;
-  gap:10px;
-}
-.actions .btn,
-.actions .action,
-.actions .check{
-  flex:1;
-  min-width:0;
-  box-sizing:border-box;
-  border:0;
-  border-radius:13px;
-  padding:15px 18px;
-  font-size:16px;
-  font-weight:700;
-  cursor:pointer;
-  touch-action:manipulation;
-}
-.actions .primary,
-.actions .check{
-  background:#5b5ce2;
-  color:#fff;
-}
-.actions .secondary{
-  background:#e9ebf4;
-  color:#252b40;
-}
-.actions .reset-hidden,
+    .st-activity-header {
+      padding:24px 18px 14px;
+    }
 
+    .st-activity-header h1 {
+      font-size:27px;
+      line-height:1.2;
+      margin:7px 0 5px;
+    }
 
-</style><script src="https://telegram.org/js/telegram-web-app.js"></script>
-<style id="practice-navigation-fix">
-.actions{
-  position:sticky;
-  bottom:10px;
-  z-index:1000;
-  background:rgba(245,247,251,.96);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  padding:10px 0;
-  display:flex;
-  gap:10px;
-}
-.actions .btn{flex:1;min-width:0}
-.actions .unit-back-button{background:#e9ebf4;color:#252b40}
-.actions .reset-hidden{display:none !important}
-</style><style id="practice-top-consistency">
-.practice-top{
-  margin: -18px -18px 18px;
-  background:#fff;
-  border-bottom:1px solid #e2e5ee;
-}
-.practice-top-nav{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 14px;
-  min-height:52px;
-  border-bottom:1px solid #e7e9f0;
-}
-.practice-top-back{
-  border:0;
-  border-radius:13px;
-  padding:10px 15px;
-  background:#eef0ff;
-  color:#5865f2;
-  font-size:15px;
-  font-weight:800;
-  cursor:pointer;
-}
-.practice-top-title{
-  font-size:13px;
-  font-weight:800;
-  color:#5e6679;
-}
-.practice-top-info{
-  padding:16px 16px 14px;
-}
-.practice-kicker{
-  color:#5865f2;
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:.08em;
-  margin-bottom:8px;
-}
-.practice-heading h1{
-  margin:0 0 5px;
-  font-size:25px;
-  line-height:1.2;
-  color:#182033;
-}
-.practice-heading p{
-  margin:0 0 18px;
-  color:#647089;
-  font-size:13px;
-  line-height:1.45;
-}
-.practice-progress-label{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:12px;
-  font-weight:800;
-  color:#273047;
-  margin-bottom:8px;
-}
-.practice-progress-track{
-  height:8px;
-  background:#e6e9f3;
-  border-radius:999px;
-  overflow:hidden;
-}
-.practice-progress-bar{
-  height:100%;
-  width:0%;
-  background:#5b5ce2;
-  border-radius:999px;
-  transition:width .2s ease;
-}
-@media(max-width:520px){
-  .practice-top{margin:-11px -11px 18px}
-  .practice-heading h1{font-size:24px}
-}
-</style>
+    .st-activity-subtitle {
+      color:#647089;
+      font-size:14px;
+      line-height:1.45;
+      margin:0;
+    }
 
-<style id="practice-test-header-match">
-body{
-  margin:0 !important;
-  padding:0 !important;
-  background:var(--bg) !important;
-}
-.container{
-  max-width:760px;
-  margin:auto;
-  padding-bottom:110px;
-}
-.practice-test-nav{
-  position:sticky;
-  top:0;
-  z-index:30;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 14px;
-  background:rgba(255,255,255,.96);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(12px);
-}
-.practice-test-back{
-  border:0;
-  border-radius:13px;
-  padding:12px 15px;
-  background:#eef0ff;
-  color:var(--blue);
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer;
-}
-.practice-test-label{
-  color:var(--muted);
-  font-size:12px;
-  font-weight:700;
-}
-.practice-test-header{
-  padding:24px 18px 14px;
-}
-.practice-test-brand{
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:.8px;
-  color:var(--blue);
-}
-.practice-test-header h1{
-  font-size:27px;
-  margin:7px 0 5px;
-  color:var(--ink);
-}
-.practice-test-subtitle{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.45;
-  margin:0;
-}
-.practice-test-progress{
-  position:sticky;
-  top:53px;
-  z-index:10;
-  background:rgba(245,247,251,.94);
-  backdrop-filter:blur(10px);
-  padding:9px 18px 12px;
-  border-bottom:1px solid var(--border);
-}
-.practice-test-progress-row{
-  display:flex;
-  justify-content:space-between;
-  font-size:12px;
-  font-weight:700;
-  margin-bottom:7px;
-}
-.practice-test-progressbar{
-  height:7px;
-  background:#e4e7ef;
-  border-radius:10px;
-  overflow:hidden;
-}
-.practice-test-progressfill{
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,var(--blue),#7c83f5);
-  transition:.3s;
-}
+    .st-choice-grid {
+      grid-template-columns:1fr;
+    }
 
-/* APPROVED STANDARD BOTTOM ACTION BAR — final override */
-body {
-  padding-bottom: 110px !important;
-}
+    .st-quiz-actions__inner {
+      justify-content:flex-end;
+    }
 
-.actions {
-  position: fixed !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  z-index: 1000 !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  background: #fff !important;
-  border-top: 1px solid var(--border, #e2e5ee) !important;
-  padding: 12px 14px 16px !important;
-  margin: 0 !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
+    .st-quiz-actions__inner .st-btn-primary {
+      flex:1;
+    }
 
-.actions-inner {
-  width: 100% !important;
-  max-width: 760px !important;
-  margin: 0 auto !important;
-  padding: 0 4px !important;
-  box-sizing: border-box !important;
-  display: flex !important;
-  gap: 9px !important;
-}
+    .st-quiz-actions__inner .st-btn-secondary {
+      display:none;
+    }
 
-.actions > button {
-  width: 100% !important;
-  box-sizing: border-box !important;
-}
+    @media (max-width:560px) {
+      .st-choice-grid {
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
 
-.actions button {
-  box-sizing: border-box !important;
-}
+<body>
+<div class="st-quiz-page">
 
-.actions-inner .check,
-.actions-inner #check,
-.actions > #check {
-  flex: 1 1 auto !important;
-  width: 100% !important;
-  min-width: 0 !important;
-}
+  <nav class="st-activity-nav">
+    <button class="st-activity-nav__back" type="button" onclick="backToUnit2()">← Unit 2</button>
+    <div class="st-activity-nav__label">SalimTeaches • Unit 2</div>
+  </nav>
 
+  <header class="st-activity-header">
+    <div class="st-activity-brand">SALIMTEACHES • BEGINNER</div>
+    <h1>📝 2-unit — Interaktiv mashqlar</h1>
+    <p class="st-activity-subtitle">Alphabet, spelling, hotels, numbers, hotel room vocabulary, this/that/these/those, cafés, plurals va a/an.</p>
+  </header>
 
-
-</style>
-
-</head><body>
-
-<div class="practice-test-nav">
-  <button class="practice-test-back" type="button" onclick="backToUnit2()">← Unit 2</button>
-  <div class="practice-test-label">SalimTeaches • Unit 2</div>
-</div>
-<div class="container">
-<header class="practice-test-header">
-  <div class="practice-test-brand">SALIMTEACHES • BEGINNER</div>
-  <h1>📝 2-unit — Interaktiv mashqlar</h1>
-  <p class="practice-test-subtitle">Alphabet, spelling, hotels, numbers, hotel room vocabulary, this/that/these/those, cafés, plurals va a/an.</p>
-</header>
-<div class="practice-test-progress">
-  <div class="practice-test-progress-row">
-    <span>Mashq jarayoni</span>
-    <span id="answered">0 / 30</span>
+  <div class="st-quiz-progress">
+    <div class="st-quiz-progress__row">
+      <span>Mashq jarayoni</span>
+      <span id="answered">0 / 30</span>
+    </div>
+    <div class="st-quiz-progress__bar">
+      <div class="st-quiz-progress__fill" id="topProgressFill"></div>
+    </div>
   </div>
-  <div class="practice-test-progressbar">
-    <div class="practice-test-progressfill" id="topProgressFill"></div>
+
+  <div class="st-answer-note">
+    Javoblar tekshirilganda har bir savol bo‘yicha to‘g‘ri javob va qisqa izoh ko‘rsatiladi.
+  </div>
+
+  <form id="quiz">
+    <section class="st-question" id="q0">
+      <div class="st-question__top">
+        <div class="st-question__number">1</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Ingliz alifbosidagi <b>A</b> harfi qanday talaffuz qilinadi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q0" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">[ey]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q0" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">[ay]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q0" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">[iy]</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f0"></div>
+    </section>
+<section class="st-question" id="q1">
+      <div class="st-question__top">
+        <div class="st-question__number">2</div>
+        <div class="st-question__body">
+          <div class="st-question__title"><b>B</b> harfining o‘zbekcha talaffuzini tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q1" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">[bay]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q1" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">[biy]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q1" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">[bi]</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f1"></div>
+    </section>
+<section class="st-question" id="q2">
+      <div class="st-question__top">
+        <div class="st-question__number">3</div>
+        <div class="st-question__body">
+          <div class="st-question__title"><b>C</b> harfi qanday talaffuz qilinadi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q2" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">[key]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q2" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">[sey]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q2" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">[siy]</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f2"></div>
+    </section>
+<section class="st-question" id="q3">
+      <div class="st-question__top">
+        <div class="st-question__number">4</div>
+        <div class="st-question__body">
+          <div class="st-question__title"><b>D</b> harfining talaffuzini tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q3" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">[dey]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q3" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">[di]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q3" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">[diy]</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f3"></div>
+    </section>
+<section class="st-question" id="q4">
+      <div class="st-question__top">
+        <div class="st-question__number">5</div>
+        <div class="st-question__body">
+          <div class="st-question__title">9-raqamli harf — <b>I</b>. Uning talaffuzi qaysi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q4" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">[ay]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q4" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">[ey]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q4" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">[iy]</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f4"></div>
+    </section>
+<section class="st-question" id="q5">
+      <div class="st-question__top">
+        <div class="st-question__number">6</div>
+        <div class="st-question__body">
+          <div class="st-question__title"><b>Q</b> harfi qanday talaffuz qilinadi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q5" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">[ku]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q5" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">[kyou]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q5" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">[kyu]</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f5"></div>
+    </section>
+<section class="st-question" id="q6">
+      <div class="st-question__top">
+        <div class="st-question__number">7</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Ism <b>Ali</b> ni harflab berishning to‘g‘ri variantini tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q6" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">[ey] - [el] - [ay]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q6" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">[ay] - [el] - [ay]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q6" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">[ey] - [i] - [ay]</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f6"></div>
+    </section>
+<section class="st-question" id="q7">
+      <div class="st-question__top">
+        <div class="st-question__number">8</div>
+        <div class="st-question__body">
+          <div class="st-question__title"><b>Sam</b> ismining to‘g‘ri spellingini tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q7" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">[es] - [ay] - [em]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q7" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">[es] - [ey] - [em]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q7" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">[siy] - [ey] - [em]</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f7"></div>
+    </section>
+<section class="st-question" id="q8">
+      <div class="st-question__top">
+        <div class="st-question__number">9</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Familiya <b>Jones</b> qanday harflanadi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q8" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">[jey] - [ou] - [en] - [iy] - [es]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q8" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">[ji] - [ou] - [en] - [iy] - [es]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q8" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">[jey] - [ay] - [en] - [iy] - [es]</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f8"></div>
+    </section>
+<section class="st-question" id="q9">
+      <div class="st-question__top">
+        <div class="st-question__number">10</div>
+        <div class="st-question__body">
+          <div class="st-question__title"><b>Brown</b> familiyasining to‘g‘ri spellingini tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q9" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">[biy] - [ar] - [ou] - [dablyu] - [en]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q9" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">[biy] - [ar] - [ou] - [yu] - [en]</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q9" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">[bay] - [ar] - [ou] - [dablyu] - [en]</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f9"></div>
+    </section>
+<section class="st-question" id="q10">
+      <div class="st-question__top">
+        <div class="st-question__number">11</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Mehmonxonaga kirib, broningiz borligini aytmoqchisiz. Qaysi gap mos?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q10" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Excuse me, I am a reservation.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q10" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">I have hotel.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q10" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Excuse me, I have a reservation.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f10"></div>
+    </section>
+<section class="st-question" id="q11">
+      <div class="st-question__top">
+        <div class="st-question__number">12</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Receptionist: “Yes, ______?”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q11" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">What’s room, please?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q11" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">How room, please?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q11" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">What’s your name, please?</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f11"></div>
+    </section>
+<section class="st-question" id="q12">
+      <div class="st-question__top">
+        <div class="st-question__number">13</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Familiya so‘rash uchun qaysi savol to‘g‘ri?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q12" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">How do you spell your last name, please?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q12" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">How are you spell your last name, please?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q12" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">What do you spell your last name, please?</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f12"></div>
+    </section>
+<section class="st-question" id="q13">
+      <div class="st-question__top">
+        <div class="st-question__number">14</div>
+        <div class="st-question__body">
+          <div class="st-question__title">“You are in room 13.” gapidagi <b>13</b> qaysi so‘z?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q13" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Thirty</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q13" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Three</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q13" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Thirteen</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f13"></div>
+    </section>
+<section class="st-question" id="q14">
+      <div class="st-question__top">
+        <div class="st-question__number">15</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Mehmonxonadagi xona raqami <b>18</b>. Uni qanday aytasiz?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q14" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Eight</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q14" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Eighteen</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q14" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Eighty</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f14"></div>
+    </section>
+<section class="st-question" id="q15">
+      <div class="st-question__top">
+        <div class="st-question__number">16</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Xonadagi chiroq inglizcha nima?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q15" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">lamp</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q15" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">desk</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q15" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">key</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f15"></div>
+    </section>
+<section class="st-question" id="q16">
+      <div class="st-question__top">
+        <div class="st-question__number">17</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Mehmonxona xonasidagi uxlash uchun ishlatiladigan narsa?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q16" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">chair</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q16" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">bed</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q16" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">desk</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f16"></div>
+    </section>
+<section class="st-question" id="q17">
+      <div class="st-question__top">
+        <div class="st-question__number">18</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Eshikni ochish uchun ishlatiladigan narsa?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q17" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">pen</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q17" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">radio</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q17" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">key</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f17"></div>
+    </section>
+<section class="st-question" id="q18">
+      <div class="st-question__top">
+        <div class="st-question__number">19</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Yozuvlar qilish uchun ishlatiladigan daftar?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q18" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">phone</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q18" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">television</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q18" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">notebook</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f18"></div>
+    </section>
+<section class="st-question" id="q19">
+      <div class="st-question__top">
+        <div class="st-question__number">20</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Mehmonxona xonasidagi aloqa vositasi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q19" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">chair</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q19" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">desk</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q19" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">phone</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f19"></div>
+    </section>
+<section class="st-question" id="q20">
+      <div class="st-question__top">
+        <div class="st-question__number">21</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Qo‘lingizdagi bitta kalitni ko‘rsatib: “_____ is my key.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q20" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">This</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q20" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Those</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q20" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">These</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f20"></div>
+    </section>
+<section class="st-question" id="q21">
+      <div class="st-question__top">
+        <div class="st-question__number">22</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Uzoqda turgan bir nechta stullarni ko‘rsatib: “_____ are chairs.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q21" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">That</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q21" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Those</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q21" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">This</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f21"></div>
+    </section>
+<section class="st-question" id="q22">
+      <div class="st-question__top">
+        <div class="st-question__number">23</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Biror narsa yoningizda ekanini ko‘rsatish uchun qaysi so‘z mos: “The keys are _____.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q22" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">there</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q22" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">here</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q22" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">those</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f22"></div>
+    </section>
+<section class="st-question" id="q23">
+      <div class="st-question__top">
+        <div class="st-question__number">24</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Kafeda ichimliklardan biri: <b>coffee</b>. Bu nima?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q23" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">tea</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q23" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">coffee</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q23" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">juice</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f23"></div>
+    </section>
+<section class="st-question" id="q24">
+      <div class="st-question__top">
+        <div class="st-question__number">25</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Gazli mineral suvning inglizcha varianti qaysi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q24" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">still mineral water</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q24" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">orange juice</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q24" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">sparkling mineral water</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f24"></div>
+    </section>
+<section class="st-question" id="q25">
+      <div class="st-question__top">
+        <div class="st-question__number">26</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Kafeda qahva buyurtma qilmoqchisiz. Eng mos gap?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q25" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">I like coffee you.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q25" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">I’d like a coffee, please.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q25" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Give coffee me.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f25"></div>
+    </section>
+<section class="st-question" id="q26">
+      <div class="st-question__top">
+        <div class="st-question__number">27</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Waiter: “I’d like a coffee.” Sizga qaysi savol berilishi mumkin?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q26" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Would you like black or white?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q26" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Are you a hotel?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q26" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">What’s your room?</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f26"></div>
+    </section>
+<section class="st-question" id="q27">
+      <div class="st-question__top">
+        <div class="st-question__number">28</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Qaysi variant to‘g‘ri? Bu mashqda a/an ni <b>talaffuzga qarab</b> tanlang: <b>___ apple</b>.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q27" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">a apple</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q27" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">an apple</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q27" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">an apples</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f27"></div>
+    </section>
+<section class="st-question" id="q28">
+      <div class="st-question__top">
+        <div class="st-question__number">29</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Aynan qaysi gap ko‘plikdagi <b>keys</b> uchun to‘g‘ri?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q28" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Here are your keys.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q28" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Here is your keys.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q28" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Here you are your keys.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f28"></div>
+    </section>
+<section class="st-question" id="q29">
+      <div class="st-question__top">
+        <div class="st-question__number">30</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Waiter sizga qahvani uzatyapti. Qaysi gap “Mana, oling” ma’nosida ishlatiladi? <br><span class="tip">Farqni eslang: <b>Here is your coffee</b> — “Mana qahvangiz”; <b>Here you are</b> — biror narsani odamga berayotganda aytiladi.</span></div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q29" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Here are your coffee.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q29" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Here you are.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q29" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Here you is.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f29"></div>
+    </section>
+  </form>
+
+  <div id="result" class="st-quiz-result">
+    <div class="st-quiz-result__score"><span id="score">0</span> / 30</div>
+    <div class="st-quiz-result__title" id="resultTitle"></div>
+    <div class="st-quiz-result__text" id="resultText"></div>
+    <div id="saveStatus" class="st-save-status"></div>
+  </div>
+
+  <div class="st-quiz-actions">
+    <div class="st-quiz-actions__inner">
+      <button class="st-btn st-btn-secondary" type="button" onclick="backToUnit2()">← Unit 2</button>
+      <button class="st-btn st-btn-primary" id="checkBtn" type="button" onclick="checkAnswers()">✓ Javoblarni tekshirish</button>
+    </div>
   </div>
 </div>
 
-
-
-
-
-<form id="quiz">
-
-<div class="card" id="q0" data-type="mc" data-answer="[ey]" data-explanation="A harfi [ey] deb talaffuz qilinadi.">
-<div class="qtitle"><span class="num">1.</span> Ingliz alifbosidagi <b>A</b> harfi qanday talaffuz qilinadi?</div>
-
-<label class="option"><input type="radio" name="q0" value="[ey]"> [ey]</label>
-<label class="option"><input type="radio" name="q0" value="[ay]"> [ay]</label>
-<label class="option"><input type="radio" name="q0" value="[iy]"> [iy]</label><div id="f0" class="feedback"></div></div>
-
-<div class="card" id="q1" data-type="mc" data-answer="[biy]" data-explanation="B harfi [biy] deb talaffuz qilinadi.">
-<div class="qtitle"><span class="num">2.</span> <b>B</b> harfining o‘zbekcha talaffuzini tanlang.</div>
-
-<label class="option"><input type="radio" name="q1" value="[bay]"> [bay]</label>
-<label class="option"><input type="radio" name="q1" value="[biy]"> [biy]</label>
-<label class="option"><input type="radio" name="q1" value="[bi]"> [bi]</label><div id="f1" class="feedback"></div></div>
-
-<div class="card" id="q2" data-type="mc" data-answer="[siy]" data-explanation="C harfi [siy] deb talaffuz qilinadi.">
-<div class="qtitle"><span class="num">3.</span> <b>C</b> harfi qanday talaffuz qilinadi?</div>
-
-<label class="option"><input type="radio" name="q2" value="[key]"> [key]</label>
-<label class="option"><input type="radio" name="q2" value="[sey]"> [sey]</label>
-<label class="option"><input type="radio" name="q2" value="[siy]"> [siy]</label><div id="f2" class="feedback"></div></div>
-
-<div class="card" id="q3" data-type="mc" data-answer="[diy]" data-explanation="D harfi [diy] deb talaffuz qilinadi.">
-<div class="qtitle"><span class="num">4.</span> <b>D</b> harfining talaffuzini tanlang.</div>
-
-<label class="option"><input type="radio" name="q3" value="[dey]"> [dey]</label>
-<label class="option"><input type="radio" name="q3" value="[di]"> [di]</label>
-<label class="option"><input type="radio" name="q3" value="[diy]"> [diy]</label><div id="f3" class="feedback"></div></div>
-
-<div class="card" id="q4" data-type="mc" data-answer="[ay]" data-explanation="I harfi [ay] deb talaffuz qilinadi.">
-<div class="qtitle"><span class="num">5.</span> 9-raqamli harf — <b>I</b>. Uning talaffuzi qaysi?</div>
-
-<label class="option"><input type="radio" name="q4" value="[ay]"> [ay]</label>
-<label class="option"><input type="radio" name="q4" value="[ey]"> [ey]</label>
-<label class="option"><input type="radio" name="q4" value="[iy]"> [iy]</label><div id="f4" class="feedback"></div></div>
-
-<div class="card" id="q5" data-type="mc" data-answer="[kyu]" data-explanation="Q harfi [kyu] deb talaffuz qilinadi.">
-<div class="qtitle"><span class="num">6.</span> <b>Q</b> harfi qanday talaffuz qilinadi?</div>
-
-<label class="option"><input type="radio" name="q5" value="[ku]"> [ku]</label>
-<label class="option"><input type="radio" name="q5" value="[kyou]"> [kyou]</label>
-<label class="option"><input type="radio" name="q5" value="[kyu]"> [kyu]</label><div id="f5" class="feedback"></div></div>
-
-<div class="card" id="q6" data-type="mc" data-answer="[ey] - [el] - [ay]" data-explanation="Ali: A — [ey], L — [el], I — [ay].">
-<div class="qtitle"><span class="num">7.</span> Ism <b>Ali</b> ni harflab berishning to‘g‘ri variantini tanlang.</div>
-
-<label class="option"><input type="radio" name="q6" value="[ey] - [el] - [ay]"> [ey] - [el] - [ay]</label>
-<label class="option"><input type="radio" name="q6" value="[ay] - [el] - [ay]"> [ay] - [el] - [ay]</label>
-<label class="option"><input type="radio" name="q6" value="[ey] - [i] - [ay]"> [ey] - [i] - [ay]</label><div id="f6" class="feedback"></div></div>
-
-<div class="card" id="q7" data-type="mc" data-answer="[es] - [ey] - [em]" data-explanation="Sam: S — [es], A — [ey], M — [em].">
-<div class="qtitle"><span class="num">8.</span> <b>Sam</b> ismining to‘g‘ri spellingini tanlang.</div>
-
-<label class="option"><input type="radio" name="q7" value="[es] - [ay] - [em]"> [es] - [ay] - [em]</label>
-<label class="option"><input type="radio" name="q7" value="[es] - [ey] - [em]"> [es] - [ey] - [em]</label>
-<label class="option"><input type="radio" name="q7" value="[siy] - [ey] - [em]"> [siy] - [ey] - [em]</label><div id="f7" class="feedback"></div></div>
-
-<div class="card" id="q8" data-type="mc" data-answer="[jey] - [ou] - [en] - [iy] - [es]" data-explanation="Jones: J — [jey], O — [ou], N — [en], E — [iy], S — [es].">
-<div class="qtitle"><span class="num">9.</span> Familiya <b>Jones</b> qanday harflanadi?</div>
-
-<label class="option"><input type="radio" name="q8" value="[jey] - [ou] - [en] - [iy] - [es]"> [jey] - [ou] - [en] - [iy] - [es]</label>
-<label class="option"><input type="radio" name="q8" value="[ji] - [ou] - [en] - [iy] - [es]"> [ji] - [ou] - [en] - [iy] - [es]</label>
-<label class="option"><input type="radio" name="q8" value="[jey] - [ay] - [en] - [iy] - [es]"> [jey] - [ay] - [en] - [iy] - [es]</label><div id="f8" class="feedback"></div></div>
-
-<div class="card" id="q9" data-type="mc" data-answer="[biy] - [ar] - [ou] - [dablyu] - [en]" data-explanation="Brown: B — [biy], R — [ar], O — [ou], W — [dablyu], N — [en].">
-<div class="qtitle"><span class="num">10.</span> <b>Brown</b> familiyasining to‘g‘ri spellingini tanlang.</div>
-
-<label class="option"><input type="radio" name="q9" value="[biy] - [ar] - [ou] - [dablyu] - [en]"> [biy] - [ar] - [ou] - [dablyu] - [en]</label>
-<label class="option"><input type="radio" name="q9" value="[biy] - [ar] - [ou] - [yu] - [en]"> [biy] - [ar] - [ou] - [yu] - [en]</label>
-<label class="option"><input type="radio" name="q9" value="[bay] - [ar] - [ou] - [dablyu] - [en]"> [bay] - [ar] - [ou] - [dablyu] - [en]</label><div id="f9" class="feedback"></div></div>
-
-<div class="card" id="q10" data-type="mc" data-answer="Excuse me, I have a reservation." data-explanation="Mehmonxonada broningiz borligini aytganda “I have a reservation” ishlatiladi.">
-<div class="qtitle"><span class="num">11.</span> Mehmonxonaga kirib, broningiz borligini aytmoqchisiz. Qaysi gap mos?</div>
-
-<label class="option"><input type="radio" name="q10" value="Excuse me, I am a reservation."> Excuse me, I am a reservation.</label>
-<label class="option"><input type="radio" name="q10" value="I have hotel."> I have hotel.</label>
-<label class="option"><input type="radio" name="q10" value="Excuse me, I have a reservation."> Excuse me, I have a reservation.</label><div id="f10" class="feedback"></div></div>
-
-<div class="card" id="q11" data-type="mc" data-answer="What’s your name, please?">
-<div class="qtitle"><span class="num">12.</span> Receptionist: “Yes, ______?”</div>
-
-<label class="option"><input type="radio" name="q11" value="What’s room, please?"> What’s room, please?</label>
-<label class="option"><input type="radio" name="q11" value="How room, please?"> How room, please?</label>
-<label class="option"><input type="radio" name="q11" value="What’s your name, please?"> What’s your name, please?</label><div id="f11" class="feedback"></div></div>
-
-<div class="card" id="q12" data-type="mc" data-answer="How do you spell your last name, please?" data-explanation="“How do you spell your last name, please?” — familiyangizni qanday harflab aytishni so‘rash uchun ishlatiladi.">
-<div class="qtitle"><span class="num">13.</span> Familiya so‘rash uchun qaysi savol to‘g‘ri?</div>
-
-<label class="option"><input type="radio" name="q12" value="How do you spell your last name, please?"> How do you spell your last name, please?</label>
-<label class="option"><input type="radio" name="q12" value="How are you spell your last name, please?"> How are you spell your last name, please?</label>
-<label class="option"><input type="radio" name="q12" value="What do you spell your last name, please?"> What do you spell your last name, please?</label><div id="f12" class="feedback"></div></div>
-
-<div class="card" id="q13" data-type="mc" data-answer="Thirteen" data-explanation="13 — thirteen. 30 esa thirty.">
-<div class="qtitle"><span class="num">14.</span> “You are in room 13.” gapidagi <b>13</b> qaysi so‘z?</div>
-
-<label class="option"><input type="radio" name="q13" value="Thirty"> Thirty</label>
-<label class="option"><input type="radio" name="q13" value="Three"> Three</label>
-<label class="option"><input type="radio" name="q13" value="Thirteen"> Thirteen</label><div id="f13" class="feedback"></div></div>
-
-<div class="card" id="q14" data-type="mc" data-answer="Eighteen">
-<div class="qtitle"><span class="num">15.</span> Mehmonxonadagi xona raqami <b>18</b>. Uni qanday aytasiz?</div>
-
-<label class="option"><input type="radio" name="q14" value="Eight"> Eight</label>
-<label class="option"><input type="radio" name="q14" value="Eighteen"> Eighteen</label>
-<label class="option"><input type="radio" name="q14" value="Eighty"> Eighty</label><div id="f14" class="feedback"></div></div>
-
-<div class="card" id="q15" data-type="mc" data-answer="lamp">
-<div class="qtitle"><span class="num">16.</span> Xonadagi chiroq inglizcha nima?</div>
-
-<label class="option"><input type="radio" name="q15" value="lamp"> lamp</label>
-<label class="option"><input type="radio" name="q15" value="desk"> desk</label>
-<label class="option"><input type="radio" name="q15" value="key"> key</label><div id="f15" class="feedback"></div></div>
-
-<div class="card" id="q16" data-type="mc" data-answer="bed">
-<div class="qtitle"><span class="num">17.</span> Mehmonxona xonasidagi uxlash uchun ishlatiladigan narsa?</div>
-
-<label class="option"><input type="radio" name="q16" value="chair"> chair</label>
-<label class="option"><input type="radio" name="q16" value="bed"> bed</label>
-<label class="option"><input type="radio" name="q16" value="desk"> desk</label><div id="f16" class="feedback"></div></div>
-
-<div class="card" id="q17" data-type="mc" data-answer="key">
-<div class="qtitle"><span class="num">18.</span> Eshikni ochish uchun ishlatiladigan narsa?</div>
-
-<label class="option"><input type="radio" name="q17" value="pen"> pen</label>
-<label class="option"><input type="radio" name="q17" value="radio"> radio</label>
-<label class="option"><input type="radio" name="q17" value="key"> key</label><div id="f17" class="feedback"></div></div>
-
-<div class="card" id="q18" data-type="mc" data-answer="notebook">
-<div class="qtitle"><span class="num">19.</span> Yozuvlar qilish uchun ishlatiladigan daftar?</div>
-
-<label class="option"><input type="radio" name="q18" value="phone"> phone</label>
-<label class="option"><input type="radio" name="q18" value="television"> television</label>
-<label class="option"><input type="radio" name="q18" value="notebook"> notebook</label><div id="f18" class="feedback"></div></div>
-
-<div class="card" id="q19" data-type="mc" data-answer="phone">
-<div class="qtitle"><span class="num">20.</span> Mehmonxona xonasidagi aloqa vositasi?</div>
-
-<label class="option"><input type="radio" name="q19" value="chair"> chair</label>
-<label class="option"><input type="radio" name="q19" value="desk"> desk</label>
-<label class="option"><input type="radio" name="q19" value="phone"> phone</label><div id="f19" class="feedback"></div></div>
-
-<div class="card" id="q20" data-type="mc" data-answer="This" data-explanation="This/that — birlik; these/those — ko‘plik.">
-<div class="qtitle"><span class="num">21.</span> Qo‘lingizdagi bitta kalitni ko‘rsatib: “_____ is my key.”</div>
-
-<label class="option"><input type="radio" name="q20" value="This"> This</label>
-<label class="option"><input type="radio" name="q20" value="Those"> Those</label>
-<label class="option"><input type="radio" name="q20" value="These"> These</label><div id="f20" class="feedback"></div></div>
-
-<div class="card" id="q21" data-type="mc" data-answer="Those" data-explanation="This/that — birlik; these/those — ko‘plik.">
-<div class="qtitle"><span class="num">22.</span> Uzoqda turgan bir nechta stullarni ko‘rsatib: “_____ are chairs.”</div>
-
-<label class="option"><input type="radio" name="q21" value="That"> That</label>
-<label class="option"><input type="radio" name="q21" value="Those"> Those</label>
-<label class="option"><input type="radio" name="q21" value="This"> This</label><div id="f21" class="feedback"></div></div>
-
-<div class="card" id="q22" data-type="mc" data-answer="here" data-explanation="here — bu yerda/yonimda; there — u yerda.">
-<div class="qtitle"><span class="num">23.</span> Biror narsa yoningizda ekanini ko‘rsatish uchun qaysi so‘z mos: “The keys are _____.”</div>
-
-<label class="option"><input type="radio" name="q22" value="there"> there</label>
-<label class="option"><input type="radio" name="q22" value="here"> here</label>
-<label class="option"><input type="radio" name="q22" value="those"> those</label><div id="f22" class="feedback"></div></div>
-
-<div class="card" id="q23" data-type="mc" data-answer="coffee">
-<div class="qtitle"><span class="num">24.</span> Kafeda ichimliklardan biri: <b>coffee</b>. Bu nima?</div>
-
-<label class="option"><input type="radio" name="q23" value="tea"> choy</label>
-<label class="option"><input type="radio" name="q23" value="coffee"> qahva</label>
-<label class="option"><input type="radio" name="q23" value="juice"> sharbat</label><div id="f23" class="feedback"></div></div>
-
-<div class="card" id="q24" data-type="mc" data-answer="sparkling mineral water">
-<div class="qtitle"><span class="num">25.</span> Gazli mineral suvning inglizcha varianti qaysi?</div>
-
-<label class="option"><input type="radio" name="q24" value="still mineral water"> still mineral water</label>
-<label class="option"><input type="radio" name="q24" value="orange juice"> orange juice</label>
-<label class="option"><input type="radio" name="q24" value="sparkling mineral water"> sparkling mineral water</label><div id="f24" class="feedback"></div></div>
-
-<div class="card" id="q25" data-type="mc" data-answer="I’d like a coffee, please.">
-<div class="qtitle"><span class="num">26.</span> Kafeda qahva buyurtma qilmoqchisiz. Eng mos gap?</div>
-
-<label class="option"><input type="radio" name="q25" value="I like coffee you."> I like coffee you.</label>
-<label class="option"><input type="radio" name="q25" value="I’d like a coffee, please."> I’d like a coffee, please.</label>
-<label class="option"><input type="radio" name="q25" value="Give coffee me."> Give coffee me.</label><div id="f25" class="feedback"></div></div>
-
-<div class="card" id="q26" data-type="mc" data-answer="Would you like black or white?">
-<div class="qtitle"><span class="num">27.</span> Waiter: “I’d like a coffee.” Sizga qaysi savol berilishi mumkin?</div>
-
-<label class="option"><input type="radio" name="q26" value="Would you like black or white?"> Would you like black or white?</label>
-<label class="option"><input type="radio" name="q26" value="Are you a hotel?"> Are you a hotel?</label>
-<label class="option"><input type="radio" name="q26" value="What’s your room?"> What’s your room?</label><div id="f26" class="feedback"></div></div>
-
-<div class="card" id="q27" data-type="mc" data-answer="an apple" data-explanation="Bu mashqda a/an ni talaffuzga qarab tanlaymiz: apple unli tovush bilan boshlanadi, shuning uchun “an apple”.">
-<div class="qtitle"><span class="num">28.</span> Qaysi variant to‘g‘ri? Bu mashqda a/an ni <b>talaffuzga qarab</b> tanlang: <b>___ apple</b>.</div>
-
-<label class="option"><input type="radio" name="q27" value="a apple"> a apple</label>
-<label class="option"><input type="radio" name="q27" value="an apple"> an apple</label>
-<label class="option"><input type="radio" name="q27" value="an apples"> an apples</label><div id="f27" class="feedback">Eslatma: bu mashqda tovushga qaraymiz. <b>apple</b> unli tovush bilan boshlanadi.</div></div>
-
-<div class="card" id="q28" data-type="mc" data-answer="Here are your keys." data-explanation="keys ko‘plik, shuning uchun “Here are your keys.”">
-<div class="qtitle"><span class="num">29.</span> Aynan qaysi gap ko‘plikdagi <b>keys</b> uchun to‘g‘ri?</div>
-
-<label class="option"><input type="radio" name="q28" value="Here are your keys."> Here are your keys.</label>
-<label class="option"><input type="radio" name="q28" value="Here is your keys."> Here is your keys.</label>
-<label class="option"><input type="radio" name="q28" value="Here you are your keys."> Here you are your keys.</label><div id="f28" class="feedback"></div></div>
-
-<div class="card" id="q29" data-type="mc" data-answer="Here you are." data-explanation="“Here you are” biror narsani odamga uzatganda ishlatiladi. “Here is your coffee” esa narsaning o‘zini ko‘rsatish/taqdim etish uchun ishlatiladi.">
-<div class="qtitle"><span class="num">30.</span> Waiter sizga qahvani uzatyapti. Qaysi gap “Mana, oling” ma’nosida ishlatiladi? <br><span class="tip">Farqni eslang: <b>Here is your coffee</b> — “Mana qahvangiz”; <b>Here you are</b> — biror narsani odamga berayotganda aytiladi.</span></div>
-
-<label class="option"><input type="radio" name="q29" value="Here are your coffee."> Here are your coffee.</label>
-<label class="option"><input type="radio" name="q29" value="Here you are."> Here you are.</label>
-<label class="option"><input type="radio" name="q29" value="Here you is."> Here you is.</label><div id="f29" class="feedback"></div></div>
-
-</form>
-<div id="result" class="result">Natijangiz<br><strong id="score">0 / 30</strong><p>Izohlarni o‘qing va xohlasangiz qayta ishlang.</p></div>
-<div class="actions">
-  <button id="check" type="button" class="btn primary">✓ Javoblarimni tekshirish</button>
-</div>
-</div>
 <script src="../js/common.js"></script>
+<script src="../js/progress.js"></script>
+
 <script>
-(function(){
-  var answers = [];
-  var answered = [];
-  var total = 30;
-  var i;
-  for(i=0;i<total;i++){ answers[i]=null; answered[i]=false; }
+"use strict";
 
-  function normalize(x){
-    return String(x || '').toLowerCase().replace(/[.,!?“”"’‘'\-]/g,'').replace(/\s+/g,' ').trim();
-  }
+const questions = [{"type": "mc", "q": "Ingliz alifbosidagi <b>A</b> harfi qanday talaffuz qilinadi?", "a": ["[ey]", "[ay]", "[iy]"], "c": 0, "e": "A harfi [ey] deb talaffuz qilinadi."},
+{"type": "mc", "q": "<b>B</b> harfining o‘zbekcha talaffuzini tanlang.", "a": ["[bay]", "[biy]", "[bi]"], "c": 1, "e": "B harfi [biy] deb talaffuz qilinadi."},
+{"type": "mc", "q": "<b>C</b> harfi qanday talaffuz qilinadi?", "a": ["[key]", "[sey]", "[siy]"], "c": 2, "e": "C harfi [siy] deb talaffuz qilinadi."},
+{"type": "mc", "q": "<b>D</b> harfining talaffuzini tanlang.", "a": ["[dey]", "[di]", "[diy]"], "c": 2, "e": "D harfi [diy] deb talaffuz qilinadi."},
+{"type": "mc", "q": "9-raqamli harf — <b>I</b>. Uning talaffuzi qaysi?", "a": ["[ay]", "[ey]", "[iy]"], "c": 0, "e": "I harfi [ay] deb talaffuz qilinadi."},
+{"type": "mc", "q": "<b>Q</b> harfi qanday talaffuz qilinadi?", "a": ["[ku]", "[kyou]", "[kyu]"], "c": 2, "e": "Q harfi [kyu] deb talaffuz qilinadi."},
+{"type": "mc", "q": "Ism <b>Ali</b> ni harflab berishning to‘g‘ri variantini tanlang.", "a": ["[ey] - [el] - [ay]", "[ay] - [el] - [ay]", "[ey] - [i] - [ay]"], "c": 0, "e": "Ali: A — [ey], L — [el], I — [ay]."},
+{"type": "mc", "q": "<b>Sam</b> ismining to‘g‘ri spellingini tanlang.", "a": ["[es] - [ay] - [em]", "[es] - [ey] - [em]", "[siy] - [ey] - [em]"], "c": 1, "e": "Sam: S — [es], A — [ey], M — [em]."},
+{"type": "mc", "q": "Familiya <b>Jones</b> qanday harflanadi?", "a": ["[jey] - [ou] - [en] - [iy] - [es]", "[ji] - [ou] - [en] - [iy] - [es]", "[jey] - [ay] - [en] - [iy] - [es]"], "c": 0, "e": "Jones: J — [jey], O — [ou], N — [en], E — [iy], S — [es]."},
+{"type": "mc", "q": "<b>Brown</b> familiyasining to‘g‘ri spellingini tanlang.", "a": ["[biy] - [ar] - [ou] - [dablyu] - [en]", "[biy] - [ar] - [ou] - [yu] - [en]", "[bay] - [ar] - [ou] - [dablyu] - [en]"], "c": 0, "e": "Brown: B — [biy], R — [ar], O — [ou], W — [dablyu], N — [en]."},
+{"type": "mc", "q": "Mehmonxonaga kirib, broningiz borligini aytmoqchisiz. Qaysi gap mos?", "a": ["Excuse me, I am a reservation.", "I have hotel.", "Excuse me, I have a reservation."], "c": 2, "e": "Mehmonxonada broningiz borligini aytganda “I have a reservation” ishlatiladi."},
+{"type": "mc", "q": "Receptionist: “Yes, ______?”", "a": ["What’s room, please?", "How room, please?", "What’s your name, please?"], "c": 2, "e": ""},
+{"type": "mc", "q": "Familiya so‘rash uchun qaysi savol to‘g‘ri?", "a": ["How do you spell your last name, please?", "How are you spell your last name, please?", "What do you spell your last name, please?"], "c": 0, "e": "“How do you spell your last name, please?” — familiyangizni qanday harflab aytishni so‘rash uchun ishlatiladi."},
+{"type": "mc", "q": "“You are in room 13.” gapidagi <b>13</b> qaysi so‘z?", "a": ["Thirty", "Three", "Thirteen"], "c": 2, "e": "13 — thirteen. 30 esa thirty."},
+{"type": "mc", "q": "Mehmonxonadagi xona raqami <b>18</b>. Uni qanday aytasiz?", "a": ["Eight", "Eighteen", "Eighty"], "c": 1, "e": ""},
+{"type": "mc", "q": "Xonadagi chiroq inglizcha nima?", "a": ["lamp", "desk", "key"], "c": 0, "e": ""},
+{"type": "mc", "q": "Mehmonxona xonasidagi uxlash uchun ishlatiladigan narsa?", "a": ["chair", "bed", "desk"], "c": 1, "e": ""},
+{"type": "mc", "q": "Eshikni ochish uchun ishlatiladigan narsa?", "a": ["pen", "radio", "key"], "c": 2, "e": ""},
+{"type": "mc", "q": "Yozuvlar qilish uchun ishlatiladigan daftar?", "a": ["phone", "television", "notebook"], "c": 2, "e": ""},
+{"type": "mc", "q": "Mehmonxona xonasidagi aloqa vositasi?", "a": ["chair", "desk", "phone"], "c": 2, "e": ""},
+{"type": "mc", "q": "Qo‘lingizdagi bitta kalitni ko‘rsatib: “_____ is my key.”", "a": ["This", "Those", "These"], "c": 0, "e": "This/that — birlik; these/those — ko‘plik."},
+{"type": "mc", "q": "Uzoqda turgan bir nechta stullarni ko‘rsatib: “_____ are chairs.”", "a": ["That", "Those", "This"], "c": 1, "e": "This/that — birlik; these/those — ko‘plik."},
+{"type": "mc", "q": "Biror narsa yoningizda ekanini ko‘rsatish uchun qaysi so‘z mos: “The keys are _____.”", "a": ["there", "here", "those"], "c": 1, "e": "here — bu yerda/yonimda; there — u yerda."},
+{"type": "mc", "q": "Kafeda ichimliklardan biri: <b>coffee</b>. Bu nima?", "a": ["tea", "coffee", "juice"], "c": 1, "e": ""},
+{"type": "mc", "q": "Gazli mineral suvning inglizcha varianti qaysi?", "a": ["still mineral water", "orange juice", "sparkling mineral water"], "c": 2, "e": ""},
+{"type": "mc", "q": "Kafeda qahva buyurtma qilmoqchisiz. Eng mos gap?", "a": ["I like coffee you.", "I’d like a coffee, please.", "Give coffee me."], "c": 1, "e": ""},
+{"type": "mc", "q": "Waiter: “I’d like a coffee.” Sizga qaysi savol berilishi mumkin?", "a": ["Would you like black or white?", "Are you a hotel?", "What’s your room?"], "c": 0, "e": ""},
+{"type": "mc", "q": "Qaysi variant to‘g‘ri? Bu mashqda a/an ni <b>talaffuzga qarab</b> tanlang: <b>___ apple</b>.", "a": ["a apple", "an apple", "an apples"], "c": 1, "e": "Bu mashqda a/an ni talaffuzga qarab tanlaymiz: apple unli tovush bilan boshlanadi, shuning uchun “an apple”."},
+{"type": "mc", "q": "Aynan qaysi gap ko‘plikdagi <b>keys</b> uchun to‘g‘ri?", "a": ["Here are your keys.", "Here is your keys.", "Here you are your keys."], "c": 0, "e": "keys ko‘plik, shuning uchun “Here are your keys.”"},
+{"type": "mc", "q": "Waiter sizga qahvani uzatyapti. Qaysi gap “Mana, oling” ma’nosida ishlatiladi? <br><span class=\"tip\">Farqni eslang: <b>Here is your coffee</b> — “Mana qahvangiz”; <b>Here you are</b> — biror narsani odamga berayotganda aytiladi.</span>", "a": ["Here are your coffee.", "Here you are.", "Here you is."], "c": 1, "e": "“Here you are” biror narsani odamga uzatganda ishlatiladi. “Here is your coffee” esa narsaning o‘zini ko‘rsatish/taqdim etish uchun ishlatiladi."}];
 
-  // Live progress is deliberately kept separate from the
-  // `answered[]` array used by the final answer checker.
-  // `answered[]` becomes true only after Check is pressed, so using it for the
-  // live bar was the reason the bar jumped to 100%.
-  var liveAnswered = new Set();
+const quiz = document.getElementById("quiz");
+const answeredEl = document.getElementById("answered");
+const progressFill = document.getElementById("topProgressFill");
 
-  function updateProgress(){
-    var n = liveAnswered.size;
-    var pct = total ? (n / total) * 100 : 0;
+function normalizeAnswer(v) {
+  return String(v ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]/gu, "")
+    .replace(/\s+/g, " ");
+}
 
-    var countEl = document.getElementById('answered');
-    var fillEl = document.getElementById('topProgressFill');
-
-    if(countEl){
-      countEl.textContent = n + ' / ' + total;
+function updateProgress() {
+  let answered = 0;
+  questions.forEach((item, i) => {
+    if (item.type === "text") {
+      const input = document.querySelector(`#q${i} .st-text-input`);
+      if (input && input.value.trim()) answered++;
+    } else {
+      if (document.querySelector(`input[name="q${i}"]:checked`)) answered++;
     }
+  });
+  answeredEl.textContent = `${answered} / ${questions.length}`;
+  progressFill.style.width = `${answered / questions.length * 100}%`;
+}
 
-    if(fillEl){
-      fillEl.style.width = pct + '%';
-    }
-  }
+async function checkAnswers() {
+  let score = 0;
 
-  function markLiveAnsweredFromRadio(radio){
-    var block = radio.closest('.card');
-    if(!block) return;
+  questions.forEach((item, i) => {
+    const card = document.getElementById(`q${i}`);
+    const feedback = document.getElementById(`f${i}`);
+    let ok = false;
+    let correctText = "";
 
-    var id = Number(block.id.replace('q',''));
-    if(!Number.isNaN(id)){
-      liveAnswered.add(id);
-      updateProgress();
-    }
-  }
-
-  function markLiveAnsweredFromText(input){
-    var block = input.closest('.card');
-    if(!block) return;
-
-    var id = Number(block.id.replace('q',''));
-    if(Number.isNaN(id)) return;
-
-    if(input.value.trim() !== ''){
-      liveAnswered.add(id);
-    }else{
-      liveAnswered.delete(id);
-    }
-
-    updateProgress();
-  }
-
-    async function checkAnswers(){
-    var score=0, j, block, selected, correct, fb;
-    for(j=0;j<total;j++){
-      block=document.getElementById('q'+j);
-      fb=document.getElementById('f'+j);
-      selected=null;
-      if(block.getAttribute('data-type')==='mc'){
-        var radios=block.getElementsByTagName('input');
-        var k;
-        for(k=0;k<radios.length;k++){
-          if(radios[k].checked){selected=radios[k].value;break;}
-        }
-      }else{
-        selected=block.getElementsByTagName('input')[0].value;
+    if (item.type === "text") {
+      const input = card.querySelector(".st-text-input");
+      ok = normalizeAnswer(input.value) === normalizeAnswer(item.answer);
+      input.classList.remove("is-correct", "is-wrong");
+      input.classList.add(ok ? "is-correct" : "is-wrong");
+      correctText = item.answer;
+    } else {
+      const selected = document.querySelector(`input[name="q${i}"]:checked`);
+      card.querySelectorAll(".st-choice").forEach((label, j) => {
+        label.classList.remove("is-correct", "is-wrong");
+        if (j === item.c) label.classList.add("is-correct");
+      });
+      if (selected && Number(selected.value) === item.c) {
+        ok = true;
+      } else if (selected) {
+        card.querySelector(`.st-choice:nth-child(${Number(selected.value) + 1})`)
+          ?.classList.add("is-wrong");
       }
-      correct=block.getAttribute('data-answer');
-      answered[j]=true;
-      if(normalize(selected)===normalize(correct)){
-        score++;
-        fb.className='feedback correct';
-        fb.innerHTML='✓ <b>To‘g‘ri!</b>';
-      }else{
-        fb.className='feedback wrong';
-        var explanation = block.getAttribute('data-explanation') || '';
-        fb.innerHTML='✗ <b>Xato.</b><br><b>To‘g‘ri javob:</b> '+correct+
-          (explanation ? '<br><b>Izoh:</b> '+explanation : '');
-      }
+      correctText = item.a[item.c];
     }
-    document.getElementById('score').innerHTML=score+' / '+total;
-    const saved = await reportActivityProgress(
-      (score/total*100)>=70,
-      Math.round(score/total*100)
+
+    if (ok) score++;
+
+    feedback.className = "st-question-feedback " + (ok ? "correct" : "incorrect") + " is-visible";
+    if (ok) {
+      feedback.innerHTML = item.e ? `✓ <b>To‘g‘ri!</b><br>${item.e}` : `✓ <b>To‘g‘ri!</b>`;
+    } else {
+      feedback.innerHTML = item.e
+        ? `✗ <b>Noto‘g‘ri.</b><br><b>To‘g‘ri javob:</b> ${correctText}<br>${item.e}`
+        : `✗ <b>Noto‘g‘ri.</b><br><b>To‘g‘ri javob:</b> ${correctText}`;
+    }
+  });
+
+  const percent = Math.round(score / questions.length * 100);
+  document.getElementById("score").textContent = score;
+
+  const result = document.getElementById("result");
+  const title = document.getElementById("resultTitle");
+  const text = document.getElementById("resultText");
+  const saveStatus = document.getElementById("saveStatus");
+
+  if (percent >= 70) {
+    result.className = "st-quiz-result pass is-visible";
+    title.textContent = "Ajoyib! Mashq muvaffaqiyatli tugallandi.";
+    text.textContent = `Siz ${percent}% natija oldingiz.`;
+  } else {
+    result.className = "st-quiz-result fail is-visible";
+    title.textContent = "Yana bir marta urinib ko‘ring.";
+    text.textContent = `Siz ${percent}% natija oldingiz. Tugallangan deb hisoblanishi uchun kamida 70% kerak.`;
+  }
+
+  saveStatus.textContent = "Progress saqlanmoqda...";
+  saveStatus.className = "st-save-status";
+
+  try {
+    const activityId =
+      Number(new URLSearchParams(window.location.search).get("activity_id")) || 0;
+
+    if (!activityId) throw new Error("activity_id topilmadi.");
+
+    const data = await window.SalimTeaches.reportActivityProgress(
+      activityId,
+      percent >= 70,
+      percent
     );
 
-    document.getElementById('result').style.display='block';
-    let saveStatus = document.getElementById('saveStatus');
-    if (!saveStatus) {
-      saveStatus = document.createElement('div');
-      saveStatus.id = 'saveStatus';
-      saveStatus.className = 'save-status';
-      document.getElementById('result').appendChild(saveStatus);
-    }
-    if (saved && saved.success === true) {
-      saveStatus.className = 'save-status ok';
-      saveStatus.textContent = '✓ Natijangiz saqlandi';
+    if (data && data.course) {
+      saveStatus.textContent = "✓ Progress saqlandi.";
+      saveStatus.className = "st-save-status correct";
     } else {
-      saveStatus.className = 'save-status err';
-      saveStatus.textContent = '⚠ Natijangizni saqlashda muammo: ' +
-        ((saved && saved.error) || 'noma’lum xatolik');
+      saveStatus.textContent = "✓ Javoblar tekshirildi.";
+      saveStatus.className = "st-save-status correct";
     }
-    updateProgress();
-    SalimTeaches.showPostCheckActions("check", 2);
-    window.scrollTo(0,document.body.scrollHeight);
+  } catch (error) {
+    console.error(error);
+    saveStatus.textContent = "Progressni saqlashda xatolik yuz berdi.";
+    saveStatus.className = "st-save-status incorrect";
   }
 
-  // Bind directly after the form exists. This avoids relying on the
-  // preview environment's window.onload handling.
-  document.getElementById('check').onclick=function(e){
-    if(e)e.preventDefault();
-    checkAnswers();
-    return false;
-  };
-
-  document.querySelectorAll('#quiz .option').forEach(function(option){
-    option.addEventListener('click', function(){
-      var radio = option.querySelector('input[type="radio"]');
-      if(radio) markLiveAnsweredFromRadio(radio);
-    });
-  });
-
-  document.querySelectorAll('#quiz input[type="text"]').forEach(function(input){
-    input.addEventListener('input', function(){
-      markLiveAnsweredFromText(input);
-    });
-  });
-
-  updateProgress();
-})();
-</script>
-
-<script>
-function getTelegramInitData() {
-  try {
-    const saved = sessionStorage.getItem("salimteaches_initData");
-    if (saved) return saved;
-  } catch (e) {
-    console.warn("sessionStorage unavailable:", e);
-  }
-
-  try {
-    if (window.Telegram && window.Telegram.WebApp) {
-      const tg = window.Telegram.WebApp;
-      if (tg.initData) {
-        try {
-          sessionStorage.setItem("salimteaches_initData", tg.initData);
-        } catch (e) {}
-        return tg.initData;
-      }
-    }
-  } catch (e) {
-    console.warn("Telegram initData unavailable:", e);
-  }
-
-  return "";
+  SalimTeaches.showPostCheckActions("checkBtn", 2);
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function backToUnit2() {
-  window.location.assign(
-    "https://imbooz.github.io/salimteaches-beginner/index.html?unit=2"
-  );
+  const returnUrl =
+    sessionStorage.getItem("salimteaches_returnUrl") ||
+    "../index.html";
+
+  const clean = returnUrl.split("#")[0].split("?")[0];
+  window.location.href = `${clean}?unit=2`;
 }
+
+quiz.addEventListener("input", updateProgress);
+quiz.addEventListener("change", updateProgress);
+updateProgress();
 </script>
-
-<script>
-async function reportActivityProgress(completed, score) {
-  const activityId =
-    Number(new URLSearchParams(window.location.search).get("activity_id")) || 0;
-  const initData = getTelegramInitData();
-
-  if (!initData) {
-    return { success: false, error: "Telegram initData mavjud emas." };
-  }
-
-  try {
-    const response = await fetch(
-      "https://salimteaches-beginner-auth.imshosalim.workers.dev/progress",
-      {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          initData,
-          activity_id: activityId,
-          completed: Boolean(completed),
-          score: score == null ? null : Number(score)
-        })
-      }
-    );
-
-    const data = await response.json();
-    if (!response.ok || data.success !== true) {
-      return {
-        success: false,
-        error: data.error || data.reason || ("HTTP " + response.status)
-      };
-    }
-    return data;
-  } catch (error) {
-    console.error("Progress save failed:", error);
-    return { success: false, error: error.message || "Network error" };
-  }
-}
-</script>
-
-</div>
-</body></html>
+</body>
+</html>

@@ -1,601 +1,943 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><title>SalimTeaches — Unit 1 Interactive Practice</title><style>
-:root{--bg:#f5f7fb;--card:#fff;--ink:#182033;--muted:#647089;--blue:#5b5ce2;--green:#168a55;--red:#c83b4b;--border:#e3e7ef}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#eef0ff,#f8fbff);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--ink);padding:18px}
-.container{max-width:760px;margin:0 auto}.hero{background:#20224d;color:white;border-radius:22px;padding:26px 22px;margin-bottom:16px}.hero h1{margin:0 0 8px;font-size:27px}.hero p{margin:0;color:#dfe1ff;line-height:1.5}
-.progress{height:9px;background:#e6e9f3;border-radius:20px;overflow:hidden;margin:12px 0 20px}.bar{height:100%;background:linear-gradient(90deg,#5b5ce2,#8d72ff);width:0}
-.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 5px 18px rgba(28,35,65,.06)}.qtitle{font-weight:700;line-height:1.45;margin-bottom:13px}.num{color:#5b5ce2}
-.option{display:block;padding:13px 14px;border:1px solid #e1e5ee;border-radius:12px;margin:8px 0;cursor:pointer;background:#fff}.option input{margin-right:9px}.option:active{background:#f0f1ff}
-input[type=text]{width:100%;padding:14px;border:1px solid #d8deea;border-radius:12px;font-size:16px;outline:none}.feedback{display:none;margin-top:12px;padding:12px;border-radius:12px;line-height:1.45}.correct{display:block;background:#eaf8f0;color:#176a43}.wrong{display:block;background:#fff0f1;color:#9d2736}
-.actions{position:sticky;bottom:10px;background:rgba(245,247,251,.94);backdrop-filter:blur(8px);padding:10px 0;display:flex;gap:10px}.btn{border:0;border-radius:13px;padding:15px 18px;font-size:16px;font-weight:700;cursor:pointer;touch-action:manipulation}.primary{background:#5b5ce2;color:white;flex:1}.secondary{background:#e9ebf4;color:#252b40}.actions{
-  position:sticky;
-  bottom:10px;
-  z-index:1000;
-  background:rgba(245,247,251,.96);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  padding:10px 0;
-  display:flex;
-  gap:10px;
-}
-.actions-inner{
-  max-width:760px;
-  width:100%;
-  margin:auto;
-  display:flex;
-  gap:10px;
-}
-.actions .btn{
-  flex:1;
-  min-width:0;
-  border:0;
-  border-radius:13px;
-  padding:15px 18px;
-  font-size:16px;
-  font-weight:700;
-  cursor:pointer;
-  touch-action:manipulation;
-}
-.actions .primary{
-  background:#5b5ce2;
-  color:#fff;
-}
-.actions .secondary{
-  background:#e9ebf4;
-  color:#252b40;
-}
-.actions .unit-back-button{
-  background:#e9ebf4;
-  color:#252b40;
-}
-.actions .reset-hidden{
-  display:none !important;
-}
-.result{display:none;text-align:center;background:#20224d;color:white;border-radius:18px;padding:22px;margin:18px 0}.result strong{font-size:28px}.tip{color:var(--muted);font-size:14px;line-height:1.5}
-@media(max-width:520px){body{padding:11px}.hero{padding:22px 18px}.card{padding:17px}.hero h1{font-size:24px}.btn{font-size:15px}}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SalimTeaches — Unit 1 Interactive Practice</title>
 
-.activity-nav{
-  position:sticky;top:0;z-index:1000;
-  display:flex;align-items:center;gap:10px;
-  padding:10px 0 12px;
-  background:rgba(245,247,251,.96);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid #e5e8f0;
-  margin-bottom:10px;
-}
-.activity-back{
-  border:0;background:#fff;color:#3f46c8;
-  border:1px solid #dfe3ef;border-radius:12px;
-  padding:9px 12px;font-size:14px;font-weight:800;
-  cursor:pointer;box-shadow:0 3px 10px rgba(20,30,60,.05);
-}
-.activity-label{font-size:13px;font-weight:800;color:#626b7e}
-.save-status{margin-top:10px;font-size:13px;font-weight:700}
-.save-status.ok{color:#149b66}.save-status.err{color:#d84a4a}
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/activities.css">
 
+  <style>
+    /* Small Unit 1/2 consistency overrides — no change to shared CSS. */
+    .st-activity-nav__back {
+      background:#eef0ff;
+      color:#5865f2;
+      border-radius:13px;
+      padding:10px 15px;
+      font-size:15px;
+    }
 
-/* APPROVED BOTTOM ACTION BAR — based on Unit 2 Test reference */
-.actions{
-  position:sticky;
-  bottom:10px;
-  z-index:1000;
-  background:rgba(245,247,251,.96);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  padding:10px 0;
-  display:flex;
-  gap:10px;
-}
-.actions-inner{
-  max-width:760px;
-  width:100%;
-  margin:auto;
-  display:flex;
-  gap:10px;
-}
-.actions .btn,
-.actions .action,
-.actions .check{
-  flex:1;
-  min-width:0;
-  box-sizing:border-box;
-  border:0;
-  border-radius:13px;
-  padding:15px 18px;
-  font-size:16px;
-  font-weight:700;
-  cursor:pointer;
-  touch-action:manipulation;
-}
-.actions .primary,
-.actions .check{
-  background:#5b5ce2;
-  color:#fff;
-}
-.actions .secondary{
-  background:#e9ebf4;
-  color:#252b40;
-}
-.actions .reset-hidden,
+    .st-activity-header {
+      padding:24px 18px 14px;
+    }
 
+    .st-activity-header h1 {
+      font-size:27px;
+      line-height:1.2;
+      margin:7px 0 5px;
+    }
 
-</style><script src="https://telegram.org/js/telegram-web-app.js"></script>
-<style id="practice-navigation-fix">
-.actions{
-  position:sticky;
-  bottom:10px;
-  z-index:1000;
-  background:rgba(245,247,251,.96);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  padding:10px 0;
-  display:flex;
-  gap:10px;
-}
-.actions .btn{flex:1;min-width:0}
-.actions .unit-back-button{background:#e9ebf4;color:#252b40}
-.actions .reset-hidden{display:none !important}
-</style><style id="practice-top-consistency">
-.practice-top{
-  margin: -18px -18px 18px;
-  background:#fff;
-  border-bottom:1px solid #e2e5ee;
-}
-.practice-top-nav{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 14px;
-  min-height:52px;
-  border-bottom:1px solid #e7e9f0;
-}
-.practice-top-back{
-  border:0;
-  border-radius:13px;
-  padding:10px 15px;
-  background:#eef0ff;
-  color:#5865f2;
-  font-size:15px;
-  font-weight:800;
-  cursor:pointer;
-}
-.practice-top-title{
-  font-size:13px;
-  font-weight:800;
-  color:#5e6679;
-}
-.practice-top-info{
-  padding:16px 16px 14px;
-}
-.practice-kicker{
-  color:#5865f2;
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:.08em;
-  margin-bottom:8px;
-}
-.practice-heading h1{
-  margin:0 0 5px;
-  font-size:25px;
-  line-height:1.2;
-  color:#182033;
-}
-.practice-heading p{
-  margin:0 0 18px;
-  color:#647089;
-  font-size:13px;
-  line-height:1.45;
-}
-.practice-progress-label{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:12px;
-  font-weight:800;
-  color:#273047;
-  margin-bottom:8px;
-}
-.practice-progress-track{
-  height:8px;
-  background:#e6e9f3;
-  border-radius:999px;
-  overflow:hidden;
-}
-.practice-progress-bar{
-  height:100%;
-  width:0%;
-  background:#5b5ce2;
-  border-radius:999px;
-  transition:width .2s ease;
-}
-@media(max-width:520px){
-  .practice-top{margin:-11px -11px 18px}
-  .practice-heading h1{font-size:24px}
-}
-</style>
+    .st-activity-subtitle {
+      color:#647089;
+      font-size:14px;
+      line-height:1.45;
+      margin:0;
+    }
 
-<style id="practice-test-header-match">
-body{
-  margin:0 !important;
-  padding:0 !important;
-  background:var(--bg) !important;
-}
-.container{
-  max-width:760px;
-  margin:auto;
-  padding-bottom:110px;
-}
-.practice-test-nav{
-  position:sticky;
-  top:0;
-  z-index:30;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 14px;
-  background:rgba(255,255,255,.96);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(12px);
-}
-.practice-test-back{
-  border:0;
-  border-radius:13px;
-  padding:12px 15px;
-  background:#eef0ff;
-  color:var(--blue);
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer;
-}
-.practice-test-label{
-  color:var(--muted);
-  font-size:12px;
-  font-weight:700;
-}
-.practice-test-header{
-  padding:24px 18px 14px;
-}
-.practice-test-brand{
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:.8px;
-  color:var(--blue);
-}
-.practice-test-header h1{
-  font-size:27px;
-  margin:7px 0 5px;
-  color:var(--ink);
-}
-.practice-test-subtitle{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.45;
-  margin:0;
-}
-.practice-test-progress{
-  position:sticky;
-  top:53px;
-  z-index:10;
-  background:rgba(245,247,251,.94);
-  backdrop-filter:blur(10px);
-  padding:9px 18px 12px;
-  border-bottom:1px solid var(--border);
-}
-.practice-test-progress-row{
-  display:flex;
-  justify-content:space-between;
-  font-size:12px;
-  font-weight:700;
-  margin-bottom:7px;
-}
-.practice-test-progressbar{
-  height:7px;
-  background:#e4e7ef;
-  border-radius:10px;
-  overflow:hidden;
-}
-.practice-test-progressfill{
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,var(--blue),#7c83f5);
-  transition:.3s;
-}
+    .st-choice-grid {
+      grid-template-columns:1fr;
+    }
 
-/* APPROVED STANDARD BOTTOM ACTION BAR — final override */
-body {
-  padding-bottom: 110px !important;
-}
+    .st-quiz-actions__inner {
+      justify-content:flex-end;
+    }
 
-.actions {
-  position: fixed !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  z-index: 1000 !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  background: #fff !important;
-  border-top: 1px solid var(--border, #e2e5ee) !important;
-  padding: 12px 14px 16px !important;
-  margin: 0 !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
+    .st-quiz-actions__inner .st-btn-primary {
+      flex:1;
+    }
 
-.actions-inner {
-  width: 100% !important;
-  max-width: 760px !important;
-  margin: 0 auto !important;
-  padding: 0 4px !important;
-  box-sizing: border-box !important;
-  display: flex !important;
-  gap: 9px !important;
-}
+    .st-quiz-actions__inner .st-btn-secondary {
+      display:none;
+    }
 
-.actions > button {
-  width: 100% !important;
-  box-sizing: border-box !important;
-}
+    @media (max-width:560px) {
+      .st-choice-grid {
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
 
-.actions button {
-  box-sizing: border-box !important;
-}
+<body>
+<div class="st-quiz-page">
 
-.actions-inner .check,
-.actions-inner #check,
-.actions > #check {
-  flex: 1 1 auto !important;
-  width: 100% !important;
-  min-width: 0 !important;
-}
+  <nav class="st-activity-nav">
+    <button class="st-activity-nav__back" type="button" onclick="backToUnit1()">← Unit 1</button>
+    <div class="st-activity-nav__label">SalimTeaches • Unit 1</div>
+  </nav>
 
+  <header class="st-activity-header">
+    <div class="st-activity-brand">SALIMTEACHES • BEGINNER</div>
+    <h1>📝 1-unit — Interaktiv mashqlar</h1>
+    <p class="st-activity-subtitle">Greetings, introductions, countries, numbers va <b>to be</b>.</p>
+  </header>
 
-
-</style>
-
-</head><body>
-
-<div class="practice-test-nav">
-  <button class="practice-test-back" type="button" onclick="backToUnit1()">← Unit 1</button>
-  <div class="practice-test-label">SalimTeaches • Unit 1</div>
-</div>
-<div class="container">
-<header class="practice-test-header">
-  <div class="practice-test-brand">SALIMTEACHES • BEGINNER</div>
-  <h1>📝 1-unit — Interaktiv mashqlar</h1>
-  <p class="practice-test-subtitle">Greetings, introductions, countries, numbers va <b>to be</b>.</p>
-</header>
-<div class="practice-test-progress">
-  <div class="practice-test-progress-row">
-    <span>Mashq jarayoni</span>
-    <span id="answered">0 / 30</span>
+  <div class="st-quiz-progress">
+    <div class="st-quiz-progress__row">
+      <span>Mashq jarayoni</span>
+      <span id="answered">0 / 30</span>
+    </div>
+    <div class="st-quiz-progress__bar">
+      <div class="st-quiz-progress__fill" id="topProgressFill"></div>
+    </div>
   </div>
-  <div class="practice-test-progressbar">
-    <div class="practice-test-progressfill" id="topProgressFill"></div>
+
+  <div class="st-answer-note">
+    Javoblar tekshirilganda har bir savol bo‘yicha to‘g‘ri javob va qisqa izoh ko‘rsatiladi.
+  </div>
+
+  <form id="quiz">
+    <section class="st-question" id="q0">
+      <div class="st-question__top">
+        <div class="st-question__number">1</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Kimdir sizga: “Hi! What’s your name?” dedi. Qaysi javob mos?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q0" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">My name is Ali.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q0" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">I from Ali.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q0" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Ali is my.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f0"></div>
+    </section>
+<section class="st-question" id="q1">
+      <div class="st-question__top">
+        <div class="st-question__number">2</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Kimdir sizni tanishtirdi: “This is Anna.” Siz nima deysiz?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q1" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Nice to meet you.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q1" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">I from Anna.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q1" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">My Anna.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f1"></div>
+    </section>
+<section class="st-question" id="q2">
+      <div class="st-question__top">
+        <div class="st-question__number">3</div>
+        <div class="st-question__body">
+          <div class="st-question__title">“Nice to meet you” degan gapga mos javobni tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q2" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Nice to meet you too.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q2" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Nice meet you.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q2" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">You too meet.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f2"></div>
+    </section>
+<section class="st-question" id="q3">
+      <div class="st-question__top">
+        <div class="st-question__number">4</div>
+        <div class="st-question__body">
+          <div class="st-question__title">“Where are you from?” savoliga to‘g‘ri javobni tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q3" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">I’m from Tashkent.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q3" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">I from Tashkent.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q3" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">My from Tashkent.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f3"></div>
+    </section>
+<section class="st-question" id="q4">
+      <div class="st-question__top">
+        <div class="st-question__number">5</div>
+        <div class="st-question__body">
+          <div class="st-question__title">To‘g‘ri variantni tanlang: “She ___ from Uzbekistan.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q4" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">am</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q4" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">is</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q4" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">are</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f4"></div>
+    </section>
+<section class="st-question" id="q5">
+      <div class="st-question__top">
+        <div class="st-question__number">6</div>
+        <div class="st-question__body">
+          <div class="st-question__title">To‘g‘ri variantni tanlang: “I ___ from Samarkand.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q5" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">am</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q5" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">is</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q5" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">are</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f5"></div>
+    </section>
+<section class="st-question" id="q6">
+      <div class="st-question__top">
+        <div class="st-question__number">7</div>
+        <div class="st-question__body">
+          <div class="st-question__title">To‘g‘ri variantni tanlang: “They ___ from Korea.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q6" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">am</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q6" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">is</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q6" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">are</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f6"></div>
+    </section>
+<section class="st-question" id="q7">
+      <div class="st-question__top">
+        <div class="st-question__number">8</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Ali is a student. ___ is from Uzbekistan.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q7" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">He</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q7" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">His</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q7" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Her</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f7"></div>
+    </section>
+<section class="st-question" id="q8">
+      <div class="st-question__top">
+        <div class="st-question__number">9</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Anna is a teacher. ___ name is Anna.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q8" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">He</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q8" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">His</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q8" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Her</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f8"></div>
+    </section>
+<section class="st-question" id="q9">
+      <div class="st-question__top">
+        <div class="st-question__number">10</div>
+        <div class="st-question__body">
+          <div class="st-question__title">“I’m Bob. ___ phone number is 90 123 45 67.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q9" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">I</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q9" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">My</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q9" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">His</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f9"></div>
+    </section>
+<section class="st-question" id="q10">
+      <div class="st-question__top">
+        <div class="st-question__number">11</div>
+        <div class="st-question__body">
+          <div class="st-question__title">“This is Maria. ___ is from Spain.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q10" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">He</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q10" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Her</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q10" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">She</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f10"></div>
+    </section>
+<section class="st-question" id="q11">
+      <div class="st-question__top">
+        <div class="st-question__number">12</div>
+        <div class="st-question__body">
+          <div class="st-question__title">“His name ___ David.” Gapni to‘ldiring.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q11" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">am</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q11" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">is</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q11" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">are</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f11"></div>
+    </section>
+<section class="st-question" id="q12">
+      <div class="st-question__top">
+        <div class="st-question__number">13</div>
+        <div class="st-question__body">
+          <div class="st-question__title">“Her name ___ Anna.” Gapni to‘ldiring.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q12" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">am</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q12" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">is</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q12" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">are</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f12"></div>
+    </section>
+<section class="st-question" id="q13">
+      <div class="st-question__top">
+        <div class="st-question__number">14</div>
+        <div class="st-question__body">
+          <div class="st-question__title">“Seven” qaysi raqam?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q13" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">5</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q13" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">6</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q13" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">7</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f13"></div>
+    </section>
+<section class="st-question" id="q14">
+      <div class="st-question__top">
+        <div class="st-question__number">15</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Gapni to‘ldiring: “What’s your ___ number?”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q14" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">name</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q14" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">phone</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q14" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">city</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f14"></div>
+    </section>
+<section class="st-question" id="q15">
+      <div class="st-question__top">
+        <div class="st-question__number">16</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Kimdir sizdan: “What’s your mobile number?” deb so‘radi. Sizda raqam yo‘q. Nima deysiz?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q15" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Sorry, I don’t have one.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q15" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">I don’t one.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q15" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Sorry, I no have.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f15"></div>
+    </section>
+<section class="st-question" id="q16">
+      <div class="st-question__top">
+        <div class="st-question__number">17</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Ingliz tilida telefon raqamini odatda qanday aytamiz?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q16" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Bitta katta son sifatida</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q16" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Raqamlarni bittalab</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q16" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Faqat juftliklarda</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f16"></div>
+    </section>
+<section class="st-question" id="q17">
+      <div class="st-question__top">
+        <div class="st-question__number">18</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Kimdir sizdan: “How are you?” deb so‘radi. Qaysi javob mos?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q17" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">I’m fine, thanks.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q17" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">I’m from Tashkent.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q17" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">My name is Ali.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f17"></div>
+    </section>
+<section class="st-question" id="q18">
+      <div class="st-question__top">
+        <div class="st-question__number">19</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Gapni to‘ldiring: “Fine, thanks. ___?”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q18" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">What you?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q18" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">And you?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q18" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">You are?</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f18"></div>
+    </section>
+<section class="st-question" id="q19">
+      <div class="st-question__top">
+        <div class="st-question__number">20</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Qaysi gap to‘g‘ri?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q19" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">I am from Tashkent.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q19" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">I is from Tashkent.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q19" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">I are from Tashkent.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f19"></div>
+    </section>
+<section class="st-question" id="q20">
+      <div class="st-question__top">
+        <div class="st-question__number">21</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Qaysi gap to‘g‘ri?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q20" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Her name are Anna.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q20" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Her name is Anna.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q20" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Her name am Anna.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f20"></div>
+    </section>
+<section class="st-question" id="q21">
+      <div class="st-question__top">
+        <div class="st-question__number">22</div>
+        <div class="st-question__body">
+          <div class="st-question__title">David erkak. Qaysi variant to‘g‘ri?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q21" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Her name</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q21" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">She name</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q21" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">His name</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f21"></div>
+    </section>
+<section class="st-question" id="q22">
+      <div class="st-question__top">
+        <div class="st-question__number">23</div>
+        <div class="st-question__body">
+          <div class="st-question__title">She bilan qaysi “to be” ishlatiladi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q22" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">am</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q22" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">is</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q22" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">are</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f22"></div>
+    </section>
+<section class="st-question" id="q23">
+      <div class="st-question__top">
+        <div class="st-question__number">24</div>
+        <div class="st-question__body">
+          <div class="st-question__title">I bilan qaysi “to be” ishlatiladi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q23" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">am</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q23" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">is</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q23" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">are</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f23"></div>
+    </section>
+<section class="st-question" id="q24">
+      <div class="st-question__top">
+        <div class="st-question__number">25</div>
+        <div class="st-question__body">
+          <div class="st-question__title">They bilan qaysi “to be” ishlatiladi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q24" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">am</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q24" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">is</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q24" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">are</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f24"></div>
+    </section>
+<section class="st-question" id="q25">
+      <div class="st-question__top">
+        <div class="st-question__number">26</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Qaysi savol kimning qayerdan ekanini so‘raydi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q25" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">What’s your name?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q25" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Where are you from?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q25" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">How are you?</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f25"></div>
+    </section>
+<section class="st-question" id="q26">
+      <div class="st-question__top">
+        <div class="st-question__number">27</div>
+        <div class="st-question__body">
+          <div class="st-question__title">So‘zlarni to‘g‘ri tartibda joylashtiring: Tashkent / from / am / I</div>
+        </div>
+      </div>
+      <input class="st-text-input" type="text" name="q26" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing">
+      <div class="st-question-feedback" id="f26"></div>
+    </section>
+<section class="st-question" id="q27">
+      <div class="st-question__top">
+        <div class="st-question__number">28</div>
+        <div class="st-question__body">
+          <div class="st-question__title">So‘zlarni to‘g‘ri tartibda joylashtiring: name / is / My / Ali</div>
+        </div>
+      </div>
+      <input class="st-text-input" type="text" name="q27" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing">
+      <div class="st-question-feedback" id="f27"></div>
+    </section>
+<section class="st-question" id="q28">
+      <div class="st-question__top">
+        <div class="st-question__number">29</div>
+        <div class="st-question__body">
+          <div class="st-question__title">So‘zlarni to‘g‘ri tartibda joylashtiring: you / Nice / meet / to</div>
+        </div>
+      </div>
+      <input class="st-text-input" type="text" name="q28" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing">
+      <div class="st-question-feedback" id="f28"></div>
+    </section>
+<section class="st-question" id="q29">
+      <div class="st-question__top">
+        <div class="st-question__number">30</div>
+        <div class="st-question__body">
+          <div class="st-question__title">So‘zlarni to‘g‘ri tartibda joylashtiring: phone / your / What’s / number</div>
+        </div>
+      </div>
+      <input class="st-text-input" type="text" name="q29" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing">
+      <div class="st-question-feedback" id="f29"></div>
+    </section>
+  </form>
+
+  <div id="result" class="st-quiz-result">
+    <div class="st-quiz-result__score"><span id="score">0</span> / 30</div>
+    <div class="st-quiz-result__title" id="resultTitle"></div>
+    <div class="st-quiz-result__text" id="resultText"></div>
+    <div id="saveStatus" class="st-save-status"></div>
+  </div>
+
+  <div class="st-quiz-actions">
+    <div class="st-quiz-actions__inner">
+      <button class="st-btn st-btn-secondary" type="button" onclick="backToUnit1()">← Unit 1</button>
+      <button class="st-btn st-btn-primary" id="checkBtn" type="button" onclick="checkAnswers()">✓ Javoblarni tekshirish</button>
+    </div>
   </div>
 </div>
 
-
-
-
-
-<form id="quiz"><div class="card" id="q0" data-type="mc" data-answer="My name is Ali."><div class="qtitle"><span class="num">1.</span> Kimdir sizga: “Hi! What’s your name?” dedi. Qaysi javob mos?</div><label class="option"><input type="radio" name="q0" value="My name is Ali."> My name is Ali.</label><label class="option"><input type="radio" name="q0" value="I from Ali."> I from Ali.</label><label class="option"><input type="radio" name="q0" value="Ali is my."> Ali is my.</label><div id="f0" class="feedback"></div></div><div class="card" id="q1" data-type="mc" data-answer="Nice to meet you."><div class="qtitle"><span class="num">2.</span> Kimdir sizni tanishtirdi: “This is Anna.” Siz nima deysiz?</div><label class="option"><input type="radio" name="q1" value="Nice to meet you."> Nice to meet you.</label><label class="option"><input type="radio" name="q1" value="I from Anna."> I from Anna.</label><label class="option"><input type="radio" name="q1" value="My Anna."> My Anna.</label><div id="f1" class="feedback"></div></div><div class="card" id="q2" data-type="mc" data-answer="Nice to meet you too."><div class="qtitle"><span class="num">3.</span> “Nice to meet you” degan gapga mos javobni tanlang.</div><label class="option"><input type="radio" name="q2" value="Nice to meet you too."> Nice to meet you too.</label><label class="option"><input type="radio" name="q2" value="Nice meet you."> Nice meet you.</label><label class="option"><input type="radio" name="q2" value="You too meet."> You too meet.</label><div id="f2" class="feedback"></div></div><div class="card" id="q3" data-type="mc" data-answer="I’m from Tashkent."><div class="qtitle"><span class="num">4.</span> “Where are you from?” savoliga to‘g‘ri javobni tanlang.</div><label class="option"><input type="radio" name="q3" value="I’m from Tashkent."> I’m from Tashkent.</label><label class="option"><input type="radio" name="q3" value="I from Tashkent."> I from Tashkent.</label><label class="option"><input type="radio" name="q3" value="My from Tashkent."> My from Tashkent.</label><div id="f3" class="feedback"></div></div><div class="card" id="q4" data-type="mc" data-answer="is"><div class="qtitle"><span class="num">5.</span> To‘g‘ri variantni tanlang: “She ___ from Uzbekistan.”</div><label class="option"><input type="radio" name="q4" value="am"> am</label><label class="option"><input type="radio" name="q4" value="is"> is</label><label class="option"><input type="radio" name="q4" value="are"> are</label><div id="f4" class="feedback"></div></div><div class="card" id="q5" data-type="mc" data-answer="am"><div class="qtitle"><span class="num">6.</span> To‘g‘ri variantni tanlang: “I ___ from Samarkand.”</div><label class="option"><input type="radio" name="q5" value="am"> am</label><label class="option"><input type="radio" name="q5" value="is"> is</label><label class="option"><input type="radio" name="q5" value="are"> are</label><div id="f5" class="feedback"></div></div><div class="card" id="q6" data-type="mc" data-answer="are"><div class="qtitle"><span class="num">7.</span> To‘g‘ri variantni tanlang: “They ___ from Korea.”</div><label class="option"><input type="radio" name="q6" value="am"> am</label><label class="option"><input type="radio" name="q6" value="is"> is</label><label class="option"><input type="radio" name="q6" value="are"> are</label><div id="f6" class="feedback"></div></div><div class="card" id="q7" data-type="mc" data-answer="He"><div class="qtitle"><span class="num">8.</span> Ali is a student. ___ is from Uzbekistan.</div><label class="option"><input type="radio" name="q7" value="He"> He</label><label class="option"><input type="radio" name="q7" value="His"> His</label><label class="option"><input type="radio" name="q7" value="Her"> Her</label><div id="f7" class="feedback"></div></div><div class="card" id="q8" data-type="mc" data-answer="Her"><div class="qtitle"><span class="num">9.</span> Anna is a teacher. ___ name is Anna.</div><label class="option"><input type="radio" name="q8" value="He"> He</label><label class="option"><input type="radio" name="q8" value="His"> His</label><label class="option"><input type="radio" name="q8" value="Her"> Her</label><div id="f8" class="feedback"></div></div><div class="card" id="q9" data-type="mc" data-answer="My"><div class="qtitle"><span class="num">10.</span> “I’m Bob. ___ phone number is 90 123 45 67.”</div><label class="option"><input type="radio" name="q9" value="I"> I</label><label class="option"><input type="radio" name="q9" value="My"> My</label><label class="option"><input type="radio" name="q9" value="His"> His</label><div id="f9" class="feedback"></div></div><div class="card" id="q10" data-type="mc" data-answer="She"><div class="qtitle"><span class="num">11.</span> “This is Maria. ___ is from Spain.”</div><label class="option"><input type="radio" name="q10" value="He"> He</label><label class="option"><input type="radio" name="q10" value="Her"> Her</label><label class="option"><input type="radio" name="q10" value="She"> She</label><div id="f10" class="feedback"></div></div><div class="card" id="q11" data-type="mc" data-answer="is"><div class="qtitle"><span class="num">12.</span> “His name ___ David.” Gapni to‘ldiring.</div><label class="option"><input type="radio" name="q11" value="am"> am</label><label class="option"><input type="radio" name="q11" value="is"> is</label><label class="option"><input type="radio" name="q11" value="are"> are</label><div id="f11" class="feedback"></div></div><div class="card" id="q12" data-type="mc" data-answer="is"><div class="qtitle"><span class="num">13.</span> “Her name ___ Anna.” Gapni to‘ldiring.</div><label class="option"><input type="radio" name="q12" value="am"> am</label><label class="option"><input type="radio" name="q12" value="is"> is</label><label class="option"><input type="radio" name="q12" value="are"> are</label><div id="f12" class="feedback"></div></div><div class="card" id="q13" data-type="mc" data-answer="7"><div class="qtitle"><span class="num">14.</span> “Seven” qaysi raqam?</div><label class="option"><input type="radio" name="q13" value="5"> 5</label><label class="option"><input type="radio" name="q13" value="6"> 6</label><label class="option"><input type="radio" name="q13" value="7"> 7</label><div id="f13" class="feedback"></div></div><div class="card" id="q14" data-type="mc" data-answer="phone"><div class="qtitle"><span class="num">15.</span> Gapni to‘ldiring: “What’s your ___ number?”</div><label class="option"><input type="radio" name="q14" value="name"> name</label><label class="option"><input type="radio" name="q14" value="phone"> phone</label><label class="option"><input type="radio" name="q14" value="city"> city</label><div id="f14" class="feedback"></div></div><div class="card" id="q15" data-type="mc" data-answer="Sorry, I don’t have one."><div class="qtitle"><span class="num">16.</span> Kimdir sizdan: “What’s your mobile number?” deb so‘radi. Sizda raqam yo‘q. Nima deysiz?</div><label class="option"><input type="radio" name="q15" value="Sorry, I don’t have one."> Sorry, I don’t have one.</label><label class="option"><input type="radio" name="q15" value="I don’t one."> I don’t one.</label><label class="option"><input type="radio" name="q15" value="Sorry, I no have."> Sorry, I no have.</label><div id="f15" class="feedback"></div></div><div class="card" id="q16" data-type="mc" data-answer="Raqamlarni bittalab"><div class="qtitle"><span class="num">17.</span> Ingliz tilida telefon raqamini odatda qanday aytamiz?</div><label class="option"><input type="radio" name="q16" value="Bitta katta son sifatida"> Bitta katta son sifatida</label><label class="option"><input type="radio" name="q16" value="Raqamlarni bittalab"> Raqamlarni bittalab</label><label class="option"><input type="radio" name="q16" value="Faqat juftliklarda"> Faqat juftliklarda</label><div id="f16" class="feedback"></div></div><div class="card" id="q17" data-type="mc" data-answer="I’m fine, thanks."><div class="qtitle"><span class="num">18.</span> Kimdir sizdan: “How are you?” deb so‘radi. Qaysi javob mos?</div><label class="option"><input type="radio" name="q17" value="I’m fine, thanks."> I’m fine, thanks.</label><label class="option"><input type="radio" name="q17" value="I’m from Tashkent."> I’m from Tashkent.</label><label class="option"><input type="radio" name="q17" value="My name is Ali."> My name is Ali.</label><div id="f17" class="feedback"></div></div><div class="card" id="q18" data-type="mc" data-answer="And you?"><div class="qtitle"><span class="num">19.</span> Gapni to‘ldiring: “Fine, thanks. ___?”</div><label class="option"><input type="radio" name="q18" value="What you?"> What you?</label><label class="option"><input type="radio" name="q18" value="And you?"> And you?</label><label class="option"><input type="radio" name="q18" value="You are?"> You are?</label><div id="f18" class="feedback"></div></div><div class="card" id="q19" data-type="mc" data-answer="I am from Tashkent."><div class="qtitle"><span class="num">20.</span> Qaysi gap to‘g‘ri?</div><label class="option"><input type="radio" name="q19" value="I am from Tashkent."> I am from Tashkent.</label><label class="option"><input type="radio" name="q19" value="I is from Tashkent."> I is from Tashkent.</label><label class="option"><input type="radio" name="q19" value="I are from Tashkent."> I are from Tashkent.</label><div id="f19" class="feedback"></div></div><div class="card" id="q20" data-type="mc" data-answer="Her name is Anna."><div class="qtitle"><span class="num">21.</span> Qaysi gap to‘g‘ri?</div><label class="option"><input type="radio" name="q20" value="Her name are Anna."> Her name are Anna.</label><label class="option"><input type="radio" name="q20" value="Her name is Anna."> Her name is Anna.</label><label class="option"><input type="radio" name="q20" value="Her name am Anna."> Her name am Anna.</label><div id="f20" class="feedback"></div></div><div class="card" id="q21" data-type="mc" data-answer="His name"><div class="qtitle"><span class="num">22.</span> David erkak. Qaysi variant to‘g‘ri?</div><label class="option"><input type="radio" name="q21" value="Her name"> Her name</label><label class="option"><input type="radio" name="q21" value="She name"> She name</label><label class="option"><input type="radio" name="q21" value="His name"> His name</label><div id="f21" class="feedback"></div></div><div class="card" id="q22" data-type="mc" data-answer="is"><div class="qtitle"><span class="num">23.</span> She bilan qaysi “to be” ishlatiladi?</div><label class="option"><input type="radio" name="q22" value="am"> am</label><label class="option"><input type="radio" name="q22" value="is"> is</label><label class="option"><input type="radio" name="q22" value="are"> are</label><div id="f22" class="feedback"></div></div><div class="card" id="q23" data-type="mc" data-answer="am"><div class="qtitle"><span class="num">24.</span> I bilan qaysi “to be” ishlatiladi?</div><label class="option"><input type="radio" name="q23" value="am"> am</label><label class="option"><input type="radio" name="q23" value="is"> is</label><label class="option"><input type="radio" name="q23" value="are"> are</label><div id="f23" class="feedback"></div></div><div class="card" id="q24" data-type="mc" data-answer="are"><div class="qtitle"><span class="num">25.</span> They bilan qaysi “to be” ishlatiladi?</div><label class="option"><input type="radio" name="q24" value="am"> am</label><label class="option"><input type="radio" name="q24" value="is"> is</label><label class="option"><input type="radio" name="q24" value="are"> are</label><div id="f24" class="feedback"></div></div><div class="card" id="q25" data-type="mc" data-answer="Where are you from?"><div class="qtitle"><span class="num">26.</span> Qaysi savol kimning qayerdan ekanini so‘raydi?</div><label class="option"><input type="radio" name="q25" value="What’s your name?"> What’s your name?</label><label class="option"><input type="radio" name="q25" value="Where are you from?"> Where are you from?</label><label class="option"><input type="radio" name="q25" value="How are you?"> How are you?</label><div id="f25" class="feedback"></div></div><div class="card" id="q26" data-type="text" data-answer="I am from Tashkent."><div class="qtitle"><span class="num">27.</span> So‘zlarni to‘g‘ri tartibda joylashtiring: Tashkent / from / am / I</div><input type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Javobingizni shu yerga yozing"><div id="f26" class="feedback"></div></div><div class="card" id="q27" data-type="text" data-answer="My name is Ali."><div class="qtitle"><span class="num">28.</span> So‘zlarni to‘g‘ri tartibda joylashtiring: name / is / My / Ali</div><input type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Javobingizni shu yerga yozing"><div id="f27" class="feedback"></div></div><div class="card" id="q28" data-type="text" data-answer="Nice to meet you."><div class="qtitle"><span class="num">29.</span> So‘zlarni to‘g‘ri tartibda joylashtiring: you / Nice / meet / to</div><input type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Javobingizni shu yerga yozing"><div id="f28" class="feedback"></div></div><div class="card" id="q29" data-type="text" data-answer="What’s your phone number?"><div class="qtitle"><span class="num">30.</span> So‘zlarni to‘g‘ri tartibda joylashtiring: phone / your / What’s / number</div><input type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Javobingizni shu yerga yozing"><div id="f29" class="feedback"></div></div></form>
-<div id="result" class="result">Natijangiz<br><strong id="score">0 / 30</strong><p>Izohlarni o‘qing va xohlasangiz qayta ishlang.</p></div>
-<div class="actions">
-  <button id="check" type="button" class="btn primary">✓ Javoblarimni tekshirish</button>
-</div>
-</div>
 <script src="../js/common.js"></script>
+<script src="../js/progress.js"></script>
+
 <script>
-(function(){
-  var answers = [];
-  var answered = [];
-  var total = 30;
-  var i;
-  for(i=0;i<total;i++){ answers[i]=null; answered[i]=false; }
+"use strict";
 
-  function normalize(x){
-    return String(x || '').toLowerCase().replace(/[.,!?“”"’‘'\-]/g,'').replace(/\s+/g,' ').trim();
-  }
+const questions = [{"type": "mc", "q": "Kimdir sizga: “Hi! What’s your name?” dedi. Qaysi javob mos?", "a": ["My name is Ali.", "I from Ali.", "Ali is my."], "c": 0, "e": ""},
+{"type": "mc", "q": "Kimdir sizni tanishtirdi: “This is Anna.” Siz nima deysiz?", "a": ["Nice to meet you.", "I from Anna.", "My Anna."], "c": 0, "e": ""},
+{"type": "mc", "q": "“Nice to meet you” degan gapga mos javobni tanlang.", "a": ["Nice to meet you too.", "Nice meet you.", "You too meet."], "c": 0, "e": ""},
+{"type": "mc", "q": "“Where are you from?” savoliga to‘g‘ri javobni tanlang.", "a": ["I’m from Tashkent.", "I from Tashkent.", "My from Tashkent."], "c": 0, "e": ""},
+{"type": "mc", "q": "To‘g‘ri variantni tanlang: “She ___ from Uzbekistan.”", "a": ["am", "is", "are"], "c": 1, "e": ""},
+{"type": "mc", "q": "To‘g‘ri variantni tanlang: “I ___ from Samarkand.”", "a": ["am", "is", "are"], "c": 0, "e": ""},
+{"type": "mc", "q": "To‘g‘ri variantni tanlang: “They ___ from Korea.”", "a": ["am", "is", "are"], "c": 2, "e": ""},
+{"type": "mc", "q": "Ali is a student. ___ is from Uzbekistan.", "a": ["He", "His", "Her"], "c": 0, "e": ""},
+{"type": "mc", "q": "Anna is a teacher. ___ name is Anna.", "a": ["He", "His", "Her"], "c": 2, "e": ""},
+{"type": "mc", "q": "“I’m Bob. ___ phone number is 90 123 45 67.”", "a": ["I", "My", "His"], "c": 1, "e": ""},
+{"type": "mc", "q": "“This is Maria. ___ is from Spain.”", "a": ["He", "Her", "She"], "c": 2, "e": ""},
+{"type": "mc", "q": "“His name ___ David.” Gapni to‘ldiring.", "a": ["am", "is", "are"], "c": 1, "e": ""},
+{"type": "mc", "q": "“Her name ___ Anna.” Gapni to‘ldiring.", "a": ["am", "is", "are"], "c": 1, "e": ""},
+{"type": "mc", "q": "“Seven” qaysi raqam?", "a": ["5", "6", "7"], "c": 2, "e": ""},
+{"type": "mc", "q": "Gapni to‘ldiring: “What’s your ___ number?”", "a": ["name", "phone", "city"], "c": 1, "e": ""},
+{"type": "mc", "q": "Kimdir sizdan: “What’s your mobile number?” deb so‘radi. Sizda raqam yo‘q. Nima deysiz?", "a": ["Sorry, I don’t have one.", "I don’t one.", "Sorry, I no have."], "c": 0, "e": ""},
+{"type": "mc", "q": "Ingliz tilida telefon raqamini odatda qanday aytamiz?", "a": ["Bitta katta son sifatida", "Raqamlarni bittalab", "Faqat juftliklarda"], "c": 1, "e": ""},
+{"type": "mc", "q": "Kimdir sizdan: “How are you?” deb so‘radi. Qaysi javob mos?", "a": ["I’m fine, thanks.", "I’m from Tashkent.", "My name is Ali."], "c": 0, "e": ""},
+{"type": "mc", "q": "Gapni to‘ldiring: “Fine, thanks. ___?”", "a": ["What you?", "And you?", "You are?"], "c": 1, "e": ""},
+{"type": "mc", "q": "Qaysi gap to‘g‘ri?", "a": ["I am from Tashkent.", "I is from Tashkent.", "I are from Tashkent."], "c": 0, "e": ""},
+{"type": "mc", "q": "Qaysi gap to‘g‘ri?", "a": ["Her name are Anna.", "Her name is Anna.", "Her name am Anna."], "c": 1, "e": ""},
+{"type": "mc", "q": "David erkak. Qaysi variant to‘g‘ri?", "a": ["Her name", "She name", "His name"], "c": 2, "e": ""},
+{"type": "mc", "q": "She bilan qaysi “to be” ishlatiladi?", "a": ["am", "is", "are"], "c": 1, "e": ""},
+{"type": "mc", "q": "I bilan qaysi “to be” ishlatiladi?", "a": ["am", "is", "are"], "c": 0, "e": ""},
+{"type": "mc", "q": "They bilan qaysi “to be” ishlatiladi?", "a": ["am", "is", "are"], "c": 2, "e": ""},
+{"type": "mc", "q": "Qaysi savol kimning qayerdan ekanini so‘raydi?", "a": ["What’s your name?", "Where are you from?", "How are you?"], "c": 1, "e": ""},
+{"type": "text", "q": "So‘zlarni to‘g‘ri tartibda joylashtiring: Tashkent / from / am / I", "answer": "I am from Tashkent.", "e": ""},
+{"type": "text", "q": "So‘zlarni to‘g‘ri tartibda joylashtiring: name / is / My / Ali", "answer": "My name is Ali.", "e": ""},
+{"type": "text", "q": "So‘zlarni to‘g‘ri tartibda joylashtiring: you / Nice / meet / to", "answer": "Nice to meet you.", "e": ""},
+{"type": "text", "q": "So‘zlarni to‘g‘ri tartibda joylashtiring: phone / your / What’s / number", "answer": "What’s your phone number?", "e": ""}];
 
-  // Live progress is deliberately kept separate from the
-  // `answered[]` array used by the final answer checker.
-  // `answered[]` becomes true only after Check is pressed, so using it for the
-  // live bar was the reason the bar jumped to 100%.
-  var liveAnswered = new Set();
+const quiz = document.getElementById("quiz");
+const answeredEl = document.getElementById("answered");
+const progressFill = document.getElementById("topProgressFill");
 
-  function updateProgress(){
-    var n = liveAnswered.size;
-    var pct = total ? (n / total) * 100 : 0;
+function normalizeAnswer(v) {
+  return String(v ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]/gu, "")
+    .replace(/\s+/g, " ");
+}
 
-    var countEl = document.getElementById('answered');
-    var fillEl = document.getElementById('topProgressFill');
-
-    if(countEl){
-      countEl.textContent = n + ' / ' + total;
+function updateProgress() {
+  let answered = 0;
+  questions.forEach((item, i) => {
+    if (item.type === "text") {
+      const input = document.querySelector(`#q${i} .st-text-input`);
+      if (input && input.value.trim()) answered++;
+    } else {
+      if (document.querySelector(`input[name="q${i}"]:checked`)) answered++;
     }
+  });
+  answeredEl.textContent = `${answered} / ${questions.length}`;
+  progressFill.style.width = `${answered / questions.length * 100}%`;
+}
 
-    if(fillEl){
-      fillEl.style.width = pct + '%';
-    }
-  }
+async function checkAnswers() {
+  let score = 0;
 
-  function markLiveAnsweredFromRadio(radio){
-    var block = radio.closest('.card');
-    if(!block) return;
+  questions.forEach((item, i) => {
+    const card = document.getElementById(`q${i}`);
+    const feedback = document.getElementById(`f${i}`);
+    let ok = false;
+    let correctText = "";
 
-    var id = Number(block.id.replace('q',''));
-    if(!Number.isNaN(id)){
-      liveAnswered.add(id);
-      updateProgress();
-    }
-  }
-
-  function markLiveAnsweredFromText(input){
-    var block = input.closest('.card');
-    if(!block) return;
-
-    var id = Number(block.id.replace('q',''));
-    if(Number.isNaN(id)) return;
-
-    if(input.value.trim() !== ''){
-      liveAnswered.add(id);
-    }else{
-      liveAnswered.delete(id);
-    }
-
-    updateProgress();
-  }
-
-    async function checkAnswers(){
-    var score=0, j, block, selected, correct, fb;
-    for(j=0;j<total;j++){
-      block=document.getElementById('q'+j);
-      fb=document.getElementById('f'+j);
-      selected=null;
-      if(block.getAttribute('data-type')==='mc'){
-        var radios=block.getElementsByTagName('input');
-        var k;
-        for(k=0;k<radios.length;k++){
-          if(radios[k].checked){selected=radios[k].value;break;}
-        }
-      }else{
-        selected=block.getElementsByTagName('input')[0].value;
+    if (item.type === "text") {
+      const input = card.querySelector(".st-text-input");
+      ok = normalizeAnswer(input.value) === normalizeAnswer(item.answer);
+      input.classList.remove("is-correct", "is-wrong");
+      input.classList.add(ok ? "is-correct" : "is-wrong");
+      correctText = item.answer;
+    } else {
+      const selected = document.querySelector(`input[name="q${i}"]:checked`);
+      card.querySelectorAll(".st-choice").forEach((label, j) => {
+        label.classList.remove("is-correct", "is-wrong");
+        if (j === item.c) label.classList.add("is-correct");
+      });
+      if (selected && Number(selected.value) === item.c) {
+        ok = true;
+      } else if (selected) {
+        card.querySelector(`.st-choice:nth-child(${Number(selected.value) + 1})`)
+          ?.classList.add("is-wrong");
       }
-      correct=block.getAttribute('data-answer');
-      answered[j]=true;
-      if(normalize(selected)===normalize(correct)){
-        score++;
-        fb.className='feedback correct';
-        fb.innerHTML='✓ <b>To‘g‘ri!</b>';
-      }else{
-        fb.className='feedback wrong';
-        fb.innerHTML='✗ <b>Xato.</b><br><b>To‘g‘ri javob:</b> '+correct;
-      }
+      correctText = item.a[item.c];
     }
-    document.getElementById('score').innerHTML=score+' / '+total;
-    const saved = await reportActivityProgress(
-      (score/total*100)>=70,
-      Math.round(score/total*100)
+
+    if (ok) score++;
+
+    feedback.className = "st-question-feedback " + (ok ? "correct" : "incorrect") + " is-visible";
+    if (ok) {
+      feedback.innerHTML = item.e ? `✓ <b>To‘g‘ri!</b><br>${item.e}` : `✓ <b>To‘g‘ri!</b>`;
+    } else {
+      feedback.innerHTML = item.e
+        ? `✗ <b>Noto‘g‘ri.</b><br><b>To‘g‘ri javob:</b> ${correctText}<br>${item.e}`
+        : `✗ <b>Noto‘g‘ri.</b><br><b>To‘g‘ri javob:</b> ${correctText}`;
+    }
+  });
+
+  const percent = Math.round(score / questions.length * 100);
+  document.getElementById("score").textContent = score;
+
+  const result = document.getElementById("result");
+  const title = document.getElementById("resultTitle");
+  const text = document.getElementById("resultText");
+  const saveStatus = document.getElementById("saveStatus");
+
+  if (percent >= 70) {
+    result.className = "st-quiz-result pass is-visible";
+    title.textContent = "Ajoyib! Mashq muvaffaqiyatli tugallandi.";
+    text.textContent = `Siz ${percent}% natija oldingiz.`;
+  } else {
+    result.className = "st-quiz-result fail is-visible";
+    title.textContent = "Yana bir marta urinib ko‘ring.";
+    text.textContent = `Siz ${percent}% natija oldingiz. Tugallangan deb hisoblanishi uchun kamida 70% kerak.`;
+  }
+
+  saveStatus.textContent = "Progress saqlanmoqda...";
+  saveStatus.className = "st-save-status";
+
+  try {
+    const activityId =
+      Number(new URLSearchParams(window.location.search).get("activity_id")) || 0;
+
+    if (!activityId) throw new Error("activity_id topilmadi.");
+
+    const data = await window.SalimTeaches.reportActivityProgress(
+      activityId,
+      percent >= 70,
+      percent
     );
 
-    document.getElementById('result').style.display='block';
-    let saveStatus = document.getElementById('saveStatus');
-    if (!saveStatus) {
-      saveStatus = document.createElement('div');
-      saveStatus.id = 'saveStatus';
-      saveStatus.className = 'save-status';
-      document.getElementById('result').appendChild(saveStatus);
-    }
-    if (saved && saved.success === true) {
-      saveStatus.className = 'save-status ok';
-      saveStatus.textContent = '✓ Natijangiz saqlandi';
+    if (data && data.course) {
+      saveStatus.textContent = "✓ Progress saqlandi.";
+      saveStatus.className = "st-save-status correct";
     } else {
-      saveStatus.className = 'save-status err';
-      saveStatus.textContent = '⚠ Natijangizni saqlashda muammo: ' +
-        ((saved && saved.error) || 'noma’lum xatolik');
+      saveStatus.textContent = "✓ Javoblar tekshirildi.";
+      saveStatus.className = "st-save-status correct";
     }
-    updateProgress();
-    SalimTeaches.showPostCheckActions("check", 1);
-    window.scrollTo(0,document.body.scrollHeight);
+  } catch (error) {
+    console.error(error);
+    saveStatus.textContent = "Progressni saqlashda xatolik yuz berdi.";
+    saveStatus.className = "st-save-status incorrect";
   }
 
-  // Bind directly after the form exists. This avoids relying on the
-  // preview environment's window.onload handling.
-  document.getElementById('check').onclick=function(e){
-    if(e)e.preventDefault();
-    checkAnswers();
-    return false;
-  };
-
-  document.querySelectorAll('#quiz .option').forEach(function(option){
-    option.addEventListener('click', function(){
-      var radio = option.querySelector('input[type="radio"]');
-      if(radio) markLiveAnsweredFromRadio(radio);
-    });
-  });
-
-  document.querySelectorAll('#quiz input[type="text"]').forEach(function(input){
-    input.addEventListener('input', function(){
-      markLiveAnsweredFromText(input);
-    });
-  });
-
-  updateProgress();
-})();
-</script>
-
-<script>
-function getTelegramInitData() {
-  try {
-    const saved = sessionStorage.getItem("salimteaches_initData");
-    if (saved) return saved;
-  } catch (e) {
-    console.warn("sessionStorage unavailable:", e);
-  }
-
-  try {
-    if (window.Telegram && window.Telegram.WebApp) {
-      const tg = window.Telegram.WebApp;
-      if (tg.initData) {
-        try {
-          sessionStorage.setItem("salimteaches_initData", tg.initData);
-        } catch (e) {}
-        return tg.initData;
-      }
-    }
-  } catch (e) {
-    console.warn("Telegram initData unavailable:", e);
-  }
-
-  return "";
+  SalimTeaches.showPostCheckActions("checkBtn", 1);
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function backToUnit1() {
-  window.location.assign(
-    "https://imbooz.github.io/salimteaches-beginner/index.html?unit=1"
-  );
+  const returnUrl =
+    sessionStorage.getItem("salimteaches_returnUrl") ||
+    "../index.html";
+
+  const clean = returnUrl.split("#")[0].split("?")[0];
+  window.location.href = `${clean}?unit=1`;
 }
+
+quiz.addEventListener("input", updateProgress);
+quiz.addEventListener("change", updateProgress);
+updateProgress();
 </script>
-
-<script>
-async function reportActivityProgress(completed, score) {
-  const activityId =
-    Number(new URLSearchParams(window.location.search).get("activity_id")) || 3;
-  const initData = getTelegramInitData();
-
-  if (!initData) {
-    return { success: false, error: "Telegram initData mavjud emas." };
-  }
-
-  try {
-    const response = await fetch(
-      "https://salimteaches-beginner-auth.imshosalim.workers.dev/progress",
-      {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          initData,
-          activity_id: activityId,
-          completed: Boolean(completed),
-          score: score == null ? null : Number(score)
-        })
-      }
-    );
-
-    const data = await response.json();
-    if (!response.ok || data.success !== true) {
-      return {
-        success: false,
-        error: data.error || data.reason || ("HTTP " + response.status)
-      };
-    }
-    return data;
-  } catch (error) {
-    console.error("Progress save failed:", error);
-    return { success: false, error: error.message || "Network error" };
-  }
-}
-</script>
-
-</div>
-</body></html>
+</body>
+</html>
