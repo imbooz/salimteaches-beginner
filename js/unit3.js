@@ -90,6 +90,7 @@
 
     document.getElementById("unit3ProgressPercent").textContent =
       progress + "%";
+
     document.getElementById("unit3ProgressFill").style.width =
       progress + "%";
 
@@ -97,9 +98,6 @@
       ["lesson", "video"],
       ["dars", "lesson"]
     );
-
-    const unit3LessonUrl =
-      "https://youtu.be/f4MXip7DSuU";
 
     const practice = findUnit3Activity(
       ["practice", "exercise"],
@@ -152,11 +150,11 @@
           );
         }
 
-        if (typeof tg?.openLink === "function") {
-          tg.openLink(unit3LessonUrl);
-        } else {
-          window.location.href = unit3LessonUrl;
-        }
+        /*
+         * Same video-opening behavior as Unit 1 and Unit 2.
+         * openVideo() is provided by index.js.
+         */
+        openVideo("f4MXip7DSuU");
       }
     });
 
@@ -377,9 +375,7 @@
   window.renderUnits = function () {
     originalRenderUnits();
 
-    const unit3 = getUnit3();
-
-    ["unitsContainer", "courseUnitsContainer"].forEach(id => {
+    [ "unitsContainer", "courseUnitsContainer" ].forEach(id => {
       const container = document.getElementById(id);
       if (!container) return;
 
@@ -400,9 +396,12 @@
     });
 
     const count = document.getElementById("unitCount");
+
     if (count) {
       const cards =
-        document.querySelectorAll("#unitsContainer .unit-card").length;
+        document.querySelectorAll(
+          "#unitsContainer .unit-card"
+        ).length;
 
       count.textContent = `${cards} ta Unit`;
     }
@@ -416,11 +415,11 @@
       return originalOpenUnit(unitId);
     }
 
-    const unit = getUnit3();
-
     document
       .querySelectorAll(".page")
-      .forEach(page => page.classList.remove("active"));
+      .forEach(page =>
+        page.classList.remove("active")
+      );
 
     addUnit3Page();
 
@@ -441,7 +440,8 @@
   };
 
   window.closeUnit3 = function () {
-    const page = document.getElementById("unit3Page");
+    const page =
+      document.getElementById("unit3Page");
 
     if (page) {
       page.classList.remove("active");
@@ -464,7 +464,8 @@
   };
 
   function initializeUnit3() {
-    const main = document.getElementById("main");
+    const main =
+      document.getElementById("main");
 
     if (!main || main.style.display !== "block") {
       return;
@@ -473,7 +474,8 @@
     addUnit3Page();
     renderUnits();
 
-    const params = new URLSearchParams(window.location.search);
+    const params =
+      new URLSearchParams(window.location.search);
 
     if (
       params.get("unit") === "3" ||
@@ -485,16 +487,22 @@
 
   // index.js authenticates asynchronously. Wait until its #main becomes
   // visible, then add Unit 3. This does not alter its authentication flow.
-  const observer = new MutationObserver(() => {
-    const main = document.getElementById("main");
+  const observer =
+    new MutationObserver(() => {
+      const main =
+        document.getElementById("main");
 
-    if (main && main.style.display === "block") {
-      initializeUnit3();
-      observer.disconnect();
-    }
-  });
+      if (
+        main &&
+        main.style.display === "block"
+      ) {
+        initializeUnit3();
+        observer.disconnect();
+      }
+    });
 
-  const main = document.getElementById("main");
+  const main =
+    document.getElementById("main");
 
   if (main) {
     observer.observe(
