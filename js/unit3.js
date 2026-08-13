@@ -276,6 +276,103 @@
         : "none";
   }
 
+  function createUnit3Card() {
+    const unit = getUnit3();
+
+    const unit2Progress =
+      courseData?.unitProgress?.[2];
+
+    const unlocked =
+      Boolean(
+        unit2Progress &&
+        Number(unit2Progress.completed) === 1
+      );
+
+    const unit3Progress =
+      courseData?.unitProgress?.[3];
+
+    const completed =
+      Boolean(
+        unit3Progress &&
+        Number(unit3Progress.completed) === 1
+      );
+
+    const progress =
+      calculateProgress(unit);
+
+    const card = document.createElement("div");
+    card.className =
+      "unit-card" +
+      (unlocked ? "" : " locked");
+
+    const icon =
+      completed
+        ? "🏆"
+        : unlocked
+          ? "📖"
+          : "🔒";
+
+    const buttonText =
+      completed
+        ? "Qayta ko‘rish →"
+        : unlocked
+          ? "Davom etish →"
+          : "Avval Unit 2 ni tugating";
+
+    card.innerHTML = `
+      <div class="unit-top">
+        <div class="unit-icon">${icon}</div>
+
+        <div class="unit-info">
+          <div class="unit-number">Unit 3</div>
+          <h3 class="unit-title">Jobs, Colours & To Be</h3>
+          <p class="unit-description">
+            Jobs, colours, nationalities, days of the week va to be.
+          </p>
+        </div>
+      </div>
+
+      ${
+        unlocked
+          ? `
+            <div class="progress-area">
+              <div class="progress-row">
+                <span class="progress-label">Jarayon</span>
+                <span class="progress-percent">${progress}%</span>
+              </div>
+
+              <div class="progress-bar">
+                <div
+                  class="progress-fill"
+                  style="width:${progress}%"
+                ></div>
+              </div>
+            </div>
+          `
+          : ""
+      }
+
+      ${
+        completed
+          ? `
+            <div class="completed-badge">
+              ✓ Tugallangan
+            </div>
+          `
+          : ""
+      }
+
+      <button
+        class="unit-button"
+        ${unlocked ? 'onclick="openUnit(3)"' : "disabled"}
+      >
+        ${buttonText}
+      </button>
+    `;
+
+    return card;
+  }
+
   // Add Unit 3 to the existing Unit 1/2 unit lists.
   const originalRenderUnits = window.renderUnits;
 
@@ -293,7 +390,7 @@
       );
 
       if (!existing) {
-        container.appendChild(createUnitCard(unit3));
+        container.appendChild(createUnit3Card());
       }
     });
 
