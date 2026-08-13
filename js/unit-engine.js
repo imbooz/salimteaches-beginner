@@ -120,11 +120,13 @@ function getUnitStatus(unit) {
   const releasedByProgress =
     Boolean(previousProgress && previousProgress.completed === 1);
 
-  const unlocked =
-    (unit.is_available === 1) && releasedByProgress;
-
+  // Deliberate: only the first unit depends on the backend's
+  // is_available flag (that's how the course "opens"). Every unit
+  // after that unlocks purely by finishing the previous one — a
+  // teacher forgetting to flip is_available on Unit 3, 4, 5... should
+  // never block a student who already earned their way there.
   return {
-    unlocked,
+    unlocked: releasedByProgress,
     completed,
     progress
   };
