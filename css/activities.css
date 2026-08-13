@@ -1,9 +1,8 @@
-/*
+/* 
  * SalimTeaches Beginner — shared activity components
  * Unit 3+ only.
  */
 
-/* Shared answer/check area */
 .activity-actions {
   display: flex;
   gap: 10px;
@@ -18,17 +17,9 @@
   font-weight: 750;
 }
 
-.activity-result.correct {
-  background: #eaf8f1;
-  color: #1f9d67;
-}
+.activity-result.correct { background: #eaf8f1; color: #1f9d67; }
+.activity-result.incorrect { background: #fff0ef; color: #d9534f; }
 
-.activity-result.incorrect {
-  background: #fff0ef;
-  color: #d9534f;
-}
-
-/* Generic reorder/drop target */
 .st-drop-target {
   min-height: 48px;
   border: 2px dashed #d8dbe5;
@@ -42,15 +33,7 @@
   background: #f5f3ff;
 }
 
-/* Standard bottom-bar clearance for Unit 3+ activity pages */
-.st-activity-page {
-  padding-bottom: 110px;
-}
-
-/* =========================================================
-   STANDARD QUIZ ACTIVITY
-   Used by Unit 3+ practice/test pages.
-   ========================================================= */
+.st-activity-page { padding-bottom: 110px; }
 
 .st-quiz-page {
   max-width: 760px;
@@ -91,9 +74,7 @@
   font-weight: 700;
 }
 
-.st-activity-header {
-  padding: 24px 18px 14px;
-}
+.st-activity-header { padding: 24px 18px 14px; }
 
 .st-activity-brand {
   font-size: 12px;
@@ -178,10 +159,7 @@
   font-weight: 900;
 }
 
-.st-question__body {
-  flex: 1;
-  min-width: 0;
-}
+.st-question__body { flex: 1; min-width: 0; }
 
 .st-question__title {
   font-size: 15px;
@@ -283,19 +261,9 @@
   line-height: 1.45;
 }
 
-.st-question-feedback.is-visible {
-  display: block;
-}
-
-.st-question-feedback.correct {
-  background: var(--success-bg);
-  color: var(--success);
-}
-
-.st-question-feedback.incorrect {
-  background: var(--danger-bg);
-  color: var(--danger);
-}
+.st-question-feedback.is-visible { display: block; }
+.st-question-feedback.correct { background: var(--success-bg); color: var(--success); }
+.st-question-feedback.incorrect { background: var(--danger-bg); color: var(--danger); }
 
 .st-quiz-result {
   display: none;
@@ -307,9 +275,7 @@
   text-align: center;
 }
 
-.st-quiz-result.is-visible {
-  display: block;
-}
+.st-quiz-result.is-visible { display: block; }
 
 .st-quiz-result__score {
   font-size: 38px;
@@ -334,9 +300,7 @@
   background: #f4fcf8;
 }
 
-.st-quiz-result.pass .st-quiz-result__score {
-  color: var(--success);
-}
+.st-quiz-result.pass .st-quiz-result__score { color: var(--success); }
 
 .st-quiz-result.fail {
   border-color: #ffd3d3;
@@ -349,13 +313,8 @@
   font-weight: 750;
 }
 
-.st-save-status.correct {
-  color: var(--success);
-}
-
-.st-save-status.incorrect {
-  color: var(--danger);
-}
+.st-save-status.correct { color: var(--success); }
+.st-save-status.incorrect { color: var(--danger); }
 
 .st-quiz-actions {
   position: fixed;
@@ -380,28 +339,21 @@
   box-sizing: border-box;
 }
 
-.st-quiz-actions .st-btn {
-  flex: 1;
-  min-width: 0;
+.st-quiz-actions .st-btn { flex: 1; min-width: 0; }
+
+/* Unit 3 practice-specific rules, extracted from the HTML. */
+.st-question__title b { color: #5865f2; }
+
+.st-answer-note {
+  margin: 10px 14px 0;
+  color: #747b8c;
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 @media (max-width: 560px) {
-  .st-choice-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .st-activity-header h1 {
-    font-size: 24px;
-  }
-
-  .st-question {
-    margin-left: 10px;
-    margin-right: 10px;
-    padding: 14px;
-  }
-
-  .st-quiz-result {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
+  .st-choice-grid { grid-template-columns: 1fr; }
+  .st-activity-header h1 { font-size: 24px; }
+  .st-question { margin-left: 10px; margin-right: 10px; padding: 14px; }
+  .st-quiz-result { margin-left: 10px; margin-right: 10px; }
 }

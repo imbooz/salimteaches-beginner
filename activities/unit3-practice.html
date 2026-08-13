@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SalimTeaches — Unit 3 Interactive Practice</title>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/activities.css">
+</head>
+
+<body>
+<div class="st-quiz-page">
+
+  <nav class="st-activity-nav">
+    <button class="st-activity-nav__back" type="button" onclick="backToUnit3()">← Unit 3</button>
+    <div class="st-activity-nav__label">SalimTeaches • Unit 3</div>
+  </nav>
+
+  <header class="st-activity-header">
+    <div class="st-activity-brand">SALIMTEACHES • BEGINNER</div>
+    <h1>🧩 Unit 3 — Interaktiv mashqlar</h1>
+    <p class="st-activity-subtitle">
+      Jobs, colours, nationalities, countries, days of the week va <b>to be</b>.
+      Shuningdek, savol berish va classroom English.
+    </p>
+  </header>
+
+  <div class="st-quiz-progress">
+    <div class="st-quiz-progress__row">
+      <span>Mashq jarayoni</span>
+      <span id="answered">0 / 30</span>
+    </div>
+    <div class="st-quiz-progress__bar">
+      <div class="st-quiz-progress__fill" id="topProgressFill"></div>
+    </div>
+  </div>
+
+  <div class="st-answer-note">
+    Javoblar tekshirilganda har bir savol bo‘yicha to‘g‘ri javob va qisqa izoh ko‘rsatiladi.
+  </div>
+
+  <form id="quiz"></form>
+
+  <div id="result" class="st-quiz-result">
+    <div class="st-quiz-result__score"><span id="score">0</span> / 30</div>
+    <div class="st-quiz-result__title" id="resultTitle"></div>
+    <div class="st-quiz-result__text" id="resultText"></div>
+    <div id="saveStatus" class="st-save-status"></div>
+  </div>
+
+  <div class="st-quiz-actions">
+    <div class="st-quiz-actions__inner">
+      <button class="st-btn st-btn-secondary" type="button" onclick="backToUnit3()">← Unit 3</button>
+      <button class="st-btn st-btn-primary" id="checkBtn" type="button" onclick="checkAnswers()">Javoblarni tekshirish</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/common.js"></script>
+<script src="../js/progress.js"></script>
+
+<script>
+"use strict";
+
+/*
+ * Unit 3 Practice
+ * - Exactly 30 questions.
+ * - Choice order is FIXED and never randomized on page load.
+ * - Correct answers intentionally appear in different positions.
+ * - The same order is used for every student.
+ */
+
+const questions = [
+  { q:"Which job works in a hospital and helps sick people?", a:["Teacher","Doctor","Actor"], c:1, e:"A doctor works with sick people in a hospital or clinic." },
+  { q:"Which job puts out fires?", a:["Firefighter","Student","Police officer"], c:0, e:"A firefighter puts out fires and helps people in dangerous situations." },
+  { q:"Which sentence asks about someone's job?", a:["Where are you from?","What is your job?","What is your nationality?"], c:1, e:"“What is your job?” asks what a person does for work." },
+  { q:"Choose the correct answer: “What do you do?”", a:["I am a teacher.","I from Uzbekistan.","I Uzbek."], c:0, e:"We can answer “What do you do?” with “I am + job.”" },
+  { q:"Choose the correct affirmative form: “She ___ an actor.”", a:["are","am","is"], c:2, e:"With he, she and it, we use “is”." },
+  { q:"Choose the correct contraction: “I am a student.”", a:["I’m a student.","I’s a student.","I are a student."], c:0, e:"I am → I’m." },
+  { q:"Choose the correct contraction: “They are doctors.”", a:["They’s doctors.","They’re doctors.","They am doctors."], c:1, e:"They are → They’re." },
+  { q:"Which person usually helps sick people in an emergency?", a:["Paramedic","Actor","Police officer"], c:0, e:"A paramedic gives emergency medical help." },
+  { q:"Which word is a colour?", a:["Uzbek","Blue","Uzbekistan"], c:1, e:"Blue is a colour. Uzbek is a nationality and Uzbekistan is a country." },
+  { q:"Complete: “I am from ___.”", a:["Uzbek","Uzbekistan","Uzbekish"], c:1, e:"After “I am from” we use the country: Uzbekistan." },
+  { q:"Complete: “I am ___.” (nationality)", a:["Uzbekistan","Uzbek","Uzbekish"], c:1, e:"Uzbek is the nationality adjective/noun." },
+  { q:"Choose the correct sentence about a flag.", a:["The Uzbek flag is blue, white and green.","The Uzbekistan flag is Uzbek.","The Uzbekistan flag is Uzbek."], c:0, e:"We say “the Uzbek flag”, not “the Uzbekistan flag” in this meaning." },
+  { q:"Which question asks about nationality?", a:["What nationality are you?","Where are you?","What do you do?"], c:0, e:"“What nationality are you?” asks about nationality." },
+  { q:"Choose the correct negative sentence: “He ___ a teacher.”", a:["He aren't a teacher.","He isn't a teacher.","He am not a teacher."], c:1, e:"He is not → He isn’t." },
+  { q:"Choose the correct negative contraction: “We are not students.”", a:["We isn’t students.","We aren’t students.","We am not students."], c:1, e:"We are not → We aren’t." },
+  { q:"Which sentence means “Men politsiyachi emasman”?", a:["I am not a police officer.","I isn’t a police officer.","I aren’t a police officer."], c:0, e:"I am not + job." },
+  { q:"Complete: “She ___ not from England.”", a:["are","am","is"], c:2, e:"She is not → She isn’t." },
+  { q:"Which day comes after Monday?", a:["Sunday","Tuesday","Friday"], c:1, e:"Monday → Tuesday." },
+  { q:"Which day comes before Friday?", a:["Thursday","Saturday","Wednesday"], c:0, e:"Thursday comes before Friday." },
+  { q:"Choose the correct yes/no question.", a:["Are you a teacher?","You are a teacher?","You am a teacher?"], c:0, e:"Yes/no questions with to be begin with am/is/are." },
+  { q:"Choose the correct short answer: “Are they students?” — “Yes, ___.”", a:["they are","they is","they am"], c:0, e:"Are they...? → Yes, they are." },
+  { q:"Choose the correct short answer: “Is he a doctor?” — “No, ___.”", a:["he aren't","he isn't","he am not"], c:1, e:"Is he...? → No, he isn’t." },
+  { q:"Choose the correct WH question for a person's job.", a:["Where are you?","What do you do?","When are you?"], c:1, e:"“What do you do?” asks about a person's job." },
+  { q:"Choose the correct question for a place/origin.", a:["Where are you from?","Who are you from?","When are you from?"], c:0, e:"“Where are you from?” asks about where someone comes from." },
+  { q:"Choose the correct question for a person.", a:["Who is your teacher?","Where is your teacher?","When is your teacher?"], c:0, e:"Who asks about a person." },
+  { q:"Which question asks about a time/day?", a:["What are you?","When is the class?","Who is the class?"], c:1, e:"When asks about time or a day." },
+  { q:"Which question can you use to ask the price?", a:["How much is it?","How nationality is it?","Who much is it?"], c:0, e:"“How much is it?” asks about price." },
+  { q:"Someone says “See you on Monday.” What does it mean?", a:["Goodbye until Monday.","I am from Monday.","My job is Monday."], c:0, e:"“See you on Monday” is a way of saying goodbye and naming the next meeting day." },
+  { q:"Which phrase asks for the English word for something?", a:["How do you spell it?","What's ___ in English?","How do you pronounce it?"], c:1, e:"“What’s ___ in English?” asks for the English translation." },
+  { q:"Which phrase is useful when you do not understand the teacher?", a:["Sorry, I don't understand.","See you on Monday.","I am from Uzbekistan."], c:0, e:"“Sorry, I don’t understand” is a useful classroom phrase." }
+];
+
+const quiz = document.getElementById("quiz");
+const answeredEl = document.getElementById("answered");
+const progressFill = document.getElementById("topProgressFill");
+
+function renderQuestions() {
+  quiz.innerHTML = questions.map((item, i) => `
+    <section class="st-question" id="q${i}">
+      <div class="st-question__top">
+        <div class="st-question__number">${i + 1}</div>
+        <div class="st-question__body">
+          <div class="st-question__title">${escapeHtml(item.q)}</div>
+        </div>
+      </div>
+
+      <div class="st-choice-grid">
+        ${item.a.map((choice, j) => `
+          <label class="st-choice">
+            <input type="radio" name="q${i}" value="${j}">
+            <span class="st-choice__letter">${String.fromCharCode(65 + j)}</span>
+            <span class="st-choice__text">${escapeHtml(choice)}</span>
+          </label>
+        `).join("")}
+      </div>
+
+      <div class="st-question-feedback" id="f${i}"></div>
+    </section>
+  `).join("");
+
+  quiz.addEventListener("change", updateProgress);
+}
+
+function escapeHtml(value) {
+  const div = document.createElement("div");
+  div.textContent = value;
+  return div.innerHTML;
+}
+
+function updateProgress() {
+  let answered = 0;
+  questions.forEach((_, i) => {
+    if (document.querySelector(`input[name="q${i}"]:checked`)) answered++;
+  });
+  answeredEl.textContent = `${answered} / ${questions.length}`;
+  progressFill.style.width = `${answered / questions.length * 100}%`;
+}
+
+async function checkAnswers() {
+  let score = 0;
+
+  questions.forEach((item, i) => {
+    const card = document.getElementById(`q${i}`);
+    const selected = document.querySelector(`input[name="q${i}"]:checked`);
+    const feedback = document.getElementById(`f${i}`);
+
+    card.querySelectorAll(".st-choice").forEach((label, j) => {
+      label.classList.remove("is-correct", "is-wrong");
+      if (j === item.c) label.classList.add("is-correct");
+    });
+
+    if (selected && Number(selected.value) === item.c) {
+      score++;
+      feedback.className = "st-question-feedback correct is-visible";
+      feedback.innerHTML = `✓ <b>To‘g‘ri!</b><br>${escapeHtml(item.e)}`;
+    } else {
+      if (selected) {
+        card.querySelector(`.st-choice:nth-child(${Number(selected.value) + 1})`)
+          ?.classList.add("is-wrong");
+      }
+      feedback.className = "st-question-feedback incorrect is-visible";
+      feedback.innerHTML =
+        `✗ <b>Noto‘g‘ri.</b><br><b>To‘g‘ri javob:</b> ${escapeHtml(item.a[item.c])}<br>${escapeHtml(item.e)}`;
+    }
+  });
+
+  const percent = Math.round(score / questions.length * 100);
+  document.getElementById("score").textContent = score;
+
+  const result = document.getElementById("result");
+  const title = document.getElementById("resultTitle");
+  const text = document.getElementById("resultText");
+  const saveStatus = document.getElementById("saveStatus");
+
+  if (percent >= 70) {
+    result.className = "st-quiz-result pass is-visible";
+    title.textContent = "Ajoyib! Mashq muvaffaqiyatli tugallandi.";
+    text.textContent = `Siz ${percent}% natija oldingiz.`;
+  } else {
+    result.className = "st-quiz-result fail is-visible";
+    title.textContent = "Yana bir marta urinib ko‘ring.";
+    text.textContent = `Siz ${percent}% natija oldingiz. Tugallangan deb hisoblanishi uchun kamida 70% kerak.`;
+  }
+
+  saveStatus.textContent = "Progress saqlanmoqda...";
+  saveStatus.className = "st-save-status";
+
+  try {
+    const activityId =
+      Number(new URLSearchParams(window.location.search).get("activity_id")) || 0;
+
+    if (!activityId) {
+      throw new Error("activity_id topilmadi.");
+    }
+
+    const data = await window.SalimTeaches.reportActivityProgress(
+      activityId,
+      percent >= 70,
+      percent
+    );
+
+    if (data && data.course) {
+      saveStatus.textContent = "✓ Progress saqlandi.";
+      saveStatus.className = "st-save-status correct";
+    } else {
+      saveStatus.textContent = "✓ Javoblar tekshirildi.";
+      saveStatus.className = "st-save-status correct";
+    }
+  } catch (error) {
+    console.error(error);
+    saveStatus.textContent = "Progressni saqlashda xatolik yuz berdi.";
+    saveStatus.className = "st-save-status incorrect";
+  }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function backToUnit3() {
+  const returnUrl =
+    sessionStorage.getItem("salimteaches_returnUrl") ||
+    "../index.html";
+
+  const clean = returnUrl.split("#")[0].split("?")[0];
+  window.location.href = `${clean}?unit=3`;
+}
+
+renderQuestions();
+updateProgress();
+</script>
+</body>
+</html>
