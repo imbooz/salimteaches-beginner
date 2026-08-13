@@ -302,6 +302,7 @@
       calculateProgress(unit);
 
     const card = document.createElement("div");
+
     card.className =
       "unit-card" +
       (unlocked ? "" : " locked");
@@ -380,8 +381,6 @@
   window.renderUnits = function () {
     originalRenderUnits();
 
-    const unit3 = getUnit3();
-
     ["unitsContainer", "courseUnitsContainer"].forEach(id => {
       const container = document.getElementById(id);
       if (!container) return;
@@ -420,24 +419,10 @@
       return originalOpenUnit(unitId);
     }
 
-    const unit = getUnit3();
-
-    // Unit 3 is unlocked by Unit 2 completion. Do not use the generic
-    // getUnitStatus() here because its previous-unit lookup depends on the
-    // backend unit metadata and can disagree with the menu card.
-    const unit2Progress =
-      courseData?.unitProgress?.[2];
-
-    const unit3Unlocked =
-      Boolean(
-        unit2Progress &&
-        Number(unit2Progress.completed) === 1
-      );
-
-    if (!unit3Unlocked) {
-      tg.showAlert("Avval Unit 2 ni tugating.");
-      return;
-    }
+    // IMPORTANT:
+    // The Unit 3 card has already checked that Unit 2 is completed.
+    // Do NOT perform another generic lock check here.
+    // This prevents the frontend from contradicting the unlocked card.
 
     document
       .querySelectorAll(".page")
