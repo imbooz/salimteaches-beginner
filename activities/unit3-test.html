@@ -27,6 +27,7 @@ h1{font-size:27px;margin:7px 0 5px}
 .qbody{min-width:0;flex:1}
 .qprompt{font-size:15px;line-height:1.5;margin-bottom:10px}
 .choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.choices.wide{grid-template-columns:1fr}
 .choice{border:1px solid #dfe3ec;background:#fbfcfe;color:var(--text);border-radius:11px;padding:11px 10px;font-size:14px;font-weight:650;min-height:44px;cursor:pointer}
 .choice.selected{border-color:var(--primary);background:#eef0ff;color:var(--primary)}
 .choice.correct{border-color:#bfead6;background:var(--goodbg);color:var(--good)}
@@ -149,11 +150,11 @@ input.text-answer.wrong{border-color:#ffd0d0;background:var(--badbg)}
     <div class="section-title">Grammar</div>
     <div class="section-desc">Gapni <b>a</b> yoki <b>an</b> bilan to‘ldiring.</div>
   </div>
-  <div class="question" data-id="26"><div class="qnum">26</div><div class="qbody"><div class="qprompt">She's __________ ambulance driver.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="a / an"><div class="feedback"></div></div></div>
-  <div class="question" data-id="27"><div class="qnum">27</div><div class="qbody"><div class="qprompt">He's __________ doctor.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="a / an"><div class="feedback"></div></div></div>
-  <div class="question" data-id="28"><div class="qnum">28</div><div class="qbody"><div class="qprompt">I'm __________ teacher.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="a / an"><div class="feedback"></div></div></div>
-  <div class="question" data-id="29"><div class="qnum">29</div><div class="qbody"><div class="qprompt">Jose is __________ paramedic.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="a / an"><div class="feedback"></div></div></div>
-  <div class="question" data-id="30"><div class="qnum">30</div><div class="qbody"><div class="qprompt">Felipe is __________ actor.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="a / an"><div class="feedback"></div></div></div>
+  <div class="question" data-id="26"><div class="qnum">26</div><div class="qbody"><div class="qprompt">She's __________ ambulance driver.</div><div class="choices"><button class="choice" data-value="an">an</button><button class="choice" data-value="a">a</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="27"><div class="qnum">27</div><div class="qbody"><div class="qprompt">He's __________ doctor.</div><div class="choices"><button class="choice" data-value="a">a</button><button class="choice" data-value="an">an</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="28"><div class="qnum">28</div><div class="qbody"><div class="qprompt">I'm __________ teacher.</div><div class="choices"><button class="choice" data-value="a">a</button><button class="choice" data-value="an">an</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="29"><div class="qnum">29</div><div class="qbody"><div class="qprompt">Jose is __________ paramedic.</div><div class="choices"><button class="choice" data-value="a">a</button><button class="choice" data-value="an">an</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="30"><div class="qnum">30</div><div class="qbody"><div class="qprompt">Felipe is __________ actor.</div><div class="choices"><button class="choice" data-value="an">an</button><button class="choice" data-value="a">a</button></div><div class="feedback"></div></div></div>
 </section>
 
 <section class="section">
@@ -162,16 +163,16 @@ input.text-answer.wrong{border-color:#ffd0d0;background:var(--badbg)}
     <div class="section-title">Grammar</div>
     <div class="section-desc">Gapni <b>am, is</b> yoki <b>are</b> bilan to‘ldiring.</div>
   </div>
-  <div class="question" data-id="31"><div class="qnum">31</div><div class="qbody"><div class="qprompt">What __________ your job?</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="am / is / are"><div class="feedback"></div></div></div>
-  <div class="question" data-id="32"><div class="qnum">32</div><div class="qbody"><div class="qprompt">They __________ firefighters.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="am / is / are"><div class="feedback"></div></div></div>
-  <div class="question" data-id="33"><div class="qnum">33</div><div class="qbody"><div class="qprompt">My name __________ Patrizia.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="am / is / are"><div class="feedback"></div></div></div>
-  <div class="question" data-id="34"><div class="qnum">34</div><div class="qbody"><div class="qprompt">She __________ a student.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="am / is / are"><div class="feedback"></div></div></div>
-  <div class="question" data-id="35"><div class="qnum">35</div><div class="qbody"><div class="qprompt">You __________ from Scotland.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="am / is / are"><div class="feedback"></div></div></div>
-  <div class="question" data-id="36"><div class="qnum">36</div><div class="qbody"><div class="qprompt">I __________ Canadian.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="am / is / are"><div class="feedback"></div></div></div>
-  <div class="question" data-id="37"><div class="qnum">37</div><div class="qbody"><div class="qprompt">It __________ your notebook.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="am / is / are"><div class="feedback"></div></div></div>
-  <div class="question" data-id="38"><div class="qnum">38</div><div class="qbody"><div class="qprompt">We __________ teachers.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="am / is / are"><div class="feedback"></div></div></div>
-  <div class="question" data-id="39"><div class="qnum">39</div><div class="qbody"><div class="qprompt">He __________ from Australia.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="am / is / are"><div class="feedback"></div></div></div>
-  <div class="question" data-id="40"><div class="qnum">40</div><div class="qbody"><div class="qprompt">Here __________ your apples.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="am / is / are"><div class="feedback"></div></div></div>
+  <div class="question" data-id="31"><div class="qnum">31</div><div class="qbody"><div class="qprompt">What __________ your job?</div><div class="choices wide"><button class="choice" data-value="is">is</button><button class="choice" data-value="am">am</button><button class="choice" data-value="are">are</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="32"><div class="qnum">32</div><div class="qbody"><div class="qprompt">They __________ firefighters.</div><div class="choices wide"><button class="choice" data-value="am">am</button><button class="choice" data-value="are">are</button><button class="choice" data-value="is">is</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="33"><div class="qnum">33</div><div class="qbody"><div class="qprompt">My name __________ Patrizia.</div><div class="choices wide"><button class="choice" data-value="are">are</button><button class="choice" data-value="is">is</button><button class="choice" data-value="am">am</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="34"><div class="qnum">34</div><div class="qbody"><div class="qprompt">She __________ a student.</div><div class="choices wide"><button class="choice" data-value="am">am</button><button class="choice" data-value="is">is</button><button class="choice" data-value="are">are</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="35"><div class="qnum">35</div><div class="qbody"><div class="qprompt">You __________ from Scotland.</div><div class="choices wide"><button class="choice" data-value="is">is</button><button class="choice" data-value="are">are</button><button class="choice" data-value="am">am</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="36"><div class="qnum">36</div><div class="qbody"><div class="qprompt">I __________ Canadian.</div><div class="choices wide"><button class="choice" data-value="is">is</button><button class="choice" data-value="are">are</button><button class="choice" data-value="am">am</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="37"><div class="qnum">37</div><div class="qbody"><div class="qprompt">It __________ your notebook.</div><div class="choices wide"><button class="choice" data-value="are">are</button><button class="choice" data-value="am">am</button><button class="choice" data-value="is">is</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="38"><div class="qnum">38</div><div class="qbody"><div class="qprompt">We __________ teachers.</div><div class="choices wide"><button class="choice" data-value="is">is</button><button class="choice" data-value="am">am</button><button class="choice" data-value="are">are</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="39"><div class="qnum">39</div><div class="qbody"><div class="qprompt">He __________ from Australia.</div><div class="choices wide"><button class="choice" data-value="am">am</button><button class="choice" data-value="are">are</button><button class="choice" data-value="is">is</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="40"><div class="qnum">40</div><div class="qbody"><div class="qprompt">Here __________ your apples.</div><div class="choices wide"><button class="choice" data-value="am">am</button><button class="choice" data-value="is">is</button><button class="choice" data-value="are">are</button></div><div class="feedback"></div></div></div>
 </section>
 
 <section class="section">
