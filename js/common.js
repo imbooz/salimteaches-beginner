@@ -28,7 +28,11 @@
   // every activity page, regardless of that page's own legacy CSS.
   //
   //   checkButtonId — id of the existing check/submit button
-  //   backUnitId    — which unit's home page "Ortga qaytish" returns to
+  //   backUnitId    — which unit's home page "Ortga qaytish" returns to.
+  //                   Omit (or pass a falsy value) to go straight to the
+  //                   app's home page instead of a unit page — use this
+  //                   for milestone/progress-test pages, which have no
+  //                   detail page of their own to go back to.
   // ----------------------------------------------------------
 
   const POSTCHECK_STYLE_ID = "st-postcheck-style";
@@ -70,8 +74,9 @@
     checkBtn.replaceWith(wrap);
 
     wrap.querySelector(".st-postcheck-back").addEventListener("click", function () {
-      window.location.href =
-        "https://imbooz.github.io/salimteaches-beginner/index.html?unit=" + backUnitId;
+      window.location.href = backUnitId
+        ? "https://imbooz.github.io/salimteaches-beginner/index.html?unit=" + backUnitId
+        : "https://imbooz.github.io/salimteaches-beginner/index.html";
     });
 
     wrap.querySelector(".st-postcheck-retry").addEventListener("click", function () {

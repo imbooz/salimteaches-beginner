@@ -186,6 +186,7 @@ function calculateProgress(unit) {
 
 function createUnitCard(unit) {
 
+  const config = getUnitConfig(unit.unit_id);
   const status = getUnitStatus(unit);
   const progress = calculateProgress(unit);
 
@@ -194,7 +195,9 @@ function createUnitCard(unit) {
   card.dataset.unitId = unit.unit_id;
 
   const icon =
-    !status.unlocked ? "🔒" : status.completed ? "🏆" : "📖";
+    !status.unlocked ? "🔒" : status.completed ? "🏆" : (config?.icon || "📖");
+
+  const kicker = config?.kicker || `Unit ${unit.unit_id}`;
 
   let buttonText;
   if (!status.unlocked) {
@@ -209,7 +212,7 @@ function createUnitCard(unit) {
     <div class="unit-top">
       <div class="unit-icon">${icon}</div>
       <div class="unit-info">
-        <div class="unit-number">Unit ${unit.unit_id}</div>
+        <div class="unit-number">${escapeHtml(kicker)}</div>
         <h3 class="unit-title">${escapeHtml(unit.title)}</h3>
         <p class="unit-description">${escapeHtml(unit.description || "")}</p>
       </div>
@@ -492,6 +495,22 @@ function openUnit(unitId) {
   const status = getUnitStatus(unit);
   if (!status.unlocked) {
     tg.showAlert("Avval oldingi Unitni tugating.");
+    return;
+  }
+
+  // Milestones (progress tests) have no detail page — tapping the card
+  // goes straight into their single "test" activity.
+  const config = getUnitConfig(unitId);
+  if (config?.milestone) {
+    const activityConfig = config.activities[0];
+    if (!activityConfig?.file) {
+      tg.showAlert("Bu test hali tayyorlanmoqda.");
+      return;
+    }
+    const lookup = activityLookupFor(activityConfig);
+    const backendActivity = findBackendActivity(unitId, lookup.types, lookup.titleWords);
+    window.location.href =
+      activityUrl(`activities/${activityConfig.file}`, backendActivity);
     return;
   }
 

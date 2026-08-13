@@ -21,6 +21,19 @@
  * "file" paths are relative to /activities/.
  * "requires" lists the activity `type`s (from this same unit) that must
  * be completed before this activity unlocks. Only used for the test.
+ *
+ * MILESTONES (progress tests between units):
+ * A block can be marked `milestone: true`. It still unlocks exactly like
+ * any other unit (previous entry's test passed ≥70%, by sortOrder), but:
+ *   - tapping its home card skips the detail page and opens its single
+ *     "test" activity's file directly
+ *   - "kicker" overrides the small "Unit N" label on its home card
+ *     (its `id` is just an internal number, not a real unit — pick one
+ *     outside the normal 1,2,3... unit-number range, e.g. 1001, so real
+ *     unit numbers never have to be renumbered when a milestone is added)
+ *   - it needs exactly one activity, type "test"
+ * sortOrder still controls where it sits in the chain — bump every real
+ * unit after it by 1 (see Unit 4 below).
  */
 
 const UNIT_CONFIGS = [
@@ -157,8 +170,28 @@ const UNIT_CONFIGS = [
         requires: ["practice", "listening"]
       }
     ]
+  },
+
+  {
+    id: 1001,
+    sortOrder: 4,
+    milestone: true,
+    kicker: "Nazorat testi",
+    title: "1–3 Unit oraliq testi",
+    description: "1, 2 va 3-Unit bo‘yicha bilimingizni tekshiruvchi yakuniy test.",
+    icon: "🏁",
+    activities: [
+      {
+        type: "test",
+        icon: "📝",
+        title: "Oraliq test",
+        subtitle: "Unitni tugatish uchun kamida 70% kerak.",
+        file: "progress-test-1.html"
+      }
+    ]
   }
 
-  // Unit 4 goes here — copy a block above, fill in the content, done.
+  // Unit 4 goes here — copy the Unit 3 block above, fill in the content,
+  // and give it sortOrder: 5 (the progress test above already took 4).
 
 ];
