@@ -23,7 +23,7 @@ body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,
 .choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}.choice{border:1px solid var(--border);background:#fff;border-radius:11px;padding:11px 10px;font-size:14px;font-weight:650;min-height:44px;cursor:pointer}.choice.selected{border-color:var(--primary);background:#eef0ff;color:var(--primary)}.choice.correct{border-color:#bfead6;background:var(--goodbg);color:var(--good)}.choice.wrong{border-color:#ffd0d0;background:var(--badbg);color:var(--bad)}
 input{width:100%;border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;padding:11px 12px;font-size:15px;color:var(--ink);outline:none}input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(88,101,242,.1)}
 .feedback{display:none;margin-top:9px;border-radius:10px;padding:9px 10px;font-size:12px;line-height:1.45}.feedback.good{display:block;background:var(--goodbg);color:var(--good)}.feedback.bad{display:block;background:var(--badbg);color:var(--bad)}
-.order-list{display:flex;flex-direction:column;gap:9px}.drag-item{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:13px 12px;font-size:14px;line-height:1.4;touch-action:none;user-select:none;cursor:grab;box-shadow:0 4px 14px rgba(20,30,60,.035)}.drag-item.dragging{opacity:.55;box-shadow:0 12px 30px rgba(20,30,60,.16)}.drag-handle{color:var(--primary);font-size:20px;line-height:1}.small-tip{color:var(--muted);font-size:11px;line-height:1.4;margin:8px 2px}
+.order-list{display:flex;flex-direction:column;gap:9px}.drag-item{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:13px 12px;font-size:14px;line-height:1.4;touch-action:none;user-select:none;cursor:grab;box-shadow:0 4px 14px rgba(20,30,60,.035)}.drag-item.dragging{opacity:.55;box-shadow:0 12px 30px rgba(20,30,60,.16)}.drag-handle{color:var(--muted);font-size:19px;line-height:1;letter-spacing:-2px;flex:0 0 auto}.drag-item.correct{border-color:#bfead6;background:var(--goodbg)}.drag-item.wrong{border-color:#ffd0d0;background:var(--badbg)}.small-tip{color:var(--muted);font-size:11px;line-height:1.4;margin:8px 2px}
 .word-row{margin-bottom:12px}.section-feedback{display:none;margin:9px 0;padding:11px 12px;border-radius:12px;font-size:13px}.section-feedback.good{display:block;background:var(--goodbg);color:var(--good)}.section-feedback.bad{display:block;background:var(--badbg);color:var(--bad)}
 .category-table{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.category-col{min-height:230px;border:2px dashed #cfd4e1;border-radius:14px;background:#fafbfe;padding:9px}.category-col.drag-over{border-color:var(--primary);background:#eef0ff}.category-title{text-align:center;font-weight:850;color:var(--primary);font-size:13px;padding:5px 3px 10px}.category-items{display:flex;flex-direction:column;gap:7px}.category-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:9px 8px;font-size:13px;cursor:grab;touch-action:none;user-select:none;text-align:center}.category-card.selected{border-color:var(--primary);background:#eef0ff;color:var(--primary)}.phrase-card.selected{border-color:var(--primary);background:#eef0ff;color:var(--primary)}.category-card.correct{border-color:#bfead6;background:var(--goodbg);color:var(--good)}.category-card.wrong{border-color:#ffd0d0;background:var(--badbg);color:var(--bad)}.category-card.placed{box-shadow:0 3px 10px rgba(20,30,60,.04)}
 .number-bank{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.number-card{border:1px solid var(--border);background:#fff;border-radius:11px;padding:10px 15px;font-weight:850;color:var(--primary);cursor:grab;touch-action:none;user-select:none}.number-card.selected{background:#eef0ff;border-color:var(--primary)}.number-card.placed{opacity:.35}
@@ -291,11 +291,11 @@ body {
 <div class="section-feedback" id="sec-D"></div></section>
 
 <section class="section"><div class="section-head"><div class="section-code">E</div><div class="section-title">Functional language</div><div class="section-desc">Gaplarni bosib ushlab, to‘g‘ri suhbat tartibiga joylashtiring.</div></div>
-<div class="order-list" id="orderE"><div class="drag-item" data-value="34" tabindex="0"><span>Ham, please.</span></div>
-<div class="drag-item" data-value="33" tabindex="0"><span>I’d like a sandwich please.</span></div>
-<div class="drag-item" data-value="32" tabindex="0"><span>Would you like cheese or ham?</span></div>
-<div class="drag-item" data-value="35" tabindex="0"><span>Here you are.</span></div>
-<div class="drag-item" data-value="31" tabindex="0"><span>Thank you.</span></div></div><div class="small-tip">📱 Gapni bosib ushlab, kerakli joyga olib boring.</div><div class="section-feedback" id="sec-E"></div></section>
+<div class="order-list" id="orderE"><div class="drag-item" data-value="34" tabindex="0"><span class="drag-handle">⠿</span><span>Ham, please.</span></div>
+<div class="drag-item" data-value="33" tabindex="0"><span class="drag-handle">⠿</span><span>I’d like a sandwich please.</span></div>
+<div class="drag-item" data-value="32" tabindex="0"><span class="drag-handle">⠿</span><span>Would you like cheese or ham?</span></div>
+<div class="drag-item" data-value="35" tabindex="0"><span class="drag-handle">⠿</span><span>Here you are.</span></div>
+<div class="drag-item" data-value="31" tabindex="0"><span class="drag-handle">⠿</span><span>Thank you.</span></div></div><div class="small-tip">📱 Gapni bosib ushlab, kerakli joyga olib boring.</div><div class="section-feedback" id="sec-E"></div></section>
 
 <section class="section"><div class="section-head"><div class="section-code">F</div><div class="section-title">Grammar</div><div class="section-desc">To‘g‘ri variantni tanlang.</div><div class="card question" data-id="36" data-answer="Two teas, please.">
 <div class="qtitle"><span class="num">36.</span> To‘g‘ri variantni tanlang.</div>
@@ -347,36 +347,36 @@ body {
 </div><div id="f45" class="feedback"></div></div></section>
 
 <section class="section">
-<div class="section-head"><div class="section-code">G</div><div class="section-title">Grammar</div><div class="section-desc"><b>this</b> yoki <b>these</b> ni tanlang.</div></div>
-<div class="card question" data-id="46" data-answer="this">
+<div class="section-head"><div class="section-code">G</div><div class="section-title">Grammar</div><div class="section-desc"><b>This is</b> yoki <b>These are</b> ni tanlang.</div></div>
+<div class="card question" data-id="46" data-answer="This is">
 <div class="qtitle"><span class="num">46.</span> <span class="blank">__________</span> his phone.</div>
 <div class="choices">
-<button type="button" class="choice" data-value="this">this</button>
-<button type="button" class="choice" data-value="these">these</button>
+<button type="button" class="choice" data-value="This is">This is</button>
+<button type="button" class="choice" data-value="These are">These are</button>
 </div>
-<div id="f46" class="feedback"></div></div><div class="card question" data-id="47" data-answer="these">
+<div id="f46" class="feedback"></div></div><div class="card question" data-id="47" data-answer="These are">
 <div class="qtitle"><span class="num">47.</span> <span class="blank">__________</span> your omelettes.</div>
 <div class="choices">
-<button type="button" class="choice" data-value="this">this</button>
-<button type="button" class="choice" data-value="these">these</button>
+<button type="button" class="choice" data-value="This is">This is</button>
+<button type="button" class="choice" data-value="These are">These are</button>
 </div>
-<div id="f47" class="feedback"></div></div><div class="card question" data-id="48" data-answer="this">
+<div id="f47" class="feedback"></div></div><div class="card question" data-id="48" data-answer="This is">
 <div class="qtitle"><span class="num">48.</span> <span class="blank">__________</span> my notebook.</div>
 <div class="choices">
-<button type="button" class="choice" data-value="this">this</button>
-<button type="button" class="choice" data-value="these">these</button>
+<button type="button" class="choice" data-value="This is">This is</button>
+<button type="button" class="choice" data-value="These are">These are</button>
 </div>
-<div id="f48" class="feedback"></div></div><div class="card question" data-id="49" data-answer="these">
+<div id="f48" class="feedback"></div></div><div class="card question" data-id="49" data-answer="These are">
 <div class="qtitle"><span class="num">49.</span> <span class="blank">__________</span> his sandwiches.</div>
 <div class="choices">
-<button type="button" class="choice" data-value="this">this</button>
-<button type="button" class="choice" data-value="these">these</button>
+<button type="button" class="choice" data-value="This is">This is</button>
+<button type="button" class="choice" data-value="These are">These are</button>
 </div>
-<div id="f49" class="feedback"></div></div><div class="card question" data-id="50" data-answer="these">
+<div id="f49" class="feedback"></div></div><div class="card question" data-id="50" data-answer="These are">
 <div class="qtitle"><span class="num">50.</span> <span class="blank">__________</span> her keys.</div>
 <div class="choices">
-<button type="button" class="choice" data-value="this">this</button>
-<button type="button" class="choice" data-value="these">these</button>
+<button type="button" class="choice" data-value="This is">This is</button>
+<button type="button" class="choice" data-value="These are">These are</button>
 </div>
 <div id="f50" class="feedback"></div></div></section>
 
@@ -504,10 +504,18 @@ async function checkTest(){
  correct+=dCorrect;
  markSection('sec-D',dCorrect===5,dCorrect===5?'✅ Ajoyib! Suhbat to‘g‘ri to‘ldirildi.':'❌ '+dCorrect+'/5 ta ibora to‘g‘ri joylashtirildi.');
 
- const eOrder=[...document.querySelectorAll('#orderE .drag-item')].map(x=>x.dataset.value).join(',');
- const eOk=eOrder==='33,32,34,35,31';
- if(eOk)correct+=5;
- markSection('sec-E',eOk,eOk?'✅ Ajoyib! Suhbat to‘g‘ri tartiblangan.':'❌ Tartib to‘g‘ri emas. Suhbatni yana bir bor ko‘rib chiqing.');
+ const eOrderItems=[...document.querySelectorAll('#orderE .drag-item')];
+ const correctOrderE=['33','32','34','35','31'];
+ let eCorrect=0;
+ eOrderItems.forEach((item,i)=>{
+   const ok=item.dataset.value===correctOrderE[i];
+   item.classList.remove('correct','wrong');
+   item.classList.add(ok?'correct':'wrong');
+   if(ok)eCorrect++;
+ });
+ correct+=eCorrect;
+ const eOk=eCorrect===correctOrderE.length;
+ markSection('sec-E',eOk,eOk?'✅ Ajoyib! Suhbat to‘g‘ri tartiblangan.':`❌ ${eCorrect}/5 ta gap to‘g‘ri joyda. Suhbatni yana bir bor ko‘rib chiqing.`);
 
  const percent=Math.round(correct/TOTAL*100);
  document.getElementById('score').textContent=correct+' / '+TOTAL+' — '+percent+'%';

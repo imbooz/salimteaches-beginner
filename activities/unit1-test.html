@@ -12,7 +12,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,B
 .question{display:flex;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 12px;margin:9px 0;box-shadow:0 4px 16px rgba(20,30,60,.035)}.qnum{width:30px;height:30px;flex:0 0 30px;border-radius:10px;background:#eef0ff;color:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px}.qbody{min-width:0;flex:1}.qprompt{font-size:15px;line-height:1.5;margin-bottom:10px}.choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}.choice,.word-choice,.phrase-card{border:1px solid #dfe3ec;background:#fbfcfe;color:var(--text);border-radius:11px;padding:11px 10px;font-size:14px;font-weight:650;min-height:44px}.choice.selected,.word-choice.selected,.phrase-card.selected{border-color:var(--primary);background:#eef0ff;color:var(--primary)}.choice.correct,.word-choice.correct{border-color:#bfead6;background:var(--goodbg);color:var(--good)}.choice.wrong,.word-choice.wrong{border-color:#ffd0d0;background:var(--badbg);color:var(--bad)}
 input{width:100%;border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;padding:11px 12px;font-size:15px;color:var(--text);outline:none}input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(88,101,242,.1)}
 .feedback{display:none;margin-top:9px;border-radius:10px;padding:9px 10px;font-size:12px;line-height:1.45}.feedback.good{display:block;background:var(--goodbg);color:var(--good)}.feedback.bad{display:block;background:var(--badbg);color:var(--bad)}
-.order-list{display:flex;flex-direction:column;gap:9px}.drag-item{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:13px 12px;font-size:14px;line-height:1.4;touch-action:none;user-select:none;cursor:grab;box-shadow:0 4px 14px rgba(20,30,60,.035)}.drag-item.dragging{opacity:.55;box-shadow:0 12px 30px rgba(20,30,60,.16)}.drag-handle{color:var(--primary);font-size:20px;line-height:1}.small-tip{color:var(--muted);font-size:11px;line-height:1.4;margin:8px 2px}.section-feedback{display:none;margin:9px 0;padding:11px 12px;border-radius:12px;font-size:13px}.section-feedback.good{display:block;background:var(--goodbg);color:var(--good)}.section-feedback.bad{display:block;background:var(--badbg);color:var(--bad)}
+.order-list{display:flex;flex-direction:column;gap:9px}.drag-item{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:13px 12px;font-size:14px;line-height:1.4;touch-action:none;user-select:none;cursor:grab;box-shadow:0 4px 14px rgba(20,30,60,.035)}.drag-item.dragging{opacity:.55;box-shadow:0 12px 30px rgba(20,30,60,.16)}.drag-handle{color:var(--muted);font-size:19px;line-height:1;letter-spacing:-2px;flex:0 0 auto}.drag-item.correct{border-color:#bfead6;background:var(--goodbg)}.drag-item.wrong{border-color:#ffd0d0;background:var(--badbg)}.small-tip{color:var(--muted);font-size:11px;line-height:1.4;margin:8px 2px}.section-feedback{display:none;margin:9px 0;padding:11px 12px;border-radius:12px;font-size:13px}.section-feedback.good{display:block;background:var(--goodbg);color:var(--good)}.section-feedback.bad{display:block;background:var(--badbg);color:var(--bad)}
 .phrase-bank{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.phrase-card{touch-action:none;cursor:grab;background:#fff}.phrase-card.placed{opacity:.45}.dialogue{display:flex;flex-direction:column;gap:8px}.dialogue-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap;background:#fff;border:1px solid var(--border);border-radius:13px;padding:10px 12px}.line{font-size:14px;line-height:1.45}.speaker{font-weight:800;color:var(--primary);min-width:20px}.drop-slot{min-height:44px;min-width:190px;border:2px dashed #cfd4e1;border-radius:11px;display:flex;align-items:center;justify-content:center;text-align:center;padding:7px;color:#9aa1af;font-size:11px;background:#fafbfe}.drop-slot.inline-slot{min-width:190px;flex:0 1 220px}.drop-slot.filled{border-style:solid;border-color:var(--primary);background:#eef0ff;color:var(--primary);font-weight:700}.drop-slot.correct{border-color:#bfead6;background:var(--goodbg);color:var(--good)}.drop-slot.wrong{border-color:#ffd0d0;background:var(--badbg);color:var(--bad)}
 .word-row{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.word-choice{padding:12px 6px}.text-answer.correct{border-color:#bfead6;background:var(--goodbg)}.text-answer.wrong{border-color:#ffd0d0;background:var(--badbg)}
 .actions{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(255,255,255,.96);border-top:1px solid var(--border);padding:12px 14px;backdrop-filter:blur(12px)}.actions-inner{max-width:760px;margin:auto;display:flex;gap:9px}.actions button{border:0;border-radius:13px;padding:13px 16px;font-size:15px;font-weight:800;cursor:pointer}.check{flex:1;background:var(--primary);color:#fff}.actions{
@@ -203,11 +203,11 @@ body {
 <section class="section">
  <div class="section-head"><div class="section-code">A</div><div class="section-title">Functional language</div>
  <div class="section-desc">Gaplarni bosib ushlab, to‘g‘ri tartibga joylashtiring.</div></div>
- <div class="order-list" id="orderA"><div class="drag-item" data-value="1" tabindex="0"><span class="drag-handle">☷</span><span>Nice to meet you, Claire.</span></div>
-<div class="drag-item" data-value="4" tabindex="0"><span class="drag-handle">☷</span><span>Nice to meet you, too.</span></div>
-<div class="drag-item" data-value="2" tabindex="0"><span class="drag-handle">☷</span><span>I’m fine thanks, Jessica. How are you?</span></div>
-<div class="drag-item" data-value="5" tabindex="0"><span class="drag-handle">☷</span><span>I’m fine. Mike, this is Claire.</span></div>
-<div class="drag-item" data-value="3" tabindex="0"><span class="drag-handle">☷</span><span>Hello, Mike. How are you?</span></div></div>
+ <div class="order-list" id="orderA"><div class="drag-item" data-value="1" tabindex="0"><span class="drag-handle">⠿</span><span>Nice to meet you, Claire.</span></div>
+<div class="drag-item" data-value="4" tabindex="0"><span class="drag-handle">⠿</span><span>Nice to meet you, too.</span></div>
+<div class="drag-item" data-value="2" tabindex="0"><span class="drag-handle">⠿</span><span>I’m fine thanks, Jessica. How are you?</span></div>
+<div class="drag-item" data-value="5" tabindex="0"><span class="drag-handle">⠿</span><span>I’m fine. Mike, this is Claire.</span></div>
+<div class="drag-item" data-value="3" tabindex="0"><span class="drag-handle">⠿</span><span>Hello, Mike. How are you?</span></div></div>
  <div class="small-tip">📱 Telefonda: gapni bosib ushlab, kerakli joyga olib boring.</div>
  <div class="section-feedback" id="sec-A"></div>
 </section>
@@ -590,12 +590,20 @@ document.querySelectorAll('.drop-slot').forEach(slot=>{
 async function checkTest(){
  let correct=0;
  // A
- const order=[...list.children].map(x=>x.dataset.value).join(',');
- const aok=order==='3,2,5,1,4';
- if(aok) correct+=5;
+ const orderItemsA=[...list.children];
+ const correctOrderA=['3','2','5','1','4'];
+ let aCorrect=0;
+ orderItemsA.forEach((item,i)=>{
+   const ok=item.dataset.value===correctOrderA[i];
+   item.classList.remove('correct','wrong');
+   item.classList.add(ok?'correct':'wrong');
+   if(ok)aCorrect++;
+ });
+ correct+=aCorrect;
+ const aok=aCorrect===correctOrderA.length;
  const secA=document.getElementById('sec-A');
  secA.className='section-feedback '+(aok?'good':'bad');
- secA.textContent=aok?'✅ Ajoyib! Suhbat to‘g‘ri tartiblangan.':'❌ Tartib to‘g‘ri emas. Suhbat salomlashishdan boshlanadi va “Nice to meet you, too.” bilan yakunlanadi.';
+ secA.textContent=aok?'✅ Ajoyib! Suhbat to‘g‘ri tartiblangan.':`❌ ${aCorrect}/5 ta gap to‘g‘ri joyda. Suhbat salomlashishdan boshlanadi va “Nice to meet you, too.” bilan yakunlanadi.`;
 
  // C
  document.querySelectorAll('.drop-slot').forEach(slot=>{
