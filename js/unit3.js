@@ -90,7 +90,6 @@
 
     document.getElementById("unit3ProgressPercent").textContent =
       progress + "%";
-
     document.getElementById("unit3ProgressFill").style.width =
       progress + "%";
 
@@ -98,6 +97,9 @@
       ["lesson", "video"],
       ["dars", "lesson"]
     );
+
+    const unit3LessonUrl =
+      "https://youtu.be/f4MXip7DSuU";
 
     const practice = findUnit3Activity(
       ["practice", "exercise"],
@@ -138,27 +140,22 @@
       subtitle: "Jobs, colours, nationalities va to be darsini ko‘ring.",
       status: lesson
         ? (lessonDone ? "✓ Tugallangan" : "Boshlash →")
-        : "Tez orada",
+        : "Boshlash →",
       done: lessonDone,
       locked: false,
       action: () => {
-        if (!lesson) {
-          tg.showAlert("Unit 3 darsi hali qo‘shilmagan.");
-          return;
+        if (lesson?.activity_id) {
+          reportProgressFromApp(
+            lesson.activity_id,
+            true,
+            null
+          );
         }
 
-        reportProgressFromApp(
-          lesson.activity_id,
-          true,
-          null
-        );
-
-        if (lesson.video_id) {
-          openVideo(lesson.video_id);
-        } else if (lesson.youtube_id) {
-          openVideo(lesson.youtube_id);
+        if (typeof tg?.openLink === "function") {
+          tg.openLink(unit3LessonUrl);
         } else {
-          tg.showAlert("Unit 3 dars videosi hali biriktirilmagan.");
+          window.location.href = unit3LessonUrl;
         }
       }
     });
@@ -302,7 +299,6 @@
       calculateProgress(unit);
 
     const card = document.createElement("div");
-
     card.className =
       "unit-card" +
       (unlocked ? "" : " locked");
@@ -381,6 +377,8 @@
   window.renderUnits = function () {
     originalRenderUnits();
 
+    const unit3 = getUnit3();
+
     ["unitsContainer", "courseUnitsContainer"].forEach(id => {
       const container = document.getElementById(id);
       if (!container) return;
@@ -402,7 +400,6 @@
     });
 
     const count = document.getElementById("unitCount");
-
     if (count) {
       const cards =
         document.querySelectorAll("#unitsContainer .unit-card").length;
@@ -419,10 +416,7 @@
       return originalOpenUnit(unitId);
     }
 
-    // IMPORTANT:
-    // The Unit 3 card has already checked that Unit 2 is completed.
-    // Do NOT perform another generic lock check here.
-    // This prevents the frontend from contradicting the unlocked card.
+    const unit = getUnit3();
 
     document
       .querySelectorAll(".page")

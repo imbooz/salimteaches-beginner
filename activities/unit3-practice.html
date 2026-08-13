@@ -9,6 +9,58 @@
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/activities.css">
+
+  <style>
+    /* Small Unit 1/2 consistency overrides — no change to shared CSS. */
+    .st-activity-nav__back {
+      background:#eef0ff;
+      color:#5865f2;
+      border-radius:13px;
+      padding:10px 15px;
+      font-size:15px;
+    }
+
+    .st-activity-header {
+      padding:24px 18px 14px;
+    }
+
+    .st-activity-header h1 {
+      font-size:27px;
+      line-height:1.2;
+      margin:7px 0 5px;
+    }
+
+    .st-activity-subtitle {
+      color:#647089;
+      font-size:14px;
+      line-height:1.45;
+      margin:0;
+    }
+
+    /* Unit 1/2 have one answer per row on mobile. */
+    .st-choice-grid {
+      grid-template-columns:1fr;
+    }
+
+    /* Match Unit 1/2: only the main check button in the bottom bar. */
+    .st-quiz-actions__inner {
+      justify-content:flex-end;
+    }
+
+    .st-quiz-actions__inner .st-btn-primary {
+      flex:1;
+    }
+
+    .st-quiz-actions__inner .st-btn-secondary {
+      display:none;
+    }
+
+    @media (max-width:560px) {
+      .st-choice-grid {
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -21,9 +73,9 @@
 
   <header class="st-activity-header">
     <div class="st-activity-brand">SALIMTEACHES • BEGINNER</div>
-    <h1>🧩 Unit 3 — Interaktiv mashqlar</h1>
+    <h1>📝 3-unit — Interaktiv mashqlar</h1>
     <p class="st-activity-subtitle">
-      Jobs, colours, nationalities, countries, days of the week va <b>to be</b>.
+      Kasblar, ranglar, millatlar, mamlakatlar, hafta kunlari va <b>to be</b>.
       Shuningdek, savol berish va classroom English.
     </p>
   </header>
@@ -42,7 +94,728 @@
     Javoblar tekshirilganda har bir savol bo‘yicha to‘g‘ri javob va qisqa izoh ko‘rsatiladi.
   </div>
 
-  <form id="quiz"></form>
+  <form id="quiz">
+    <section class="st-question" id="q0">
+      <div class="st-question__top">
+        <div class="st-question__number">1</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Qaysi kasb shifoxonada ishlaydi va kasal odamlarga yordam beradi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q0" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Teacher</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q0" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Doctor</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q0" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Actor</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f0"></div>
+    </section>
+<section class="st-question" id="q1">
+      <div class="st-question__top">
+        <div class="st-question__number">2</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Qaysi kasb yong‘inlarni o‘chiradi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q1" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Firefighter</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q1" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Student</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q1" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Police officer</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f1"></div>
+    </section>
+<section class="st-question" id="q2">
+      <div class="st-question__top">
+        <div class="st-question__number">3</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Qaysi gap kimningdir kasbini so‘raydi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q2" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Where are you from?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q2" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">What is your job?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q2" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">What is your nationality?</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f2"></div>
+    </section>
+<section class="st-question" id="q3">
+      <div class="st-question__top">
+        <div class="st-question__number">4</div>
+        <div class="st-question__body">
+          <div class="st-question__title">“What do you do?” savoliga to‘g‘ri javobni tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q3" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">I am a teacher.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q3" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">I from Uzbekistan.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q3" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">I Uzbek.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f3"></div>
+    </section>
+<section class="st-question" id="q4">
+      <div class="st-question__top">
+        <div class="st-question__number">5</div>
+        <div class="st-question__body">
+          <div class="st-question__title">To‘g‘ri tasdiq gapni tanlang: “She ___ an actor.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q4" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">are</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q4" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">am</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q4" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">is</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f4"></div>
+    </section>
+<section class="st-question" id="q5">
+      <div class="st-question__top">
+        <div class="st-question__number">6</div>
+        <div class="st-question__body">
+          <div class="st-question__title">To‘g‘ri qisqartmani tanlang: “I am a student.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q5" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">I’m a student.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q5" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">I’s a student.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q5" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">I are a student.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f5"></div>
+    </section>
+<section class="st-question" id="q6">
+      <div class="st-question__top">
+        <div class="st-question__number">7</div>
+        <div class="st-question__body">
+          <div class="st-question__title">To‘g‘ri qisqartmani tanlang: “They are doctors.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q6" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">They’s doctors.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q6" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">They’re doctors.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q6" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">They am doctors.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f6"></div>
+    </section>
+<section class="st-question" id="q7">
+      <div class="st-question__top">
+        <div class="st-question__number">8</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Favqulodda vaziyatda odatda kim kasal yoki jarohatlangan odamlarga yordam beradi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q7" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Paramedic</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q7" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Actor</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q7" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Police officer</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f7"></div>
+    </section>
+<section class="st-question" id="q8">
+      <div class="st-question__top">
+        <div class="st-question__number">9</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Qaysi so‘z rang nomi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q8" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Uzbek</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q8" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Blue</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q8" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Uzbekistan</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f8"></div>
+    </section>
+<section class="st-question" id="q9">
+      <div class="st-question__top">
+        <div class="st-question__number">10</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Gapni to‘ldiring: “I am from ___.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q9" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Uzbek</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q9" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Uzbekistan</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q9" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Uzbekish</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f9"></div>
+    </section>
+<section class="st-question" id="q10">
+      <div class="st-question__top">
+        <div class="st-question__number">11</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Gapni to‘ldiring: “I am ___.” (millat)</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q10" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Uzbekistan</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q10" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Uzbek</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q10" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Uzbekish</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f10"></div>
+    </section>
+<section class="st-question" id="q11">
+      <div class="st-question__top">
+        <div class="st-question__number">12</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Bayroq haqida to‘g‘ri gapni tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q11" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">The Uzbek flag is blue, white and green.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q11" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">The Uzbekistan flag is Uzbek.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q11" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">The Uzbekistan flag is blue, white and green.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f11"></div>
+    </section>
+<section class="st-question" id="q12">
+      <div class="st-question__top">
+        <div class="st-question__number">13</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Qaysi savol millatni so‘raydi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q12" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">What nationality are you?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q12" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Where are you?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q12" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">What do you do?</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f12"></div>
+    </section>
+<section class="st-question" id="q13">
+      <div class="st-question__top">
+        <div class="st-question__number">14</div>
+        <div class="st-question__body">
+          <div class="st-question__title">To‘g‘ri inkor gapni tanlang: “He ___ a teacher.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q13" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">He aren't a teacher.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q13" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">He isn't a teacher.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q13" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">He am not a teacher.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f13"></div>
+    </section>
+<section class="st-question" id="q14">
+      <div class="st-question__top">
+        <div class="st-question__number">15</div>
+        <div class="st-question__body">
+          <div class="st-question__title">To‘g‘ri inkor qisqartmasini tanlang: “We are not students.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q14" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">We isn’t students.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q14" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">We aren’t students.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q14" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">We am not students.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f14"></div>
+    </section>
+<section class="st-question" id="q15">
+      <div class="st-question__top">
+        <div class="st-question__number">16</div>
+        <div class="st-question__body">
+          <div class="st-question__title">“Men politsiyachi emasman” ma’nosidagi gapni tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q15" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">I am not a police officer.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q15" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">I isn’t a police officer.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q15" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">I aren’t a police officer.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f15"></div>
+    </section>
+<section class="st-question" id="q16">
+      <div class="st-question__top">
+        <div class="st-question__number">17</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Gapni to‘ldiring: “She ___ not from England.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q16" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">are</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q16" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">am</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q16" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">is</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f16"></div>
+    </section>
+<section class="st-question" id="q17">
+      <div class="st-question__top">
+        <div class="st-question__number">18</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Mondaydan keyin qaysi kun keladi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q17" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Sunday</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q17" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Tuesday</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q17" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Friday</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f17"></div>
+    </section>
+<section class="st-question" id="q18">
+      <div class="st-question__top">
+        <div class="st-question__number">19</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Fridaydan oldin qaysi kun keladi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q18" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Thursday</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q18" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Saturday</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q18" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Wednesday</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f18"></div>
+    </section>
+<section class="st-question" id="q19">
+      <div class="st-question__top">
+        <div class="st-question__number">20</div>
+        <div class="st-question__body">
+          <div class="st-question__title">To‘g‘ri yes/no savolni tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q19" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Are you a teacher?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q19" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">You are a teacher?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q19" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">You am a teacher?</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f19"></div>
+    </section>
+<section class="st-question" id="q20">
+      <div class="st-question__top">
+        <div class="st-question__number">21</div>
+        <div class="st-question__body">
+          <div class="st-question__title">To‘g‘ri qisqa javobni tanlang: “Are they students?” — “Yes, ___.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q20" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">they are</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q20" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">they is</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q20" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">they am</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f20"></div>
+    </section>
+<section class="st-question" id="q21">
+      <div class="st-question__top">
+        <div class="st-question__number">22</div>
+        <div class="st-question__body">
+          <div class="st-question__title">To‘g‘ri qisqa javobni tanlang: “Is he a doctor?” — “No, ___.”</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q21" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">he aren't</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q21" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">he isn't</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q21" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">he am not</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f21"></div>
+    </section>
+<section class="st-question" id="q22">
+      <div class="st-question__top">
+        <div class="st-question__number">23</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Kishining kasbini so‘rash uchun to‘g‘ri WH savolni tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q22" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Where are you?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q22" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">What do you do?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q22" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">When are you?</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f22"></div>
+    </section>
+<section class="st-question" id="q23">
+      <div class="st-question__top">
+        <div class="st-question__number">24</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Joy yoki kelib chiqishni so‘rash uchun to‘g‘ri savolni tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q23" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Where are you from?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q23" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Who are you from?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q23" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">When are you from?</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f23"></div>
+    </section>
+<section class="st-question" id="q24">
+      <div class="st-question__top">
+        <div class="st-question__number">25</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Biror shaxs haqida so‘rash uchun to‘g‘ri savolni tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q24" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Who is your teacher?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q24" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">Where is your teacher?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q24" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">When is your teacher?</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f24"></div>
+    </section>
+<section class="st-question" id="q25">
+      <div class="st-question__top">
+        <div class="st-question__number">26</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Vaqt yoki kunni so‘raydigan savolni tanlang.</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q25" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">What are you?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q25" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">When is the class?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q25" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Who is the class?</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f25"></div>
+    </section>
+<section class="st-question" id="q26">
+      <div class="st-question__top">
+        <div class="st-question__number">27</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Narxni so‘rash uchun qaysi savol ishlatiladi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q26" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">How much is it?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q26" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">How nationality is it?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q26" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">Who much is it?</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f26"></div>
+    </section>
+<section class="st-question" id="q27">
+      <div class="st-question__top">
+        <div class="st-question__number">28</div>
+        <div class="st-question__body">
+          <div class="st-question__title">“See you on Monday.” degani nimani anglatadi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q27" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Goodbye until Monday.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q27" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">I am from Monday.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q27" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">My job is Monday.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f27"></div>
+    </section>
+<section class="st-question" id="q28">
+      <div class="st-question__top">
+        <div class="st-question__number">29</div>
+        <div class="st-question__body">
+          <div class="st-question__title">Biror narsaning inglizcha nomini so‘rash uchun qaysi ibora ishlatiladi?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q28" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">How do you spell it?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q28" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">What's ___ in English?</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q28" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">How do you pronounce it?</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f28"></div>
+    </section>
+<section class="st-question" id="q29">
+      <div class="st-question__top">
+        <div class="st-question__number">30</div>
+        <div class="st-question__body">
+          <div class="st-question__title">O‘qituvchini tushunmaganingizda qaysi iborani ishlatishingiz mumkin?</div>
+        </div>
+      </div>
+      <div class="st-choice-grid">
+        <label class="st-choice">
+            <input type="radio" name="q29" value="0">
+            <span class="st-choice__letter">A</span>
+            <span class="st-choice__text">Sorry, I don't understand.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q29" value="1">
+            <span class="st-choice__letter">B</span>
+            <span class="st-choice__text">See you on Monday.</span>
+          </label><label class="st-choice">
+            <input type="radio" name="q29" value="2">
+            <span class="st-choice__letter">C</span>
+            <span class="st-choice__text">I am from Uzbekistan.</span>
+          </label>
+      </div>
+      <div class="st-question-feedback" id="f29"></div>
+    </section>
+  </form>
 
   <div id="result" class="st-quiz-result">
     <div class="st-quiz-result__score"><span id="score">0</span> / 30</div>
@@ -65,83 +838,11 @@
 <script>
 "use strict";
 
-/*
- * Unit 3 Practice
- * - Exactly 30 questions.
- * - Choice order is FIXED and never randomized on page load.
- * - Correct answers intentionally appear in different positions.
- * - The same order is used for every student.
- */
-
-const questions = [
-  { q:"Which job works in a hospital and helps sick people?", a:["Teacher","Doctor","Actor"], c:1, e:"A doctor works with sick people in a hospital or clinic." },
-  { q:"Which job puts out fires?", a:["Firefighter","Student","Police officer"], c:0, e:"A firefighter puts out fires and helps people in dangerous situations." },
-  { q:"Which sentence asks about someone's job?", a:["Where are you from?","What is your job?","What is your nationality?"], c:1, e:"“What is your job?” asks what a person does for work." },
-  { q:"Choose the correct answer: “What do you do?”", a:["I am a teacher.","I from Uzbekistan.","I Uzbek."], c:0, e:"We can answer “What do you do?” with “I am + job.”" },
-  { q:"Choose the correct affirmative form: “She ___ an actor.”", a:["are","am","is"], c:2, e:"With he, she and it, we use “is”." },
-  { q:"Choose the correct contraction: “I am a student.”", a:["I’m a student.","I’s a student.","I are a student."], c:0, e:"I am → I’m." },
-  { q:"Choose the correct contraction: “They are doctors.”", a:["They’s doctors.","They’re doctors.","They am doctors."], c:1, e:"They are → They’re." },
-  { q:"Which person usually helps sick people in an emergency?", a:["Paramedic","Actor","Police officer"], c:0, e:"A paramedic gives emergency medical help." },
-  { q:"Which word is a colour?", a:["Uzbek","Blue","Uzbekistan"], c:1, e:"Blue is a colour. Uzbek is a nationality and Uzbekistan is a country." },
-  { q:"Complete: “I am from ___.”", a:["Uzbek","Uzbekistan","Uzbekish"], c:1, e:"After “I am from” we use the country: Uzbekistan." },
-  { q:"Complete: “I am ___.” (nationality)", a:["Uzbekistan","Uzbek","Uzbekish"], c:1, e:"Uzbek is the nationality adjective/noun." },
-  { q:"Choose the correct sentence about a flag.", a:["The Uzbek flag is blue, white and green.","The Uzbekistan flag is Uzbek.","The Uzbekistan flag is Uzbek."], c:0, e:"We say “the Uzbek flag”, not “the Uzbekistan flag” in this meaning." },
-  { q:"Which question asks about nationality?", a:["What nationality are you?","Where are you?","What do you do?"], c:0, e:"“What nationality are you?” asks about nationality." },
-  { q:"Choose the correct negative sentence: “He ___ a teacher.”", a:["He aren't a teacher.","He isn't a teacher.","He am not a teacher."], c:1, e:"He is not → He isn’t." },
-  { q:"Choose the correct negative contraction: “We are not students.”", a:["We isn’t students.","We aren’t students.","We am not students."], c:1, e:"We are not → We aren’t." },
-  { q:"Which sentence means “Men politsiyachi emasman”?", a:["I am not a police officer.","I isn’t a police officer.","I aren’t a police officer."], c:0, e:"I am not + job." },
-  { q:"Complete: “She ___ not from England.”", a:["are","am","is"], c:2, e:"She is not → She isn’t." },
-  { q:"Which day comes after Monday?", a:["Sunday","Tuesday","Friday"], c:1, e:"Monday → Tuesday." },
-  { q:"Which day comes before Friday?", a:["Thursday","Saturday","Wednesday"], c:0, e:"Thursday comes before Friday." },
-  { q:"Choose the correct yes/no question.", a:["Are you a teacher?","You are a teacher?","You am a teacher?"], c:0, e:"Yes/no questions with to be begin with am/is/are." },
-  { q:"Choose the correct short answer: “Are they students?” — “Yes, ___.”", a:["they are","they is","they am"], c:0, e:"Are they...? → Yes, they are." },
-  { q:"Choose the correct short answer: “Is he a doctor?” — “No, ___.”", a:["he aren't","he isn't","he am not"], c:1, e:"Is he...? → No, he isn’t." },
-  { q:"Choose the correct WH question for a person's job.", a:["Where are you?","What do you do?","When are you?"], c:1, e:"“What do you do?” asks about a person's job." },
-  { q:"Choose the correct question for a place/origin.", a:["Where are you from?","Who are you from?","When are you from?"], c:0, e:"“Where are you from?” asks about where someone comes from." },
-  { q:"Choose the correct question for a person.", a:["Who is your teacher?","Where is your teacher?","When is your teacher?"], c:0, e:"Who asks about a person." },
-  { q:"Which question asks about a time/day?", a:["What are you?","When is the class?","Who is the class?"], c:1, e:"When asks about time or a day." },
-  { q:"Which question can you use to ask the price?", a:["How much is it?","How nationality is it?","Who much is it?"], c:0, e:"“How much is it?” asks about price." },
-  { q:"Someone says “See you on Monday.” What does it mean?", a:["Goodbye until Monday.","I am from Monday.","My job is Monday."], c:0, e:"“See you on Monday” is a way of saying goodbye and naming the next meeting day." },
-  { q:"Which phrase asks for the English word for something?", a:["How do you spell it?","What's ___ in English?","How do you pronounce it?"], c:1, e:"“What’s ___ in English?” asks for the English translation." },
-  { q:"Which phrase is useful when you do not understand the teacher?", a:["Sorry, I don't understand.","See you on Monday.","I am from Uzbekistan."], c:0, e:"“Sorry, I don’t understand” is a useful classroom phrase." }
-];
+const questions = [{"q": "Qaysi kasb shifoxonada ishlaydi va kasal odamlarga yordam beradi?", "a": ["Teacher", "Doctor", "Actor"], "c": 1, "e": "Doctor shifoxona yoki klinikada kasal odamlarga yordam beradi."}, {"q": "Qaysi kasb yong‘inlarni o‘chiradi?", "a": ["Firefighter", "Student", "Police officer"], "c": 0, "e": "Firefighter yong‘inlarni o‘chiradi va xavfli vaziyatlarda odamlarga yordam beradi."}, {"q": "Qaysi gap kimningdir kasbini so‘raydi?", "a": ["Where are you from?", "What is your job?", "What is your nationality?"], "c": 1, "e": "“What is your job?” kishining kasbini so‘raydi."}, {"q": "“What do you do?” savoliga to‘g‘ri javobni tanlang.", "a": ["I am a teacher.", "I from Uzbekistan.", "I Uzbek."], "c": 0, "e": "“What do you do?” savoliga “I am + kasb” shaklida javob beramiz."}, {"q": "To‘g‘ri tasdiq gapni tanlang: “She ___ an actor.”", "a": ["are", "am", "is"], "c": 2, "e": "He, she va it bilan “is” ishlatiladi."}, {"q": "To‘g‘ri qisqartmani tanlang: “I am a student.”", "a": ["I’m a student.", "I’s a student.", "I are a student."], "c": 0, "e": "I am → I’m."}, {"q": "To‘g‘ri qisqartmani tanlang: “They are doctors.”", "a": ["They’s doctors.", "They’re doctors.", "They am doctors."], "c": 1, "e": "They are → They’re."}, {"q": "Favqulodda vaziyatda odatda kim kasal yoki jarohatlangan odamlarga yordam beradi?", "a": ["Paramedic", "Actor", "Police officer"], "c": 0, "e": "Paramedic favqulodda tibbiy yordam ko‘rsatadi."}, {"q": "Qaysi so‘z rang nomi?", "a": ["Uzbek", "Blue", "Uzbekistan"], "c": 1, "e": "Blue — rang, Uzbek — millat, Uzbekistan — mamlakat."}, {"q": "Gapni to‘ldiring: “I am from ___.”", "a": ["Uzbek", "Uzbekistan", "Uzbekish"], "c": 1, "e": "I am from dan keyin mamlakat nomi keladi: Uzbekistan."}, {"q": "Gapni to‘ldiring: “I am ___.” (millat)", "a": ["Uzbekistan", "Uzbek", "Uzbekish"], "c": 1, "e": "Millatni aytganda Uzbek ishlatiladi."}, {"q": "Bayroq haqida to‘g‘ri gapni tanlang.", "a": ["The Uzbek flag is blue, white and green.", "The Uzbekistan flag is Uzbek.", "The Uzbekistan flag is blue, white and green."], "c": 0, "e": "Bu ma’noda “the Uzbek flag” deyiladi, “the Uzbekistan flag” emas."}, {"q": "Qaysi savol millatni so‘raydi?", "a": ["What nationality are you?", "Where are you?", "What do you do?"], "c": 0, "e": "“What nationality are you?” millatni so‘raydi."}, {"q": "To‘g‘ri inkor gapni tanlang: “He ___ a teacher.”", "a": ["He aren't a teacher.", "He isn't a teacher.", "He am not a teacher."], "c": 1, "e": "He is not → He isn’t."}, {"q": "To‘g‘ri inkor qisqartmasini tanlang: “We are not students.”", "a": ["We isn’t students.", "We aren’t students.", "We am not students."], "c": 1, "e": "We are not → We aren’t."}, {"q": "“Men politsiyachi emasman” ma’nosidagi gapni tanlang.", "a": ["I am not a police officer.", "I isn’t a police officer.", "I aren’t a police officer."], "c": 0, "e": "I am not + kasb."}, {"q": "Gapni to‘ldiring: “She ___ not from England.”", "a": ["are", "am", "is"], "c": 2, "e": "She is not → She isn’t."}, {"q": "Mondaydan keyin qaysi kun keladi?", "a": ["Sunday", "Tuesday", "Friday"], "c": 1, "e": "Monday → Tuesday."}, {"q": "Fridaydan oldin qaysi kun keladi?", "a": ["Thursday", "Saturday", "Wednesday"], "c": 0, "e": "Thursday Fridaydan oldin keladi."}, {"q": "To‘g‘ri yes/no savolni tanlang.", "a": ["Are you a teacher?", "You are a teacher?", "You am a teacher?"], "c": 0, "e": "To be bilan yes/no savollarda am/is/are gap boshiga keladi."}, {"q": "To‘g‘ri qisqa javobni tanlang: “Are they students?” — “Yes, ___.”", "a": ["they are", "they is", "they am"], "c": 0, "e": "Are they...? → Yes, they are."}, {"q": "To‘g‘ri qisqa javobni tanlang: “Is he a doctor?” — “No, ___.”", "a": ["he aren't", "he isn't", "he am not"], "c": 1, "e": "Is he...? → No, he isn’t."}, {"q": "Kishining kasbini so‘rash uchun to‘g‘ri WH savolni tanlang.", "a": ["Where are you?", "What do you do?", "When are you?"], "c": 1, "e": "“What do you do?” kishining kasbini so‘raydi."}, {"q": "Joy yoki kelib chiqishni so‘rash uchun to‘g‘ri savolni tanlang.", "a": ["Where are you from?", "Who are you from?", "When are you from?"], "c": 0, "e": "“Where are you from?” kishining qayerdan ekanini so‘raydi."}, {"q": "Biror shaxs haqida so‘rash uchun to‘g‘ri savolni tanlang.", "a": ["Who is your teacher?", "Where is your teacher?", "When is your teacher?"], "c": 0, "e": "Who shaxs haqida so‘rash uchun ishlatiladi."}, {"q": "Vaqt yoki kunni so‘raydigan savolni tanlang.", "a": ["What are you?", "When is the class?", "Who is the class?"], "c": 1, "e": "When vaqt yoki kun haqida so‘raydi."}, {"q": "Narxni so‘rash uchun qaysi savol ishlatiladi?", "a": ["How much is it?", "How nationality is it?", "Who much is it?"], "c": 0, "e": "“How much is it?” narxni so‘raydi."}, {"q": "“See you on Monday.” degani nimani anglatadi?", "a": ["Goodbye until Monday.", "I am from Monday.", "My job is Monday."], "c": 0, "e": "“See you on Monday” — xayrlashish va keyingi uchrashuv kunini aytish usuli."}, {"q": "Biror narsaning inglizcha nomini so‘rash uchun qaysi ibora ishlatiladi?", "a": ["How do you spell it?", "What's ___ in English?", "How do you pronounce it?"], "c": 1, "e": "“What’s ___ in English?” biror narsaning inglizcha tarjimasini so‘raydi."}, {"q": "O‘qituvchini tushunmaganingizda qaysi iborani ishlatishingiz mumkin?", "a": ["Sorry, I don't understand.", "See you on Monday.", "I am from Uzbekistan."], "c": 0, "e": "“Sorry, I don’t understand” — foydali classroom English iborasi."}];
 
 const quiz = document.getElementById("quiz");
 const answeredEl = document.getElementById("answered");
 const progressFill = document.getElementById("topProgressFill");
-
-function renderQuestions() {
-  quiz.innerHTML = questions.map((item, i) => `
-    <section class="st-question" id="q${i}">
-      <div class="st-question__top">
-        <div class="st-question__number">${i + 1}</div>
-        <div class="st-question__body">
-          <div class="st-question__title">${escapeHtml(item.q)}</div>
-        </div>
-      </div>
-
-      <div class="st-choice-grid">
-        ${item.a.map((choice, j) => `
-          <label class="st-choice">
-            <input type="radio" name="q${i}" value="${j}">
-            <span class="st-choice__letter">${String.fromCharCode(65 + j)}</span>
-            <span class="st-choice__text">${escapeHtml(choice)}</span>
-          </label>
-        `).join("")}
-      </div>
-
-      <div class="st-question-feedback" id="f${i}"></div>
-    </section>
-  `).join("");
-
-  quiz.addEventListener("change", updateProgress);
-}
-
-function escapeHtml(value) {
-  const div = document.createElement("div");
-  div.textContent = value;
-  return div.innerHTML;
-}
 
 function updateProgress() {
   let answered = 0;
@@ -168,7 +869,7 @@ async function checkAnswers() {
     if (selected && Number(selected.value) === item.c) {
       score++;
       feedback.className = "st-question-feedback correct is-visible";
-      feedback.innerHTML = `✓ <b>To‘g‘ri!</b><br>${escapeHtml(item.e)}`;
+      feedback.innerHTML = `✓ <b>To‘g‘ri!</b><br>${item.e}`;
     } else {
       if (selected) {
         card.querySelector(`.st-choice:nth-child(${Number(selected.value) + 1})`)
@@ -176,7 +877,7 @@ async function checkAnswers() {
       }
       feedback.className = "st-question-feedback incorrect is-visible";
       feedback.innerHTML =
-        `✗ <b>Noto‘g‘ri.</b><br><b>To‘g‘ri javob:</b> ${escapeHtml(item.a[item.c])}<br>${escapeHtml(item.e)}`;
+        `✗ <b>Noto‘g‘ri.</b><br><b>To‘g‘ri javob:</b> ${item.a[item.c]}<br>${item.e}`;
     }
   });
 
@@ -205,9 +906,7 @@ async function checkAnswers() {
     const activityId =
       Number(new URLSearchParams(window.location.search).get("activity_id")) || 0;
 
-    if (!activityId) {
-      throw new Error("activity_id topilmadi.");
-    }
+    if (!activityId) throw new Error("activity_id topilmadi.");
 
     const data = await window.SalimTeaches.reportActivityProgress(
       activityId,
@@ -240,7 +939,7 @@ function backToUnit3() {
   window.location.href = `${clean}?unit=3`;
 }
 
-renderQuestions();
+quiz.addEventListener("change", updateProgress);
 updateProgress();
 </script>
 </body>
