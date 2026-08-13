@@ -205,64 +205,10 @@
 
 
     <!-- ========================================
-         UNIT 1 PAGE
+         UNIT DETAIL PAGES
+         Created on demand by unit-engine.js from
+         js/units-config.js — nothing hardcoded here.
     ========================================= -->
-
-    <div id="unit1Page" class="page unit-page">
-
-      <div class="unit-page-header">
-        <button class="back-button" onclick="closeUnit1()" aria-label="Orqaga">←</button>
-        <div>
-          <div class="unit-page-kicker">Unit 1</div>
-          <h2>Greetings & Introductions</h2>
-        </div>
-      </div>
-
-      <div class="unit-progress-card">
-        <div class="progress-row">
-          <span class="progress-label">Unit jarayoni</span>
-          <span class="progress-percent" id="unit1ProgressPercent">0%</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" id="unit1ProgressFill" style="width:0%"></div>
-        </div>
-      </div>
-
-      <div id="unit1Activities" class="activity-list"></div>
-
-      <div id="unit1CompleteCard" class="unit-complete-card">
-        🎉 Unit 1 tugallandi! Keyingi Unit ochildi.
-      </div>
-
-    </div>
-
-    <div id="unit2Page" class="page unit-page">
-
-      <div class="unit-page-header">
-        <button class="back-button" onclick="closeUnit2()" aria-label="Orqaga">←</button>
-        <div>
-          <div class="unit-page-kicker">Unit 2</div>
-          <h2>Hotels & Cafés</h2>
-        </div>
-      </div>
-
-      <div class="unit-progress-card">
-        <div class="progress-row">
-          <span class="progress-label">Unit jarayoni</span>
-          <span class="progress-percent" id="unit2ProgressPercent">0%</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" id="unit2ProgressFill" style="width:0%"></div>
-        </div>
-      </div>
-
-      <div id="unit2Activities" class="activity-list"></div>
-
-      <div id="unit2CompleteCard" class="unit-complete-card">
-        🎉 Unit 2 tugallandi! Keyingi Unit ochildi.
-      </div>
-
-    </div>
 
   </div>
 
@@ -343,8 +289,9 @@
   </nav>
 
 
+  <script src="js/units-config.js"></script>
+  <script src="js/unit-engine.js"></script>
   <script src="js/index.js"></script>
-  <script src="js/unit3.js"></script>
 
 </body>
 
