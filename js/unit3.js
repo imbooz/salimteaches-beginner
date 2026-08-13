@@ -385,12 +385,19 @@
       const container = document.getElementById(id);
       if (!container) return;
 
+      // index.js may already have rendered Unit 3 from courseData.
+      // Replace that card with our Unit 3 card so its unlock state is
+      // based on Unit 2 completion, not the backend is_available flag.
       const existing = [...container.children].find(card =>
         card.querySelector(".unit-number")?.textContent.trim() === "Unit 3"
       );
 
-      if (!existing) {
-        container.appendChild(createUnit3Card());
+      const replacement = createUnit3Card();
+
+      if (existing) {
+        existing.replaceWith(replacement);
+      } else {
+        container.appendChild(replacement);
       }
     });
 
