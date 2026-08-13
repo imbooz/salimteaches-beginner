@@ -129,6 +129,12 @@ const UNIT_CONFIGS = [
         videoId: "f4MXip7DSuU"
       },
       {
+        type: "workbook",
+        icon: "🎬",
+        title: "Workbook tahlili",
+        subtitle: "Video tez orada qo‘shiladi."
+      },
+      {
         type: "practice",
         icon: "🧩",
         title: "Amaliy mashqlar",

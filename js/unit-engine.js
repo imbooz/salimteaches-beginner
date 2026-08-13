@@ -382,7 +382,7 @@ function renderUnitDetail(unitId) {
       status = done ? "✓ Tugallangan" : "Boshlash →";
 
     } else if (activityConfig.type === "workbook") {
-      status = "Ixtiyoriy";
+      status = activityConfig.videoId ? "Ixtiyoriy" : "Tez orada";
 
     } else {
       const requires = activityConfig.requires || [];
@@ -423,6 +423,10 @@ function renderUnitDetail(unitId) {
         }
 
         if (activityConfig.type === "workbook") {
+          if (!activityConfig.videoId) {
+            tg.showAlert("Workbook tahlili videosi tez orada qo‘shiladi.");
+            return;
+          }
           openVideo(activityConfig.videoId);
           return;
         }
