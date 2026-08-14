@@ -221,6 +221,52 @@ Migration this needed (already run once, but note it for any fresh DB):
 ALTER TABLE students ADD COLUMN display_name TEXT;
 ```
 
+### Telegram bot `/start` welcome message (new — added after the leaderboard)
+
+The Telegram **bot** (as opposed to the Mini App) previously didn't respond to
+anything, including `/start`. `worker/worker.js` now has a `POST
+/telegram-webhook` route that receives Telegram Bot updates and, on `/start`
+(including the `/start@YourBotName` form Telegram uses in group chats), replies
+with an Uzbek welcome message and an inline button that launches the Mini App.
+
+**Important:** that button uses Telegram's `web_app` button type
+(`{ web_app: { url: MINI_APP_URL } }`), not a plain `url` button — a plain link
+would open the site in Telegram's regular in-app browser *without* proper Mini
+App context, meaning `Telegram.WebApp.initData` would be empty and auth would
+fail. Always use `web_app` for any button meant to open this Mini App.
+
+This route is protected by an **optional** shared secret
+(`env.TG_WEBHOOK_SECRET`) checked against the `X-Telegram-Bot-Api-Secret-Token`
+header Telegram sends when you register the webhook with one — without it,
+anyone who discovers the URL could POST fake "updates" and get the bot to send
+messages using its identity. It works with zero secret configured too (skipped
+automatically), just less safely — recommend setting it.
+
+**One-time setup after deploying this Worker version** (the teacher does this,
+nobody else has the bot token):
+
+1. *(Recommended)* In the Cloudflare dashboard → Worker → Settings →
+   Variables, add a new secret `TG_WEBHOOK_SECRET` — any string of your choosing
+   using only letters, numbers, `_` or `-` (Telegram's requirement).
+2. Deploy the Worker (paste `worker/worker.js`, Deploy — same as always).
+3. Open this URL once in a browser (fill in your real bot token and, if you set
+   one, the same secret from step 1 — omit `&secret_token=...` entirely if you
+   skipped step 1):
+
+   ```
+   https://api.telegram.org/bot<YOUR_BOT_TOKEN>/setWebhook?url=https://salimteaches-beginner-auth.imshosalim.workers.dev/telegram-webhook&secret_token=<YOUR_SECRET>
+   ```
+
+   A `{"ok":true,"result":true,"description":"Webhook was set"}` response means
+   it worked. (Never paste the bot token into a chat conversation with any
+   Claude session — build this URL yourself.)
+4. Send `/start` to the bot to confirm the welcome message + button appear.
+
+If `/start` still doesn't respond after this, the most likely cause is step 3
+not having been run yet (registering the webhook is a separate step from
+deploying the code — the code alone does nothing until Telegram knows to call
+it).
+
 ---
 
 ## 6. Known pitfalls — read before repeating them
@@ -272,23 +318,22 @@ ALTER TABLE students ADD COLUMN display_name TEXT;
   needed, its row already exists.
 - ⏳ **Unit 4's workbook video** — same as above, add `videoId` to Unit 4's
   `workbook` block when recorded. No DB change needed.
-- 🔶 **Leaderboard** — front-end (`js/leaderboard.js`, home page card, name-prompt
-  modal, Profile page name field) is built and unit-tested (SQL logic verified
-  against a real SQLite engine; front-end flow verified in a mocked browser
-  session — see the conversation this was built in for details). **Not yet live**:
-  needs the teacher to (1) run the `ALTER TABLE` migration above, and (2) paste
-  `worker/worker.js`'s current content into the Cloudflare dashboard and deploy it.
-  The front-end code was intentionally NOT pushed to GitHub Pages until both of
-  those are confirmed done, to avoid every student seeing a name-prompt modal that
-  can't actually save (old Worker has no `/profile` route yet). **If you're
-  picking this up fresh: ask the teacher whether both steps are done before
-  pushing anything home-page-related, or check the deployed Worker's `/` response
-  isn't from a build that predates this feature.**
+- ✅ **Leaderboard** — DB migration run, Worker deployed, front-end pushed. Live
+  and confirmed working (`/profile` and `/leaderboard` both verified responding
+  correctly, not 404, right after deploy).
+- 🔶 **Telegram bot `/start` welcome message** — Worker code written and unit-tested
+  (webhook routing/gating logic verified with a mocked Telegram API — 5 scenarios,
+  all passed). **Not yet confirmed live**: needs the teacher to redeploy
+  `worker/worker.js` (it now includes the `/telegram-webhook` route) and complete
+  the one-time `setWebhook` call described in §5 — the code alone does nothing
+  until that registration step is done. No DB or front-end changes involved this
+  time, so nothing is blocked on git. **If you're picking this up fresh: ask
+  whether `setWebhook` was actually called — that's the step people forget.**
 
 ## 8. Status — what's next
 
-Once the leaderboard is confirmed live (§7), **Unit 5**, using the standing
-workflow in §9. Unit 5 is odd → it needs a **Listening** section (not Reading),
+Once the `/start` welcome message is confirmed live (§7), **Unit 5**, using the
+standing workflow in §9. Unit 5 is odd → it needs a **Listening** section (not Reading),
 with a drafted dialogue script + questions handed to the teacher before the audio
 exists (see §9). It needs `sortOrder: 6` in `units-config.js` (Unit 4 has 5; no
 milestone sits between Unit 4 and Unit 5, so no gap to leave this time — the next

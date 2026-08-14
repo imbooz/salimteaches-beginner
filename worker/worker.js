@@ -1,4 +1,5 @@
 const ALLOWED_ORIGIN = "https://imbooz.github.io";
+const MINI_APP_URL = "https://imbooz.github.io/salimteaches-beginner/";
 
 
 // ============================================================
@@ -325,6 +326,41 @@ async function checkGroupMembership(
     member: isMember,
     status
   };
+
+}
+
+
+// ============================================================
+// SEND A TELEGRAM MESSAGE
+// ============================================================
+
+async function sendTelegramMessage(
+  botToken,
+  chatId,
+  text,
+  replyMarkup
+) {
+
+  const url =
+    `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+
+  const response =
+    await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text,
+        parse_mode: "HTML",
+        reply_markup: replyMarkup
+      })
+    });
+
+
+  return response.json();
 
 }
 
@@ -2066,6 +2102,142 @@ export default {
         }, 500);
 
       }
+
+    }
+
+
+    // ========================================================
+    // TELEGRAM BOT WEBHOOK
+    //
+    // Handles updates Telegram sends to the bot (e.g. a user
+    // sending /start) and replies with a welcome message + a
+    // button that launches the Mini App. This does NOT use
+    // initData auth (there's no Mini App session yet at this
+    // point) — instead it's protected by an optional shared
+    // secret. See worker/worker.js's comment in the README for
+    // one-time setup (registering this URL with Telegram via
+    // setWebhook).
+    // ========================================================
+
+    if (
+      url.pathname === "/telegram-webhook"
+    ) {
+
+      if (
+        request.method !== "POST"
+      ) {
+
+        return json({
+          error:
+            "Method Not Allowed"
+        }, 405);
+
+      }
+
+
+      // ----------------------------------------------------
+      // Optional shared-secret check. Set TG_WEBHOOK_SECRET
+      // in the Worker's environment variables and pass the
+      // exact same value as secret_token when calling
+      // Telegram's setWebhook — this stops anyone else on the
+      // internet from POSTing fake updates here to make the
+      // bot send messages using your bot's identity. Skipped
+      // automatically if the secret hasn't been configured yet
+      // (so this still works with zero extra setup, just less
+      // safely until you add it).
+      // ----------------------------------------------------
+
+      if (env.TG_WEBHOOK_SECRET) {
+
+        const providedSecret =
+          request.headers.get(
+            "X-Telegram-Bot-Api-Secret-Token"
+          );
+
+
+        if (
+          providedSecret !==
+          env.TG_WEBHOOK_SECRET
+        ) {
+
+          return json({
+            error: "Unauthorized"
+          }, 401);
+
+        }
+
+      }
+
+
+      let update;
+
+
+      try {
+
+        update =
+          await request.json();
+
+      } catch {
+
+        // Telegram still needs a 200 or it will keep retrying.
+        return json({ ok: true });
+
+      }
+
+
+      const message =
+        update.message;
+
+
+      const text =
+        message?.text || "";
+
+
+      if (
+        message &&
+        text.startsWith("/start")
+      ) {
+
+        try {
+
+          await sendTelegramMessage(
+            env.TG_BOT_TOKEN,
+            message.chat.id,
+
+            "Assalomu alaykum! 👋\n\n" +
+            "<b>SalimTeaches Beginner</b> kursiga xush kelibsiz!\n\n" +
+            "Bu yerda darslar, interaktiv mashqlar va testlar orqali " +
+            "ingliz tilini bosqichma-bosqich o‘rganasiz.\n\n" +
+            "Boshlash uchun quyidagi tugmani bosing 👇",
+
+            {
+              inline_keyboard: [
+                [
+                  {
+                    text: "📚 Kursni ochish",
+                    web_app: {
+                      url: MINI_APP_URL
+                    }
+                  }
+                ]
+              ]
+            }
+          );
+
+        } catch (error) {
+
+          console.error(
+            "TELEGRAM WEBHOOK SEND ERROR:",
+            error
+          );
+
+        }
+
+      }
+
+
+      // Telegram only needs a fast 200 OK — it ignores the body.
+      return json({ ok: true });
 
     }
 
