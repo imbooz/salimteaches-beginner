@@ -146,7 +146,7 @@ const UNIT_CONFIGS = [
         icon: "🎬",
         title: "Workbook tahlili",
         subtitle: "Javoblarni men bilan birga tekshiring va xatolaringizni tahlil qiling.",
-        videoId: "wQBNfkJHvWQ"
+        videoId: "8AzqkJN6Tic"
       },
       {
         type: "practice",
