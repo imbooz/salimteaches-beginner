@@ -320,19 +320,12 @@ it).
 - ✅ **Leaderboard** — DB migration run, Worker deployed, front-end pushed. Live
   and confirmed working (`/profile` and `/leaderboard` both verified responding
   correctly, not 404, right after deploy).
-- 🔶 **Telegram bot `/start` welcome message** — Worker code written and unit-tested
-  (webhook routing/gating logic verified with a mocked Telegram API — 5 scenarios,
-  all passed). **Not yet confirmed live**: needs the teacher to redeploy
-  `worker/worker.js` (it now includes the `/telegram-webhook` route) and complete
-  the one-time `setWebhook` call described in §5 — the code alone does nothing
-  until that registration step is done. No DB or front-end changes involved this
-  time, so nothing is blocked on git. **If you're picking this up fresh: ask
-  whether `setWebhook` was actually called — that's the step people forget.**
+- ✅ **Telegram bot `/start` welcome message** — deployed, `setWebhook` registered,
+  confirmed live by the teacher (replies with the welcome message + Mini App button).
 
 ## 8. Status — what's next
 
-Once the `/start` welcome message is confirmed live (§7), **Unit 5**, using the
-standing workflow in §9. Unit 5 is odd → it needs a **Listening** section (not Reading),
+**Unit 5**, using the standing workflow in §9. Unit 5 is odd → it needs a **Listening** section (not Reading),
 with a drafted dialogue script + questions handed to the teacher before the audio
 exists (see §9). It needs `sortOrder: 6` in `units-config.js` (Unit 4 has 5; no
 milestone sits between Unit 4 and Unit 5, so no gap to leave this time — the next
@@ -374,9 +367,31 @@ test doc."* — per content type:
 
 ## 10. How to work with the user (read this if you're a fresh Claude chat session)
 
-**You almost certainly have no filesystem, git, or database access in this
-conversation** — the teacher is using claude.ai chat (or similar), not Claude Code
-with tools. That changes how you have to work:
+**Step 0, before anything else: work out whether you actually have tool access.**
+The teacher works across two different kinds of Claude session, and they look
+similar to them but are very different to you:
+
+- **A tool-using session** (a Claude Code CLI session, an IDE/desktop integration,
+  or similar) — you have Bash/PowerShell/Edit/Write tools, and this repo is
+  probably already checked out on disk. If so: **don't ask the teacher to
+  copy-paste anything.** Just work directly — `cd` into the repo (or find where
+  it's checked out), read this file yourself, edit files, commit, and push,
+  exactly the way the session that wrote this file did. Confirm this quickly by
+  trying something harmless like listing the repo directory or running `git log
+  -1`; if it works, you're in this mode.
+- **A plain chat session** (claude.ai web/mobile chat with no tools) — you have
+  no filesystem, git, or database access at all. The teacher will have pasted or
+  uploaded this file's content to give you context. In this mode, follow the
+  copy-paste workflow below (steps 1–5).
+
+Getting a fresh conversation does **not** by itself mean you've lost tool access —
+that depends on which *kind* of session the teacher opened, not on whether it's a
+new conversation. A new conversation in a tool-using environment (e.g. a new
+Claude Code session pointed at the same project folder) keeps full access even
+though it has no memory of this specific chat — which is exactly why this file
+exists: to be the memory, regardless of which mode you're in.
+
+**If you're in plain-chat mode with no tools, here's the workflow:**
 
 1. **Getting context in:** the teacher will paste this file's contents (or upload it)
    at the start of the conversation, and may upload/paste specific `.html` files from
