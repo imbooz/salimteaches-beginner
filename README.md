@@ -313,11 +313,10 @@ it).
   (3 original passages, 15 Q), test (50 Q from the official doc, writing section
   excluded per instruction). DB rows live.
 - ✅ All practice pages (Units 1–4) share the same visual component system.
-- ⏳ **Unit 3's workbook video** — not yet recorded. When ready, add
-  `videoId: "..."` to Unit 3's `workbook` block in `units-config.js` — no DB change
-  needed, its row already exists.
-- ⏳ **Unit 4's workbook video** — same as above, add `videoId` to Unit 4's
-  `workbook` block when recorded. No DB change needed.
+- ✅ **Unit 3's workbook video** — live (`videoId: "wQBNfkJHvWQ"`).
+- ✅ **Unit 4's workbook video** — live (`videoId: "8AzqkJN6Tic"`). Both units'
+  workbook cards are fully done now — no more "Video tez orada qo‘shiladi."
+  placeholders anywhere in `units-config.js`.
 - ✅ **Leaderboard** — DB migration run, Worker deployed, front-end pushed. Live
   and confirmed working (`/profile` and `/leaderboard` both verified responding
   correctly, not 404, right after deploy).
