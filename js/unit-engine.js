@@ -319,10 +319,22 @@ function ensureUnitPageDom(unitId) {
 // UNIT DETAIL PAGE — ACTIVITY LIST (identical logic for every unit)
 // ======================================================
 
+// "lesson" and "lesson2" (an optional second lesson-video card, e.g. a
+// lesson split into Part 1 / Part 2) both behave like a lesson video:
+// clicking opens the YouTube player and immediately reports completion.
+function isLessonType(type) {
+  return type === "lesson" || type === "lesson2";
+}
+
 function activityLookupFor(activityConfig) {
 
   const typeAliases = {
     lesson: ["lesson", "video"],
+    // "lesson2" is an optional second lesson-video card (e.g. a lesson
+    // split into Part 1 / Part 2). It needs its own DB activity_type
+    // ("lesson2") so it doesn't collide with the first lesson's
+    // backend row/completion state — see isLessonType() below.
+    lesson2: ["lesson2"],
     workbook: ["workbook"],
     practice: ["practice", "exercise"],
     listening: ["listening"],
@@ -332,6 +344,7 @@ function activityLookupFor(activityConfig) {
 
   const titleWordAliases = {
     lesson: ["dars", "lesson"],
+    lesson2: ["dars", "lesson"],
     workbook: ["workbook", "tahlil"],
     practice: ["mashq", "practice"],
     listening: ["listening", "tinglash"],
@@ -381,7 +394,7 @@ function renderUnitDetail(unitId) {
     let locked = false;
     let status;
 
-    if (activityConfig.type === "lesson") {
+    if (isLessonType(activityConfig.type)) {
       status = done ? "✓ Tugallangan" : "Boshlash →";
 
     } else if (activityConfig.type === "workbook") {
@@ -417,7 +430,7 @@ function renderUnitDetail(unitId) {
 
         if (locked) return;
 
-        if (activityConfig.type === "lesson") {
+        if (isLessonType(activityConfig.type)) {
           if (backendActivity) {
             reportProgressFromApp(backendActivity.activity_id, true, null);
           }

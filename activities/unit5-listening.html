@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>SalimTeaches — Unit 5 Listening</title>
+<style>
+:root{
+  --primary:#5865f2;
+  --primary-dark:#4652d9;
+  --bg:#f5f7fb;
+  --card:#fff;
+  --text:#172033;
+  --muted:#747d91;
+  --border:#e8ebf2;
+  --good:#149b66;
+  --goodbg:#e9f8f1;
+  --bad:#d84a4a;
+  --badbg:#fff0f0;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+}
+.app{max-width:760px;margin:auto;padding-bottom:110px}
+.header{padding:24px 18px 14px}
+.brand{font-size:12px;font-weight:800;letter-spacing:.8px;color:var(--primary)}
+h1{font-size:27px;margin:7px 0 5px}
+.subtitle{color:var(--muted);font-size:14px;line-height:1.45;margin:0}
+.progress-wrap{
+  position:sticky;top:53px;z-index:10;background:rgba(245,247,251,.94);
+  backdrop-filter:blur(10px);padding:9px 18px 12px;border-bottom:1px solid var(--border)
+}
+.progress-row{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:7px}
+.progressbar{height:7px;background:#e4e7ef;border-radius:10px;overflow:hidden}
+.progressfill{height:100%;width:0;background:linear-gradient(90deg,var(--primary),#7c83f5);transition:.3s}
+
+.section{
+  margin:14px 14px 0;background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:18px;box-shadow:0 5px 20px rgba(20,30,60,.04)
+}
+.section-head{
+  background:linear-gradient(135deg,#5865f2,#747cf5);color:#fff;
+  border-radius:17px;padding:15px;margin-bottom:15px
+}
+.section-code{font-size:11px;font-weight:800;opacity:.85;letter-spacing:.5px}
+.section-title{font-size:19px;font-weight:800;margin-top:3px}
+.section-desc{font-size:13px;opacity:.92;margin-top:5px;line-height:1.45}
+
+.audio-card{
+  background:#f7f8ff;border:1px solid #e1e4ff;border-radius:16px;
+  padding:14px;margin-bottom:16px
+}
+.audio-title{font-weight:800;font-size:15px;margin-bottom:9px}
+.audio-note{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.4}
+audio{width:100%;height:42px}
+
+.question{
+  padding:15px 0;border-top:1px solid #edf0f5
+}
+.question:first-of-type{border-top:0}
+.qnum{
+  display:inline-flex;width:29px;height:29px;border-radius:9px;
+  background:#eef0ff;color:var(--primary);align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;margin-right:8px;vertical-align:middle
+}
+.qprompt{font-size:15px;line-height:1.5;font-weight:650;margin-bottom:11px}
+.choices{display:grid;gap:8px}
+.choice{
+  width:100%;border:1px solid #dfe3ec;background:#fbfcfe;color:var(--text);
+  border-radius:12px;padding:12px;font-size:14px;font-weight:650;text-align:left;
+  min-height:46px;cursor:pointer
+}
+.choice.selected{border-color:var(--primary);background:#eef0ff;color:var(--primary)}
+.choice.correct{border-color:#bfead6;background:var(--goodbg);color:var(--good)}
+.choice.wrong{border-color:#ffd0d0;background:var(--badbg);color:var(--bad)}
+
+.tf-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tf{
+  border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;
+  padding:11px;text-align:center;font-weight:750;cursor:pointer
+}
+.tf.selected{border-color:var(--primary);background:#eef0ff;color:var(--primary)}
+.tf.correct{border-color:#bfead6;background:var(--goodbg);color:var(--good)}
+.tf.wrong{border-color:#ffd0d0;background:var(--badbg);color:var(--bad)}
+
+input[type="text"]{
+  width:100%;border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;
+  padding:12px;font-size:15px;color:var(--text);outline:none
+}
+input[type="text"]:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(88,101,242,.1)}
+input.correct{border-color:#bfead6;background:var(--goodbg)}
+input.wrong{border-color:#ffd0d0;background:var(--badbg)}
+
+.feedback{
+  display:none;margin-top:9px;border-radius:10px;padding:9px 10px;
+  font-size:12px;line-height:1.45
+}
+.feedback.good{display:block;background:var(--goodbg);color:var(--good)}
+.feedback.bad{display:block;background:var(--badbg);color:var(--bad)}
+
+.result{
+  display:none;margin:14px;padding:21px;border-radius:20px;
+  background:#fff;border:1px solid var(--border);text-align:center
+}
+.result.pass{border-color:#c9efdd;background:#f4fcf8}
+.result.fail{border-color:#ffd3d3;background:#fff8f8}
+.result-score{font-size:38px;font-weight:900;color:var(--primary)}
+.result.pass .result-score{color:var(--good)}
+.result-title{font-size:20px;font-weight:850;margin:5px 0}
+.result-text{color:var(--muted);font-size:14px;line-height:1.5}
+
+@media(max-width:480px){
+  .section{margin-left:10px;margin-right:10px;padding:15px}
+}
+
+.activity-nav{
+  position:sticky;
+  top:0;
+  z-index:30;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+}
+.activity-back{
+  border:0;
+  border-radius:13px;
+  padding:12px 15px;
+  background:#eef0ff;
+  color:var(--primary);
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+}
+.activity-label{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
+}
+
+body {
+  padding-bottom: 110px !important;
+}
+
+.actions{
+  position:sticky;
+  bottom:10px;
+  z-index:1000;
+  background:rgba(245,247,251,.96);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  padding:10px 0;
+  display:flex;
+  gap:10px;
+}
+.actions-inner{
+  max-width:760px;
+  width:100%;
+  margin:auto;
+  display:flex;
+  gap:10px;
+}
+.actions .btn,
+.actions .action,
+.actions .check{
+  flex:1;
+  min-width:0;
+  box-sizing:border-box;
+  border:0;
+  border-radius:13px;
+  padding:15px 18px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+.actions .primary,
+.actions .check{
+  background:#5b5ce2;
+  color:#fff;
+}
+</style>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+
+<body>
+
+<div class="activity-nav">
+  <button class="activity-back" type="button" onclick="backToUnit5()">← Unit 5</button>
+  <div class="activity-label">SalimTeaches • Unit 5</div>
+</div>
+<div class="app">
+
+<header class="header">
+  <div class="brand">SALIMTEACHES • BEGINNER</div>
+  <h1>🎧 Unit 5 — Listening</h1>
+  <p class="subtitle">Tinglang, savollarga javob bering va eshitib tushunish qobiliyatingizni mashq qiling.</p>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-row">
+    <span>Listening jarayoni</span>
+    <span id="progressText">0 / 15</span>
+  </div>
+  <div class="progressbar"><div class="progressfill" id="progressFill"></div></div>
+</div>
+
+<!-- PART 1 -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-code">1-QISM</div>
+    <div class="section-title">🏢 New in the Office</div>
+    <div class="section-desc">Anna va Adamning ishdagi suhbatini tinglang va gaplar to'g'ri yoki noto'g'ri ekanini aniqlang.</div>
+  </div>
+
+  <div class="audio-card">
+    <div class="audio-title">🎧 Audio 1</div>
+    <audio controls preload="none">
+      <source src="../audio/beginner-unit5-1.mp3" type="audio/mpeg">
+      Brauzeringiz audio faylni qo'llab-quvvatlamaydi.
+    </audio>
+    <div class="audio-note">Audio faylni qayta tinglashingiz mumkin.</div>
+  </div>
+
+  <div class="question" data-id="1" data-answer="true">
+    <div class="qprompt"><span class="qnum">1</span>Adam ofisda yangi.</div>
+    <div class="tf-grid"><button class="tf" data-value="true">✓ True</button><button class="tf" data-value="false">✗ False</button></div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="2" data-answer="false">
+    <div class="qprompt"><span class="qnum">2</span>Adam o'z ishini juda qiziqarli deb hisoblaydi.</div>
+    <div class="tf-grid"><button class="tf" data-value="true">✓ True</button><button class="tf" data-value="false">✗ False</button></div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="3" data-answer="true">
+    <div class="qprompt"><span class="qnum">3</span>Anna har kuni mijozlar bilan gaplashadi.</div>
+    <div class="tf-grid"><button class="tf" data-value="true">✓ True</button><button class="tf" data-value="false">✗ False</button></div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="4" data-answer="false">
+    <div class="qprompt"><span class="qnum">4</span>Anna ishga avtobusda boradi.</div>
+    <div class="tf-grid"><button class="tf" data-value="true">✓ True</button><button class="tf" data-value="false">✗ False</button></div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="5" data-answer="false">
+    <div class="qprompt"><span class="qnum">5</span>Adam tushlik uchun yaxshi joy biladi.</div>
+    <div class="tf-grid"><button class="tf" data-value="true">✓ True</button><button class="tf" data-value="false">✗ False</button></div>
+    <div class="feedback"></div>
+  </div>
+</section>
+
+<!-- PART 2 -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-code">2-QISM</div>
+    <div class="section-title">💻 A Computer Problem</div>
+    <div class="section-desc">Audio tinglang va to'g'ri javobni tanlang.</div>
+  </div>
+
+  <div class="audio-card">
+    <div class="audio-title">🎧 Audio 2</div>
+    <audio controls preload="none">
+      <source src="../audio/beginner-unit5-2.mp3" type="audio/mpeg">
+      Brauzeringiz audio faylni qo'llab-quvvatlamaydi.
+    </audio>
+    <div class="audio-note">Kerak bo'lsa, audioni bir necha marta tinglang.</div>
+  </div>
+
+  <div class="question" data-id="6" data-answer="It's very slow">
+    <div class="qprompt"><span class="qnum">6</span>Adamning kompyuteri bilan bog'liq muammo nima?</div>
+    <div class="choices">
+      <button class="choice" data-value="It's broken">It's broken</button>
+      <button class="choice" data-value="It's very slow">It's very slow</button>
+      <button class="choice" data-value="He can't find it">He can't find it</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="7" data-answer="Cancel">
+    <div class="qprompt"><span class="qnum">7</span>Anna Adamga sichqonchani bosgandan keyin yana nimani bosishni aytadi?</div>
+    <div class="choices">
+      <button class="choice" data-value="Cancel">Cancel</button>
+      <button class="choice" data-value="Save">Save</button>
+      <button class="choice" data-value="Explorer">Explorer</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="8" data-answer="Har doim unutadi">
+    <div class="qprompt"><span class="qnum">8</span>Adam ishini qanchalik tez-tez saqlaydi?</div>
+    <div class="choices">
+      <button class="choice" data-value="Har doim">Har doim</button>
+      <button class="choice" data-value="Ba'zan">Ba'zan</button>
+      <button class="choice" data-value="Har doim unutadi">Har doim unutadi</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="9" data-answer="Annaniki">
+    <div class="qprompt"><span class="qnum">9</span>Bugun kimning printeri ishlamayapti?</div>
+    <div class="choices">
+      <button class="choice" data-value="Annaniki">Annaniki</button>
+      <button class="choice" data-value="Adamniki">Adamniki</button>
+      <button class="choice" data-value="Ikkalasiniki ham">Ikkalasiniki ham</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="10" data-answer="Anna">
+    <div class="qprompt"><span class="qnum">10</span>Adamning printeridan kim foydalanadi?</div>
+    <div class="choices">
+      <button class="choice" data-value="Adam">Adam</button>
+      <button class="choice" data-value="Hech kim">Hech kim</button>
+      <button class="choice" data-value="Anna">Anna</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+</section>
+
+<!-- PART 3 -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-code">3-QISM</div>
+    <div class="section-title">📧 What's Your Email?</div>
+    <div class="section-desc">Audio tinglang va Adam bilan Annaning kontakt eslatmasini to'ldiring.</div>
+  </div>
+
+  <div class="audio-card">
+    <div class="audio-title">🎧 Audio 3</div>
+    <audio controls preload="none">
+      <source src="../audio/beginner-unit5-3.mp3" type="audio/mpeg">
+      Brauzeringiz audio faylni qo'llab-quvvatlamaydi.
+    </audio>
+    <div class="audio-note">Kerak bo'lsa, audioni qayta tinglang.</div>
+  </div>
+
+  <div class="question" data-id="11" data-answer="at">
+    <div class="qprompt"><span class="qnum">11</span>Email: adam.king ______ sunrisemail.com</div>
+    <input type="text" autocomplete="off" placeholder="Javobingiz...">
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="12" data-answer="uk">
+    <div class="qprompt"><span class="qnum">12</span>Website: www.adamking-design.co.______</div>
+    <input type="text" autocomplete="off" placeholder="Javobingiz...">
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="13" data-answer="line">
+    <div class="qprompt"><span class="qnum">13</span>A dash is a small ______.</div>
+    <input type="text" autocomplete="off" placeholder="Javobingiz...">
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="14" data-answer="ru">
+    <div class="qprompt"><span class="qnum">14</span>Email: anna_ivanova @ mail.______</div>
+    <input type="text" autocomplete="off" placeholder="Javobingiz...">
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-id="15" data-answer="Russian">
+    <div class="qprompt"><span class="qnum">15</span>Anna's email is a ______ email address.</div>
+    <input type="text" autocomplete="off" placeholder="Javobingiz...">
+    <div class="feedback"></div>
+  </div>
+</section>
+
+<div id="result" class="result">
+  <div class="result-score" id="score">0 / 15</div>
+  <div class="result-title" id="resultTitle"></div>
+  <div class="result-text" id="resultText"></div>
+</div>
+
+</div>
+
+<div class="actions">
+  <div class="actions-inner">
+    <button class="action check" id="check" onclick="checkListening()">Javoblarimni tekshirish</button>
+  </div>
+</div>
+
+<script>
+const questions=[...document.querySelectorAll('.question')];
+const answered=new Set();
+
+function norm(v){
+  return String(v ?? '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]/gu, '')
+    .replace(/\s+/g, ' ');
+}
+
+function updateProgress(){
+  document.getElementById('progressText').textContent=answered.size+' / 15';
+  document.getElementById('progressFill').style.width=(answered.size/15*100)+'%';
+}
+
+function selectButton(btn){
+  const q=btn.closest('.question');
+  q.querySelectorAll('.choice,.tf').forEach(x=>x.classList.remove('selected'));
+  btn.classList.add('selected');
+  answered.add(Number(q.dataset.id));
+  updateProgress();
+}
+
+document.querySelectorAll('.choice,.tf').forEach(btn=>{
+  btn.addEventListener('click',()=>selectButton(btn));
+});
+
+document.querySelectorAll('input[type="text"]').forEach(input=>{
+  input.addEventListener('input',()=>{
+    const q=input.closest('.question');
+    const id=Number(q.dataset.id);
+    if(norm(input.value)) answered.add(id);
+    else answered.delete(id);
+    updateProgress();
+  });
+});
+
+async function checkListening(){
+  let score=0;
+
+  questions.forEach(q=>{
+    const id=Number(q.dataset.id);
+    const answer=q.dataset.answer;
+    let value='';
+    let input=q.querySelector('input[type="text"]');
+    let selected=q.querySelector('.choice.selected,.tf.selected');
+
+    if(selected) value=selected.dataset.value;
+    else if(input) value=input.value;
+
+    const ok=norm(value)===norm(answer);
+
+    if(ok) score++;
+
+    const feedback=q.querySelector('.feedback');
+    feedback.className='feedback '+(ok?'good':'bad');
+
+    if(ok){
+      feedback.textContent='✅ To\'g\'ri!';
+    }else{
+      let correctAnswer=answer;
+      if(id>=1 && id<=5){
+        correctAnswer=answer==='true'?'True':'False';
+      }
+      feedback.innerHTML='❌ Noto\'g\'ri. <strong>To\'g\'ri javob:</strong> '+correctAnswer;
+    }
+
+    q.querySelectorAll('.choice,.tf').forEach(btn=>{
+      btn.classList.remove('correct','wrong');
+      if(btn.classList.contains('selected')){
+        btn.classList.add(ok?'correct':'wrong');
+      }
+    });
+
+    if(input){
+      input.classList.remove('correct','wrong');
+      input.classList.add(ok?'correct':'wrong');
+    }
+  });
+
+  const percent=Math.round(score/15*100);
+  const result=document.getElementById('result');
+  result.style.display='block';
+  result.className='result '+(percent>=70?'pass':'fail');
+
+  document.getElementById('score').textContent=score+' / 15 — '+percent+'%';
+  const saved = await reportActivityProgress(percent>=70, percent);
+
+  let saveStatus = document.getElementById('saveStatus');
+  if (!saveStatus) {
+    saveStatus = document.createElement('div');
+    saveStatus.id = 'saveStatus';
+    saveStatus.className = 'save-status';
+    result.appendChild(saveStatus);
+  }
+  if (saved && saved.success === true) {
+    saveStatus.className = 'save-status ok';
+    saveStatus.textContent = '✓ Natijangiz saqlandi';
+  } else {
+    saveStatus.className = 'save-status err';
+    saveStatus.textContent = '⚠ Natijangizni saqlashda muammo: ' +
+      ((saved && saved.error) || 'noma\'lum xatolik');
+  }
+
+  if(percent>=70){
+    document.getElementById('resultTitle').textContent='🎉 Ajoyib!';
+    document.getElementById('resultText').textContent='Listening mashqini muvaffaqiyatli tugatdingiz. Keyingi mashqqa o\'tishingiz mumkin.';
+  }else{
+    document.getElementById('resultTitle').textContent='💪 Yana bir marta urinib ko\'ring';
+    document.getElementById('resultText').textContent='Kamida 70% olishga harakat qiling. Xatolarni ko\'rib chiqing va audioni yana tinglang.';
+  }
+
+  SalimTeaches.showPostCheckActions("check", 5);
+  result.scrollIntoView({behavior:'smooth',block:'center'});
+}
+</script>
+
+<script src="../js/common.js"></script>
+
+<script>
+function getTelegramInitData() {
+  try {
+    const saved = sessionStorage.getItem("salimteaches_initData");
+    if (saved) return saved;
+  } catch (e) {
+    console.warn("sessionStorage unavailable:", e);
+  }
+
+  try {
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+      if (tg.initData) {
+        try {
+          sessionStorage.setItem("salimteaches_initData", tg.initData);
+        } catch (e) {}
+        return tg.initData;
+      }
+    }
+  } catch (e) {
+    console.warn("Telegram initData unavailable:", e);
+  }
+
+  return "";
+}
+
+function backToUnit5() {
+  window.location.href = "../index.html?unit=5";
+}
+</script>
+
+<script>
+async function reportActivityProgress(completed, score) {
+  const activityId =
+    Number(new URLSearchParams(window.location.search).get("activity_id")) || 0;
+  const initData = getTelegramInitData();
+
+  if (!initData) {
+    return { success: false, error: "Telegram initData mavjud emas." };
+  }
+
+  try {
+    const response = await fetch(
+      "https://salimteaches-beginner-auth.imshosalim.workers.dev/progress",
+      {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          initData,
+          activity_id: activityId,
+          completed: Boolean(completed),
+          score: score == null ? null : Number(score)
+        })
+      }
+    );
+
+    const data = await response.json();
+    if (!response.ok || data.success !== true) {
+      return {
+        success: false,
+        error: data.error || data.reason || ("HTTP " + response.status)
+      };
+    }
+    return data;
+  } catch (error) {
+    console.error("Progress save failed:", error);
+    return { success: false, error: error.message || "Network error" };
+  }
+}
+</script>
+
+</body>
+</html>

@@ -11,6 +11,12 @@
  *
  * Activity "type" values the engine understands:
  *   lesson    — opens a YouTube video in the built-in player, always first
+ *   lesson2   — OPTIONAL second lesson-video card (e.g. "Part 2" of a
+ *               lesson that was recorded/uploaded in two parts). Behaves
+ *               exactly like "lesson" (own video, own completion state)
+ *               but needs its own DB activity_type ("lesson2") so it
+ *               doesn't collide with the first lesson's backend row.
+ *               Put it right after "lesson" in the activities array.
  *   workbook  — optional workbook-analysis video (skipped if you omit it)
  *   practice  — links to an interactive HTML exercise page
  *   listening — links to an interactive HTML exercise page
@@ -235,9 +241,59 @@ const UNIT_CONFIGS = [
         requires: ["practice", "reading"]
       }
     ]
-  }
+  },
 
-  // Unit 5 goes here — copy the Unit 4 block above, fill in the content,
-  // and give it sortOrder: 6.
+  {
+    id: 5,
+    sortOrder: 6,
+    title: "Technology & Everyday Life",
+    description: "Doimiy fe’llar, Present Simple, texnologiya va kompyuter lug‘ati, sifatlar va elektron pochta so‘rash.",
+    activities: [
+      {
+        type: "lesson",
+        icon: "🎥",
+        title: "5-Dars (1-qism)",
+        subtitle: "Unit 5 darsining 1-qismini ko‘ring.",
+        videoId: "9Xo3JOtj-nM"
+      },
+      {
+        type: "lesson2",
+        icon: "🎥",
+        title: "5-Dars (2-qism)",
+        subtitle: "Unit 5 darsining 2-qismini ko‘ring.",
+        videoId: "a6VYGqfbw6A"
+      },
+      {
+        type: "workbook",
+        icon: "🎬",
+        title: "Workbook tahlili",
+        subtitle: "Javoblarni men bilan birga tekshiring va xatolaringizni tahlil qiling."
+        // videoId omitted — not recorded yet. Engine shows "Video tez orada
+        // qo‘shiladi." until a videoId is added here.
+      },
+      {
+        type: "practice",
+        icon: "🧩",
+        title: "Amaliy mashqlar",
+        subtitle: "Unit 5 bo‘yicha 30 ta interaktiv savol.",
+        file: "unit5-practice.html"
+      },
+      {
+        type: "listening",
+        icon: "🎧",
+        title: "Listening",
+        subtitle: "3 ta dialog va 15 ta savol.",
+        file: "unit5-listening.html"
+      },
+      {
+        type: "test",
+        icon: "📝",
+        title: "Unit 5 Test",
+        subtitle: "Unitni tugatish uchun kamida 70% kerak.",
+        file: "unit5-test.html",
+        requires: ["practice", "listening"]
+      }
+    ]
+  }
 
 ];

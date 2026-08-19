@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="uz"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>SalimTeaches — Unit 5 Test</title>
+<style>
+:root{--primary:#5865f2;--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#747d91;--border:#e8ebf2;--good:#149b66;--goodbg:#e9f8f1;--bad:#d84a4a;--badbg:#fff0f0}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+.app{max-width:760px;margin:auto;padding-bottom:110px}
+.header{padding:24px 18px 14px}
+.brand{font-size:12px;font-weight:800;letter-spacing:.8px;color:var(--primary)}
+h1{font-size:27px;margin:7px 0 5px}
+.subtitle{color:var(--muted);font-size:14px;line-height:1.45;margin:0}
+.progress-wrap{position:sticky;top:53px;z-index:10;background:rgba(245,247,251,.94);backdrop-filter:blur(10px);padding:9px 18px 12px;border-bottom:1px solid var(--border)}
+.progress-row{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:7px}
+.progressbar{height:7px;background:#e4e7ef;border-radius:10px;overflow:hidden}
+.progressfill{height:100%;width:0;background:linear-gradient(90deg,var(--primary),#7c83f5);transition:.3s}
+
+.section{margin:14px 14px 0}
+.section-head{background:linear-gradient(135deg,#5865f2,#747cf5);color:#fff;border-radius:18px;padding:16px 16px 14px;margin-bottom:10px}
+.section-code{font-size:11px;font-weight:800;opacity:.85;letter-spacing:.5px}
+.section-title{font-size:18px;font-weight:800;margin-top:3px}
+.section-desc{font-size:12px;opacity:.92;margin-top:5px;line-height:1.45}
+
+.question{display:flex;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 12px;margin:9px 0;box-shadow:0 4px 16px rgba(20,30,60,.035)}
+.qnum{width:30px;height:30px;flex:0 0 30px;border-radius:10px;background:#eef0ff;color:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px}
+.qbody{min-width:0;flex:1}
+.qprompt{font-size:15px;line-height:1.5;margin-bottom:10px}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.choices.wide{grid-template-columns:1fr}
+.choice{border:1px solid #dfe3ec;background:#fbfcfe;color:var(--text);border-radius:11px;padding:11px 10px;font-size:14px;font-weight:650;min-height:44px;cursor:pointer;text-align:left}
+.choice.selected{border-color:var(--primary);background:#eef0ff;color:var(--primary)}
+.choice.correct{border-color:#bfead6;background:var(--goodbg);color:var(--good)}
+.choice.wrong{border-color:#ffd0d0;background:var(--badbg);color:var(--bad)}
+
+input.text-answer{width:100%;border:1px solid #dfe3ec;background:#fbfcfe;border-radius:11px;padding:11px 12px;font-size:15px;color:var(--text);outline:none}
+input.text-answer:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(88,101,242,.1)}
+input.text-answer.correct{border-color:#bfead6;background:var(--goodbg)}
+input.text-answer.wrong{border-color:#ffd0d0;background:var(--badbg)}
+
+.feedback{display:none;margin-top:9px;border-radius:10px;padding:9px 10px;font-size:12px;line-height:1.45}
+.feedback.good{display:block;background:var(--goodbg);color:var(--good)}
+.feedback.bad{display:block;background:var(--badbg);color:var(--bad)}
+
+.result{display:none;margin:14px;padding:21px;border-radius:20px;background:#fff;border:1px solid var(--border);text-align:center}
+.result.pass{border-color:#c9efdd;background:#f4fcf8}
+.result.fail{border-color:#ffd3d3;background:#fff8f8}
+.result-score{font-size:38px;font-weight:900;color:var(--primary)}
+.result.pass .result-score{color:var(--good)}
+.result-title{font-size:20px;font-weight:850;margin:5px 0}
+.result-text{color:var(--muted);font-size:14px;line-height:1.5}
+.save-status{margin-top:12px;font-size:12px;font-weight:800}
+.save-status.ok{color:var(--good)}
+.save-status.err{color:var(--bad)}
+
+.activity-nav{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
+.activity-back{border:0;border-radius:13px;padding:12px 15px;background:#eef0ff;color:var(--primary);font-size:14px;font-weight:800;cursor:pointer}
+.activity-label{color:var(--muted);font-size:12px;font-weight:700}
+
+.actions{position:sticky;bottom:10px;z-index:1000;background:rgba(245,247,251,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:10px 0;display:flex;gap:10px}
+.actions-inner{max-width:760px;width:100%;margin:auto;display:flex;gap:10px}
+.actions .btn{flex:1;min-width:0;border:0;border-radius:13px;padding:15px 18px;font-size:16px;font-weight:700;cursor:pointer;touch-action:manipulation}
+.actions .primary,.actions .check{background:#5b5ce2;color:#fff}
+
+@media(max-width:480px){.section{margin-left:10px;margin-right:10px}}
+</style>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+
+<div class="activity-nav">
+  <button class="activity-back" type="button" onclick="backToUnit5()">← Unit 5</button>
+  <div class="activity-label">SalimTeaches • Unit 5</div>
+</div>
+
+<div class="app">
+<header class="header">
+  <div class="brand">SALIMTEACHES • BEGINNER</div>
+  <h1>📝 Unit 5 Test</h1>
+  <p class="subtitle">Doimiy fe'llar, Present Simple, texnologiya va kompyuter lug'ati, sifatlar va elektron pochta so'rash.</p>
+</header>
+<div class="progress-wrap">
+  <div class="progress-row"><span>Test jarayoni</span><span id="answered">0 / 50</span></div>
+  <div class="progressbar"><div class="progressfill" id="progressFill"></div></div>
+</div>
+
+<div id="test">
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-code">A</div>
+    <div class="section-title">Vocabulary</div>
+    <div class="section-desc">To'g'ri so'zni tanlab, gapni to'ldiring.</div>
+  </div>
+  <div class="question" data-id="1" data-answer="in"><div class="qnum">1</div><div class="qbody"><div class="qprompt">They work ____________________ a factory.</div><div class="choices"><button class="choice" data-value="in">in</button><button class="choice" data-value="on">on</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="2" data-answer="with"><div class="qnum">2</div><div class="qbody"><div class="qprompt">I live ____________________ my wife.</div><div class="choices"><button class="choice" data-value="by">by</button><button class="choice" data-value="with">with</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="3" data-answer="on foot"><div class="qnum">3</div><div class="qbody"><div class="qprompt">I go to school ____________________.</div><div class="choices"><button class="choice" data-value="on foot">on foot</button><button class="choice" data-value="by train">by train</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="4" data-answer="for"><div class="qnum">4</div><div class="qbody"><div class="qprompt">We work ____________________ a big company.</div><div class="choices"><button class="choice" data-value="for">for</button><button class="choice" data-value="on">on</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="5" data-answer="by bus"><div class="qnum">5</div><div class="qbody"><div class="qprompt">They go to work ____________________.</div><div class="choices"><button class="choice" data-value="by foot">by foot</button><button class="choice" data-value="by bus">by bus</button></div><div class="feedback"></div></div></div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-code">B</div>
+    <div class="section-title">Vocabulary</div>
+    <div class="section-desc">Ortiqcha (mos kelmaydigan) so'zni toping.</div>
+  </div>
+  <div class="question" data-id="6" data-answer="train"><div class="qnum">6</div><div class="qbody"><div class="qprompt">Qaysi so'z ortiqcha?</div><div class="choices"><button class="choice" data-value="computer">computer</button><button class="choice" data-value="website">website</button><button class="choice" data-value="train">train</button><button class="choice" data-value="fax machine">fax machine</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="7" data-answer="dot"><div class="qnum">7</div><div class="qbody"><div class="qprompt">Qaysi so'z ortiqcha?</div><div class="choices"><button class="choice" data-value="dot">dot</button><button class="choice" data-value="interesting">interesting</button><button class="choice" data-value="boring">boring</button><button class="choice" data-value="easy">easy</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="8" data-answer="text"><div class="qnum">8</div><div class="qbody"><div class="qprompt">Qaysi so'z ortiqcha?</div><div class="choices"><button class="choice" data-value="new">new</button><button class="choice" data-value="old">old</button><button class="choice" data-value="text">text</button><button class="choice" data-value="bad">bad</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="9" data-answer="car"><div class="qnum">9</div><div class="qbody"><div class="qprompt">Qaysi so'z ortiqcha?</div><div class="choices"><button class="choice" data-value="use">use</button><button class="choice" data-value="car">car</button><button class="choice" data-value="have">have</button><button class="choice" data-value="live">live</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="10" data-answer="bus"><div class="qnum">10</div><div class="qbody"><div class="qprompt">Qaysi so'z ortiqcha?</div><div class="choices"><button class="choice" data-value="office">office</button><button class="choice" data-value="factory">factory</button><button class="choice" data-value="shop">shop</button><button class="choice" data-value="bus">bus</button></div><div class="feedback"></div></div></div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-code">C</div>
+    <div class="section-title">Functional language</div>
+    <div class="section-desc">So'zlarni to'g'ri tartibga solib, savol tuzing.</div>
+  </div>
+  <div class="question" data-id="11" data-answer="What's your email address?|What is your email address?"><div class="qnum">11</div><div class="qbody"><div class="qprompt">email &nbsp; What's &nbsp; address &nbsp; your &nbsp; ?</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="12" data-answer="Do you have an interesting job?"><div class="qnum">12</div><div class="qbody"><div class="qprompt">job &nbsp; interesting &nbsp; have you &nbsp; Do &nbsp; an &nbsp; ?</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="13" data-answer="Do you work in an office?"><div class="qnum">13</div><div class="qbody"><div class="qprompt">an &nbsp; office &nbsp; work &nbsp; Do &nbsp; in &nbsp; you &nbsp; ?</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="14" data-answer="Do you work with other people?"><div class="qnum">14</div><div class="qbody"><div class="qprompt">work &nbsp; other &nbsp; Do &nbsp; with you &nbsp; people &nbsp; ?</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="15" data-answer="Do you have a computer?"><div class="qnum">15</div><div class="qbody"><div class="qprompt">have &nbsp; you &nbsp; computer &nbsp; Do &nbsp; a &nbsp; ?</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-code">D</div>
+    <div class="section-title">Functional language</div>
+    <div class="section-desc">Bo'sh joylarga a, e, i, o yoki u harflarini qo'yib, kompyuter so'zlarini to'ldiring.</div>
+  </div>
+  <div class="question" data-id="16" data-answer="Windows"><div class="qnum">16</div><div class="qbody"><div class="qprompt">W _ nd _ ws</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="17" data-answer="World Wide Web"><div class="qnum">17</div><div class="qbody"><div class="qprompt">W _ rld W _ d _ W _ b</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="18" data-answer="a mouse|mouse"><div class="qnum">18</div><div class="qbody"><div class="qprompt">a m _ _ s _</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="19" data-answer="cancel"><div class="qnum">19</div><div class="qbody"><div class="qprompt">c _ nc _ l</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="20" data-answer="Explorer"><div class="qnum">20</div><div class="qbody"><div class="qprompt">_ xpl _ r _ r</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-code">E</div>
+    <div class="section-title">Grammar</div>
+    <div class="section-desc">Bo'shliqni fe'lning to'g'ri shakli bilan to'ldiring: go, live, work.</div>
+  </div>
+  <div class="question" data-id="21" data-answer="live"><div class="qnum">21</div><div class="qbody"><div class="qprompt">I ____________________ with my parents in Madrid.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="22" data-answer="live"><div class="qnum">22</div><div class="qbody"><div class="qprompt">We ____________________ in a flat near the centre.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="23" data-answer="work"><div class="qnum">23</div><div class="qbody"><div class="qprompt">I ____________________ in a shop.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="24" data-answer="works"><div class="qnum">24</div><div class="qbody"><div class="qprompt">My mother ____________________ in an office in the city.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="25" data-answer="go"><div class="qnum">25</div><div class="qbody"><div class="qprompt">We ____________________ to work by bus.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="26" data-answer="works"><div class="qnum">26</div><div class="qbody"><div class="qprompt">My father ____________________ for a big company.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="27" data-answer="goes"><div class="qnum">27</div><div class="qbody"><div class="qprompt">He ____________________ to work by train.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-code">F</div>
+    <div class="section-title">Grammar</div>
+    <div class="section-desc">Gapni to'g'ri to'ldiruvchi so'zni tanlang.</div>
+  </div>
+  <div class="question" data-id="28" data-answer="He"><div class="qnum">28</div><div class="qbody"><div class="qprompt">____________________ lives in a house in Berlin.</div><div class="choices"><button class="choice" data-value="He">He</button><button class="choice" data-value="They">They</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="29" data-answer="I"><div class="qnum">29</div><div class="qbody"><div class="qprompt">____________________ work in a big office.</div><div class="choices"><button class="choice" data-value="She">She</button><button class="choice" data-value="I">I</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="30" data-answer="We"><div class="qnum">30</div><div class="qbody"><div class="qprompt">____________________ go to work on foot.</div><div class="choices"><button class="choice" data-value="We">We</button><button class="choice" data-value="He">He</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="31" data-answer="You"><div class="qnum">31</div><div class="qbody"><div class="qprompt">____________________ live alone.</div><div class="choices"><button class="choice" data-value="She">She</button><button class="choice" data-value="You">You</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="32" data-answer="He"><div class="qnum">32</div><div class="qbody"><div class="qprompt">____________________ goes to school by bus.</div><div class="choices"><button class="choice" data-value="He">He</button><button class="choice" data-value="I">I</button></div><div class="feedback"></div></div></div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-code">G</div>
+    <div class="section-title">Grammar</div>
+    <div class="section-desc">To'g'ri gapni tanlang.</div>
+  </div>
+  <div class="question" data-id="33" data-answer="Paul has a computer at home."><div class="qnum">33</div><div class="qbody"><div class="qprompt">Qaysi gap to'g'ri?</div><div class="choices wide"><button class="choice" data-value="Paul has a computer at home.">Paul has a computer at home.</button><button class="choice" data-value="Paul have a computer at home.">Paul have a computer at home.</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="34" data-answer="Carl and Kate don't have a digital camera."><div class="qnum">34</div><div class="qbody"><div class="qprompt">Qaysi gap to'g'ri?</div><div class="choices wide"><button class="choice" data-value="Carl and Kate doesn't have a digital camera.">Carl and Kate doesn't have a digital camera.</button><button class="choice" data-value="Carl and Kate don't have a digital camera.">Carl and Kate don't have a digital camera.</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="35" data-answer="Grandad doesn't have a mobile."><div class="qnum">35</div><div class="qbody"><div class="qprompt">Qaysi gap to'g'ri?</div><div class="choices wide"><button class="choice" data-value="Grandad doesn't have a mobile.">Grandad doesn't have a mobile.</button><button class="choice" data-value="Grandad don't have a mobile.">Grandad don't have a mobile.</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="36" data-answer="I don't work at weekends."><div class="qnum">36</div><div class="qbody"><div class="qprompt">Qaysi gap to'g'ri?</div><div class="choices wide"><button class="choice" data-value="I doesn't work at weekends.">I doesn't work at weekends.</button><button class="choice" data-value="I don't work at weekends.">I don't work at weekends.</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="37" data-answer="You have two fax machines here."><div class="qnum">37</div><div class="qbody"><div class="qprompt">Qaysi gap to'g'ri?</div><div class="choices wide"><button class="choice" data-value="You has two fax machines here.">You has two fax machines here.</button><button class="choice" data-value="You have two fax machines here.">You have two fax machines here.</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="38" data-answer="We don't use this printer."><div class="qnum">38</div><div class="qbody"><div class="qprompt">Qaysi gap to'g'ri?</div><div class="choices wide"><button class="choice" data-value="We don't use this printer.">We don't use this printer.</button><button class="choice" data-value="We doesn't use this printer.">We doesn't use this printer.</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="39" data-answer="My mother doesn't have a computer."><div class="qnum">39</div><div class="qbody"><div class="qprompt">Qaysi gap to'g'ri?</div><div class="choices wide"><button class="choice" data-value="My mother hasn't a computer.">My mother hasn't a computer.</button><button class="choice" data-value="My mother doesn't have a computer.">My mother doesn't have a computer.</button></div><div class="feedback"></div></div></div>
+  <div class="question" data-id="40" data-answer="I have two phones."><div class="qnum">40</div><div class="qbody"><div class="qprompt">Qaysi gap to'g'ri?</div><div class="choices wide"><button class="choice" data-value="I have two phones.">I have two phones.</button><button class="choice" data-value="I has two phones.">I has two phones.</button></div><div class="feedback"></div></div></div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-code">H</div>
+    <div class="section-title">Grammar</div>
+    <div class="section-desc">So'zlardan foydalanib, savol tuzing.</div>
+  </div>
+  <div class="question" data-id="41" data-answer="Do you live in a house?"><div class="qnum">41</div><div class="qbody"><div class="qprompt">you / live / in a house?</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="42" data-answer="Do they use computers at work?"><div class="qnum">42</div><div class="qbody"><div class="qprompt">they / use / computers at work?</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="43" data-answer="Does your sister have a good job?"><div class="qnum">43</div><div class="qbody"><div class="qprompt">your sister / have a good job?</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="44" data-answer="Does he work in a hospital?"><div class="qnum">44</div><div class="qbody"><div class="qprompt">he / work / in a hospital?</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="45" data-answer="Do we have the money?"><div class="qnum">45</div><div class="qbody"><div class="qprompt">we / have / the money?</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-code">I</div>
+    <div class="section-title">Grammar</div>
+    <div class="section-desc">Yuqoridagi savollarga qisqa javob yozing.</div>
+  </div>
+  <div class="question" data-id="46" data-answer="I do"><div class="qnum">46</div><div class="qbody"><div class="qprompt">41-savol: Do you live in a house?<br>Yes, ____________________.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="47" data-answer="they don't|they do not"><div class="qnum">47</div><div class="qbody"><div class="qprompt">42-savol: Do they use computers at work?<br>No, ____________________.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="48" data-answer="she does"><div class="qnum">48</div><div class="qbody"><div class="qprompt">43-savol: Does your sister have a good job?<br>Yes, ____________________.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="49" data-answer="he doesn't|he does not"><div class="qnum">49</div><div class="qbody"><div class="qprompt">44-savol: Does he work in a hospital?<br>No, ____________________.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+  <div class="question" data-id="50" data-answer="we do"><div class="qnum">50</div><div class="qbody"><div class="qprompt">45-savol: Do we have the money?<br>Yes, ____________________.</div><input class="text-answer" autocomplete="off" spellcheck="false" placeholder="Javobingizni yozing"><div class="feedback"></div></div></div>
+</section>
+
+</div>
+
+<div id="result" class="result">
+  <div class="result-score" id="score">0 / 50</div>
+  <div class="result-title" id="resultTitle"></div>
+  <div class="result-text" id="resultText"></div>
+</div>
+
+</div>
+
+<div class="actions">
+  <div class="actions-inner">
+    <button class="btn primary" id="check" type="button">✓ Javoblarimni tekshirish</button>
+  </div>
+</div>
+
+<script src="../js/common.js"></script>
+<script>
+const TOTAL = 50;
+const answeredSet = new Set();
+
+function norm(v) {
+  return String(v ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]/gu, "")
+    .replace(/\s+/g, " ");
+}
+
+function isCorrect(answerAttr, value) {
+  const v = norm(value);
+  return String(answerAttr || "").split("|").some(a => norm(a) === v);
+}
+
+function updateProgress() {
+  const n = answeredSet.size;
+  document.getElementById("answered").textContent = n + " / " + TOTAL;
+  document.getElementById("progressFill").style.width = (n / TOTAL * 100) + "%";
+}
+
+document.querySelectorAll(".choice").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const q = btn.closest(".question");
+    q.querySelectorAll(".choice").forEach(x => x.classList.remove("selected"));
+    btn.classList.add("selected");
+    answeredSet.add(Number(q.dataset.id));
+    updateProgress();
+  });
+});
+
+document.querySelectorAll("input.text-answer").forEach(input => {
+  input.addEventListener("input", () => {
+    const q = input.closest(".question");
+    const id = Number(q.dataset.id);
+    if (norm(input.value)) answeredSet.add(id);
+    else answeredSet.delete(id);
+    updateProgress();
+  });
+});
+
+async function checkTest() {
+  let correct = 0;
+
+  document.querySelectorAll(".question").forEach(q => {
+    const id = Number(q.dataset.id);
+    const answer = q.dataset.answer;
+    const choice = q.querySelector(".choice.selected");
+    const input = q.querySelector("input.text-answer");
+    const value = choice ? choice.dataset.value : (input ? input.value : "");
+    const ok = isCorrect(answer, value);
+
+    if (ok) correct++;
+
+    const fb = q.querySelector(".feedback");
+    fb.className = "feedback " + (ok ? "good" : "bad");
+    fb.textContent = ok
+      ? "✅ To'g'ri!"
+      : "❌ Noto'g'ri. To'g'ri javob: " + String(answer).split("|")[0];
+
+    if (choice) {
+      q.querySelectorAll(".choice").forEach(btn => {
+        btn.classList.remove("correct", "wrong");
+        if (btn.classList.contains("selected")) {
+          btn.classList.add(ok ? "correct" : "wrong");
+        }
+      });
+    }
+    if (input) {
+      input.classList.remove("correct", "wrong");
+      input.classList.add(ok ? "correct" : "wrong");
+    }
+  });
+
+  const percent = Math.round(correct / TOTAL * 100);
+  const result = document.getElementById("result");
+  result.style.display = "block";
+  result.className = "result " + (percent >= 70 ? "pass" : "fail");
+  document.getElementById("score").textContent = correct + " / " + TOTAL + " — " + percent + "%";
+
+  const saved = await reportActivityProgress(percent >= 70, percent);
+
+  let saveStatus = document.getElementById("saveStatus");
+  if (!saveStatus) {
+    saveStatus = document.createElement("div");
+    saveStatus.id = "saveStatus";
+    saveStatus.className = "save-status";
+    result.appendChild(saveStatus);
+  }
+  if (saved && saved.success === true) {
+    saveStatus.className = "save-status ok";
+    saveStatus.textContent = "✓ Natijangiz saqlandi";
+  } else {
+    saveStatus.className = "save-status err";
+    saveStatus.textContent = "⚠ Natijangizni saqlashda muammo: " + ((saved && saved.error) || "noma'lum xatolik");
+  }
+
+  document.getElementById("resultTitle").textContent =
+    percent >= 70 ? "🎉 Tabriklaymiz!" : "💪 Yana bir marta urinib ko'ring";
+  document.getElementById("resultText").textContent =
+    percent >= 70
+      ? "Siz Unit 5 testidan kamida 70% oldingiz. Unitni tugatish uchun talab bajarildi."
+      : "Unit 5 ni tugatish uchun kamida 70% kerak. Xatolarni ko'rib chiqing va testni qayta ishlang.";
+
+  SalimTeaches.showPostCheckActions("check", 5);
+  result.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+document.getElementById("check").addEventListener("click", checkTest);
+
+function getTelegramInitData() {
+  try {
+    const saved = sessionStorage.getItem("salimteaches_initData");
+    if (saved) return saved;
+  } catch (e) {}
+  try {
+    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData) {
+      const d = window.Telegram.WebApp.initData;
+      try { sessionStorage.setItem("salimteaches_initData", d); } catch (e) {}
+      return d;
+    }
+  } catch (e) {}
+  return "";
+}
+
+async function reportActivityProgress(completed, score) {
+  const activityId = Number(new URLSearchParams(window.location.search).get("activity_id")) || 0;
+  const initData = getTelegramInitData();
+  if (!initData) return { success: false, error: "Telegram initData mavjud emas." };
+  try {
+    const response = await fetch(
+      "https://salimteaches-beginner-auth.imshosalim.workers.dev/progress",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          initData,
+          activity_id: activityId,
+          completed: Boolean(completed),
+          score: score == null ? null : Number(score)
+        })
+      }
+    );
+    const data = await response.json();
+    if (!response.ok || data.success !== true) {
+      return { success: false, error: data.error || data.reason || ("HTTP " + response.status) };
+    }
+    return data;
+  } catch (error) {
+    console.error("Progress save failed:", error);
+    return { success: false, error: error.message || "Network error" };
+  }
+}
+
+function backToUnit5() {
+  window.location.href = "../index.html?unit=5";
+}
+</script>
+
+</body>
+</html>

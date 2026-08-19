@@ -70,6 +70,16 @@ gated content hub — lessons, practice exercises, listening/reading, and tests 
   driven entirely by `units-config.js` + `courseData` from the Worker. **Never
   hardcode a unit number in this file.** Also handles the `milestone: true` /
   `kicker` / per-unit `icon` config fields — see §5.
+  - **Two-part lessons (`lesson2`):** if a lesson was recorded/uploaded as two
+    videos, give it two activity blocks in `units-config.js`: one `type:
+    "lesson"` and one `type: "lesson2"` right after it (see the comment at
+    the top of `units-config.js`). `lesson2` behaves identically to `lesson`
+    (own video, own completion state) but needs its **own DB `activity_type`
+    value, `"lesson2"`** — reusing `"lesson"` for both would make them share
+    one backend row, so completing either card would silently mark both
+    (or neither) done, and the second card's click could reopen the first
+    video. `isLessonType()` in `unit-engine.js` is what treats both types
+    the same way for status/click behavior. Added for Unit 5 (§8).
 - **`js/index.js`** — shared app shell only (Telegram auth, nav, video modal,
   progress reporting). Calls `initLeaderboardAndProfile()` (from `js/leaderboard.js`)
   once inside `showApplication()` — that's the only line it knows about the
@@ -322,14 +332,29 @@ it).
   correctly, not 404, right after deploy).
 - ✅ **Telegram bot `/start` welcome message** — deployed, `setWebhook` registered,
   confirmed live by the teacher (replies with the welcome message + Mini App button).
+- ✅ **Unit 5** ("Technology & Everyday Life"): fully complete — lesson recorded
+  in **two parts** (first unit to use the new `lesson2` two-part-lesson
+  pattern, see §3), practice (30 Q), listening (3 scenes, 15 Q — per the
+  teacher's request, question type is consistent per scene rather than
+  mixed: Scene 1 all True/False, Scene 2 all MC, Scene 3 all fill-in-the-blank
+  — a deliberate one-off exception to every other unit's listening format),
+  test (50 Q, built from the teacher's real `.doc` test + answer key, read
+  via `antiword`, preserving the doc's real 9-section structure per §9).
+  `sortOrder: 6`, DB rows live. The listening script went through 3 rounds
+  of revision — worth remembering for future units: keep dialogue natural
+  but strictly scoped to grammar actually taught so far (a first draft used
+  the possessive pronoun "mine," present continuous, and "will," none of
+  which this class had covered yet). Only the workbook-analysis video is
+  still pending from the teacher; shows "Video tez orada qo‘shiladi." until
+  supplied — not a broken link, safe as-is.
 
 ## 8. Status — what's next
 
-**Unit 5**, using the standing workflow in §9. Unit 5 is odd → it needs a **Listening** section (not Reading),
-with a drafted dialogue script + questions handed to the teacher before the audio
-exists (see §9). It needs `sortOrder: 6` in `units-config.js` (Unit 4 has 5; no
-milestone sits between Unit 4 and Unit 5, so no gap to leave this time — the next
-milestone comes after Unit 6, between Unit 6 and Unit 7).
+**Unit 6**, using the standing workflow in §9. Unit 6 is even → it needs a
+**Reading** section (not Listening). Needs `sortOrder: 7`. Unit 6 is also the
+next milestone trigger — remember to insert a progress-test milestone
+(`milestone: true`, see §5) between Unit 6 and Unit 7, bumping Unit 7's
+`sortOrder` to leave room for it.
 
 ---
 
