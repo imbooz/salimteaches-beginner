@@ -297,6 +297,16 @@ it).
   most recent sibling page instead (see §3).
 - **Unit 3's regression** (documented, don't reintroduce): unlock logic must never
   depend on `is_available` except for the very first unit in the whole sequence.
+- **Free-text answers must accept both contracted and full forms.** Found in
+  Unit 4's test (Q22/Q24, reported by the teacher): a `data-answer` of only
+  `"I'm not married"` marks a student's `"I am not married"` wrong, even
+  though both are correct English. `norm()` does NOT bridge this gap —
+  stripping the apostrophe turns `"I'm"` into `"im"`, which never equals
+  `"i am"`. Any free-text (not multiple-choice) question whose answer
+  contains a contraction needs the `|`-alternative syntax already used
+  elsewhere, e.g. `data-answer="I'm not married|I am not married"`. Doesn't
+  apply to possessive `'s` (e.g. "Bill Clinton's daughter") — that's not a
+  contraction and has no full-form equivalent to offer.
 - **`tg.initData` (Telegram WebApp SDK) is a getter-only property** — you cannot
   mock it with a plain `tg.initData = "..."` assignment when testing index.html
   outside real Telegram (the assignment silently no-ops). It'll just stay `""`. If
